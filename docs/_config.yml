@@ -1,5 +1,10 @@
-title: "AB-3"
-theme: minima
+title: "TutorSynch built from AB-3"
+description: "TutorSynch is a smart, intuitive platform designed for independent tutors and coaching professionals who 
+want to streamline their workflow. With powerful tools to organize student contacts, track progress, and manage 
+sessions efficiently, TutorSynch minimizes administrative tasks—allowing educators to focus on what they do best: 
+teaching. Whether you're managing a handful of students or a growing tutoring business, TutorSynch helps you stay 
+organized, save time, and enhance learning outcomes."
+remote_theme: pages-themes/cayman@v0.2.0
 
 header_pages:
   - UserGuide.md
@@ -13,3 +18,4 @@ github_icon: "images/github-icon.png"
 
 plugins:
   - jemoji
+  - jekyll-remote-theme
