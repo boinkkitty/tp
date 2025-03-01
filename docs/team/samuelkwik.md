@@ -3,6 +3,7 @@ layout: page
 title: Jeremy Samuel Kwik's Project Portfolio Page
 ---
 ### Work in progress
+
 <!--
 ### Project: AddressBook Level 3
 
