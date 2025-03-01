@@ -9,11 +9,31 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+
 ### Jun Xiang
 
 <img src="images/junxiang26.png" width="200px">
 
 [[github](https://github.com/JunXiang26)]
 [[portfolio](team/junxiang)]
+
+* Role: Developer
+
+### Jeremy Samuel Kwik Yi Xian
+
+<img src="images/samuelkwik.png" width="200px">
+
+[[github](http://github.com/samuelkwik)]
+[[portfolio](team/samuelkwik.md)]
+
+* Role: Developer
+
+### Daryl Ghee
+
+<img src="images/boinkkitty.png" width="200px">
+
+[[homepage](https://www.linkedin.com/in/darylgheesw/)]
+[[github](https://github.com/boinkkitty)]
+[[portfolio](team/daryl.md)]
 
 * Role: Developer
