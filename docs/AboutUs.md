@@ -9,12 +9,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### Daryl Ghee
+### Gaanesh Theivasigamani
 
-<img src="images/boinkkitty.png" width="200px">
+<img src="images/gaanesht.png" width="200px">
 
-[[homepage](https://www.linkedin.com/in/darylgheesw/)]
-[[github](https://github.com/boinkkitty)]
-[[portfolio](team/daryl.md)]
+[[homepage](https://gaanesh.com/)]
+[[github](https://github.com/gaanesht)]
+[[portfolio](team/gaanesh.md)]
 
 * Role: Developer

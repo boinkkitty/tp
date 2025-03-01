@@ -1,6 +1,6 @@
 ---
 layout: page
-title: John Doe's Project Portfolio Page
+title: Gaanesh's Project Portfolio Page
 ---
 
 Work In Progress
