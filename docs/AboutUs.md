@@ -37,3 +37,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/daryl.md)]
 
 * Role: Developer
+
+### Muhammad Danial Adam
+
+<img src="images/theend-alr-taken.png" width="200px">
+
+[[github](https://github.com/TheEnd-alr-taken)]
+[[portfolio](team/danial.md)]
+
+* Role: Developer
