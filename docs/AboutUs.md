@@ -9,6 +9,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+
+### Jun Xiang
+
+<img src="images/junxiang26.png" width="200px">
+
+[[github](https://github.com/JunXiang26)]
+[[portfolio](team/junxiang)]
+
+* Role: Developer
+
 ### Jeremy Samuel Kwik Yi Xian
 
 <img src="images/samuelkwik.png" width="200px">
