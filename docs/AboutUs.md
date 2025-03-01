@@ -9,7 +9,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-
 ### Jun Xiang
 
 <img src="images/junxiang26.png" width="200px">
@@ -35,6 +34,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[homepage](https://www.linkedin.com/in/darylgheesw/)]
 [[github](https://github.com/boinkkitty)]
 [[portfolio](team/daryl.md)]
+
+* Role: Developer
+
+### Gaanesh Theivasigamani
+
+<img src="images/gaanesht.png" width="200px">
+
+[[homepage](https://gaanesh.com/)]
+[[github](https://github.com/gaanesht)]
+[[portfolio](team/gaanesh.md)]
 
 * Role: Developer
 
