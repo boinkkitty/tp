@@ -17,3 +17,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/samuelkwik.md)]
 
 * Role: Developer
+
+### Daryl Ghee
+
+<img src="images/boinkkitty.png" width="200px">
+
+[[homepage](https://www.linkedin.com/in/darylgheesw/)]
+[[github](https://github.com/boinkkitty)]
+[[portfolio](team/daryl.md)]
+
+* Role: Developer
