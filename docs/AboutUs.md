@@ -9,6 +9,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+### Lee Jia Quan, Benny
+
+<img src="images/shamanbenny.png" width="200px">
+
+[[homepage](https://www.sneakyowl.net/)]
+[[github](https://github.com/Shamanbenny)]
+[[portfolio](team/benny.md)]
+
+* Role: Team Lead
+
 ### Jun Xiang
 
 <img src="images/junxiang26.png" width="200px">
