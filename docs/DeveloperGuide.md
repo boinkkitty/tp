@@ -320,8 +320,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+4.  Should be able to save the historical data that user has input in a txt file in storage folder.
+5.  Should be backward compatible with data produced by earlier version of the system.
+6.  Response to any use action should be visible within 3 seconds.
+7.  The user interface should be intuitive enough for users who may not be IT-savvy.
 
 ### Glossary
 
