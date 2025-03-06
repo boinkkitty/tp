@@ -302,7 +302,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `TutorSynch` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Add a person**
+**Use case: UC01 - Add a person**
 
 Guarantees:
 * A properly formatted person's information with all mandatory details will be added to the list of persons.
@@ -327,6 +327,26 @@ Guarantees:
     * 2b1. TutorSynch shows an error message.
 
       Use case ends.
+
+**Use case: UC02 - Delete a person**
+
+Preconditions: Target person exists in TutorSynch
+
+**MSS**
+
+1.  User requests to delete a person from TutorSynch.
+2.  User enters the index or name of target person.
+3.  TutorSynch deletes the person and displays status.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. TutorSynch detects that user did not provide valid index or name of a person.
+    * 2a1. TutorSynch shows an error message.
+      
+      Use case ends.
+
 
   
 *{More to be added}*
