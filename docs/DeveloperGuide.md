@@ -262,29 +262,41 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* has a need to manage a significant number of student contacts
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
+* independent tutors and coaching professionals who are tech-savvy
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Helps tutors organize student contacts and track their progress, reducing administrative work and improving learning outcomes
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …                    | I want to …                                         | So that I can…                                                                            |
+|----------|---------------------------|-----------------------------------------------------|-------------------------------------------------------------------------------------------|
+| `* * *`  | Tutor (Beginner User)     | Add student information                             | Have all necessary student info in one place.                                             |
+| `* * *`  | Tutor (Beginner User)     | Delete student information                          | Remove outdated or incorrect records.                                                     |
+| `* * *`  | Tutor (Beginner User)     | List all student information                        | Look through an organized overview of all my students for easy reference and management.  |
+| `* *`    | Tutor (Beginner User)     | Search for student information by name              | Quickly retrieve student records that match the name.                                     |
+| `* *`    | Tutor (Beginner User)     | Sort my student information when listing            | Organize and view student records sorted based on a specific field.                       |
+| `* *`    | Tutor (Intermediate User) | Edit student information                            | Update incorrect records.                                                                 |
+| `* *`    | Tutor (Intermediate User) | Tag students into groups                            | Easily manage students by group type.                                                     |
+| `*`      | Tutor (Intermediate User) | Assign colors to groups                             | Visually differentiate student groups.                                                    |
+| `* *`    | Tutor (Expert User)       | Categorise student information                      | Better retrieve and organize relevant student data.                                       |
+| `* *`    | Tutor (Expert User)       | Compare student progress                            | Tailor lessons to individual needs.                                                       |
+| `* *`    | Tutor (Expert User)       | Perform bulk deletion of student information        | Efficiently clear outdated records and prepare for a new semester.                        |
+| `* *`    | Tutor (Expert User)       | Record student payments                             | Keep track of payments received.                                                          |
+| `* *`    | Tutor (Expert User)       | Update payment statuses                             | Know which students have outstanding fees.                                                |
+| `*`      | Tutor (Expert User)       | Export filtered views                               | Save and share specific student data for analysis, reporting, or administrative purposes. |
+| `*`      | Tutor (Expert User)       | Filter students by criteria                         | Quickly find relevant students.                                                           |
+| `*`      | Tutor (Expert User)       | Generate payment summaries                          | Have a quick overview of all payments.                                                    |
+| `*`      | Tutor (Expert User)       | Generate student progress reports                   | Share insights with students or parents.                                                  |
+| `*`      | Tutor (Expert User)       | Perform conditional deletion of student information | Efficiently clear out specific groups of student records.                                 |
+| `*`      | Tutor (Expert User)       | View student performance trends                     | Assess their progress over time.                                                          |
 
 ### Use cases
 
