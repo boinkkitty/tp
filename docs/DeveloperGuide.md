@@ -331,6 +331,35 @@ Guarantees:
   
 *{More to be added}*
 
+**Use case: List a person**
+
+**MSS**
+1. User requests to list all students by entering the `list` command.
+2. TutorSynch processes the request, ignoring case sensitivity and extra whitespaces.
+3. TutorSynch retrieves all student records from the database.
+4. TutorSynch checks if there are students stored:
+   1. If student exists:
+      1. TutorSynch displays a list of all students.
+      2. Success message is shown: "Listed all students successfully. Total entries: * Students"
+   2. If no student exists:
+      1. TutorSynch displays "No students found."
+5. TutorSynch waits for next user command
+
+   Use case ends.
+
+
+**Extensions**
+
+* 2a. Student list is empty
+  * TutorSynch displays "No students found."
+  
+   Use case ends.
+
+* 4a. Unexpected formatting issue when displaying users
+  * TutorSynch displays " Error occured while displaying student information. Please check the format and try again."
+
+   Use case ends.
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
