@@ -290,6 +290,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
+**Use case: Add a person**
+
+Guarantees:
+* A properly formatted person's information with all mandatory details will be added to the list of persons.
+
+**MSS**
+
+1.  User requests to add a person's information.
+2.  User enters the details of the person.
+3.  AddressBook adds the person.
+4.  AddressBook shows the list of person including newly added person.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. User did not provide all mandatory details of a person
+  * 2a1. AddressBook shows an error message
+
+    Use case ends.
+
+* 2b. User did not comply with required formatting for details of a person.
+    * 2b1. AddressBook shows an error message.
+
+      Use case ends
+
+
+
 **Use case: Delete a person**
 
 **MSS**
@@ -312,7 +340,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. AddressBook shows an error message.
 
       Use case resumes at step 2.
-
+  
 *{More to be added}*
 
 ### Non-Functional Requirements
