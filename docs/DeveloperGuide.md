@@ -300,31 +300,35 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `TutorSynch` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Add a person**
+
+Guarantees:
+* A properly formatted person's information with all mandatory details will be added to the list of persons.
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to add a person's information.
+2.  User enters the details of the person.
+3.  TutorSynch adds the person.
+4.  TutorSynch shows the list of person including newly added person.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. TutorSynch detects that user did not provide all mandatory details of a person.
+  * 2a1. TutorSynch shows an error message.
 
-  Use case ends.
+    Use case ends.
 
-* 3a. The given index is invalid.
+* 2b. TutorSynch detects that user did not comply with required formatting for details of a person.
+    * 2b1. TutorSynch shows an error message.
 
-    * 3a1. AddressBook shows an error message.
+      Use case ends.
 
-      Use case resumes at step 2.
-
+  
 *{More to be added}*
 
 ### Non-Functional Requirements
