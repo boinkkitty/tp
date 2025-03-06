@@ -312,7 +312,7 @@ Guarantees:
     Use case ends.
 
 * 2b. TutorSynch detects that user did not comply with required formatting for details of a person.
-    * 2b1. AddressBook shows an error message.
+    * 2b1. TutorSynch shows an error message.
 
       Use case ends.
 
