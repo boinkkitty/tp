@@ -3,15 +3,20 @@ layout: page
 title: Benny's Project Portfolio Page
 ---
 
-### Work in Progress...
-
-<!--
-### Project: AddressBook Level 3
-
-AddressBook - Level 3 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+### Project: TutorSynch
 
 Given below are my contributions to the project.
 
+* **Documentation**:
+  * Ui Mockup:
+    * Designed `docs\images\Ui.png` and `docs\images\findLeeYuResult.png` via PowerPoint. [\#38](https://github.com/AY2425S2-CS2103-F15-2/tp/pull/38)
+  * User Guide:
+    * Did cosmetic tweaks to existing documentations mentioning `AddressBook` instead of `TutorSynch`. [\#46](https://github.com/AY2425S2-CS2103-F15-2/tp/pull/46)
+  * Developer Guide:
+    * Modified existing use cases for `UC01 - Add a new student`, `UC03 - Delete a student`, and `UC04 - List all students`. [\#46](https://github.com/AY2425S2-CS2103-F15-2/tp/pull/46)
+    * Added use cases for `UC02 - Edit a student's information`, `UC05 - Record payment information for existing student`, `UC06 - Bulk delete student records`, `UC07 - Compare progress between two students`. [\#46](https://github.com/AY2425S2-CS2103-F15-2/tp/pull/46)
+
+<!--
 * **New Feature**: Added the ability to undo/redo previous commands.
   * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
   * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
