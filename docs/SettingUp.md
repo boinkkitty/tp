@@ -16,7 +16,7 @@ title: Setting up and getting started
 Follow the steps in the following guide precisely. Things will not work out if you deviate in some steps.
 </div>
 
-First, **fork** this repo, and **clone** the fork into your computer.
+First, **fork** [this repo](https://github.com/AY2425S2-CS2103-F15-2/tp), and **clone** the fork into your computer.
 
 If you plan to use Intellij IDEA (highly recommended):
 1. **Configure the JDK**: Follow the guide [_[se-edu/guides] IDEA: Configuring the JDK_](https://se-education.org/guides/tutorials/intellijJdk.html) to ensure Intellij is configured to use **JDK 17**.
