@@ -306,12 +306,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case: UC01 - Add a new student**
 
 Guarantees:
-* The new student record is saved locally if successfully added.
+* The new student record is saved if successfully added.
 
 **MSS**
 
 1. User requests to add a new student with the necessary information.
-2. TutorSynch adds and stores the student's information locally.
+2. TutorSynch adds the student's record.
 3. TutorSynch shows the list of student records including the newly added.
 
     Use case ends.
@@ -330,33 +330,26 @@ Guarantees:
 
     Use case ends.
 
-* 2a. TutorSynch fails to store changes on persistant storage.
-  * 2a1. TutorSynch shows an error message.
-  * 2a2. TutorSynch retains the student record in memory only.
-  * 2a3. TutorSynch shows the list of person including newly added person.
-  
-    Use case ends.
-
 **Use case: UC02 - Edit a student's information**
 
 Preconditions:
-* At lease one student record exists in TutorSynch.
+* At least one student record exists in TutorSynch.
 * User has identified the specific student to be edited.
 
 Guarantees:
-* The existing student record is updated locally if successfully edited.
+* The existing student record is updated if successfully edited.
 
 **MSS**
 
-1. User requests to edit a student by specifying the student's index, alongside the new details.
-2. TutorSynch updates the relevant student record by overwriting and storing the updated information locally.
+1. User requests to edit a specific student, alongside the new details.
+2. TutorSynch updates the relevant student record.
 3. TutorSynch shows the list of student records including the newly updated.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. TutorSynch detects that user enters an invalid student index.
+* 1a. TutorSynch detects that user enters an invalid student reference.
   * 1a1. TutorSynch shows an error message.
   * 1a2. TutorSynch terminates the edit process.
 
@@ -368,43 +361,29 @@ Guarantees:
 
     Use case ends.
 
-* 2a. TutorSynch fails to store changes on persistant storage.
-  * 2a1. TutorSynch shows an error message.
-  * 2a2. TutorSynch retains the updated student record in memory only.
-  * 2a3. TutorSynch shows the list of student records including the newly updated.
-
-    Use case ends.
-
 **Use case: UC03 - Delete a student**
 
 Preconditions:
-* At lease one student record exists in TutorSynch.
+* At least one student record exists in TutorSynch.
 * User has identified the specific student to be deleted.
 
 Guarantees:
-* The targeting student record is removed locally if successfully deleted.
+* The targeting student record is removed if successfully deleted.
 
 **MSS**
 
-1. User requests to delete a student record by specifying the student's index.
-2. TutorSynch deletes the specified student record and update changes locally.
+1. User requests to delete a specific student record.
+2. TutorSynch deletes the specified student record.
 3. TutorSynch shows the updated list of student records.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. TutorSynch detects that user enters an invalid student index.
+* 1a. TutorSynch detects that user enters an invalid student reference.
   * 1a1. TutorSynch shows an error message.
   * 1a2. TutorSynch terminates the delete process.
       
-    Use case ends.
-
-* 2a. TutorSynch fails to store changes on persistant storage.
-  * 2a1. TutorSynch shows an error message.
-  * 2a2. TutorSynch deletes the specified student record in memory only.
-  * 2a3. TutorSynch shows the updated list of student records.
-
     Use case ends.
 
 **Use case: UC04 - List all students**
@@ -426,22 +405,22 @@ Guarantees:
 **Use case: UC05 - Record payment information for existing student**
 
 Preconditions:
-* At lease one student record exists in TutorSynch.
+* At least one student record exists in TutorSynch.
 * User has identified the specific student to update their payment information.
 
 Guarantees:
-* The existing student record is updated locally with payment information if successfully recorded.
+* The existing student record is updated with payment information if successfully recorded.
 
 **MSS**
-1. User requests to record payment information by specifying the student's index, alongside the payment information.
-2. TutorSynch adds and stores the payment information to the student's record locally.
+1. User requests to record payment information for a specific student.
+2. TutorSynch adds the payment information to the student's record.
 3. TutorSynch shows the list of student records including the newly added payment information.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. TutorSynch detects that user enters an invalid student index.
+* 1a. TutorSynch detects that user enters an invalid student reference.
   * 1a1. TutorSynch shows an error message.
   * 1a2. TutorSynch terminates the edit process.
 
@@ -453,26 +432,13 @@ Guarantees:
 
     Use case ends.
 
-* 1c. The specified student record already contains existing payment information.
-  * 1c1. TutorSynch overwrites and stores the payment information to the student's record locally.
-  * 1c2. TutorSynch shows the list of student records including the updated payment information.
-
-    Use case ends.
-
-* 2a. TutorSynch fails to store changes on persistant storage.
-  * 2a1. TutorSynch shows an error message.
-  * 2a2. TutorSynch retains the updated payment information to the student's record in memory only.
-  * 2a3. TutorSynch shows the list of student records including the newly added payment information.
-
-    Use case ends.
-
 **Use case: UC06 - Bulk delete student records**
 
 Preconditions:
-* At lease one student record exists in TutorSynch.
+* At least one student record exists in TutorSynch.
 
 Guarantees:
-* **ALL** existing student records will be removed locally.
+* **ALL** existing student records will be removed.
 
 **MSS**
 1. User requests to perform a bulk deletion.
@@ -480,7 +446,7 @@ Guarantees:
 3. User confirms.
 4. TutorSynch requests for a second confirmation.
 5. User confirms.
-6. TutorSynch deletes **ALL** student records locally.
+6. TutorSynch deletes **ALL** student records.
 7. TutorSynch informs the user of the bulk deletion.
 
    Use case ends.
@@ -499,24 +465,17 @@ Guarantees:
 
     Use case ends.
 
-* 6a. TutorSynch fails to store changes on persistant storage.
-  * 6a1. TutorSynch shows an error message.
-  * 6a2. TutorSynch deletes **ALL** student records in memory only.
-  * 6a3. TutorSynch shows the updated empty list of student records.
-
-    Use case ends.
-
 **Use case: UC07 - Compare progress between two students**
 
 Preconditions:
-* At lease two distinct student record exists in TutorSynch.
+* At least two distinct student record exists in TutorSynch.
 * User has identified the two specific students to compare between.
 
 Guarantees:
 * TutorSynch shows a basic side-by-side comparison of the two student's progress/grades.
 
 **MSS**
-1. User requests a comparison by specifying the two student's index.
+1. User requests a comparison by specifying the two student.
 2. TutorSynch fetches both the existing student records.
 3. TutorSynch displays the basic side-by-side comparison based on student records.
 
@@ -524,14 +483,9 @@ Guarantees:
 
 **Extensions**
 
-* 1a. TutorSynch detects one or both student indexes are invalid.
+* 1a. TutorSynch detects one or both student references are invalid.
     * 1a1. TutorSynch shows an error message.
     * 1a2. TutorSynch terminates the comparison process.
-
-      Use case ends.
-
-* 2a. Either or both of the student records contain missing progress data (e.g. grades).
-    * 1b1. TutorSynch continues to display the side-by-side comparison, but with `N/A` where applicable.
 
       Use case ends.
 
@@ -548,7 +502,8 @@ Guarantees:
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **CLI**: Command Line Interface; user interacts with the application by typing text commands rather than using a mouse.
+* **CLI**: Command Line Interface; User interacts with the application by typing text commands rather than using a mouse.
+* **Persist**: Student records should be saved to local storage (as JSON files) in a way that ensures they remain available even after the application is closed and reopened.
 
 --------------------------------------------------------------------------------------------------------------------
 
