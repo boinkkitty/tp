@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.address.model.person.Person;
 
 /**
@@ -41,17 +42,19 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
-    private Label placeholder1;
-    @FXML
-    private Label placeholder2;
-    @FXML
-    private Label placeholder3;
-    @FXML
-    private Label placeholder4;
-    @FXML
-    private Label placeholder5;
-    @FXML
-    private Label placeholder6;
+    private VBox details;
+//    @FXML
+//    private Label placeholder1;
+//    @FXML
+//    private Label placeholder2;
+//    @FXML
+//    private Label placeholder3;
+//    @FXML
+//    private Label placeholder4;
+//    @FXML
+//    private Label placeholder5;
+//    @FXML
+//    private Label placeholder6;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -65,12 +68,12 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
 
-        placeholder1.setText("placeholder text 1");
-        placeholder2.setText("placeholder text 2");
-        placeholder3.setText("placeholder text 3");
-        placeholder4.setText("placeholder text 4");
-        placeholder5.setText("placeholder text 5");
-        placeholder6.setText("placeholder text 6");
+        Label placeholder = new Label("placeholder text");
+        placeholder.getStyleClass().add("cell_small_label");
+        details.getChildren().add(placeholder);
+        Label placeholder2 = new Label("placeholder text");
+        placeholder2.getStyleClass().add("cell_small_label");
+        details.getChildren().add(placeholder2);
 
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
