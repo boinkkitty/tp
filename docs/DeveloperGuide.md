@@ -390,15 +390,14 @@ Guarantees:
 
 **MSS**
 1. User requests to list all students records.
-2. TutorSynch fetches all existing student records.
-3. TutorSynch displays the full list of students with their information.
+2. TutorSynch displays the full list of students with their information.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. Student list is empty
-  * TutorSynch informs the user of the empty list.
+* 1a. Student list is empty.
+  * 1a1. TutorSynch informs the user of the empty list.
   
    Use case ends.
 
@@ -476,8 +475,7 @@ Guarantees:
 
 **MSS**
 1. User requests a comparison by specifying the two student.
-2. TutorSynch fetches both the existing student records.
-3. TutorSynch displays the basic side-by-side comparison based on student records.
+3. TutorSynch displays the basic side-by-side comparison based on both student records.
 
    Use case ends.
 
