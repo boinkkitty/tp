@@ -37,7 +37,7 @@ public class PaymentCommandParserTest {
         assertParseFailure(parser, PaymentCommand.COMMAND_WORD, expectedMessage);
 
         // Missing index
-        assertParseFailure(parser, PaymentCommand.COMMAND_WORD + PAYMENT_FEE_DESC+ PAYMENT_DATE_DESC,
+        assertParseFailure(parser, PaymentCommand.COMMAND_WORD + PAYMENT_FEE_DESC + PAYMENT_DATE_DESC,
                 expectedMessage);
 
         // Missing fee
