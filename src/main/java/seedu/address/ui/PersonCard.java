@@ -1,11 +1,17 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.util.List;
+import java.util.stream.IntStream;
 
+import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.address.model.person.Person;
@@ -43,18 +49,6 @@ public class PersonCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private VBox details;
-//    @FXML
-//    private Label placeholder1;
-//    @FXML
-//    private Label placeholder2;
-//    @FXML
-//    private Label placeholder3;
-//    @FXML
-//    private Label placeholder4;
-//    @FXML
-//    private Label placeholder5;
-//    @FXML
-//    private Label placeholder6;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -68,15 +62,30 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
 
-        Label placeholder = new Label("placeholder text");
-        placeholder.getStyleClass().add("cell_small_label");
-        details.getChildren().add(placeholder);
-        Label placeholder2 = new Label("placeholder text");
-        placeholder2.getStyleClass().add("cell_small_label");
-        details.getChildren().add(placeholder2);
-
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .forEach(tag -> {
+                    Label label = new Label(tag.tagName);
+                    label.maxWidthProperty().bind(tags.widthProperty());
+                    Tooltip tooltip = new Tooltip(tag.tagName);
+                    label.setTooltip(tooltip);
+                    tags.getChildren().add(label);
+                });
+
+        retrieveDetailsAsList().stream()
+                .filter(s -> !s.isEmpty())
+                .map(s -> stringToDetailsLabel(s))
+                .forEach(label -> details.getChildren().add(label));
+
+    }
+
+    private List<String> retrieveDetailsAsList() {
+        return List.of("placeholder1","","placeholder3","placeholder4","placeholder5","placeholder6");
+    }
+
+    private Label stringToDetailsLabel(String s) {
+        Label label = new Label(s);
+        label.getStyleClass().add("cell_small_label");
+        return label;
     }
 }
