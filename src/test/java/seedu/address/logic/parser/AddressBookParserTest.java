@@ -4,6 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.PAYMENT_DATE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.PAYMENT_FEE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PAYMENT_DATE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PAYMENT_FEE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -91,7 +95,9 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_payment() throws Exception {
-        assertTrue(parser.parseCommand(PaymentCommand.COMMAND_WORD) instanceof PaymentCommand);
+        PaymentCommand command = (PaymentCommand) parser.parseCommand(PaymentCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased() + PAYMENT_FEE_DESC + PAYMENT_DATE_DESC);
+        assertEquals(new PaymentCommand(INDEX_FIRST_PERSON, VALID_PAYMENT_FEE, VALID_PAYMENT_DATE), command);
     }
 
     @Test
