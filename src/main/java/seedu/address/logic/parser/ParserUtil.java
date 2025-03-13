@@ -10,6 +10,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.CurrentGrade;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -120,5 +121,20 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String current grade} into an {@code CurrentGrade}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code current grade} is invalid.
+     */
+    public static CurrentGrade parseCurrentGrade(String currentGrade) throws ParseException {
+        requireNonNull(currentGrade);
+        String trimmedCurrentGrade = currentGrade.trim();
+        if (!CurrentGrade.isValidCurrentGrade(trimmedCurrentGrade)) {
+            throw new ParseException(CurrentGrade.MESSAGE_CONSTRAINTS);
+        }
+        return new CurrentGrade(trimmedCurrentGrade);
     }
 }
