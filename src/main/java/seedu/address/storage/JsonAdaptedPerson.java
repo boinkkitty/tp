@@ -107,7 +107,8 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         if (currentGrade == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, CurrentGrade.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    CurrentGrade.class.getSimpleName()));
         }
         if (!CurrentGrade.isValidCurrentGrade(currentGrade)) {
             throw new IllegalValueException(CurrentGrade.MESSAGE_CONSTRAINTS);
