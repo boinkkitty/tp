@@ -36,6 +36,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
+        descriptor.setExpectedGrade(person.getExpectedGrade());
         descriptor.setTags(person.getTags());
     }
 
@@ -68,6 +69,14 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withAddress(String address) {
         descriptor.setAddress(new Address(address));
+        return this;
+    }
+
+    /**
+     * Sets the {@code ExpectedGrade} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withExpectedGrade(String expectedGrade) {
+        descriptor.setExpectedGrade(new ExpectedGrade(expectedGrade));
         return this;
     }
 
