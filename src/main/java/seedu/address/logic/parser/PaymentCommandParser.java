@@ -26,8 +26,7 @@ public class PaymentCommandParser implements Parser<PaymentCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_PAYMENT_FEE, PREFIX_PAYMENT_DATE);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_PAYMENT_FEE)
-                || argMultimap.getPreamble().isEmpty()) {
+        if (argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, PaymentCommand.MESSAGE_USAGE));
         }
 
@@ -40,7 +39,12 @@ public class PaymentCommandParser implements Parser<PaymentCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PAYMENT_FEE, PREFIX_PAYMENT_DATE);
 
-        int paymentFee = ParserUtil.parseFee(argMultimap.getValue(PREFIX_PAYMENT_FEE).get());
+        int paymentFee;
+        if (argMultimap.getValue(PREFIX_PAYMENT_FEE).isPresent()) {
+            paymentFee = ParserUtil.parseFee(argMultimap.getValue(PREFIX_PAYMENT_FEE).get());
+        } else {
+            paymentFee = 0;
+        }
 
         String paymentDate;
         if (argMultimap.getValue(PREFIX_PAYMENT_DATE).isPresent()) {
