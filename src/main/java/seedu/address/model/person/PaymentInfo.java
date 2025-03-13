@@ -19,7 +19,7 @@ public class PaymentInfo {
     private final String paymentDate;
 
     /**
-     * Constructs a {@code PaymentInfo} with {@code PaymentFee} and {@code PaymentDate}.
+     * Constructs a {@code PaymentInfo} with {@code paymentFee} and {@code paymentDate}.
      *
      * @param paymentFee A valid fee.
      * @param paymentDate A valid date.
@@ -27,13 +27,13 @@ public class PaymentInfo {
     public PaymentInfo(int paymentFee, String paymentDate) {
         requireNonNull(paymentDate);
         checkArgument(PaymentInfo.isValidFee(paymentFee), MESSAGE_CONSTRAINTS_FEE);
-        checkArgument(isValidDate(paymentDate), MESSAGE_CONSTRAINTS_FEE);
+        checkArgument(isValidDate(paymentDate), MESSAGE_CONSTRAINTS_DATE);
         this.paymentFee = paymentFee;
         this.paymentDate = paymentDate;
     }
 
     /**
-     * Constructs a {@code PaymentInfo} with {@code PaymentFee} only.
+     * Constructs a {@code PaymentInfo} with {@code paymentFee} only.
      */
     public PaymentInfo(int paymentFee) {
         checkArgument(PaymentInfo.isValidFee(paymentFee), MESSAGE_CONSTRAINTS_FEE);
@@ -42,7 +42,17 @@ public class PaymentInfo {
     }
 
     /**
-     * Constructs a {@code PaymentInfo} without {@code PaymentFee} and {@code PaymentDate}.
+     * Constructs a {@code PaymentInfo} with {@code paymentDate} only.
+     */
+    public PaymentInfo(String paymentDate) {
+        requireNonNull(paymentDate);
+        checkArgument(isValidDate(paymentDate), MESSAGE_CONSTRAINTS_DATE);
+        this.paymentFee = 0;
+        this.paymentDate = paymentDate;
+    }
+
+    /**
+     * Constructs a {@code PaymentInfo} without {@code paymentFee} and {@code paymentDate}.
      */
     public PaymentInfo() {
         this.paymentFee = 0;

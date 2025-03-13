@@ -110,6 +110,14 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code PaymentInfo} of the {@code Person} that we are building, containing only the Payment Date.
+     */
+    public PersonBuilder withPaymentInfo(String paymentDate) {
+        this.paymentInfo = new PaymentInfo(paymentDate);
+        return this;
+    }
+
+    /**
      * Sets the {@code PaymentInfo} of the {@code Person} that we are building, containing Payment Fee & Date.
      */
     public PersonBuilder withPaymentInfo(int paymentFee, String paymentDate) {
