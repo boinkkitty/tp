@@ -73,7 +73,7 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding a person : `add`
 
 Adds a person to the address book.
 
@@ -110,7 +110,21 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Updating a person's payment information : `payment`
+
+Updates the payment information of an existing person in the address book.
+
+Format: `payment INDEX [f/FEE] [d/PAYMENT_DATE]`
+
+* Updates the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Existing values will be updated to the input values.
+* If none of the optional fields are provided, the specified person's payment information will be removed.
+
+Examples:
+* `payment 1 f/1000 d/14-11-2000` Updates the tutoring fee and payment date to be `1000` and `14-11-2000` respectively.
+* `payment 2` Removes the payment information of the 2nd person.
+
+### Locating persons by name : `find`
 
 Finds persons whose names contain any of the given keywords.
 
@@ -195,6 +209,7 @@ _Details coming soon ..._
 | **Clear**  | `clear`                                                                                                                                                               |
 | **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
 | **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
+| **Payment**| `payment INDEX [f/FEE] d/[PAYMENT_DATE]`<br> e.g., `payment 4 f/1000 d/14-11-2000`                                                                                    |
 | **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
 | **List**   | `list`                                                                                                                                                                |
 | **Help**   | `help`                                                                                                                                                                |
