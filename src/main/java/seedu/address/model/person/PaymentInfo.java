@@ -7,7 +7,7 @@ import seedu.address.commons.util.StringUtil;
 
 /**
  * Represents a Person's payment info in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidFee(int)} and {@link #isValidDate(String)}
  */
 public class PaymentInfo {
     public static final String MESSAGE_CONSTRAINTS_FEE =
@@ -26,7 +26,7 @@ public class PaymentInfo {
      */
     public PaymentInfo(int paymentFee, String paymentDate) {
         requireNonNull(paymentDate);
-        checkArgument(isValidFee(paymentFee), MESSAGE_CONSTRAINTS_FEE);
+        checkArgument(PaymentInfo.isValidFee(paymentFee), MESSAGE_CONSTRAINTS_FEE);
         checkArgument(isValidDate(paymentDate), MESSAGE_CONSTRAINTS_FEE);
         this.paymentFee = paymentFee;
         this.paymentDate = paymentDate;
@@ -36,7 +36,7 @@ public class PaymentInfo {
      * Constructs a {@code PaymentInfo} with {@code PaymentFee} only.
      */
     public PaymentInfo(int paymentFee) {
-        checkArgument(isValidFee(paymentFee), MESSAGE_CONSTRAINTS_FEE);
+        checkArgument(PaymentInfo.isValidFee(paymentFee), MESSAGE_CONSTRAINTS_FEE);
         this.paymentFee = paymentFee;
         this.paymentDate = "";
     }
@@ -52,15 +52,15 @@ public class PaymentInfo {
     /**
      * Returns true if a given int is a valid fee (Positive).
      */
-    public boolean isValidFee(int fee) {
+    public static boolean isValidFee(int fee) {
         return fee >= 0;
     }
 
     /**
      * Returns true if a given string is a valid date (dd-MM-yyyy).
      */
-    public boolean isValidDate(String s) {
-        return StringUtil.isValidDate(s);
+    public static boolean isValidDate(String s) {
+        return StringUtil.isValidDate(s) || s.isEmpty();
     }
 
     public int getPaymentFee() {

@@ -94,6 +94,14 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code PaymentInfo} of the {@code Person} that we are building, with no initial value.
+     */
+    public PersonBuilder withPaymentInfo() {
+        this.paymentInfo = new PaymentInfo();
+        return this;
+    }
+
+    /**
      * Sets the {@code PaymentInfo} of the {@code Person} that we are building, containing only the Payment Fee.
      */
     public PersonBuilder withPaymentInfo(int paymentFee) {

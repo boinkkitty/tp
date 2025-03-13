@@ -3,6 +3,7 @@ package seedu.address.storage;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -30,6 +31,8 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final int paymentFee;
+    private final String paymentDate;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -37,7 +40,8 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("paymentFee") int paymentFee,
+            @JsonProperty("paymentDate") String paymentDate) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -45,6 +49,8 @@ class JsonAdaptedPerson {
         if (tags != null) {
             this.tags.addAll(tags);
         }
+        this.paymentFee = paymentFee;
+        this.paymentDate = Objects.requireNonNullElse(paymentDate, "");
     }
 
     /**
@@ -58,6 +64,8 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        paymentFee = source.getPaymentInfo().getPaymentFee();
+        paymentDate = source.getPaymentInfo().getPaymentDate();
     }
 
     /**
@@ -105,8 +113,17 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        // TODO [BENNY]: Implement parsing and marshalling on the storage commit.
-        final PaymentInfo paymentInfo = new PaymentInfo();
+        // IF paymentFee field is missing, it will be set as 0 by default. Therefore, no checks needed.
+        if (!PaymentInfo.isValidFee(paymentFee)) {
+            throw new IllegalValueException(PaymentInfo.MESSAGE_CONSTRAINTS_FEE);
+        }
+        if (paymentDate == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "[paymentDate]"));
+        }
+        if (!PaymentInfo.isValidDate(paymentDate)) {
+            throw new IllegalValueException(PaymentInfo.MESSAGE_CONSTRAINTS_DATE);
+        }
+        final PaymentInfo paymentInfo = new PaymentInfo(paymentFee, paymentDate);
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, paymentInfo);
     }
