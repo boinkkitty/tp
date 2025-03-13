@@ -4,6 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.PAYMENT_DATE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.PAYMENT_FEE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PAYMENT_DATE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PAYMENT_FEE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -22,6 +26,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.PaymentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -86,6 +91,13 @@ public class AddressBookParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_payment() throws Exception {
+        PaymentCommand command = (PaymentCommand) parser.parseCommand(PaymentCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased() + PAYMENT_FEE_DESC + PAYMENT_DATE_DESC);
+        assertEquals(new PaymentCommand(INDEX_FIRST_PERSON, VALID_PAYMENT_FEE, VALID_PAYMENT_DATE), command);
     }
 
     @Test
