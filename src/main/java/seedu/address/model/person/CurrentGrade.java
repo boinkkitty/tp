@@ -20,6 +20,10 @@ public class CurrentGrade {
 
     public final String value;
 
+    public CurrentGrade() {
+        value = "C";
+    }
+
     /**
      * Constructs an {@code Current Grade}.
      *

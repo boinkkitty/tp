@@ -6,8 +6,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.testutil.PersonBuilder;
-
 public class CurrentGradeTest {
 
     @Test
@@ -17,7 +15,7 @@ public class CurrentGradeTest {
 
     @Test
     public void constructor_invalidCurrentGrade_throwsIllegalArgumentException() {
-        String invalidGrade = "b";
+        String invalidGrade = "";
         assertThrows(IllegalArgumentException.class, () -> new Phone(invalidGrade));
     }
 
@@ -53,6 +51,6 @@ public class CurrentGradeTest {
         assertFalse(currentGrade.equals(null));
 
         // different values -> returns false
-        assertFalse(currentGrade.equals(new CurrentGrade("A")));
+        assertFalse(currentGrade.equals(new CurrentGrade("D")));
     }
 }
