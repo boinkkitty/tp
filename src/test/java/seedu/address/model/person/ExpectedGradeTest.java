@@ -14,8 +14,8 @@ public class ExpectedGradeTest {
 
     @Test
     public void constructor_invalidExpectedGrade_throwsIllegalArgumentException() {
-        String invalidAddress = " ";
-        assertThrows(IllegalArgumentException.class, () -> new ExpectedGrade(invalidAddress));
+        String invalidExpectedGrade = " ";
+        assertThrows(IllegalArgumentException.class, () -> new ExpectedGrade(invalidExpectedGrade));
     }
 
     @Test
@@ -37,10 +37,10 @@ public class ExpectedGradeTest {
         ExpectedGrade expectedGrade = new ExpectedGrade("Valid Expected Grade");
 
         // same values -> returns true
-        assertTrue(expectedGrade.equals(new Address("Valid Expected Grade")));
+        assertTrue(expectedGrade.equals(new ExpectedGrade("Valid Expected Grade")));
 
         // same object -> returns true
-        assertTrue(expectedGrade.equals(address));
+        assertTrue(expectedGrade.equals(expectedGrade));
 
         // null -> returns false
         assertFalse(expectedGrade.equals(null));
