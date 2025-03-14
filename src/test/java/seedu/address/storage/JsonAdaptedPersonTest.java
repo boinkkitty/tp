@@ -128,7 +128,7 @@ public class JsonAdaptedPersonTest {
     public void toModelType_invalidCurrentGrade_throwsIllegalValueException() {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS,
-                        INVALID_CURRENT_GRADE);
+                        VALID_PAYMENT_FEE, VALID_PAYMENT_DATE, INVALID_CURRENT_GRADE);
         String expectedMessage = CurrentGrade.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -137,7 +137,7 @@ public class JsonAdaptedPersonTest {
     public void toModelType_invalidPaymentFee_throwsIllegalValueException() {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS,
-                        INVALID_PAYMENT_FEE, VALID_PAYMENT_DATE);
+                        INVALID_PAYMENT_FEE, VALID_PAYMENT_DATE, VALID_CURRENT_GRADE);
         String expectedMessage = PaymentInfo.MESSAGE_CONSTRAINTS_FEE;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -146,7 +146,7 @@ public class JsonAdaptedPersonTest {
     public void toModelType_invalidPaymentDate_throwsIllegalValueException() {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS,
-                        VALID_PAYMENT_FEE, INVALID_PAYMENT_DATE);
+                        VALID_PAYMENT_FEE, INVALID_PAYMENT_DATE, VALID_CURRENT_GRADE);
         String expectedMessage = PaymentInfo.MESSAGE_CONSTRAINTS_DATE;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -155,7 +155,7 @@ public class JsonAdaptedPersonTest {
     public void toModelType_nullPaymentDate_returnsPerson() throws Exception {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS,
-                        VALID_PAYMENT_FEE, null);
+                        VALID_PAYMENT_FEE, null, VALID_CURRENT_GRADE);
         assertEquals(BENSON, person.toModelType());
     }
 }

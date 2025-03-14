@@ -138,6 +138,7 @@ public class ParserUtil {
             throw new ParseException(CurrentGrade.MESSAGE_CONSTRAINTS);
         }
         return new CurrentGrade(trimmedCurrentGrade);
+    }
 
     /**
      * Parses {@code feeString} into an {@code int} and returns it. Leading and trailing whitespaces will be

@@ -42,19 +42,18 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("currentGrade") String currentGrade), 
             @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("paymentFee") int paymentFee,
-            @JsonProperty("paymentDate") String paymentDate) {
+            @JsonProperty("paymentDate") String paymentDate, @JsonProperty("currentGrade") String currentGrade) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.currentGrade = currentGrade;
         if (tags != null) {
             this.tags.addAll(tags);
         }
         this.paymentFee = paymentFee;
         this.paymentDate = Objects.requireNonNullElse(paymentDate, "");
+        this.currentGrade = currentGrade;
     }
 
     /**

@@ -109,7 +109,8 @@ public class EditCommand extends Command {
         // Edit command does not allow editing paymentInfo
         PaymentInfo updatedPaymentInfo = personToEdit.getPaymentInfo();
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedPaymentInfo, updatedCurrentGrade);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedPaymentInfo,
+                updatedCurrentGrade);
     }
 
     @Override

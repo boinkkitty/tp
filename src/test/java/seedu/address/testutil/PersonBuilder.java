@@ -104,7 +104,7 @@ public class PersonBuilder {
         this.currentGrade = new CurrentGrade(currentGrade);
         return this;
     }
-  
+
     /**
      * Sets the {@code PaymentInfo} of the {@code Person} that we are building, with no initial value.
      */
