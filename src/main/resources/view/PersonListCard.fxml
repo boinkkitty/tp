@@ -43,8 +43,8 @@
             <Label fx:id="placeholder2" styleClass="cell_small_label" text="\$placeholder2" />
             <Label fx:id="currentGrade" styleClass="cell_small_label" text="\$currentGrade" />
             <Label fx:id="placeholder4" styleClass="cell_small_label" text="\$placeholder4" />
-            <Label fx:id="placeholder5" styleClass="cell_small_label" text="\$placeholder5" />
-            <Label fx:id="placeholder6" styleClass="cell_small_label" text="\$placeholder6" />
+            <Label fx:id="paymentFee" styleClass="cell_small_label" text="\$paymentFee" />
+            <Label fx:id="paymentDate" styleClass="cell_small_label" text="\$paymentDate" />
          </children>
       </VBox>
       <rowConstraints>

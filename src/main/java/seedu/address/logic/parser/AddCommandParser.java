@@ -17,6 +17,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.CurrentGrade;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.PaymentInfo;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -50,8 +51,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         CurrentGrade currentGrade = ParserUtil.parseCurrentGrade(argMultimap
                 .getValue(PREFIX_CURRENT_GRADE).orElse("C"));
+        PaymentInfo paymentInfo = new PaymentInfo();
 
-        Person person = new Person(name, phone, email, address, tagList, currentGrade);
+        Person person = new Person(name, phone, email, address, tagList, paymentInfo, currentGrade);
 
         return new AddCommand(person);
     }

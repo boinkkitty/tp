@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.person.PaymentInfo;
 import seedu.address.model.person.Person;
 
 /**
@@ -49,9 +50,9 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label placeholder4;
     @FXML
-    private Label placeholder5;
+    private Label paymentFee;
     @FXML
-    private Label placeholder6;
+    private Label paymentDate;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -69,8 +70,19 @@ public class PersonCard extends UiPart<Region> {
         placeholder2.setText("placeholder text 2");
         currentGrade.setText("Current Grade: " + person.getCurrentGrade());
         placeholder4.setText("placeholder text 4");
-        placeholder5.setText("placeholder text 5");
-        placeholder6.setText("placeholder text 6");
+        PaymentInfo paymentInfo = person.getPaymentInfo();
+        if (paymentInfo.getPaymentFee() == 0) {
+            paymentFee.setManaged(false);
+            paymentFee.setVisible(false);
+        } else {
+            paymentFee.setText("Tutoring Fee: $" + paymentInfo.getPaymentFee());
+        }
+        if (paymentInfo.getPaymentDate().isEmpty()) {
+            paymentDate.setManaged(false);
+            paymentDate.setVisible(false);
+        } else {
+            paymentDate.setText("Payment Date: " + paymentInfo.getPaymentDate());
+        }
 
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))

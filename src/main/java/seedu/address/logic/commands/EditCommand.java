@@ -26,6 +26,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.CurrentGrade;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.PaymentInfo;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -105,8 +106,10 @@ public class EditCommand extends Command {
         CurrentGrade updatedCurrentGrade = editPersonDescriptor.getCurrentGrade()
                 .orElse(personToEdit.getCurrentGrade());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        // Edit command does not allow editing paymentInfo
+        PaymentInfo updatedPaymentInfo = personToEdit.getPaymentInfo();
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedCurrentGrade);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedPaymentInfo, updatedCurrentGrade);
     }
 
     @Override
