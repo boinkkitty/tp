@@ -69,6 +69,7 @@ public class PersonCard extends UiPart<Region> {
                     label.maxWidthProperty().bind(tags.widthProperty());
                     Tooltip tooltip = new Tooltip(tag.tagName);
                     label.setTooltip(tooltip);
+                    label.setOnMouseClicked(event -> label.setWrapText(!label.isWrapText()));
                     tags.getChildren().add(label);
                 });
 
