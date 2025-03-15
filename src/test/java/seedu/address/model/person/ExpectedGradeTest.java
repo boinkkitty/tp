@@ -25,19 +25,22 @@ public class ExpectedGradeTest {
 
         // invalid addresses
         assertFalse(ExpectedGrade.isValidExpectedGrade(" ")); // No whitespaces allowed
+        assertFalse(ExpectedGrade.isValidExpectedGrade("a")); // No small letters
+        assertFalse(ExpectedGrade.isValidExpectedGrade("G")); // Only A - G
+        assertFalse(ExpectedGrade.isValidExpectedGrade("AB")); // Only 1 letter at most
 
         // valid addresses
         assertTrue(ExpectedGrade.isValidExpectedGrade("")); // Treated as none
         assertTrue(ExpectedGrade.isValidExpectedGrade("A")); // one character
-        assertTrue(ExpectedGrade.isValidExpectedGrade("Grade 5"));
+        assertTrue(ExpectedGrade.isValidExpectedGrade("B+")); // Upper alphabet with sign
     }
 
     @Test
     public void equals() {
-        ExpectedGrade expectedGrade = new ExpectedGrade("Valid Expected Grade");
+        ExpectedGrade expectedGrade = new ExpectedGrade("A");
 
         // same values -> returns true
-        assertTrue(expectedGrade.equals(new ExpectedGrade("Valid Expected Grade")));
+        assertTrue(expectedGrade.equals(new ExpectedGrade("A")));
 
         // same object -> returns true
         assertTrue(expectedGrade.equals(expectedGrade));
@@ -49,6 +52,6 @@ public class ExpectedGradeTest {
         assertFalse(expectedGrade.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(expectedGrade.equals(new ExpectedGrade("Other Valid Expected Grade")));
+        assertFalse(expectedGrade.equals(new ExpectedGrade("B")));
     }
 }

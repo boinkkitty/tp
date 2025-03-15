@@ -10,13 +10,13 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class ExpectedGrade {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Expected Grades should only contain a single upper case alphabet";
+            "Expected Grades should only be from A to F and can only have a +/- following the upper case letter.";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "(^$|^[^\s].*)";
+    public static final String VALIDATION_REGEX = "^(?:|[A-F][+-]?)$";
 
     public final String value;
 

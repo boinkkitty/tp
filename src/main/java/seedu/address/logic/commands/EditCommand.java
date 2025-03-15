@@ -208,7 +208,7 @@ public class EditCommand extends Command {
          */
 
         public Optional<ExpectedGrade> getExpectedGrade() {
-            if (expectedGrade == null || !expectedGrade.isEmptyExpectedGrade()) {
+            if (expectedGrade == null || expectedGrade.isEmptyExpectedGrade()) {
                 return Optional.empty();
             } else {
                 return Optional.ofNullable(expectedGrade);
