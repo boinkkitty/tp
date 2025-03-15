@@ -68,7 +68,7 @@ public class CommandTestUtil {
     public static final String INVALID_PAYMENT_FEE_DESC = " " + PREFIX_PAYMENT_FEE + -1000;
     // only 'dd-MM-yyyy' is allowed
     public static final String INVALID_PAYMENT_DATE_DESC = " " + PREFIX_PAYMENT_DATE + "2000-11-14";
-    public static final String INVALID_GRADE_DESC = " " + PREFIX_CURRENT_GRADE + "b"; // lowercase not allowed in grades
+    public static final String INVALID_GRADE_DESC = " " + PREFIX_CURRENT_GRADE + "Z"; // "Z" not allowed in grades
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

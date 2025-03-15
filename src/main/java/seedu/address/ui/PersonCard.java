@@ -68,7 +68,7 @@ public class PersonCard extends UiPart<Region> {
 
         placeholder1.setText("placeholder text 1");
         placeholder2.setText("placeholder text 2");
-        currentGrade.setText("Current Grade: " + person.getCurrentGrade());
+        currentGrade.setText("placeholder text 3");
         placeholder4.setText("placeholder text 4");
         PaymentInfo paymentInfo = person.getPaymentInfo();
         if (paymentInfo.getPaymentFee() == 0) {

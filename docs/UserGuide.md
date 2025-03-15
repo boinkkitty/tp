@@ -79,8 +79,6 @@ Adds a person to the address book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [cg/CURRENT_GRADE] [t/TAG]…​`
 
-* If not current grade is specified, a dummy grade C will be specified
-
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
@@ -99,7 +97,7 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [cg/CURRENT_GRADE]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]… [cg/CURRENT_GRADE]​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -205,13 +203,13 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                                                      |
-|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 cg/D  t/friend t/colleague` |
-| **Clear**  | `clear`                                                                                                                                                               |
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
-| **Payment**| `payment INDEX [f/FEE] d/[PAYMENT_DATE]`<br> e.g., `payment 4 f/1000 d/14-11-2000`                                                                                    |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
-| **List**   | `list`                                                                                                                                                                |
-| **Help**   | `help`                                                                                                                                                                |
+| Action     | Format, Examples                                                                                                                                                                             |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]… [cg/CURRENT_GRADE]​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 cg/D  t/friend t/colleague` |
+| **Clear**  | `clear`                                                                                                                                                                                      |
+| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                          |
+| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]… [cg/CURRENT_GRADE]​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                            |
+| **Payment**| `payment INDEX [f/FEE] d/[PAYMENT_DATE]`<br> e.g., `payment 4 f/1000 d/14-11-2000`                                                                                                           |
+| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                   |
+| **List**   | `list`                                                                                                                                                                                       |
+| **Help**   | `help`                                                                                                                                                                                       |

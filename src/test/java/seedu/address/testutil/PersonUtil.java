@@ -38,6 +38,7 @@ public class PersonUtil {
         person.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
+        sb.append(PREFIX_CURRENT_GRADE + person.getCurrentGrade().value + " ");
         return sb.toString();
     }
 

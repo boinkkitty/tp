@@ -25,7 +25,6 @@ public class CurrentGradeTest {
         assertThrows(NullPointerException.class, () -> CurrentGrade.isValidCurrentGrade(null));
 
         // invalid currentGrade numbers
-        assertFalse(CurrentGrade.isValidCurrentGrade("")); // empty string
         assertFalse(CurrentGrade.isValidCurrentGrade(" ")); // spaces only
         assertFalse(CurrentGrade.isValidCurrentGrade("b")); // non-capitalized letter
         assertFalse(CurrentGrade.isValidCurrentGrade("B%")); // wrong symbol

@@ -134,7 +134,8 @@ public class ParserUtil {
     public static CurrentGrade parseCurrentGrade(String currentGrade) throws ParseException {
         requireNonNull(currentGrade);
         String trimmedCurrentGrade = currentGrade.trim();
-        if (!CurrentGrade.isValidCurrentGrade(trimmedCurrentGrade)) {
+        String upperCaseCurrentGrade = trimmedCurrentGrade.toUpperCase();
+        if (!CurrentGrade.isValidCurrentGrade(upperCaseCurrentGrade)) {
             throw new ParseException(CurrentGrade.MESSAGE_CONSTRAINTS);
         }
         return new CurrentGrade(trimmedCurrentGrade);

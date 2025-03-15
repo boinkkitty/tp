@@ -25,7 +25,7 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
-    private static final String INVALID_CURRENT_GRADE = "b";
+    private static final String INVALID_CURRENT_GRADE = "Z";
     private static final int INVALID_PAYMENT_FEE = -1000;
     private static final String INVALID_PAYMENT_DATE = "11-14-2000"; // `MM-dd-yyyy` instead
 

@@ -16,12 +16,15 @@ public class CurrentGrade {
      * The first character of the Current Grade must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "^[A-F+-]+$";
+    public static final String VALIDATION_REGEX = "^[A-F+-]*$";
 
     public final String value;
 
+    /**
+     * Constructs an {@code CurrentGrade} without specifying the level (defaults to empty string).
+     */
     public CurrentGrade() {
-        value = "C";
+        this.value = "";
     }
 
     /**
@@ -32,7 +35,7 @@ public class CurrentGrade {
     public CurrentGrade(String currentGrade) {
         requireNonNull(currentGrade);
         checkArgument(isValidCurrentGrade(currentGrade), MESSAGE_CONSTRAINTS);
-        value = currentGrade;
+        this.value = currentGrade;
     }
 
     /**
