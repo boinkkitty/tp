@@ -138,7 +138,7 @@ public class ParserUtil {
         if (!CurrentGrade.isValidCurrentGrade(upperCaseCurrentGrade)) {
             throw new ParseException(CurrentGrade.MESSAGE_CONSTRAINTS);
         }
-        return new CurrentGrade(trimmedCurrentGrade);
+        return new CurrentGrade(upperCaseCurrentGrade);
     }
 
     /**
