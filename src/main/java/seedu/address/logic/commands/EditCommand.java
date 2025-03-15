@@ -102,7 +102,8 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        ExpectedGrade updatedExpectedGrade = editPersonDescriptor.getExpectedGrade().orElse(personToEdit.getExpectedGrade());
+        ExpectedGrade updatedExpectedGrade = editPersonDescriptor.getExpectedGrade()
+                .orElse(personToEdit.getExpectedGrade());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedExpectedGrade, updatedTags);
@@ -204,7 +205,7 @@ public class EditCommand extends Command {
 
         /**
          * Returns Optional<ExpectedGrade> if an ExpectedGrade exists.
-         * Returns {@code Optional#empty()} if ExpectedGrade does not exist.
+         * Returns {@code Optional#empty()} if ExpectedGrade does not exist (null or empty).
          */
 
         public Optional<ExpectedGrade> getExpectedGrade() {
