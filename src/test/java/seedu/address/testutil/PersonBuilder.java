@@ -6,6 +6,7 @@ import java.util.Set;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.PaymentInfo;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -26,6 +27,7 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Set<Tag> tags;
+    private PaymentInfo paymentInfo;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -36,6 +38,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+        paymentInfo = new PaymentInfo();
     }
 
     /**
@@ -47,6 +50,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
+        paymentInfo = personToCopy.getPaymentInfo();
     }
 
     /**
@@ -89,8 +93,40 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code PaymentInfo} of the {@code Person} that we are building, with no initial value.
+     */
+    public PersonBuilder withPaymentInfo() {
+        this.paymentInfo = new PaymentInfo();
+        return this;
+    }
+
+    /**
+     * Sets the {@code PaymentInfo} of the {@code Person} that we are building, containing only the Payment Fee.
+     */
+    public PersonBuilder withPaymentInfo(int paymentFee) {
+        this.paymentInfo = new PaymentInfo(paymentFee);
+        return this;
+    }
+
+    /**
+     * Sets the {@code PaymentInfo} of the {@code Person} that we are building, containing only the Payment Date.
+     */
+    public PersonBuilder withPaymentInfo(String paymentDate) {
+        this.paymentInfo = new PaymentInfo(paymentDate);
+        return this;
+    }
+
+    /**
+     * Sets the {@code PaymentInfo} of the {@code Person} that we are building, containing Payment Fee & Date.
+     */
+    public PersonBuilder withPaymentInfo(int paymentFee, String paymentDate) {
+        this.paymentInfo = new PaymentInfo(paymentFee, paymentDate);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        return new Person(name, phone, email, address, tags, paymentInfo);
     }
 
 }

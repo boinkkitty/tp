@@ -21,6 +21,8 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_PAYMENT_FEE = "Payment Fee is not an unsigned integer.";
+    public static final String MESSAGE_INVALID_PAYMENT_DATE = "Payment Date is not a valid Date.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -120,5 +122,31 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses {@code feeString} into an {@code int} and returns it. Leading and trailing whitespaces will be
+     * trimmed.
+     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     */
+    public static int parseFee(String feeString) throws ParseException {
+        String trimmedFee = feeString.trim();
+        if (!StringUtil.isUnsignedInteger(trimmedFee)) {
+            throw new ParseException(MESSAGE_INVALID_PAYMENT_FEE);
+        }
+        return Integer.parseInt(trimmedFee);
+    }
+
+    /**
+     * Parses {@code dateString} into a valid date and returns it. Leading and trailing whitespaces will be
+     * trimmed.
+     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     */
+    public static String parseDate(String dateString) throws ParseException {
+        String trimmedDate = dateString.trim();
+        if (!StringUtil.isValidDate(trimmedDate)) {
+            throw new ParseException(MESSAGE_INVALID_PAYMENT_DATE);
+        }
+        return trimmedDate;
     }
 }
