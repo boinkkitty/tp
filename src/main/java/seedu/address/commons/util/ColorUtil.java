@@ -12,6 +12,8 @@ public class ColorUtil {
      * @return true if the color is light, false if dark.
      */
     public static boolean isLightColor(String hexColor) {
+        // [ACKNOWLEDGEMENT] Code logic adopted from here:
+        // https://stackoverflow.com/a/14714716
         try {
             Color color = Color.decode("#" + hexColor);
 

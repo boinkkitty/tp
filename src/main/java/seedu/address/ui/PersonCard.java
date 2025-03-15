@@ -93,6 +93,11 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(createTagLabel(tag)));
     }
 
+    /**
+     * A helper function to create a {@code Label} given a {@code Tag}.
+     * @param tag A valid Tag object.
+     * @return The corresponding JavaFX Label object.
+     */
     private Label createTagLabel(Tag tag) {
         String[] parts = tag.fullTag.split("#");
         Label label = new Label(parts[0]);
