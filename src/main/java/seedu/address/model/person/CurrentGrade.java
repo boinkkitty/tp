@@ -9,14 +9,14 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class CurrentGrade {
 
-    public static final String MESSAGE_CONSTRAINTS = "Current Grade can take any captitalised Letter Grade from A to F "
-            + "with + / - symbols, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Current Grade allows 1 Letter Grade from A to F "
+            + "with 1 + / - symbols, and it should not be blank";
 
     /*
      * The first character of the Current Grade must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "^[A-F+-]*$";
+    public static final String VALIDATION_REGEX = "^(?:[A-F][+-]?|)$";
 
     public final String value;
 
