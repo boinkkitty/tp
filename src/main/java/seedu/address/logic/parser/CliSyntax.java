@@ -16,5 +16,4 @@ public class CliSyntax {
     // `PREFIX_PAYMENT_FEE` and `PREFIX_PAYMENT_DATE` is part of the Payment Command
     public static final Prefix PREFIX_PAYMENT_FEE = new Prefix("f/");
     public static final Prefix PREFIX_PAYMENT_DATE = new Prefix("d/");
-
 }
