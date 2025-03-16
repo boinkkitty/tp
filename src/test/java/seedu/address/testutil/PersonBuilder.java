@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
+import seedu.address.model.person.CurrentGrade;
 import seedu.address.model.person.CurrentYear;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -28,6 +29,7 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private CurrentYear currentYear;
+    private CurrentGrade currentGrade;
     private Set<Tag> tags;
     private PaymentInfo paymentInfo;
 
@@ -40,6 +42,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         currentYear = new CurrentYear();
+        currentGrade = new CurrentGrade();
         tags = new HashSet<>();
         paymentInfo = new PaymentInfo();
     }
@@ -53,6 +56,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         currentYear = personToCopy.getCurrentYear();
+        currentGrade = personToCopy.getCurrentGrade();
         tags = new HashSet<>(personToCopy.getTags());
         paymentInfo = personToCopy.getPaymentInfo();
     }
@@ -106,6 +110,14 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code Email} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withCurrentGrade(String currentGrade) {
+        this.currentGrade = new CurrentGrade(currentGrade);
+        return this;
+    }
+
+    /**
      * Sets the {@code PaymentInfo} of the {@code Person} that we are building, with no initial value.
      */
     public PersonBuilder withPaymentInfo() {
@@ -138,7 +150,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, currentYear, tags, paymentInfo);
+        return new Person(name, phone, email, address, currentYear, currentGrade, tags, paymentInfo);
     }
 
 }
