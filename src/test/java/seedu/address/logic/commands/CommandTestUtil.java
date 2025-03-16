@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_FEE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG_REMOVE;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -38,6 +39,7 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
+    public static final String VALID_TAG_DONOR = "donor";
     public static final String VALID_TAG_FRIEND = "friend";
     public static final int VALID_PAYMENT_FEE = 1000;
     public static final String VALID_PAYMENT_DATE = "13-03-2025";
@@ -54,6 +56,7 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String TAG_DESC_DONOR_TO_REMOVE = " " + PREFIX_TAG_REMOVE + VALID_TAG_DONOR;
     public static final String PAYMENT_FEE_DESC = " " + PREFIX_PAYMENT_FEE + VALID_PAYMENT_FEE;
     public static final String PAYMENT_DATE_DESC = " " + PREFIX_PAYMENT_DATE + VALID_PAYMENT_DATE;
     public static final String GRADE_DESC_AMY = " " + PREFIX_CURRENT_GRADE + VALID_GRADE_AMY;
@@ -82,7 +85,8 @@ public class CommandTestUtil {
                 .withTags(VALID_TAG_FRIEND).withCurrentGrade(VALID_GRADE_AMY).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withCurrentGrade(VALID_GRADE_BOB).build();
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND, VALID_TAG_DONOR).withCurrentGrade(VALID_GRADE_BOB)
+                .withTagsToRemove(VALID_TAG_DONOR).build();
     }
 
     /**

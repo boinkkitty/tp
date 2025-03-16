@@ -108,9 +108,12 @@ public class EditCommand extends Command {
         CurrentGrade updatedCurrentGrade = editPersonDescriptor.getCurrentGrade()
                 .orElse(personToEdit.getCurrentGrade());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        updatedTags = updatedTags.stream()
-                        .filter(tag -> !editPersonDescriptor.tagsToRemove.contains(tag))
-                        .collect(Collectors.toSet());
+        if (editPersonDescriptor.getTagsToRemove().isPresent()) {
+            updatedTags = updatedTags.stream()
+                    .filter(tag -> !editPersonDescriptor.getTagsToRemove().get().contains(tag))
+                    .collect(Collectors.toSet());
+        }
+
 
         // Edit command does not allow editing paymentInfo
         PaymentInfo updatedPaymentInfo = personToEdit.getPaymentInfo();

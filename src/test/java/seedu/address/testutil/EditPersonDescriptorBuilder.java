@@ -91,6 +91,16 @@ public class EditPersonDescriptorBuilder {
         return this;
     }
 
+    /**
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
+     * that we are building.
+     */
+    public EditPersonDescriptorBuilder withTagsToRemove(String... tags) {
+        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
+        descriptor.setTagsToRemove(tagSet);
+        return this;
+    }
+
     public EditPersonDescriptor build() {
         return descriptor;
     }
