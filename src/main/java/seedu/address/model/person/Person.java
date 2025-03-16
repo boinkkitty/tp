@@ -24,18 +24,22 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final CurrentGrade currentGrade;
     private final PaymentInfo paymentInfo;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, PaymentInfo paymentInfo) {
+
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, PaymentInfo paymentInfo,
+                  CurrentGrade currentGrade) {
         requireAllNonNull(name, phone, email, address, tags, paymentInfo);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.currentGrade = currentGrade;
         this.paymentInfo = paymentInfo;
     }
 
@@ -53,6 +57,10 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public CurrentGrade getCurrentGrade() {
+        return currentGrade;
     }
 
     /**
@@ -101,13 +109,14 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags)
+                && currentGrade.equals(otherPerson.currentGrade)
                 && paymentInfo.equals(otherPerson.paymentInfo);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, currentGrade);
     }
 
     @Override
@@ -119,6 +128,7 @@ public class Person {
                 .add("address", address)
                 .add("tags", tags)
                 .add("paymentInfo", paymentInfo)
+                .add("currentGrade", currentGrade)
                 .toString();
     }
 
