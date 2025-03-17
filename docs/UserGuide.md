@@ -97,18 +97,26 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]… [cg/CURRENT_GRADE]​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]… [t-/TAGS_TO_REMOVE]…  [cg/CURRENT_GRADE]​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+
+
+#### Tag Editing : `t/`, `t-/`
+* When editing tags, any number of `t/` or `t-/` may be provided, order of execution is as follows: 
+1. Tags prefixed with `t/` form the new list of tags (overwriting the old tags), if none are provided, old list of tags is used for the next steps.
+2. Tags prefixed with `t-/` are removed from the list provided by the last step. If the tag to be removed does not exist, the app silently continues with the rest.
+3. The final tag list is updated to the person.
+
+Examples:
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 2 t-/Maths` Edits the tags of the 2nd person by removing `Maths` from existing list of tags.
+*  `edit 1 t/Maths t/Science t-/Science ` Edits the tags of the 2nd person by clearing all existing tags and adding `Maths`.
 
 ### Updating a person's payment information : `payment`
 
@@ -203,13 +211,13 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                                                                             |
-|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Action     | Format, Examples                                                                                                                                                                               |
+|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]… [cg/CURRENT_GRADE]​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 cg/D  t/friend t/colleague` |
-| **Clear**  | `clear`                                                                                                                                                                                      |
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                          |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]… [cg/CURRENT_GRADE]​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                            |
-| **Payment**| `payment INDEX [f/FEE] d/[PAYMENT_DATE]`<br> e.g., `payment 4 f/1000 d/14-11-2000`                                                                                                           |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                   |
-| **List**   | `list`                                                                                                                                                                                       |
-| **Help**   | `help`                                                                                                                                                                                       |
+| **Clear**  | `clear`                                                                                                                                                                                        |
+| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                            |
+| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]… [t-/TAGS_TO_REMOVE]… [cg/CURRENT_GRADE]​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                            |
+| **Payment**| `payment INDEX [f/FEE] d/[PAYMENT_DATE]`<br> e.g., `payment 4 f/1000 d/14-11-2000`                                                                                                             |
+| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                     |
+| **List**   | `list`                                                                                                                                                                                         |
+| **Help**   | `help`                                                                                                                                                                                         |
