@@ -33,6 +33,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final String currentGrade;
+    private final String currentYear;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final int paymentFee;
     private final String paymentDate;
@@ -43,12 +44,14 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("currentGrade") String currentGrade, @JsonProperty("tags") List<JsonAdaptedTag> tags,
-            @JsonProperty("paymentFee") int paymentFee, @JsonProperty("paymentDate") String paymentDate) {
+            @JsonProperty("currentYear") String currentYear, @JsonProperty("currentGrade") String currentGrade,
+            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("paymentFee") int paymentFee,
+            @JsonProperty("paymentDate") String paymentDate) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.currentYear = currentYear;
         this.currentGrade = currentGrade;
         if (tags != null) {
             this.tags.addAll(tags);
@@ -65,6 +68,7 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        currentYear = source.getCurrentYear().value;
         currentGrade = source.getCurrentGrade().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -116,6 +120,16 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        final CurrentYear modelCurrentYear;
+        if (currentYear == null) {
+            modelCurrentYear = new CurrentYear(); // If currentYear field is missing, currentYear will be set to "".
+        } else {
+            if (!CurrentYear.isValidCurrentYear(currentYear)) {
+                throw new IllegalValueException(CurrentYear.MESSAGE_CONSTRAINTS);
+            }
+            modelCurrentYear = new CurrentYear(currentYear);
+        }
+
         if (currentGrade == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     CurrentGrade.class.getSimpleName()));
@@ -139,7 +153,7 @@ class JsonAdaptedPerson {
         }
         final PaymentInfo paymentInfo = new PaymentInfo(paymentFee, paymentDate);
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, new CurrentYear(), modelCurrentGrade,
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelCurrentYear, modelCurrentGrade,
                 modelTags, paymentInfo);
     }
 
