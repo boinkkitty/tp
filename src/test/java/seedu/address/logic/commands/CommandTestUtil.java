@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CURRENT_GRADE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CURRENT_YEAR;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EDULEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_DATE;
@@ -38,6 +39,8 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
+    public static final String VALID_EDULEVEL_AMY = "Master";
+    public static final String VALID_EDULEVEL_BOB = "Bachelor";
     public static final String VALID_CURRENT_YEAR = "Year 1";
     public static final String VALID_EMPTY_CURRENT_YEAR = "";
     public static final String VALID_GRADE_AMY = "C-";
@@ -57,6 +60,8 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String GRADE_DESC_AMY = " " + PREFIX_CURRENT_GRADE + VALID_GRADE_AMY;
     public static final String GRADE_DESC_BOB = " " + PREFIX_CURRENT_GRADE + VALID_GRADE_BOB;
+    public static final String EDULEVEL_DESC_AMY = " " + PREFIX_EDULEVEL + VALID_EDULEVEL_AMY;
+    public static final String EDULEVEL_DESC_BOB = " " + PREFIX_EDULEVEL + VALID_EDULEVEL_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String PAYMENT_FEE_DESC = " " + PREFIX_PAYMENT_FEE + VALID_PAYMENT_FEE;
@@ -68,6 +73,7 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_CURRENT_YEAR = " " + PREFIX_CURRENT_YEAR + "@3"; // special char not allowed
     public static final String INVALID_GRADE_DESC = " " + PREFIX_CURRENT_GRADE + "Z"; // "Z" not allowed in grades
+    public static final String INVALID_EDULEVEL_DESC = " " + PREFIX_EDULEVEL + "InvalidLevel";
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     // '-' integer not allowed in paymentFees
     public static final String INVALID_PAYMENT_FEE_DESC = " " + PREFIX_PAYMENT_FEE + -1000;

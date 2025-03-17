@@ -46,7 +46,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
-    private Label placeholder1;
+    private Label eduLevel;
     @FXML
     private Label currentYear;
     @FXML
@@ -70,7 +70,7 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
 
-        placeholder1.setText("placeholder text 1");
+        eduLevel.setText("Education Level: " + person.getEduLevel());
         currentYear.setText("Current Year: " + person.getCurrentYear());
         currentGrade.setText("Current Grade: " + person.getCurrentGrade());
         placeholder4.setText("placeholder text 4");

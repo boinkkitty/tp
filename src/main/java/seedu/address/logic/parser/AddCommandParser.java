@@ -4,6 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CURRENT_GRADE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CURRENT_YEAR;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EDULEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -17,6 +18,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.CurrentGrade;
 import seedu.address.model.person.CurrentYear;
+import seedu.address.model.person.EduLevel;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.PaymentInfo;
@@ -36,8 +38,8 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG,
-                        PREFIX_CURRENT_YEAR, PREFIX_CURRENT_GRADE);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                        PREFIX_EDULEVEL, PREFIX_TAG, PREFIX_CURRENT_YEAR, PREFIX_CURRENT_GRADE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -45,19 +47,24 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                PREFIX_CURRENT_YEAR, PREFIX_CURRENT_GRADE);
+                PREFIX_EDULEVEL, PREFIX_CURRENT_YEAR, PREFIX_CURRENT_GRADE);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
+        EduLevel eduLevel = ParserUtil.parseEduLevel(argMultimap.getValue(PREFIX_EDULEVEL).orElse(""));
+
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        CurrentYear currentYear = ParserUtil.parseCurrentYear(argMultimap.getValue(PREFIX_CURRENT_YEAR).orElse(""));
+        CurrentYear currentYear = ParserUtil.parseCurrentYear(argMultimap.getValue(PREFIX_CURRENT_YEAR)
+            .orElse(""));
         CurrentGrade currentGrade = ParserUtil.parseCurrentGrade(argMultimap
                 .getValue(PREFIX_CURRENT_GRADE).orElse(""));
+
         // Add command does not allow adding paymentInfo straight away
         PaymentInfo paymentInfo = new PaymentInfo();
 
-        Person person = new Person(name, phone, email, address, currentYear, currentGrade, tagList, paymentInfo);
+        Person person = new Person(name, phone, email, address, eduLevel, currentYear, currentGrade,
+                tagList, paymentInfo);
 
         return new AddCommand(person);
     }

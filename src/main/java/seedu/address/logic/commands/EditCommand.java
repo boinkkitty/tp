@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CURRENT_GRADE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CURRENT_YEAR;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EDULEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -26,6 +27,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.CurrentGrade;
 import seedu.address.model.person.CurrentYear;
+import seedu.address.model.person.EduLevel;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.PaymentInfo;
@@ -48,6 +50,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_EDULEVEL + "EDUCATION] "
             + "[" + PREFIX_CURRENT_YEAR + "CURRENT_YEAR] "
             + "[" + PREFIX_CURRENT_GRADE + "CURRENT_GRADE] "
             + "[" + PREFIX_TAG + "TAG]...\n"
@@ -107,6 +110,7 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        EduLevel updatedEduLevel = editPersonDescriptor.getEduLevel().orElse(personToEdit.getEduLevel());
         CurrentYear updatedCurrentYear = editPersonDescriptor.getCurrentYear().orElse(personToEdit.getCurrentYear());
         CurrentGrade updatedCurrentGrade = editPersonDescriptor.getCurrentGrade()
                 .orElse(personToEdit.getCurrentGrade());
@@ -114,7 +118,7 @@ public class EditCommand extends Command {
         // Edit command does not allow editing paymentInfo
         PaymentInfo updatedPaymentInfo = personToEdit.getPaymentInfo();
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedCurrentYear,
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedEduLevel, updatedCurrentYear,
                 updatedCurrentGrade, updatedTags, updatedPaymentInfo);
     }
 
@@ -154,6 +158,7 @@ public class EditCommand extends Command {
         private CurrentYear currentYear;
         private CurrentGrade currentGrade;
         private Set<Tag> tags;
+        private EduLevel eduLevel;
 
         public EditPersonDescriptor() {}
 
@@ -166,16 +171,18 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
+            setEduLevel(toCopy.eduLevel);
             setCurrentYear(toCopy.currentYear);
             setCurrentGrade(toCopy.currentGrade);
             setTags(toCopy.tags);
+
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, currentYear, currentGrade, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, eduLevel, currentYear, currentGrade, tags);
         }
 
         public void setName(Name name) {
@@ -188,6 +195,10 @@ public class EditCommand extends Command {
 
         public void setPhone(Phone phone) {
             this.phone = phone;
+        }
+
+        public void setEduLevel(EduLevel eduLevel) {
+            this.eduLevel = eduLevel;
         }
 
         public Optional<Phone> getPhone() {
@@ -208,6 +219,10 @@ public class EditCommand extends Command {
 
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
+        }
+
+        public Optional<EduLevel> getEduLevel() {
+            return Optional.ofNullable(eduLevel);
         }
 
         public void setCurrentYear(CurrentYear currentYear) {
@@ -259,6 +274,7 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
+                    && Objects.equals(eduLevel, otherEditPersonDescriptor.eduLevel)
                     && Objects.equals(currentYear, otherEditPersonDescriptor.currentYear)
                     && Objects.equals(currentGrade, otherEditPersonDescriptor.currentGrade)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
@@ -271,6 +287,7 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
+                    .add("eduLevel", eduLevel)
                     .add("currentYear", currentYear)
                     .add("currentGrade", currentGrade)
                     .add("tags", tags)

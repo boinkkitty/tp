@@ -27,21 +27,24 @@ public class Person {
     private final CurrentGrade currentGrade;
     private final Set<Tag> tags = new HashSet<>();
     private final PaymentInfo paymentInfo;
+    private final EduLevel eduLevel;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, CurrentYear currentYear,
+    public Person(Name name, Phone phone, Email email, Address address, EduLevel eduLevel, CurrentYear currentYear,
                   CurrentGrade currentGrade, Set<Tag> tags, PaymentInfo paymentInfo) {
         requireAllNonNull(name, phone, email, address, currentYear, currentGrade, tags, paymentInfo);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.eduLevel = eduLevel;
         this.currentYear = currentYear;
         this.currentGrade = currentGrade;
         this.tags.addAll(tags);
         this.paymentInfo = paymentInfo;
+
     }
 
     public Name getName() {
@@ -58,6 +61,10 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public EduLevel getEduLevel() {
+        return eduLevel;
     }
 
     public CurrentYear getCurrentYear() {
@@ -113,6 +120,7 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
+                && eduLevel.equals(otherPerson.eduLevel)
                 && currentYear.equals(otherPerson.currentYear)
                 && currentGrade.equals(otherPerson.currentGrade)
                 && tags.equals(otherPerson.tags)
@@ -132,6 +140,7 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("eduLevel", eduLevel)
                 .add("currentYear", currentYear)
                 .add("currentGrade", currentGrade)
                 .add("tags", tags)

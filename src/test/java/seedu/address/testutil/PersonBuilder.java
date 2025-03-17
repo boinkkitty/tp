@@ -6,6 +6,7 @@ import java.util.Set;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.CurrentGrade;
 import seedu.address.model.person.CurrentYear;
+import seedu.address.model.person.EduLevel;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.PaymentInfo;
@@ -23,10 +24,12 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_EDULEVEL = "Bachelor";
 
     private Name name;
     private Phone phone;
     private Email email;
+    private EduLevel eduLevel;
     private Address address;
     private CurrentYear currentYear;
     private CurrentGrade currentGrade;
@@ -43,6 +46,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         currentYear = new CurrentYear();
         currentGrade = new CurrentGrade();
+        eduLevel = new EduLevel(DEFAULT_EDULEVEL);
         tags = new HashSet<>();
         paymentInfo = new PaymentInfo();
     }
@@ -57,6 +61,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         currentYear = personToCopy.getCurrentYear();
         currentGrade = personToCopy.getCurrentGrade();
+        eduLevel = personToCopy.getEduLevel();
         tags = new HashSet<>(personToCopy.getTags());
         paymentInfo = personToCopy.getPaymentInfo();
     }
@@ -149,8 +154,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code EduLevel} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withEduLevel(String eduLevel) {
+        this.eduLevel = new EduLevel(eduLevel);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, currentYear, currentGrade, tags, paymentInfo);
+        return new Person(name, phone, email, address, eduLevel, currentYear, currentGrade, tags, paymentInfo);
     }
 
 }
