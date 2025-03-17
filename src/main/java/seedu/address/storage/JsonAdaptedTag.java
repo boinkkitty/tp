@@ -11,26 +11,26 @@ import seedu.address.model.tag.Tag;
  */
 class JsonAdaptedTag {
 
-    private final String tagName;
+    private final String fullTag;
 
     /**
-     * Constructs a {@code JsonAdaptedTag} with the given {@code tagName}.
+     * Constructs a {@code JsonAdaptedTag} with the given {@code fullTag}.
      */
     @JsonCreator
-    public JsonAdaptedTag(String tagName) {
-        this.tagName = tagName;
+    public JsonAdaptedTag(String fullTag) {
+        this.fullTag = fullTag;
     }
 
     /**
      * Converts a given {@code Tag} into this class for Jackson use.
      */
     public JsonAdaptedTag(Tag source) {
-        tagName = source.tagName;
+        fullTag = source.fullTag;
     }
 
     @JsonValue
-    public String getTagName() {
-        return tagName;
+    public String getFullTag() {
+        return fullTag;
     }
 
     /**
@@ -39,10 +39,10 @@ class JsonAdaptedTag {
      * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
      */
     public Tag toModelType() throws IllegalValueException {
-        if (!Tag.isValidTagName(tagName)) {
+        if (!Tag.isValidTag(fullTag)) {
             throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(tagName);
+        return new Tag(fullTag);
     }
 
 }
