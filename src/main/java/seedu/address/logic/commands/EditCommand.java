@@ -204,7 +204,7 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Returns Optional<ExpectedGrade> if an ExpectedGrade exists.
+         * Returns Optional#ExpectedGrade if an ExpectedGrade exists.
          * Returns {@code Optional#empty()} if ExpectedGrade does not exist (null or empty).
          */
 
