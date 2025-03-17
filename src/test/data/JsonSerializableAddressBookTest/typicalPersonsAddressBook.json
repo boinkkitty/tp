@@ -8,7 +8,8 @@
     "currentYear" : "Year 3",
     "tags" : [ "friends" ],
     "paymentFee" : 0,
-    "paymentDate" : ""
+    "paymentDate" : "",
+    "currentGrade": "D"
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
@@ -17,7 +18,8 @@
     "currentYear" : "Year 4",
     "tags" : [ "owesMoney", "friends" ],
     "paymentFee" : 500,
-    "paymentDate" : ""
+    "paymentDate" : "",
+    "currentGrade": "B-"
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
@@ -25,7 +27,8 @@
     "address" : "wall street",
     "tags" : [ ],
     "paymentFee" : 1250,
-    "paymentDate" : "25-02-2025"
+    "paymentDate" : "25-02-2025",
+    "currentGrade": ""
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
@@ -33,7 +36,8 @@
     "address" : "10th street",
     "tags" : [ "friends" ],
     "paymentFee" : 0,
-    "paymentDate" : ""
+    "paymentDate" : "",
+    "currentGrade": ""
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
@@ -42,7 +46,8 @@
     "currentYear" : "Year 2",
     "tags" : [ ],
     "paymentFee" : 0,
-    "paymentDate" : ""
+    "paymentDate" : "",
+    "currentGrade": "C"
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
@@ -51,7 +56,8 @@
     "currentYear" : "Year 2",
     "tags" : [ ],
     "paymentFee" : 0,
-    "paymentDate" : ""
+    "paymentDate" : "",
+    "currentGrade": "B"
   }, {
     "name" : "George Best",
     "phone" : "9482442",
@@ -60,6 +66,7 @@
     "currentYear" : "Year 1",
     "tags" : [ ],
     "paymentFee" : 0,
-    "paymentDate" : ""
+    "paymentDate" : "",
+    "currentGrade": ""
   } ]
 }

@@ -23,23 +23,24 @@ public class Person {
 
     // Data fields
     private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
     private final CurrentYear currentYear;
+    private final CurrentGrade currentGrade;
+    private final Set<Tag> tags = new HashSet<>();
     private final PaymentInfo paymentInfo;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, CurrentYear currentYear, Set<Tag> tags,
-                  PaymentInfo paymentInfo) {
-        requireAllNonNull(name, phone, email, address, tags, paymentInfo,
-                currentYear);
+    public Person(Name name, Phone phone, Email email, Address address, CurrentYear currentYear,
+                  CurrentGrade currentGrade, Set<Tag> tags, PaymentInfo paymentInfo) {
+        requireAllNonNull(name, phone, email, address, currentYear, currentGrade, tags, paymentInfo);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.tags.addAll(tags);
         this.currentYear = currentYear;
+        this.currentGrade = currentGrade;
+        this.tags.addAll(tags);
         this.paymentInfo = paymentInfo;
     }
 
@@ -61,6 +62,10 @@ public class Person {
 
     public CurrentYear getCurrentYear() {
         return currentYear;
+    }
+
+    public CurrentGrade getCurrentGrade() {
+        return currentGrade;
     }
 
     /**
@@ -108,15 +113,16 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags)
                 && currentYear.equals(otherPerson.currentYear)
+                && currentGrade.equals(otherPerson.currentGrade)
+                && tags.equals(otherPerson.tags)
                 && paymentInfo.equals(otherPerson.paymentInfo);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, currentYear, currentGrade, tags);
     }
 
     @Override
@@ -126,8 +132,9 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
-                .add("tags", tags)
                 .add("currentYear", currentYear)
+                .add("currentGrade", currentGrade)
+                .add("tags", tags)
                 .add("paymentInfo", paymentInfo)
                 .toString();
     }
