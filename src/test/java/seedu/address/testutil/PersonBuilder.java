@@ -176,6 +176,10 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Builds {@code Person} object using internal fields.
+     */
+
     public Person build() {
         return new Person(
                 name, phone, email, address, eduLevel, currentYear, currentGrade, expectedGrade, tags, paymentInfo);
