@@ -38,7 +38,7 @@ public class JsonAdaptedPersonTest {
     private static final String VALID_ADDRESS = BENSON.getAddress().toString();
     private static final String VALID_CURRENT_YEAR = BENSON.getCurrentYear().toString();
     private static final String VALID_CURRENT_GRADE = BENSON.getCurrentGrade().toString();
-    private static final String VALID_EDULEVEL = BENSON.getEduLevel().getEduLevel();
+    private static final String VALID_EDULEVEL = BENSON.getEduLevel().toString();
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());

@@ -70,7 +70,7 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
 
-        eduLevel.setText("Education Level: " + person.getEduLevel().getEduLevel());
+        eduLevel.setText("Education Level: " + person.getEduLevel());
         currentYear.setText("Current Year: " + person.getCurrentYear());
         currentGrade.setText("Current Grade: " + person.getCurrentGrade());
         placeholder4.setText("placeholder text 4");

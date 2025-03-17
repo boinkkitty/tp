@@ -73,6 +73,6 @@ public class EduLevelTest {
     @Test
     public void toString_validOutput() {
         EduLevel eduLevel = new EduLevel("PhD");
-        assertEquals("Education Level: PhD", eduLevel.toString());
+        assertEquals("PhD", eduLevel.toString());
     }
 }

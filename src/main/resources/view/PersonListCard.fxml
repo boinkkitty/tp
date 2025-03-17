@@ -39,7 +39,7 @@
             <Insets bottom="5" left="15" right="5" top="5" />
          </padding>
          <children>
-             <Label fx:id="eduLevel" styleClass="cell_small_label" text="\$placeholder1" />
+             <Label fx:id="eduLevel" styleClass="cell_small_label" text="\$eduLevel" />
             <Label fx:id="currentYear" styleClass="cell_small_label" text="\$currentYear" />
              <Label fx:id="currentGrade" styleClass="cell_small_label" text="\$currentGrade" />
             <Label fx:id="placeholder4" styleClass="cell_small_label" text="\$placeholder4" />

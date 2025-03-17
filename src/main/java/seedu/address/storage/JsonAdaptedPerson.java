@@ -73,7 +73,7 @@ class JsonAdaptedPerson {
         address = source.getAddress().value;
         currentYear = source.getCurrentYear().value;
         currentGrade = source.getCurrentGrade().value;
-        eduLevel = source.getEduLevel().getEduLevel(); // getEduLevel() returns the value
+        eduLevel = source.getEduLevel().eduLevel; // getEduLevel() returns the value
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));

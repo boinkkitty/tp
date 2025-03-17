@@ -15,7 +15,7 @@ public class EduLevel {
             "Education level should not be blank and should be one of the predefined levels: "
                     + String.join(", ", VALID_EDU_LEVELS) + ".";
 
-    private final String eduLevel;
+    public final String eduLevel;
 
     /**
      * Constructs an {@code EduLevel} with a valid education level.
@@ -50,13 +50,10 @@ public class EduLevel {
         return false;
     }
 
-    public String getEduLevel() {
-        return eduLevel;
-    }
 
     @Override
     public String toString() {
-        return "Education Level: " + eduLevel;
+        return eduLevel;
     }
 
     @Override
