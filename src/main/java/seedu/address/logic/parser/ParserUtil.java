@@ -10,6 +10,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.CurrentGrade;
+import seedu.address.model.person.CurrentYear;
 import seedu.address.model.person.EduLevel;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -107,7 +109,7 @@ public class ParserUtil {
     public static Tag parseTag(String tag) throws ParseException {
         requireNonNull(tag);
         String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
+        if (!Tag.isValidTag(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
         return new Tag(trimmedTag);
@@ -123,6 +125,37 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String currentYear} into an {@code CurrentYear}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code currentYear} is invalid.
+     */
+    public static CurrentYear parseCurrentYear(String currentYear) throws ParseException {
+        requireNonNull(currentYear);
+        String trimmedCurrentYear = currentYear.trim();
+        if (!CurrentYear.isValidCurrentYear(trimmedCurrentYear)) {
+            throw new ParseException(CurrentYear.MESSAGE_CONSTRAINTS);
+        }
+        return new CurrentYear(trimmedCurrentYear);
+    }
+
+    /**
+     * Parses a {@code String current grade} into an {@code CurrentGrade}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code current grade} is invalid.
+     */
+    public static CurrentGrade parseCurrentGrade(String currentGrade) throws ParseException {
+        requireNonNull(currentGrade);
+        String trimmedCurrentGrade = currentGrade.trim();
+        String upperCaseCurrentGrade = trimmedCurrentGrade.toUpperCase();
+        if (!CurrentGrade.isValidCurrentGrade(upperCaseCurrentGrade)) {
+            throw new ParseException(CurrentGrade.MESSAGE_CONSTRAINTS);
+        }
+        return new CurrentGrade(upperCaseCurrentGrade);
     }
 
     /**
