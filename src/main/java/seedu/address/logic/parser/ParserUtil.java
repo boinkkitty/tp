@@ -9,7 +9,14 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.CurrentGrade;
+import seedu.address.model.person.CurrentYear;
+import seedu.address.model.person.EduLevel;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.ExpectedGrade;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -18,6 +25,8 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_PAYMENT_FEE = "Payment Fee is not an unsigned integer.";
+    public static final String MESSAGE_INVALID_PAYMENT_DATE = "Payment Date is not a valid Date.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -116,7 +125,7 @@ public class ParserUtil {
     public static Tag parseTag(String tag) throws ParseException {
         requireNonNull(tag);
         String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
+        if (!Tag.isValidTag(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
         return new Tag(trimmedTag);
@@ -132,5 +141,78 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String currentYear} into an {@code CurrentYear}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code currentYear} is invalid.
+     */
+    public static CurrentYear parseCurrentYear(String currentYear) throws ParseException {
+        requireNonNull(currentYear);
+        String trimmedCurrentYear = currentYear.trim();
+        if (!CurrentYear.isValidCurrentYear(trimmedCurrentYear)) {
+            throw new ParseException(CurrentYear.MESSAGE_CONSTRAINTS);
+        }
+        return new CurrentYear(trimmedCurrentYear);
+    }
+
+    /**
+     * Parses a {@code String current grade} into an {@code CurrentGrade}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code current grade} is invalid.
+     */
+    public static CurrentGrade parseCurrentGrade(String currentGrade) throws ParseException {
+        requireNonNull(currentGrade);
+        String trimmedCurrentGrade = currentGrade.trim();
+        String upperCaseCurrentGrade = trimmedCurrentGrade.toUpperCase();
+        if (!CurrentGrade.isValidCurrentGrade(upperCaseCurrentGrade)) {
+            throw new ParseException(CurrentGrade.MESSAGE_CONSTRAINTS);
+        }
+        return new CurrentGrade(upperCaseCurrentGrade);
+    }
+
+    /**
+     * Parses {@code feeString} into an {@code int} and returns it. Leading and trailing whitespaces will be
+     * trimmed.
+     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     */
+    public static int parseFee(String feeString) throws ParseException {
+        String trimmedFee = feeString.trim();
+        if (!StringUtil.isUnsignedInteger(trimmedFee)) {
+            throw new ParseException(MESSAGE_INVALID_PAYMENT_FEE);
+        }
+        return Integer.parseInt(trimmedFee);
+    }
+
+    /**
+     * Parses {@code dateString} into a valid date and returns it. Leading and trailing whitespaces will be
+     * trimmed.
+     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     */
+    public static String parseDate(String dateString) throws ParseException {
+        String trimmedDate = dateString.trim();
+        if (!StringUtil.isValidDate(trimmedDate)) {
+            throw new ParseException(MESSAGE_INVALID_PAYMENT_DATE);
+        }
+        return trimmedDate;
+    }
+
+    /**
+     * Parses a given {@code String} representing an education level and returns an {@code EduLevel} object.
+     *
+     * @param eduLevel The string representation of the education level to be parsed.
+     * @return An {@code EduLevel} object representing the valid education level.
+     * @throws ParseException If the provided education level is not one of the allowed values.
+     */
+    public static EduLevel parseEduLevel(String eduLevel) throws ParseException {
+        requireNonNull(eduLevel);
+        String trimmedEduLevel = eduLevel.trim();
+        if (!EduLevel.isValidEduLevel(trimmedEduLevel)) {
+            throw new ParseException(EduLevel.MESSAGE_CONSTRAINTS);
+        }
+        return new EduLevel(trimmedEduLevel);
     }
 }

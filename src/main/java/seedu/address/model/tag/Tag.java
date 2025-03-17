@@ -5,30 +5,31 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Tag in the address book.
- * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
+ * Guarantees: immutable; name is valid as declared in {@link #isValidTag(String)}
  */
 public class Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric, while its color codes should"
+            + "be 6 hexadecimal long (e.g. \"CS2040C#F2552E\")";
+    public static final String VALIDATION_REGEX = "^(\\p{Alnum}+)(?:#([A-Fa-f0-9]{6}))?$";
 
-    public final String tagName;
+    public final String fullTag;
 
     /**
      * Constructs a {@code Tag}.
      *
-     * @param tagName A valid tag name.
+     * @param fullTag A valid full tag (e.g. `CS2040C#F2552E`).
      */
-    public Tag(String tagName) {
-        requireNonNull(tagName);
-        checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
-        this.tagName = tagName;
+    public Tag(String fullTag) {
+        requireNonNull(fullTag);
+        checkArgument(isValidTag(fullTag), MESSAGE_CONSTRAINTS);
+        this.fullTag = fullTag;
     }
 
     /**
-     * Returns true if a given string is a valid tag name.
+     * Returns true if a given string is a valid tag format.
      */
-    public static boolean isValidTagName(String test) {
+    public static boolean isValidTag(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
@@ -44,19 +45,20 @@ public class Tag {
         }
 
         Tag otherTag = (Tag) other;
-        return tagName.equals(otherTag.tagName);
+        // Tag is the same as long as the `tagName` (First half) is the same. `hexColor` (Second half) is ignored here.
+        return fullTag.split("#")[0].equals(otherTag.fullTag.split("#")[0]);
     }
 
     @Override
     public int hashCode() {
-        return tagName.hashCode();
+        return fullTag.hashCode();
     }
 
     /**
      * Format state as text for viewing.
      */
     public String toString() {
-        return '[' + tagName + ']';
+        return '[' + fullTag + ']';
     }
 
 }

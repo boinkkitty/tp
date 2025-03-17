@@ -3,7 +3,23 @@ layout: page
 title: John Doe's Project Portfolio Page
 ---
 
-# Work in progress
+## Project: TutorSynch
+
+Below are my project contributions:
+
+***
+### Codebase:
+* Feature 1: Added `Current Grade` field to student's information
+  * Allows tutor to store the current grade of the student and keep track of student's progress
+  * Tested functionality of feature with empty inputs and duplicate `cg/` fields
+***
+### Documentation:
+* User Guide:
+  * Refurbished details of adding current grade field in `add` command
+* Developer Guide:
+  * Created additional Non-Functional Requirements for project
+* README:
+  * Refurbished design of README to incorporate relevant features of TutorSynch
 
 <!--
 ### Project: AddressBook Level 3
