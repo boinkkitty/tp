@@ -44,7 +44,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label placeholder1;
     @FXML
-    private Label placeholder2;
+    private Label currentYear;
     @FXML
     private Label currentGrade;
     @FXML
@@ -67,8 +67,8 @@ public class PersonCard extends UiPart<Region> {
         email.setText(person.getEmail().value);
 
         placeholder1.setText("placeholder text 1");
-        placeholder2.setText("placeholder text 2");
-        currentGrade.setText("placeholder text 3");
+        currentYear.setText("Current Year: " + person.getCurrentYear());
+        currentGrade.setText("Current Grade: " + person.getCurrentGrade());
         placeholder4.setText("placeholder text 4");
         PaymentInfo paymentInfo = person.getPaymentInfo();
         if (paymentInfo.getPaymentFee() == 0) {

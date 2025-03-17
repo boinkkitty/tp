@@ -5,6 +5,7 @@ import java.util.Set;
 
 import seedu.address.model.person.Address;
 import seedu.address.model.person.CurrentGrade;
+import seedu.address.model.person.CurrentYear;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.PaymentInfo;
@@ -27,8 +28,9 @@ public class PersonBuilder {
     private Phone phone;
     private Email email;
     private Address address;
-    private Set<Tag> tags;
+    private CurrentYear currentYear;
     private CurrentGrade currentGrade;
+    private Set<Tag> tags;
     private PaymentInfo paymentInfo;
 
     /**
@@ -39,8 +41,9 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        tags = new HashSet<>();
+        currentYear = new CurrentYear();
         currentGrade = new CurrentGrade();
+        tags = new HashSet<>();
         paymentInfo = new PaymentInfo();
     }
 
@@ -52,8 +55,9 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
-        tags = new HashSet<>(personToCopy.getTags());
+        currentYear = personToCopy.getCurrentYear();
         currentGrade = personToCopy.getCurrentGrade();
+        tags = new HashSet<>(personToCopy.getTags());
         paymentInfo = personToCopy.getPaymentInfo();
     }
 
@@ -98,6 +102,14 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code CurrentYear} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withCurrentYear(String currentYear) {
+        this.currentYear = new CurrentYear(currentYear);
+        return this;
+    }
+
+    /**
      * Sets the {@code Email} of the {@code Person} that we are building.
      */
     public PersonBuilder withCurrentGrade(String currentGrade) {
@@ -138,7 +150,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, tags, paymentInfo, currentGrade);
+        return new Person(name, phone, email, address, currentYear, currentGrade, tags, paymentInfo);
     }
 
 }

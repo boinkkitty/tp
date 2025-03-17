@@ -13,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.CurrentGrade;
+import seedu.address.model.person.CurrentYear;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.PaymentInfo;
@@ -42,18 +43,18 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("paymentFee") int paymentFee,
-            @JsonProperty("paymentDate") String paymentDate, @JsonProperty("currentGrade") String currentGrade) {
+            @JsonProperty("currentGrade") String currentGrade, @JsonProperty("tags") List<JsonAdaptedTag> tags,
+            @JsonProperty("paymentFee") int paymentFee, @JsonProperty("paymentDate") String paymentDate) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.currentGrade = currentGrade;
         if (tags != null) {
             this.tags.addAll(tags);
         }
         this.paymentFee = paymentFee;
         this.paymentDate = Objects.requireNonNullElse(paymentDate, "");
-        this.currentGrade = currentGrade;
     }
 
     /**
@@ -138,7 +139,8 @@ class JsonAdaptedPerson {
         }
         final PaymentInfo paymentInfo = new PaymentInfo(paymentFee, paymentDate);
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, paymentInfo, modelCurrentGrade);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, new CurrentYear(), modelCurrentGrade,
+                modelTags, paymentInfo);
     }
 
 }
