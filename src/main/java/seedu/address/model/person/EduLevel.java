@@ -40,7 +40,7 @@ public class EduLevel {
      */
     public static boolean isValidEduLevel(String eduLevel) {
         if (eduLevel.isEmpty()) {
-            return true; // Allow empty value
+            return true;
         }
         for (String validLevel : VALID_EDU_LEVELS) {
             if (validLevel.equalsIgnoreCase(eduLevel)) {
