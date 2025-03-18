@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -33,6 +34,18 @@ public class ExpectedGradeTest {
         assertTrue(ExpectedGrade.isValidExpectedGrade("")); // Treated as none
         assertTrue(ExpectedGrade.isValidExpectedGrade("A")); // one character
         assertTrue(ExpectedGrade.isValidExpectedGrade("B+")); // Upper alphabet with sign
+    }
+
+    @Test
+    public void getExpectedGradeLetter() {
+        ExpectedGrade emptyExpectedGrade = new ExpectedGrade("");
+        ExpectedGrade validExpectedGrade = new ExpectedGrade("A");
+        ExpectedGrade validExpectedGradeWithSign = new ExpectedGrade("B+");
+
+        assertEquals(emptyExpectedGrade.getExpectedGradeLetter(), "");
+        assertEquals(validExpectedGrade.getExpectedGradeLetter(), "A");
+        assertEquals(validExpectedGradeWithSign.getExpectedGradeLetter(), "B");
+
     }
 
     @Test

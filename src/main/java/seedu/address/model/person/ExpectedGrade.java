@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.commons.util.ColorUtil.getGradeHexColor;
 
 /**
  * Represents a Person's Expected Grade in the address book.
@@ -19,6 +20,7 @@ public class ExpectedGrade {
     public static final String VALIDATION_REGEX = "^(?:|[A-F][+-]?|)$";
 
     public final String value;
+    public final String color;
 
     /**
      * Constructs a {@code Expected Grade}.
@@ -28,7 +30,17 @@ public class ExpectedGrade {
     public ExpectedGrade(String expectedGrade) {
         requireNonNull(expectedGrade);
         checkArgument(isValidExpectedGrade(expectedGrade), MESSAGE_CONSTRAINTS);
-        value = expectedGrade;
+        this.value = expectedGrade;
+        this.color = getGradeHexColor(getExpectedGradeLetter());
+    }
+
+    /**
+     * Extracts first letter of the given grade string.
+     *
+     * @return The first letter of grade if present, otherwise an empty string.
+     */
+    public String getExpectedGradeLetter() {
+        return value.trim().isEmpty() ? "" : value.substring(0, 1);
     }
 
     /**
