@@ -14,7 +14,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
+
+import seedu.address.commons.util.ColorUtil;
+import seedu.address.model.person.PaymentInfo;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -49,6 +54,18 @@ public class PersonCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private VBox details;
+    @FXML
+    private Label eduLevel;
+    @FXML
+    private Label currentYear;
+    @FXML
+    private Label currentGrade;
+    @FXML
+    private Label placeholder4;
+    @FXML
+    private Label paymentFee;
+    @FXML
+    private Label paymentDate;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -61,32 +78,61 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+      
+        eduLevel.setText("Education Level: " + person.getEduLevel());
+        currentYear.setText("Current Year: " + person.getCurrentYear());
+        currentGrade.setText("Current Grade: " + person.getCurrentGrade());
+        PaymentInfo paymentInfo = person.getPaymentInfo();
+      
+        if (paymentInfo.getPaymentFee() == 0) {
+            paymentFee.setManaged(false);
+            paymentFee.setVisible(false);
+        } else {
+            paymentFee.setText("Tutoring Fee: $" + paymentInfo.getPaymentFee());
+        }
+      
+        if (paymentInfo.getPaymentDate().isEmpty()) {
+            paymentDate.setManaged(false);
+            paymentDate.setVisible(false);
+        } else {
+            paymentDate.setText("Payment Date: " + paymentInfo.getPaymentDate());
+        }
 
         person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> {
-                    Label label = new Label(tag.tagName);
-                    label.maxWidthProperty().bind(tags.widthProperty());
-                    Tooltip tooltip = new Tooltip(tag.tagName);
-                    label.setTooltip(tooltip);
-                    label.setOnMouseClicked(event -> label.setWrapText(!label.isWrapText()));
-                    tags.getChildren().add(label);
-                });
-
-        retrieveDetailsAsList().stream()
-                .filter(s -> !s.isEmpty())
-                .map(s -> stringToDetailsLabel(s))
-                .forEach(label -> details.getChildren().add(label));
-
+                .sorted(Comparator.comparing(tag -> tag.fullTag))
+                .forEach(tag -> tags.getChildren().add(createTagLabel(tag)));
+    }
+    private hideDetailsLabel(Label label) {
+        label.setManaged(false);
+        label.setVisible(false);
     }
 
-    private List<String> retrieveDetailsAsList() {
-        return List.of("placeholder1","","placeholder3","placeholder4","placeholder5","placeholder6");
-    }
+    /**
+     * A helper function to create a {@code Label} given a {@code Tag}.
+     * @param tag A valid Tag object.
+     * @return The corresponding JavaFX Label object.
+     */
+    private Label createTagLabel(Tag tag) {
+        String[] parts = tag.fullTag.split("#");
+        Label label = new Label(parts[0]);
+        label.maxWidthProperty().bind(tags.widthProperty());
+        label.setOnMouseClicked(event -> label.setWrapText(!label.isWrapText()));
+        if (parts.length == 2 && !parts[1].isEmpty()) {
+            // Determine text and background color if custom color code is found...
+            String hexColor = parts[1];
+            String textColor = ColorUtil.isLightColor(hexColor) ? "black" : "white";
+            label.setStyle("-fx-background-color: #" + hexColor + "; -fx-text-fill: " + textColor + ";");
+            // Create a tooltip showing the hex color
+            Tooltip tooltip = new Tooltip("Color: #" + hexColor);
+            tooltip.setShowDelay(Duration.millis(0)); // No delay before showing
+            Tooltip.install(label, tooltip); // Attach tooltip to the label
+        } else {
+            // Create a tooltip showing the hex color
+            Tooltip tooltip = new Tooltip("Color: #3e7b91");
+            tooltip.setShowDelay(Duration.millis(0)); // No delay before showing
+            Tooltip.install(label, tooltip); // Attach tooltip to the label
+        }
 
-    private Label stringToDetailsLabel(String s) {
-        Label label = new Label(s);
-        label.getStyleClass().add("cell_small_label");
         return label;
     }
 }

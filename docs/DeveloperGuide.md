@@ -9,6 +9,8 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
+* This project is based on the [AddressBook-Level3 project](https://github.com/se-edu/addressbook-level3) created by the [SE-EDU initiative](https://se-education.org).
+* `ColorUtil:isLightColor` is slightly adopted from the **StackOverflow** discussions [here](https://stackoverflow.com/a/14714716).
 * {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 --------------------------------------------------------------------------------------------------------------------
@@ -271,129 +273,240 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Value proposition**: Helps tutors organize student contacts and track their progress, reducing administrative work and improving learning outcomes
 
-
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …                    | I want to …                                         | So that I can…                                                                            |
-|----------|---------------------------|-----------------------------------------------------|-------------------------------------------------------------------------------------------|
-| `* * *`  | Tutor (Beginner User)     | Add student information                             | Have all necessary student info in one place.                                             |
-| `* * *`  | Tutor (Beginner User)     | Delete student information                          | Remove outdated or incorrect records.                                                     |
-| `* * *`  | Tutor (Beginner User)     | List all student information                        | Look through an organized overview of all my students for easy reference and management.  |
-| `* *`    | Tutor (Beginner User)     | Search for student information by name              | Quickly retrieve student records that match the name.                                     |
-| `* *`    | Tutor (Beginner User)     | Sort my student information when listing            | Organize and view student records sorted based on a specific field.                       |
-| `* *`    | Tutor (Intermediate User) | Edit student information                            | Update incorrect records.                                                                 |
-| `* *`    | Tutor (Intermediate User) | Tag students into groups                            | Easily manage students by group type.                                                     |
-| `*`      | Tutor (Intermediate User) | Assign colors to groups                             | Visually differentiate student groups.                                                    |
-| `* *`    | Tutor (Expert User)       | Categorise student information                      | Better retrieve and organize relevant student data.                                       |
-| `* *`    | Tutor (Expert User)       | Compare student progress                            | Tailor lessons to individual needs.                                                       |
-| `* *`    | Tutor (Expert User)       | Perform bulk deletion of student information        | Efficiently clear outdated records and prepare for a new semester.                        |
-| `* *`    | Tutor (Expert User)       | Record student payments                             | Keep track of payments received.                                                          |
-| `* *`    | Tutor (Expert User)       | Update payment statuses                             | Know which students have outstanding fees.                                                |
-| `*`      | Tutor (Expert User)       | Export filtered views                               | Save and share specific student data for analysis, reporting, or administrative purposes. |
-| `*`      | Tutor (Expert User)       | Filter students by criteria                         | Quickly find relevant students.                                                           |
-| `*`      | Tutor (Expert User)       | Generate payment summaries                          | Have a quick overview of all payments.                                                    |
-| `*`      | Tutor (Expert User)       | Generate student progress reports                   | Share insights with students or parents.                                                  |
-| `*`      | Tutor (Expert User)       | Perform conditional deletion of student information | Efficiently clear out specific groups of student records.                                 |
-| `*`      | Tutor (Expert User)       | View student performance trends                     | Assess their progress over time.                                                          |
+| Priority | As a …                    | I want to …                                           | So that I can…                                                                            |
+|----------|---------------------------|-------------------------------------------------------|-------------------------------------------------------------------------------------------|
+| `* * *`  | Tutor (Beginner User)     | Add student information                               | Have all necessary student info in one place.                                             |
+| `* * *`  | Tutor (Beginner User)     | Delete student information                            | Remove outdated or incorrect records.                                                     |
+| `* * *`  | Tutor (Beginner User)     | List all student information                          | Look through an organized overview of all my students for easy reference and management.  |
+| `* *`    | Tutor (Beginner User)     | Search for student information by name                | Quickly retrieve student records that match the name.                                     |
+| `* *`    | Tutor (Beginner User)     | Sort my student information when listing              | Organize and view student records sorted based on a specific field.                       |
+| `* *`    | Tutor (Intermediate User) | Edit student information                              | Update incorrect records.                                                                 |
+| `* *`    | Tutor (Intermediate User) | Tag students into groups                              | Easily manage students by group type.                                                     |
+| `* * *`  | Tutor (Intermediate User) | Assign colors to groups                               | Visually differentiate student groups.                                                    |
+| `* * *`  | Tutor (Intermediate User) | Be able to efficiently add or remove tag from student | Efficiently manage a student's tag without having to overwrite it instead.                |
+| `* * *`  | Tutor (Intermediate User) | Be able to bulk remove ALL student information        | Efficiently wipe out student records onto a clean slate.                                  |
+| `* *`    | Tutor (Intermediate User) | Be able to bulk remove certain tag from all students  | Efficiently clear outdated tags.                                                          |
+| `* *`    | Tutor (Expert User)       | Categorise student information                        | Better retrieve and organize relevant student data.                                       |
+| `* *`    | Tutor (Expert User)       | Compare student progress                              | Tailor lessons to individual needs.                                                       |
+| `* *`    | Tutor (Expert User)       | Perform bulk deletion of student information          | Efficiently clear outdated records and prepare for a new semester.                        |
+| `* *`    | Tutor (Expert User)       | Record student payments                               | Keep track of payments received.                                                          |
+| `* *`    | Tutor (Expert User)       | Update payment statuses                               | Know which students have outstanding fees.                                                |
+| `*`      | Tutor (Expert User)       | Export filtered views                                 | Save and share specific student data for analysis, reporting, or administrative purposes. |
+| `*`      | Tutor (Expert User)       | Filter students by criteria                           | Quickly find relevant students.                                                           |
+| `*`      | Tutor (Expert User)       | Generate payment summaries                            | Have a quick overview of all payments.                                                    |
+| `*`      | Tutor (Expert User)       | Generate student progress reports                     | Share insights with students or parents.                                                  |
+| `*`      | Tutor (Expert User)       | Perform conditional deletion of student information   | Efficiently clear out specific groups of student records.                                 |
+| `*`      | Tutor (Expert User)       | View student performance trends                       | Assess their progress over time.                                                          |
+| `*`      | Tutor (Beginner User)     | Be able to change to Dark/Light mode                  | See certain assigned colors easier.                                                       |
 
 ### Use cases
 
-(For all use cases below, the **System** is the `TutorSynch` and the **Actor** is the `user`, unless specified otherwise)
+<div markdown="span" class="alert alert-info">:information_source: **Note:** For all use cases below, the **System** is the `TutorSynch` and the **Actor** is the `user` (a tutor), unless specified otherwise.
+</div>
 
-**Use case: UC01 - Add a person**
+**Use case: UC01 - Add a new student**
 
 Guarantees:
-* A properly formatted person's information with all mandatory details will be added to the list of persons.
+* The new student record is saved if successfully added.
 
 **MSS**
 
-1.  User requests to add a person's information.
-2.  User enters the details of the person.
-3.  TutorSynch adds the person.
-4.  TutorSynch shows the list of person including newly added person.
+1. User requests to add a new student with the necessary information.
+2. TutorSynch adds the student's record.
+3. TutorSynch shows the list of student records including the newly added.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. TutorSynch detects that user did not provide all mandatory details of a person.
-  * 2a1. TutorSynch shows an error message.
+* 1a. TutorSynch detects that user did not provide all mandatory details of a person.
+  * 1a1. TutorSynch shows an error message.
+  * 1a2. TutorSynch terminates the add process.
 
     Use case ends.
 
-* 2b. TutorSynch detects that user did not comply with required formatting for details of a person.
-    * 2b1. TutorSynch shows an error message.
+* 1b. TutorSynch detects that user did not comply with required formatting for details of a person.
+  * 1b1. TutorSynch shows an error message.
+  * 1b2. TutorSynch terminates the add process.
 
-      Use case ends.
+    Use case ends.
 
-**Use case: UC02 - Delete a person**
+**Use case: UC02 - Edit a student's information**
 
-Preconditions: Target person exists in TutorSynch
+Preconditions:
+* At least one student record exists in TutorSynch.
+* User has identified the specific student to be edited.
+
+Guarantees:
+* The existing student record is updated if successfully edited.
 
 **MSS**
 
-1.  User requests to delete a person from TutorSynch.
-2.  User enters the index or name of target person.
-3.  TutorSynch deletes the person and displays status.
+1. User requests to edit a specific student, alongside the new details.
+2. TutorSynch updates the relevant student record.
+3. TutorSynch shows the list of student records including the newly updated.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. TutorSynch detects that user enters an invalid student reference.
+  * 1a1. TutorSynch shows an error message.
+  * 1a2. TutorSynch terminates the edit process.
+
+    Use case ends.
+
+* 1b. TutorSynch detects that user did not comply with required formatting for details of a person.
+  * 1b1. TutorSynch shows an error message.
+  * 1b2. TutorSynch terminates the edit process.
+
+    Use case ends.
+
+**Use case: UC03 - Delete a student**
+
+Preconditions:
+* At least one student record exists in TutorSynch.
+* User has identified the specific student to be deleted.
+
+Guarantees:
+* The targeting student record is removed if successfully deleted.
+
+**MSS**
+
+1. User requests to delete a specific student record.
+2. TutorSynch deletes the specified student record.
+3. TutorSynch shows the updated list of student records.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. TutorSynch detects that user did not provide valid index or name of a person.
-    * 2a1. TutorSynch shows an error message.
+* 1a. TutorSynch detects that user enters an invalid student reference.
+  * 1a1. TutorSynch shows an error message.
+  * 1a2. TutorSynch terminates the delete process.
       
-      Use case ends.
+    Use case ends.
 
-
-  
-*{More to be added}*
-
-**Use case: List a person**
+**Use case: UC04 - List all students**
 
 **MSS**
-1. User requests to list all students by entering the `list` command.
-2. TutorSynch processes the request, ignoring case sensitivity and extra whitespaces.
-3. TutorSynch retrieves all student records from the database.
-4. TutorSynch checks if there are students stored:
-   1. If student exists:
-      1. TutorSynch displays a list of all students.
-      2. Success message is shown: "Listed all students successfully. Total entries: * Students"
-   2. If no student exists:
-      1. TutorSynch displays "No students found."
-5. TutorSynch waits for next user command
+1. User requests to list all students records.
+2. TutorSynch displays the full list of students with their information.
 
    Use case ends.
-
 
 **Extensions**
 
-* 2a. Student list is empty
-  * TutorSynch displays "No students found."
+* 1a. Student list is empty.
+  * 1a1. TutorSynch informs the user of the empty list.
   
    Use case ends.
 
-* 4a. Unexpected formatting issue when displaying users
-  * TutorSynch displays " Error occured while displaying student information. Please check the format and try again."
+**Use case: UC05 - Record payment information for existing student**
+
+Preconditions:
+* At least one student record exists in TutorSynch.
+* User has identified the specific student to update their payment information.
+
+Guarantees:
+* The existing student record is updated with payment information if successfully recorded.
+
+**MSS**
+1. User requests to record payment information for a specific student.
+2. TutorSynch adds the payment information to the student's record.
+3. TutorSynch shows the list of student records including the newly added payment information.
 
    Use case ends.
+
+**Extensions**
+
+* 1a. TutorSynch detects that user enters an invalid student reference.
+  * 1a1. TutorSynch shows an error message.
+  * 1a2. TutorSynch terminates the edit process.
+
+    Use case ends.
+
+* 1b. TutorSynch detects that user did not comply with required formatting for payment information of a person.
+  * 1b1. TutorSynch shows an error message.
+  * 1b2. TutorSynch terminates the edit process.
+
+    Use case ends.
+
+**Use case: UC06 - Bulk delete student records**
+
+Preconditions:
+* At least one student record exists in TutorSynch.
+
+Guarantees:
+* **ALL** existing student records will be removed.
+
+**MSS**
+1. User requests to perform a bulk deletion.
+2. TutorSynch requests for confirmation.
+3. User confirms.
+4. TutorSynch requests for a second confirmation.
+5. User confirms.
+6. TutorSynch deletes **ALL** student records.
+7. TutorSynch informs the user of the bulk deletion.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. User chooses to cancel or deny the bulk deletion process.
+  * 2a1. TutorSynch informs the user that no changes were made.
+  * 2a2. TutorSynch terminates the bulk deletion process.
+
+    Use case ends.
+
+* 4a. User chooses to cancel or deny the bulk deletion process.
+  * 4a1. TutorSynch informs the user that no changes were made.
+  * 4a2. TutorSynch terminates the bulk deletion process.
+
+    Use case ends.
+
+**Use case: UC07 - Compare progress between two students**
+
+Preconditions:
+* At least two distinct student record exists in TutorSynch.
+* User has identified the two specific students to compare between.
+
+Guarantees:
+* TutorSynch shows a basic side-by-side comparison of the two student's progress/grades.
+
+**MSS**
+1. User requests a comparison by specifying the two student.
+3. TutorSynch displays the basic side-by-side comparison based on both student records.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. TutorSynch detects one or both student references are invalid.
+    * 1a1. TutorSynch shows an error message.
+    * 1a2. TutorSynch terminates the comparison process.
+
+      Use case ends.
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  Should be able to save the historical data that user has input in a txt file in storage folder.
-5.  Should be backward compatible with data produced by earlier version of the system.
-6.  Response to any use action should be visible within 3 seconds.
-7.  The user interface should be intuitive enough for users who may not be IT-savvy.
+4.  Should be able to persist student records and payment status in local storage as JSON files.
+5.  Any changes to the student records will result in an immediate update to the persistent local storage.
+6.  Should be able to fall back to a safe state (empty state) given a corrupted or invalid JSON data.
+7.  Response to any use action should be visible within 3 seconds.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **CLI**: Command Line Interface; User interacts with the application by typing text commands rather than using a mouse.
+* **Persist**: Student records should be saved to local storage (as JSON files) in a way that ensures they remain available even after the application is closed and reopened.
 
 --------------------------------------------------------------------------------------------------------------------
 
