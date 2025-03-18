@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -72,6 +73,11 @@ public class PersonUtil {
                 tags = tags.stream()
                         .filter(tag -> !tagsToRemove.contains(tag))
                         .collect(Collectors.toSet());
+            }
+            if (descriptor.getTagsToAppend().isPresent()) {
+                Set<Tag> tagsToAppend = descriptor.getTagsToAppend().get();
+                tags = new HashSet<>(tags);
+                tags.addAll(tagsToAppend);
             }
             if (tags.isEmpty()) {
                 sb.append(PREFIX_TAG);

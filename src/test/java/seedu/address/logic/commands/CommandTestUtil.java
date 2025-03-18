@@ -13,6 +13,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_FEE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG_APPEND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG_REMOVE;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -51,6 +52,7 @@ public class CommandTestUtil {
     public static final String VALID_GRADE_BOB = "C";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_DONOR = "donor";
+    public static final String VALID_TAG_CLASSMATE = "classmate";
     public static final String VALID_TAG_FRIEND = "friend";
     public static final int VALID_PAYMENT_FEE = 1000;
     public static final String VALID_PAYMENT_DATE = "13-03-2025";
@@ -71,6 +73,7 @@ public class CommandTestUtil {
     public static final String EDULEVEL_DESC_BOB = " " + PREFIX_EDULEVEL + VALID_EDULEVEL_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String TAG_DESC_CLASSMATE_TO_APPEND = " " + PREFIX_TAG_APPEND + VALID_TAG_CLASSMATE;
     public static final String TAG_DESC_DONOR_TO_REMOVE = " " + PREFIX_TAG_REMOVE + VALID_TAG_DONOR;
     public static final String PAYMENT_FEE_DESC = " " + PREFIX_PAYMENT_FEE + VALID_PAYMENT_FEE;
     public static final String PAYMENT_DATE_DESC = " " + PREFIX_PAYMENT_DATE + VALID_PAYMENT_DATE;
@@ -106,6 +109,7 @@ public class CommandTestUtil {
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND, VALID_TAG_DONOR)
                 .withCurrentYear(VALID_EMPTY_CURRENT_YEAR)
                 .withTagsToRemove(VALID_TAG_DONOR)
+                .withTagsToAppend(VALID_TAG_CLASSMATE)
                 .withCurrentGrade(VALID_GRADE_BOB)
                 .withExpectedGrade(VALID_EXP_GRADE_BOB)
                 .build();

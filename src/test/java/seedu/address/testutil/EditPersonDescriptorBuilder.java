@@ -130,6 +130,16 @@ public class EditPersonDescriptorBuilder {
         return this;
     }
 
+    /**
+     * Parses the {@code tags} into a {@code Set<Tag>} and appends it in the {@code EditPersonDescriptor}
+     * that we are building.
+     */
+    public EditPersonDescriptorBuilder withTagsToAppend(String... tags) {
+        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
+        descriptor.setTagsToAppend(tagSet);
+        return this;
+    }
+
     public EditPersonDescriptor build() {
         return descriptor;
     }
