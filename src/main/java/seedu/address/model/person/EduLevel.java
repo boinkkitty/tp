@@ -15,7 +15,7 @@ public class EduLevel {
             "Education level should not be blank and should be one of the predefined levels: "
                     + String.join(", ", VALID_EDU_LEVELS) + ".";
 
-    public final String eduLevel;
+    public final String value;
 
     /**
      * Constructs an {@code EduLevel} with a valid education level.
@@ -25,14 +25,14 @@ public class EduLevel {
     public EduLevel(String eduLevel) {
         requireNonNull(eduLevel);
         checkArgument(isValidEduLevel(eduLevel), MESSAGE_CONSTRAINTS);
-        this.eduLevel = eduLevel;
+        this.value = eduLevel;
     }
 
     /**
      * Constructs an {@code EduLevel} without specifying the level (defaults to empty string).
      */
     public EduLevel() {
-        this.eduLevel = "";
+        this.value = "";
     }
 
     /**
@@ -53,7 +53,7 @@ public class EduLevel {
 
     @Override
     public String toString() {
-        return eduLevel;
+        return value;
     }
 
     @Override
@@ -67,11 +67,11 @@ public class EduLevel {
         }
 
         EduLevel otherEduLevel = (EduLevel) other;
-        return eduLevel.equalsIgnoreCase(otherEduLevel.eduLevel);
+        return value.equalsIgnoreCase(otherEduLevel.value);
     }
 
     @Override
     public int hashCode() {
-        return eduLevel.toLowerCase().hashCode();
+        return value.toLowerCase().hashCode();
     }
 }

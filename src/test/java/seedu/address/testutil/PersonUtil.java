@@ -37,7 +37,7 @@ public class PersonUtil {
         sb.append(PREFIX_PHONE + person.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
-        sb.append(PREFIX_EDULEVEL).append(person.getEduLevel().eduLevel + " ");
+        sb.append(PREFIX_EDULEVEL).append(person.getEduLevel().value + " ");
         sb.append(PREFIX_CURRENT_YEAR + person.getCurrentYear().value + " ");
         sb.append(PREFIX_CURRENT_GRADE + person.getCurrentGrade().value + " ");
         person.getTags().stream().forEach(

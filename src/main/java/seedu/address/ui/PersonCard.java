@@ -1,21 +1,15 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
-import java.util.List;
-import java.util.stream.IntStream;
 
-import javafx.application.Platform;
-import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
-
 import seedu.address.commons.util.ColorUtil;
 import seedu.address.model.person.PaymentInfo;
 import seedu.address.model.person.Person;
@@ -78,22 +72,35 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-      
-        eduLevel.setText("Education Level: " + person.getEduLevel());
-        currentYear.setText("Current Year: " + person.getCurrentYear());
-        currentGrade.setText("Current Grade: " + person.getCurrentGrade());
+
+        if (person.getEduLevel().value.equals("")) {
+            hideDetailsLabel(eduLevel);
+        } else {
+            eduLevel.setText("Education Level: " + person.getEduLevel().value);
+        }
+
+        if (person.getCurrentYear().value.equals("")) {
+            hideDetailsLabel(currentYear);
+        } else {
+            currentYear.setText("Current Year: " + person.getCurrentYear().value);
+        }
+
+        if (person.getCurrentGrade().value.equals("")) {
+            hideDetailsLabel(currentGrade);
+        } else {
+            currentGrade.setText("Current Grade: " + person.getCurrentGrade().value);
+        }
+
         PaymentInfo paymentInfo = person.getPaymentInfo();
-      
+
         if (paymentInfo.getPaymentFee() == 0) {
-            paymentFee.setManaged(false);
-            paymentFee.setVisible(false);
+            hideDetailsLabel(paymentFee);
         } else {
             paymentFee.setText("Tutoring Fee: $" + paymentInfo.getPaymentFee());
         }
-      
+
         if (paymentInfo.getPaymentDate().isEmpty()) {
-            paymentDate.setManaged(false);
-            paymentDate.setVisible(false);
+            hideDetailsLabel(paymentDate);
         } else {
             paymentDate.setText("Payment Date: " + paymentInfo.getPaymentDate());
         }
@@ -102,13 +109,15 @@ public class PersonCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.fullTag))
                 .forEach(tag -> tags.getChildren().add(createTagLabel(tag)));
     }
-    private hideDetailsLabel(Label label) {
+
+    private void hideDetailsLabel(Label label) {
         label.setManaged(false);
         label.setVisible(false);
     }
 
     /**
      * A helper function to create a {@code Label} given a {@code Tag}.
+     *
      * @param tag A valid Tag object.
      * @return The corresponding JavaFX Label object.
      */
