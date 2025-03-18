@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CURRENT_GRADE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CURRENT_YEAR;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EDULEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -35,7 +37,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_TAG, PREFIX_TAG_REMOVE, PREFIX_CURRENT_GRADE);
+                        PREFIX_EDULEVEL, PREFIX_TAG, PREFIX_TAG_REMOVE, PREFIX_CURRENT_YEAR, PREFIX_CURRENT_GRADE);
 
         Index index;
 
@@ -46,7 +48,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                PREFIX_CURRENT_GRADE);
+                PREFIX_EDULEVEL, PREFIX_CURRENT_YEAR, PREFIX_CURRENT_GRADE);
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
@@ -62,9 +64,17 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
             editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
+        if (argMultimap.getValue(PREFIX_EDULEVEL).isPresent()) {
+            editPersonDescriptor.setEduLevel(ParserUtil.parseEduLevel(argMultimap.getValue(PREFIX_EDULEVEL).get()));
+        }
+
+        if (argMultimap.getValue(PREFIX_CURRENT_YEAR).isPresent()) {
+            editPersonDescriptor.setCurrentYear(
+                    ParserUtil.parseCurrentYear(argMultimap.getValue(PREFIX_CURRENT_YEAR).get()));
+        }
         if (argMultimap.getValue(PREFIX_CURRENT_GRADE).isPresent()) {
-            editPersonDescriptor.setCurrentGrade(ParserUtil.parseCurrentGrade(argMultimap
-                    .getValue(PREFIX_CURRENT_GRADE).get()));
+            editPersonDescriptor.setCurrentGrade(
+                    ParserUtil.parseCurrentGrade(argMultimap.getValue(PREFIX_CURRENT_GRADE).get()));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG_REMOVE)).ifPresent(editPersonDescriptor::setTagsToRemove);

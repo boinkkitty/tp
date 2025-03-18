@@ -13,6 +13,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.CurrentGrade;
+import seedu.address.model.person.CurrentYear;
+import seedu.address.model.person.EduLevel;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.PaymentInfo;
@@ -32,6 +34,8 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final String currentGrade;
+    private final String currentYear;
+    private final String eduLevel;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final int paymentFee;
     private final String paymentDate;
@@ -42,18 +46,21 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("paymentFee") int paymentFee,
-            @JsonProperty("paymentDate") String paymentDate, @JsonProperty("currentGrade") String currentGrade) {
+            @JsonProperty("eduLevel") String eduLevel, @JsonProperty("currentYear") String currentYear,
+            @JsonProperty("currentGrade") String currentGrade, @JsonProperty("tags") List<JsonAdaptedTag> tags,
+            @JsonProperty("paymentFee") int paymentFee, @JsonProperty("paymentDate") String paymentDate) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.currentYear = currentYear;
+        this.currentGrade = currentGrade;
+        this.eduLevel = eduLevel;
         if (tags != null) {
             this.tags.addAll(tags);
         }
         this.paymentFee = paymentFee;
         this.paymentDate = Objects.requireNonNullElse(paymentDate, "");
-        this.currentGrade = currentGrade;
     }
 
     /**
@@ -64,7 +71,9 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        currentYear = source.getCurrentYear().value;
         currentGrade = source.getCurrentGrade().value;
+        eduLevel = source.getEduLevel().eduLevel; // getEduLevel() returns the value
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -115,6 +124,25 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        if (eduLevel == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    EduLevel.class.getSimpleName()));
+        }
+        if (!EduLevel.isValidEduLevel(eduLevel)) {
+            throw new IllegalValueException(EduLevel.MESSAGE_CONSTRAINTS);
+        }
+        final EduLevel modelEduLevel = new EduLevel(eduLevel);
+
+        final CurrentYear modelCurrentYear;
+        if (currentYear == null) {
+            modelCurrentYear = new CurrentYear(); // If currentYear field is missing, currentYear will be set to "".
+        } else {
+            if (!CurrentYear.isValidCurrentYear(currentYear)) {
+                throw new IllegalValueException(CurrentYear.MESSAGE_CONSTRAINTS);
+            }
+            modelCurrentYear = new CurrentYear(currentYear);
+        }
+
         if (currentGrade == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     CurrentGrade.class.getSimpleName()));
@@ -123,6 +151,7 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(CurrentGrade.MESSAGE_CONSTRAINTS);
         }
         final CurrentGrade modelCurrentGrade = new CurrentGrade(currentGrade);
+
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
@@ -138,7 +167,8 @@ class JsonAdaptedPerson {
         }
         final PaymentInfo paymentInfo = new PaymentInfo(paymentFee, paymentDate);
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, paymentInfo, modelCurrentGrade);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelEduLevel, modelCurrentYear,
+                modelCurrentGrade, modelTags, paymentInfo);
     }
 
 }

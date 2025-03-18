@@ -11,6 +11,8 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.CurrentGrade;
+import seedu.address.model.person.CurrentYear;
+import seedu.address.model.person.EduLevel;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -107,7 +109,7 @@ public class ParserUtil {
     public static Tag parseTag(String tag) throws ParseException {
         requireNonNull(tag);
         String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
+        if (!Tag.isValidTag(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
         return new Tag(trimmedTag);
@@ -123,6 +125,21 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String currentYear} into an {@code CurrentYear}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code currentYear} is invalid.
+     */
+    public static CurrentYear parseCurrentYear(String currentYear) throws ParseException {
+        requireNonNull(currentYear);
+        String trimmedCurrentYear = currentYear.trim();
+        if (!CurrentYear.isValidCurrentYear(trimmedCurrentYear)) {
+            throw new ParseException(CurrentYear.MESSAGE_CONSTRAINTS);
+        }
+        return new CurrentYear(trimmedCurrentYear);
     }
 
     /**
@@ -165,5 +182,21 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_PAYMENT_DATE);
         }
         return trimmedDate;
+    }
+
+    /**
+     * Parses a given {@code String} representing an education level and returns an {@code EduLevel} object.
+     *
+     * @param eduLevel The string representation of the education level to be parsed.
+     * @return An {@code EduLevel} object representing the valid education level.
+     * @throws ParseException If the provided education level is not one of the allowed values.
+     */
+    public static EduLevel parseEduLevel(String eduLevel) throws ParseException {
+        requireNonNull(eduLevel);
+        String trimmedEduLevel = eduLevel.trim();
+        if (!EduLevel.isValidEduLevel(trimmedEduLevel)) {
+            throw new ParseException(EduLevel.MESSAGE_CONSTRAINTS);
+        }
+        return new EduLevel(trimmedEduLevel);
     }
 }

@@ -23,24 +23,28 @@ public class Person {
 
     // Data fields
     private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
+    private final CurrentYear currentYear;
     private final CurrentGrade currentGrade;
+    private final Set<Tag> tags = new HashSet<>();
     private final PaymentInfo paymentInfo;
+    private final EduLevel eduLevel;
 
     /**
      * Every field must be present and not null.
      */
-
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, PaymentInfo paymentInfo,
-                  CurrentGrade currentGrade) {
-        requireAllNonNull(name, phone, email, address, tags, paymentInfo);
+    public Person(Name name, Phone phone, Email email, Address address, EduLevel eduLevel, CurrentYear currentYear,
+                  CurrentGrade currentGrade, Set<Tag> tags, PaymentInfo paymentInfo) {
+        requireAllNonNull(name, phone, email, address, currentYear, currentGrade, tags, paymentInfo);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.tags.addAll(tags);
+        this.eduLevel = eduLevel;
+        this.currentYear = currentYear;
         this.currentGrade = currentGrade;
+        this.tags.addAll(tags);
         this.paymentInfo = paymentInfo;
+
     }
 
     public Name getName() {
@@ -57,6 +61,14 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public EduLevel getEduLevel() {
+        return eduLevel;
+    }
+
+    public CurrentYear getCurrentYear() {
+        return currentYear;
     }
 
     public CurrentGrade getCurrentGrade() {
@@ -108,15 +120,17 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags)
+                && eduLevel.equals(otherPerson.eduLevel)
+                && currentYear.equals(otherPerson.currentYear)
                 && currentGrade.equals(otherPerson.currentGrade)
+                && tags.equals(otherPerson.tags)
                 && paymentInfo.equals(otherPerson.paymentInfo);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, currentGrade);
+        return Objects.hash(name, phone, email, address, currentYear, currentGrade, tags);
     }
 
     @Override
@@ -126,9 +140,11 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("eduLevel", eduLevel)
+                .add("currentYear", currentYear)
+                .add("currentGrade", currentGrade)
                 .add("tags", tags)
                 .add("paymentInfo", paymentInfo)
-                .add("currentGrade", currentGrade)
                 .toString();
     }
 
