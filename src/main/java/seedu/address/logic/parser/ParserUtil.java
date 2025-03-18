@@ -102,21 +102,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String expectedGrade} into an {@code ExpectedGrade}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code expectedGrade} is invalid.
-     */
-    public static ExpectedGrade parseExpectedGrade(String expectedGrade) throws ParseException {
-        requireNonNull(expectedGrade);
-        String trimmedExpectedGrade = expectedGrade.trim();
-        if (!ExpectedGrade.isValidExpectedGrade(trimmedExpectedGrade)) {
-            throw new ParseException(ExpectedGrade.MESSAGE_CONSTRAINTS);
-        }
-        return new ExpectedGrade(trimmedExpectedGrade);
-    }
-
-    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -175,6 +160,37 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String expectedGrade} into an {@code ExpectedGrade}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code expectedGrade} is invalid.
+     */
+    public static ExpectedGrade parseExpectedGrade(String expectedGrade) throws ParseException {
+        requireNonNull(expectedGrade);
+        String trimmedExpectedGrade = expectedGrade.trim();
+        if (!ExpectedGrade.isValidExpectedGrade(trimmedExpectedGrade)) {
+            throw new ParseException(ExpectedGrade.MESSAGE_CONSTRAINTS);
+        }
+        return new ExpectedGrade(trimmedExpectedGrade);
+    }
+
+    /**
+     * Parses a given {@code String} representing an education level and returns an {@code EduLevel} object.
+     *
+     * @param eduLevel The string representation of the education level to be parsed.
+     * @return An {@code EduLevel} object representing the valid education level.
+     * @throws ParseException If the provided education level is not one of the allowed values.
+     */
+    public static EduLevel parseEduLevel(String eduLevel) throws ParseException {
+        requireNonNull(eduLevel);
+        String trimmedEduLevel = eduLevel.trim();
+        if (!EduLevel.isValidEduLevel(trimmedEduLevel)) {
+            throw new ParseException(EduLevel.MESSAGE_CONSTRAINTS);
+        }
+        return new EduLevel(trimmedEduLevel);
+    }
+
+    /**
      * Parses {@code feeString} into an {@code int} and returns it. Leading and trailing whitespaces will be
      * trimmed.
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
@@ -198,21 +214,5 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_PAYMENT_DATE);
         }
         return trimmedDate;
-    }
-
-    /**
-     * Parses a given {@code String} representing an education level and returns an {@code EduLevel} object.
-     *
-     * @param eduLevel The string representation of the education level to be parsed.
-     * @return An {@code EduLevel} object representing the valid education level.
-     * @throws ParseException If the provided education level is not one of the allowed values.
-     */
-    public static EduLevel parseEduLevel(String eduLevel) throws ParseException {
-        requireNonNull(eduLevel);
-        String trimmedEduLevel = eduLevel.trim();
-        if (!EduLevel.isValidEduLevel(trimmedEduLevel)) {
-            throw new ParseException(EduLevel.MESSAGE_CONSTRAINTS);
-        }
-        return new EduLevel(trimmedEduLevel);
     }
 }

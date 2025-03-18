@@ -27,4 +27,30 @@ public class ColorUtil {
             return true; // Default to light to prevent errors
         }
     }
+
+    /**
+     * Returns the hexadecimal color code associated with a given grade. Expected valid input grades: "A", "B", "C",
+     * "D", "E", or "F". If the provided grade is not recognized, the method returns "#FF0000" (red) as a default.
+     *
+     * @param grade the current grade {@code String } which may contain "+" / "-"
+     * @return the corresponding hex color code as a {@code String}
+     */
+    public static String getGradeHexColor(String grade) {
+        switch (grade) {
+        case "A":
+            return "#6DF162";
+        case "B":
+            return "#D2F088";
+        case "C":
+            return "#E1E888";
+        case "D":
+            return "#E8D588";
+        case "E":
+            return "#EE9C59";
+        case "F":
+            return "#EC736E";
+        default:
+            return "#FFFFFF";
+        }
+    }
 }

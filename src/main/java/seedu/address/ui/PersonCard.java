@@ -89,6 +89,7 @@ public class PersonCard extends UiPart<Region> {
             hideDetailsLabel(currentGrade);
         } else {
             currentGrade.setText("Current Grade: " + person.getCurrentGrade().value);
+            currentGrade.setStyle("-fx-text-fill: " + person.getCurrentGrade().color);
         }
 
         if (person.getExpectedGrade().value.equals("")) {

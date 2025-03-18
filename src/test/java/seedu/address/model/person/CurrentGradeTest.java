@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -20,7 +21,7 @@ public class CurrentGradeTest {
     }
 
     @Test
-    public void isValidPhone() {
+    public void isValidCurrentGrade() {
         // null currentGrade number
         assertThrows(NullPointerException.class, () -> CurrentGrade.isValidCurrentGrade(null));
 
@@ -34,6 +35,16 @@ public class CurrentGradeTest {
         // valid currentGrade numbers
         assertTrue(CurrentGrade.isValidCurrentGrade("B")); // correct grade
         assertTrue(CurrentGrade.isValidCurrentGrade("B+")); // correct symbol
+    }
+
+    @Test
+    public void getCurrentGradeLetter() {
+        CurrentGrade currentGrade1 = new CurrentGrade("B+");
+        CurrentGrade currentGrade2 = new CurrentGrade("");
+
+        //returns right current grade letters
+        assertEquals(currentGrade1.getCurrentGradeLetter(currentGrade1.value), "B");
+        assertEquals(currentGrade2.getCurrentGradeLetter(currentGrade2.value), "");
     }
 
     @Test
