@@ -168,7 +168,8 @@ public class ParserUtil {
     public static ExpectedGrade parseExpectedGrade(String expectedGrade) throws ParseException {
         requireNonNull(expectedGrade);
         String trimmedExpectedGrade = expectedGrade.trim();
-        if (!ExpectedGrade.isValidExpectedGrade(trimmedExpectedGrade)) {
+        String upperCaseCurrentGrade = trimmedExpectedGrade.toUpperCase();
+        if (!ExpectedGrade.isValidExpectedGrade(upperCaseCurrentGrade)) {
             throw new ParseException(ExpectedGrade.MESSAGE_CONSTRAINTS);
         }
         return new ExpectedGrade(trimmedExpectedGrade);

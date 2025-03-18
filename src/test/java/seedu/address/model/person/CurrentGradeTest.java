@@ -43,8 +43,8 @@ public class CurrentGradeTest {
         CurrentGrade currentGrade2 = new CurrentGrade("");
 
         //returns right current grade letters
-        assertEquals(currentGrade1.getCurrentGradeLetter(currentGrade1.value), "B");
-        assertEquals(currentGrade2.getCurrentGradeLetter(currentGrade2.value), "");
+        assertEquals(currentGrade1.getCurrentGradeLetter(), "B");
+        assertEquals(currentGrade2.getCurrentGradeLetter(), "");
     }
 
     @Test

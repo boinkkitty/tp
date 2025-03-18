@@ -96,6 +96,7 @@ public class PersonCard extends UiPart<Region> {
             hideDetailsLabel(expectedGrade);
         } else {
             expectedGrade.setText("Expected Grade: " + person.getExpectedGrade().value);
+            expectedGrade.setStyle("-fx-text-fill: " + person.getExpectedGrade().color);
         }
 
         PaymentInfo paymentInfo = person.getPaymentInfo();

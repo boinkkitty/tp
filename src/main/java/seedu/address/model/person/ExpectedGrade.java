@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.commons.util.ColorUtil.getGradeHexColor;
 
 /**
  * Represents a Person's Expected Grade in the address book.
@@ -10,7 +11,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class ExpectedGrade {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Expected Grades should only be from A to F and can only have a +/- following the upper case letter.";
+            "Expected Grade allows 1 Letter Grade from A to F "
+                    + "with 1 + / - symbols, and it should not be blank";
 
     /*
      * The first character of the address must not be a whitespace,
@@ -19,6 +21,7 @@ public class ExpectedGrade {
     public static final String VALIDATION_REGEX = "^(?:|[A-F][+-]?|)$";
 
     public final String value;
+    public final String color;
 
     /**
      * Constructs a {@code Expected Grade}.
@@ -28,7 +31,17 @@ public class ExpectedGrade {
     public ExpectedGrade(String expectedGrade) {
         requireNonNull(expectedGrade);
         checkArgument(isValidExpectedGrade(expectedGrade), MESSAGE_CONSTRAINTS);
-        value = expectedGrade;
+        this.value = expectedGrade;
+        this.color = getGradeHexColor(getExpectedGradeLetter());
+    }
+
+    /**
+     * Extracts first letter of the given grade string.
+     *
+     * @return The first letter of grade if present, otherwise an empty string.
+     */
+    public String getExpectedGradeLetter() {
+        return value.trim().isEmpty() ? "" : value.substring(0, 1);
     }
 
     /**

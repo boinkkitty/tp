@@ -39,17 +39,16 @@ public class CurrentGrade {
         requireNonNull(currentGrade);
         checkArgument(isValidCurrentGrade(currentGrade), MESSAGE_CONSTRAINTS);
         this.value = currentGrade;
-        this.color = getGradeHexColor(getCurrentGradeLetter(currentGrade));
+        this.color = getGradeHexColor(getCurrentGradeLetter());
     }
 
     /**
      * Extracts the first letter of the given grade string.
      *
-     * @param currentGrade the grade string from which to extract the first letter
      * @return the first letter of the grade if present, otherwise an empty string
      */
-    public String getCurrentGradeLetter(String currentGrade) {
-        return currentGrade.trim().isEmpty() ? "" : currentGrade.substring(0, 1);
+    public String getCurrentGradeLetter() {
+        return value.trim().isEmpty() ? "" : value.substring(0, 1);
     }
 
     /**
