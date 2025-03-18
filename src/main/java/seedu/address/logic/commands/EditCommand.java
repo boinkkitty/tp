@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -57,6 +58,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_CURRENT_GRADE + "CURRENT_GRADE] "
             + "[" + PREFIX_EXP_GRADE + "EXP_GRADE] "
             + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TAG + "REMOVE_TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com"
@@ -120,6 +122,13 @@ public class EditCommand extends Command {
         ExpectedGrade updatedExpectedGrade = editPersonDescriptor.getExpectedGrade()
                 .orElse(personToEdit.getExpectedGrade());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        if (editPersonDescriptor.getTagsToRemove().isPresent()) {
+            updatedTags = updatedTags.stream()
+                    .filter(tag -> !editPersonDescriptor.getTagsToRemove().get().contains(tag))
+                    .collect(Collectors.toSet());
+        }
+
+
         // Edit command does not allow editing paymentInfo
         PaymentInfo updatedPaymentInfo = personToEdit.getPaymentInfo();
 
@@ -164,9 +173,12 @@ public class EditCommand extends Command {
         private CurrentYear currentYear;
         private CurrentGrade currentGrade;
         private Set<Tag> tags;
+        private Set<Tag> tagsToRemove;
         private EduLevel eduLevel;
 
-        public EditPersonDescriptor() {}
+
+        public EditPersonDescriptor() {
+        }
 
         /**
          * Copy constructor.
@@ -182,6 +194,7 @@ public class EditCommand extends Command {
             setCurrentYear(toCopy.currentYear);
             setCurrentGrade(toCopy.currentGrade);
             setTags(toCopy.tags);
+            setTagsToRemove(toCopy.tagsToRemove);
         }
 
         /**
@@ -189,7 +202,7 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, email, address, eduLevel, currentYear, currentGrade,
-                    expectedGrade, tags);
+                    expectedGrade, tags, tagsToRemove);
         }
 
         public void setName(Name name) {
@@ -282,6 +295,25 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        /**
+         * Sets {@code tagsToRemove}
+         * A defensive copy of {@code tagsToRemove} is used internally.
+         */
+        public void setTagsToRemove(Set<Tag> tagsToRemove) {
+            this.tagsToRemove = (tagsToRemove != null) ? new HashSet<>(tagsToRemove) : null;
+        }
+
+        /**
+         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code tagsToRemove} is null.
+         */
+        public Optional<Set<Tag>> getTagsToRemove() {
+            return (tagsToRemove != null)
+                    ? Optional.of(Collections.unmodifiableSet(tagsToRemove))
+                    : Optional.empty();
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -302,7 +334,8 @@ public class EditCommand extends Command {
                     && Objects.equals(currentYear, otherEditPersonDescriptor.currentYear)
                     && Objects.equals(currentGrade, otherEditPersonDescriptor.currentGrade)
                     && Objects.equals(expectedGrade, otherEditPersonDescriptor.expectedGrade)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
+                    && Objects.equals(tagsToRemove, otherEditPersonDescriptor.tagsToRemove);
         }
 
         @Override
