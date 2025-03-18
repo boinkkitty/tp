@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CURRENT_GRADE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CURRENT_YEAR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EDULEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXP_GRADE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -29,6 +30,7 @@ import seedu.address.model.person.CurrentGrade;
 import seedu.address.model.person.CurrentYear;
 import seedu.address.model.person.EduLevel;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.ExpectedGrade;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.PaymentInfo;
 import seedu.address.model.person.Person;
@@ -53,6 +55,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EDULEVEL + "EDUCATION] "
             + "[" + PREFIX_CURRENT_YEAR + "CURRENT_YEAR] "
             + "[" + PREFIX_CURRENT_GRADE + "CURRENT_GRADE] "
+            + "[" + PREFIX_EXP_GRADE + "EXP_GRADE] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -114,12 +117,14 @@ public class EditCommand extends Command {
         CurrentYear updatedCurrentYear = editPersonDescriptor.getCurrentYear().orElse(personToEdit.getCurrentYear());
         CurrentGrade updatedCurrentGrade = editPersonDescriptor.getCurrentGrade()
                 .orElse(personToEdit.getCurrentGrade());
+        ExpectedGrade updatedExpectedGrade = editPersonDescriptor.getExpectedGrade()
+                .orElse(personToEdit.getExpectedGrade());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         // Edit command does not allow editing paymentInfo
         PaymentInfo updatedPaymentInfo = personToEdit.getPaymentInfo();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedEduLevel, updatedCurrentYear,
-                updatedCurrentGrade, updatedTags, updatedPaymentInfo);
+                updatedCurrentGrade, updatedExpectedGrade, updatedTags, updatedPaymentInfo);
     }
 
     @Override
@@ -155,6 +160,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
+        private ExpectedGrade expectedGrade;
         private CurrentYear currentYear;
         private CurrentGrade currentGrade;
         private Set<Tag> tags;
@@ -171,18 +177,19 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
+            setExpectedGrade(toCopy.expectedGrade);
             setEduLevel(toCopy.eduLevel);
             setCurrentYear(toCopy.currentYear);
             setCurrentGrade(toCopy.currentGrade);
             setTags(toCopy.tags);
-
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, eduLevel, currentYear, currentGrade, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, eduLevel, currentYear, currentGrade,
+                    expectedGrade, tags);
         }
 
         public void setName(Name name) {
@@ -219,6 +226,23 @@ public class EditCommand extends Command {
 
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
+        }
+
+        public void setExpectedGrade(ExpectedGrade expectedGrade) {
+            this.expectedGrade = expectedGrade;
+        }
+
+        /**
+         * Returns Optional#ExpectedGrade if an ExpectedGrade exists.
+         * Returns {@code Optional#empty()} if ExpectedGrade does not exist (null or empty).
+         */
+
+        public Optional<ExpectedGrade> getExpectedGrade() {
+            if (expectedGrade == null || expectedGrade.isEmptyExpectedGrade()) {
+                return Optional.empty();
+            } else {
+                return Optional.ofNullable(expectedGrade);
+            }
         }
 
         public Optional<EduLevel> getEduLevel() {
@@ -277,6 +301,7 @@ public class EditCommand extends Command {
                     && Objects.equals(eduLevel, otherEditPersonDescriptor.eduLevel)
                     && Objects.equals(currentYear, otherEditPersonDescriptor.currentYear)
                     && Objects.equals(currentGrade, otherEditPersonDescriptor.currentGrade)
+                    && Objects.equals(expectedGrade, otherEditPersonDescriptor.expectedGrade)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
@@ -290,6 +315,7 @@ public class EditCommand extends Command {
                     .add("eduLevel", eduLevel)
                     .add("currentYear", currentYear)
                     .add("currentGrade", currentGrade)
+                    .add("expectedGrade", expectedGrade)
                     .add("tags", tags)
                     .toString();
         }

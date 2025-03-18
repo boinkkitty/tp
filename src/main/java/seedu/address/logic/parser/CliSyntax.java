@@ -13,6 +13,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_CURRENT_YEAR = new Prefix("cy/");
     public static final Prefix PREFIX_CURRENT_GRADE = new Prefix("cg/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
+    public static final Prefix PREFIX_EXP_GRADE = new Prefix("eg/");
     // `PREFIX_PAYMENT_FEE` and `PREFIX_PAYMENT_DATE` is part of the Payment Command
     public static final Prefix PREFIX_PAYMENT_FEE = new Prefix("f/");
     public static final Prefix PREFIX_PAYMENT_DATE = new Prefix("d/");
