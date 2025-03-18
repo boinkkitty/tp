@@ -58,6 +58,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_CURRENT_GRADE + "CURRENT_GRADE] "
             + "[" + PREFIX_EXP_GRADE + "EXP_GRADE] "
             + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TAG + "REMOVE_TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com"
@@ -295,7 +296,7 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Sets {@code tagsToRemove} to this object's {@code tags}.
+         * Sets {@code tagsToRemove}
          * A defensive copy of {@code tagsToRemove} is used internally.
          */
         public void setTagsToRemove(Set<Tag> tagsToRemove) {
