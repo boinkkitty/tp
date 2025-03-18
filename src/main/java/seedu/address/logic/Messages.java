@@ -49,6 +49,8 @@ public class Messages {
                 .append(person.getCurrentYear())
                 .append("; Current Grade: ")
                 .append(person.getCurrentGrade())
+                .append("; Expected Grade: ")
+                .append(person.getExpectedGrade())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
 

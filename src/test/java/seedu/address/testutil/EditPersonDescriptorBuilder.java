@@ -10,6 +10,7 @@ import seedu.address.model.person.CurrentGrade;
 import seedu.address.model.person.CurrentYear;
 import seedu.address.model.person.EduLevel;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.ExpectedGrade;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -41,6 +42,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setAddress(person.getAddress());
         descriptor.setCurrentYear(person.getCurrentYear());
         descriptor.setCurrentGrade(person.getCurrentGrade());
+        descriptor.setExpectedGrade(person.getExpectedGrade());
         descriptor.setTags(person.getTags());
     }
 
@@ -73,6 +75,14 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withAddress(String address) {
         descriptor.setAddress(new Address(address));
+        return this;
+    }
+
+    /**
+     * Sets the {@code ExpectedGrade} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withExpectedGrade(String expectedGrade) {
+        descriptor.setExpectedGrade(new ExpectedGrade(expectedGrade));
         return this;
     }
 

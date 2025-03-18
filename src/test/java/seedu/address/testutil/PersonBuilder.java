@@ -8,6 +8,7 @@ import seedu.address.model.person.CurrentGrade;
 import seedu.address.model.person.CurrentYear;
 import seedu.address.model.person.EduLevel;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.ExpectedGrade;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.PaymentInfo;
 import seedu.address.model.person.Person;
@@ -24,6 +25,7 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_EXP_GRADE = "A";
     public static final String DEFAULT_EDULEVEL = "Bachelor";
 
     private Name name;
@@ -33,6 +35,8 @@ public class PersonBuilder {
     private Address address;
     private CurrentYear currentYear;
     private CurrentGrade currentGrade;
+    private ExpectedGrade expectedGrade;
+
     private Set<Tag> tags;
     private PaymentInfo paymentInfo;
 
@@ -44,6 +48,7 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        expectedGrade = new ExpectedGrade(DEFAULT_EXP_GRADE);
         currentYear = new CurrentYear();
         currentGrade = new CurrentGrade();
         eduLevel = new EduLevel(DEFAULT_EDULEVEL);
@@ -61,6 +66,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         currentYear = personToCopy.getCurrentYear();
         currentGrade = personToCopy.getCurrentGrade();
+        expectedGrade = personToCopy.getExpectedGrade();
         eduLevel = personToCopy.getEduLevel();
         tags = new HashSet<>(personToCopy.getTags());
         paymentInfo = personToCopy.getPaymentInfo();
@@ -103,6 +109,14 @@ public class PersonBuilder {
      */
     public PersonBuilder withEmail(String email) {
         this.email = new Email(email);
+        return this;
+    }
+
+    /**
+     * Sets the {@code ExpectedGrade} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withExpectedGrade(String expectedGrade) {
+        this.expectedGrade = new ExpectedGrade(expectedGrade);
         return this;
     }
 
@@ -162,8 +176,13 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Builds {@code Person} object using internal fields.
+     */
+
     public Person build() {
-        return new Person(name, phone, email, address, eduLevel, currentYear, currentGrade, tags, paymentInfo);
+        return new Person(
+                name, phone, email, address, eduLevel, currentYear, currentGrade, expectedGrade, tags, paymentInfo);
     }
 
 }

@@ -8,6 +8,7 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import seedu.address.commons.util.ColorUtil;
 import seedu.address.model.person.PaymentInfo;
@@ -46,13 +47,15 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
+    private VBox details;
+    @FXML
     private Label eduLevel;
     @FXML
     private Label currentYear;
     @FXML
     private Label currentGrade;
     @FXML
-    private Label placeholder4;
+    private Label expectedGrade;
     @FXML
     private Label paymentFee;
     @FXML
@@ -70,20 +73,40 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
 
-        eduLevel.setText("Education Level: " + person.getEduLevel());
-        currentYear.setText("Current Year: " + person.getCurrentYear());
-        currentGrade.setText("Current Grade: " + person.getCurrentGrade());
-        placeholder4.setText("placeholder text 4");
+        if (person.getEduLevel().value.equals("")) {
+            hideDetailsLabel(eduLevel);
+        } else {
+            eduLevel.setText("Education Level: " + person.getEduLevel().value);
+        }
+
+        if (person.getCurrentYear().value.equals("")) {
+            hideDetailsLabel(currentYear);
+        } else {
+            currentYear.setText("Current Year: " + person.getCurrentYear().value);
+        }
+
+        if (person.getCurrentGrade().value.equals("")) {
+            hideDetailsLabel(currentGrade);
+        } else {
+            currentGrade.setText("Current Grade: " + person.getCurrentGrade().value);
+        }
+
+        if (person.getExpectedGrade().value.equals("")) {
+            hideDetailsLabel(expectedGrade);
+        } else {
+            expectedGrade.setText("Expected Grade: " + person.getExpectedGrade().value);
+        }
+
         PaymentInfo paymentInfo = person.getPaymentInfo();
+
         if (paymentInfo.getPaymentFee() == 0) {
-            paymentFee.setManaged(false);
-            paymentFee.setVisible(false);
+            hideDetailsLabel(paymentFee);
         } else {
             paymentFee.setText("Tutoring Fee: $" + paymentInfo.getPaymentFee());
         }
+
         if (paymentInfo.getPaymentDate().isEmpty()) {
-            paymentDate.setManaged(false);
-            paymentDate.setVisible(false);
+            hideDetailsLabel(paymentDate);
         } else {
             paymentDate.setText("Payment Date: " + paymentInfo.getPaymentDate());
         }
@@ -91,6 +114,11 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.fullTag))
                 .forEach(tag -> tags.getChildren().add(createTagLabel(tag)));
+    }
+
+    private void hideDetailsLabel(Label label) {
+        label.setManaged(false);
+        label.setVisible(false);
     }
 
     /**
@@ -101,6 +129,8 @@ public class PersonCard extends UiPart<Region> {
     private Label createTagLabel(Tag tag) {
         String[] parts = tag.fullTag.split("#");
         Label label = new Label(parts[0]);
+        label.maxWidthProperty().bind(tags.widthProperty());
+        label.setOnMouseClicked(event -> label.setWrapText(!label.isWrapText()));
         if (parts.length == 2 && !parts[1].isEmpty()) {
             // Determine text and background color if custom color code is found...
             String hexColor = parts[1];

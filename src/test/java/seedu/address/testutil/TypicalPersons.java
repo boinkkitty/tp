@@ -6,6 +6,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EDULEVEL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EDULEVEL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EXP_GRADE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EXP_GRADE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GRADE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GRADE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
@@ -22,6 +24,8 @@ import java.util.List;
 import seedu.address.model.AddressBook;
 import seedu.address.model.person.Person;
 
+// import static seedu.address.logic.commands.CommandTestUtil.*;
+
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.
  */
@@ -30,25 +34,26 @@ public class TypicalPersons {
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253").withEduLevel("Bachelor").withPaymentInfo().withCurrentYear("Year 3")
-            .withCurrentGrade("D").withTags("friends").build();
+            .withCurrentGrade("D").withExpectedGrade("A").withTags("friends").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25").withPaymentInfo(500)
             .withEmail("johnd@example.com").withPhone("98765432").withEduLevel("Bachelor").withCurrentYear("Year 4")
-            .withCurrentGrade("B-").withTags("owesMoney", "friends").build();
+            .withCurrentGrade("B-").withExpectedGrade("B").withTags("owesMoney", "friends").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street").withEduLevel("PhD")
-            .withPaymentInfo(1250, "25-02-2025").build();
+            .withPaymentInfo(1250, "25-02-2025").withExpectedGrade("C").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withEduLevel("Master").withAddress("10th street")
-            .withTags("friends").build();
+            .withExpectedGrade("D").withTags("friends").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
             .withEmail("werner@example.com").withEduLevel("Bachelor").withAddress("michegan ave")
-            .withCurrentYear("Year 2").withCurrentGrade("C").build();
+            .withCurrentYear("Year 2").withCurrentGrade("C").withExpectedGrade("E").build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
             .withEmail("lydia@example.com").withAddress("little tokyo").withCurrentYear("Year 2")
-            .withCurrentGrade("B").build();
+            .withCurrentGrade("B").withExpectedGrade("F").build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
-            .withEmail("anna@example.com").withAddress("4th street").withCurrentYear("Year 1").build();
+            .withEmail("anna@example.com").withAddress("4th street").withCurrentYear("Year 1")
+            .withExpectedGrade("A").build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
@@ -59,10 +64,12 @@ public class TypicalPersons {
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withEduLevel(VALID_EDULEVEL_AMY)
-            .withCurrentGrade(VALID_GRADE_AMY).withTags(VALID_TAG_FRIEND).build();
+            .withCurrentGrade(VALID_GRADE_AMY).withExpectedGrade(VALID_EXP_GRADE_AMY)
+            .withTags(VALID_TAG_FRIEND).build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withEduLevel(VALID_EDULEVEL_BOB)
-            .withCurrentGrade(VALID_GRADE_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+            .withCurrentGrade(VALID_GRADE_BOB).withExpectedGrade(VALID_EXP_GRADE_BOB)
+            .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
