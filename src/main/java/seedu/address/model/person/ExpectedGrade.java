@@ -11,7 +11,8 @@ import static seedu.address.commons.util.ColorUtil.getGradeHexColor;
 public class ExpectedGrade {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Expected Grades should only be from A to F and can only have a +/- following the upper case letter.";
+            "Expected Grade allows 1 Letter Grade from A to F "
+                    + "with 1 + / - symbols, and it should not be blank";
 
     /*
      * The first character of the address must not be a whitespace,
