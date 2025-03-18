@@ -55,7 +55,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label currentGrade;
     @FXML
-    private Label placeholder4;
+    private Label expectedGrade;
     @FXML
     private Label paymentFee;
     @FXML
@@ -91,6 +91,12 @@ public class PersonCard extends UiPart<Region> {
             currentGrade.setText("Current Grade: " + person.getCurrentGrade().value);
         }
 
+        if (person.getExpectedGrade().value.equals("")) {
+            hideDetailsLabel(expectedGrade);
+        } else {
+            expectedGrade.setText("Expected Grade: " + person.getExpectedGrade().value);
+        }
+
         PaymentInfo paymentInfo = person.getPaymentInfo();
 
         if (paymentInfo.getPaymentFee() == 0) {
@@ -117,7 +123,6 @@ public class PersonCard extends UiPart<Region> {
 
     /**
      * A helper function to create a {@code Label} given a {@code Tag}.
-     *
      * @param tag A valid Tag object.
      * @return The corresponding JavaFX Label object.
      */

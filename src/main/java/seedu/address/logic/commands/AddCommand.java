@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CURRENT_GRADE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CURRENT_YEAR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EDULEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXP_GRADE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -32,6 +33,7 @@ public class AddCommand extends Command {
             + "[" + PREFIX_EDULEVEL + "EDUCATION] "
             + "[" + PREFIX_CURRENT_YEAR + "CURRENT_YEAR] "
             + "[" + PREFIX_CURRENT_GRADE + "CURRENT_GRADE] "
+            + "[" + PREFIX_EXP_GRADE + "EXP_GRADE] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
@@ -41,6 +43,7 @@ public class AddCommand extends Command {
             + PREFIX_EDULEVEL + "Bachelor "
             + PREFIX_CURRENT_YEAR + "Year 1 "
             + PREFIX_CURRENT_GRADE + "C "
+            + PREFIX_EXP_GRADE + "A "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney ";
 

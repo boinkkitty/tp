@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CURRENT_GRADE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CURRENT_YEAR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EDULEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXP_GRADE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -40,6 +41,7 @@ public class PersonUtil {
         sb.append(PREFIX_EDULEVEL).append(person.getEduLevel().value + " ");
         sb.append(PREFIX_CURRENT_YEAR + person.getCurrentYear().value + " ");
         sb.append(PREFIX_CURRENT_GRADE + person.getCurrentGrade().value + " ");
+        sb.append(PREFIX_EXP_GRADE + person.getExpectedGrade().value + " ");
         person.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.fullTag + " ")
         );
@@ -59,6 +61,9 @@ public class PersonUtil {
                 .append(currentYear.value).append(" "));
         descriptor.getCurrentGrade().ifPresent(currentGrade -> sb.append(PREFIX_CURRENT_GRADE)
                 .append(currentGrade.value).append(" "));
+        descriptor.getExpectedGrade().ifPresent(expectedGrade -> sb.append(PREFIX_EXP_GRADE)
+                .append(expectedGrade.value).append(" "));
+
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {
