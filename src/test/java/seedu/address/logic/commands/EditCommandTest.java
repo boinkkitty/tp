@@ -123,8 +123,6 @@ public class EditCommandTest {
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
     }
 
-
-
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
@@ -149,6 +147,27 @@ public class EditCommandTest {
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    /**
+     * Edit
+     */
+    @Test
+    public void execute_test_success() {
+        Person editedPerson = new PersonBuilder().withTags().build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson)
+                .withTags("Math#FF5733", "Physics", "PE").withTagsToAppend("Chemistry", "Math", "History")
+                .withTagsToRemove("PE", "Chemistry").build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(
+                new PersonBuilder().withTags("Physics", "Math#FF5733", "History").build()));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(model.getFilteredPersonList().get(0), new PersonBuilder()
+                .withTags("Physics", "Math#FF5733", "History").build());
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
