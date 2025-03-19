@@ -27,6 +27,7 @@ public class ExpectedGradeTest {
         // invalid addresses
         assertFalse(ExpectedGrade.isValidExpectedGrade(" ")); // No whitespaces allowed
         assertFalse(ExpectedGrade.isValidExpectedGrade("a")); // No small letters
+        assertFalse(CurrentGrade.isValidCurrentGrade("B%")); // wrong symbol
         assertFalse(ExpectedGrade.isValidExpectedGrade("G")); // Only A - F
         assertFalse(ExpectedGrade.isValidExpectedGrade("AB")); // Only 1 letter at most
 
