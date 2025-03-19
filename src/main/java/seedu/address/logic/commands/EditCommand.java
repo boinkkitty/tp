@@ -121,20 +121,18 @@ public class EditCommand extends Command {
                 .orElse(personToEdit.getCurrentGrade());
         ExpectedGrade updatedExpectedGrade = editPersonDescriptor.getExpectedGrade()
                 .orElse(personToEdit.getExpectedGrade());
+        // For Tag Editing, Tag Overwrite will be processed first, followed by Tag Append, then Tag Remove.
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        if (editPersonDescriptor.getTagsToRemove().isPresent()) {
-            updatedTags = updatedTags.stream()
-                    .filter(tag -> !editPersonDescriptor.getTagsToRemove().get().contains(tag))
-                    .collect(Collectors.toSet());
-        }
-
         if (editPersonDescriptor.getTagsToAppend().isPresent()) {
             Set<Tag> modifiableTags = new HashSet<>(updatedTags);
             modifiableTags.addAll(editPersonDescriptor.getTagsToAppend().get());
             updatedTags = modifiableTags;
         }
-
-
+        if (editPersonDescriptor.getTagsToRemove().isPresent()) {
+            updatedTags = updatedTags.stream()
+                    .filter(tag -> !editPersonDescriptor.getTagsToRemove().get().contains(tag))
+                    .collect(Collectors.toSet());
+        }
         // Edit command does not allow editing paymentInfo
         PaymentInfo updatedPaymentInfo = personToEdit.getPaymentInfo();
 
