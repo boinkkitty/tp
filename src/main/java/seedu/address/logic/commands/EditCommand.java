@@ -128,6 +128,12 @@ public class EditCommand extends Command {
                     .collect(Collectors.toSet());
         }
 
+        if (editPersonDescriptor.getTagsToAppend().isPresent()) {
+            Set<Tag> modifiableTags = new HashSet<>(updatedTags);
+            modifiableTags.addAll(editPersonDescriptor.getTagsToAppend().get());
+            updatedTags = modifiableTags;
+        }
+
 
         // Edit command does not allow editing paymentInfo
         PaymentInfo updatedPaymentInfo = personToEdit.getPaymentInfo();
@@ -174,7 +180,9 @@ public class EditCommand extends Command {
         private CurrentGrade currentGrade;
         private Set<Tag> tags;
         private Set<Tag> tagsToRemove;
+        private Set<Tag> tagsToAppend;
         private EduLevel eduLevel;
+
 
 
         public EditPersonDescriptor() {
@@ -195,6 +203,8 @@ public class EditCommand extends Command {
             setCurrentGrade(toCopy.currentGrade);
             setTags(toCopy.tags);
             setTagsToRemove(toCopy.tagsToRemove);
+            setTagsToAppend(toCopy.tagsToAppend);
+
         }
 
         /**
@@ -202,7 +212,7 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, email, address, eduLevel, currentYear, currentGrade,
-                    expectedGrade, tags, tagsToRemove);
+                    expectedGrade, tags, tagsToRemove, tagsToAppend);
         }
 
         public void setName(Name name) {
@@ -314,6 +324,16 @@ public class EditCommand extends Command {
                     : Optional.empty();
         }
 
+        public void setTagsToAppend(Set<Tag> tagsToAppend) {
+            this.tagsToAppend = (tagsToAppend != null) ? new HashSet<>(tagsToAppend) : null;
+        }
+
+        public Optional<Set<Tag>> getTagsToAppend() {
+            return (tagsToAppend != null)
+                    ? Optional.of(Collections.unmodifiableSet(tagsToAppend))
+                    : Optional.empty();
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -335,7 +355,8 @@ public class EditCommand extends Command {
                     && Objects.equals(currentGrade, otherEditPersonDescriptor.currentGrade)
                     && Objects.equals(expectedGrade, otherEditPersonDescriptor.expectedGrade)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags)
-                    && Objects.equals(tagsToRemove, otherEditPersonDescriptor.tagsToRemove);
+                    && Objects.equals(tagsToRemove, otherEditPersonDescriptor.tagsToRemove)
+                    && Objects.equals(tagsToAppend, otherEditPersonDescriptor.tagsToAppend);
         }
 
         @Override

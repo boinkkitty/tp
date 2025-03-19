@@ -15,6 +15,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_EXP_GRADE = new Prefix("eg/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
     public static final Prefix PREFIX_TAG_REMOVE = new Prefix("t-/");
+    public static final Prefix PREFIX_TAG_APPEND = new Prefix("t+/");
     // `PREFIX_PAYMENT_FEE` and `PREFIX_PAYMENT_DATE` is part of the Payment Command
     public static final Prefix PREFIX_PAYMENT_FEE = new Prefix("f/");
     public static final Prefix PREFIX_PAYMENT_DATE = new Prefix("d/");
