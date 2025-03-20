@@ -255,17 +255,8 @@ public class EditCommand extends Command {
             this.expectedGrade = expectedGrade;
         }
 
-        /**
-         * Returns Optional#ExpectedGrade if an ExpectedGrade exists.
-         * Returns {@code Optional#empty()} if ExpectedGrade does not exist (null or empty).
-         */
-
         public Optional<ExpectedGrade> getExpectedGrade() {
-            if (expectedGrade == null || expectedGrade.isEmptyExpectedGrade()) {
-                return Optional.empty();
-            } else {
-                return Optional.ofNullable(expectedGrade);
-            }
+            return Optional.ofNullable(expectedGrade);
         }
 
         public Optional<EduLevel> getEduLevel() {

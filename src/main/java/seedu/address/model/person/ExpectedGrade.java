@@ -51,13 +51,6 @@ public class ExpectedGrade {
         return test.matches(VALIDATION_REGEX);
     }
 
-    /**
-     * Returns true if there is a grade
-     */
-    public boolean isEmptyExpectedGrade() {
-        return value.isEmpty();
-    }
-
     @Override
     public String toString() {
         return value;
