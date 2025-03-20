@@ -23,7 +23,7 @@ public class CurrentGrade {
     public final String color;
 
     /**
-     * Constructs an {@code CurrentGrade} without specifying the level (defaults to empty string).
+     * Constructs a {@code CurrentGrade} without specifying the grade (defaults to empty string).
      */
     public CurrentGrade() {
         this.value = "";
@@ -31,7 +31,7 @@ public class CurrentGrade {
     }
 
     /**
-     * Constructs an {@code Current Grade}.
+     * Constructs a {@code CurrentGrade}.
      *
      * @param currentGrade A valid current grade.
      */

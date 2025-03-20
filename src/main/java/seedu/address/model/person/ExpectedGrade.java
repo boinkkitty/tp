@@ -24,7 +24,15 @@ public class ExpectedGrade {
     public final String color;
 
     /**
-     * Constructs a {@code Expected Grade}.
+     * Constructs an {@code ExpectedGrade} without specifying the grade (defaults to empty string).
+     */
+    public ExpectedGrade() {
+        this.value = "";
+        this.color = getGradeHexColor("");
+    }
+
+    /**
+     * Constructs an {@code ExpectedGrade}.
      *
      * @param expectedGrade A valid expected grade.
      */

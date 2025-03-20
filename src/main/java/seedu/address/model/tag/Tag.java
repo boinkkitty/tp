@@ -46,12 +46,13 @@ public class Tag {
 
         Tag otherTag = (Tag) other;
         // Tag is the same as long as the `tagName` (First half) is the same. `hexColor` (Second half) is ignored here.
-        return fullTag.split("#")[0].equals(otherTag.fullTag.split("#")[0]);
+        return fullTag.split("#")[0].equalsIgnoreCase(otherTag.fullTag.split("#")[0]);
     }
 
     @Override
     public int hashCode() {
-        return fullTag.hashCode();
+        // NOTE: hashCode() is used primarily for determining duplicated content in a HashSet.
+        return fullTag.split("#")[0].toLowerCase().hashCode();
     }
 
     /**
