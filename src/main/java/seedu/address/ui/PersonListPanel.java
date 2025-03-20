@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
@@ -41,7 +42,15 @@ public class PersonListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
+                PersonCard personCard = new PersonCard(person, getIndex() + 1);
+                setGraphic(personCard.getRoot());
+
+                // Handles delayed re-rendering of PersonCard given an update to the item...
+                Platform.runLater(() -> {
+                    personCard.getRoot().applyCss();
+                    personCard.getRoot().layout();
+                    personCard.getRoot().requestLayout();
+                });
             }
         }
     }
