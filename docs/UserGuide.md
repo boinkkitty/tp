@@ -138,6 +138,14 @@ Examples:
 * `payment 1 f/1000 d/14-11-2000` Updates the tutoring fee and payment date to be `1000` and `14-11-2000` respectively.
 * `payment 2` Removes the payment information of the 2nd person.
 
+### Sorting the list of people : `sort`
+Sorts the list of people alphabetically based on their name.
+
+Subsequent additions are inserted at the bottom.
+
+This command takes no arguments.
+
+Format: `sort`
 ### Locating persons by name : `find`
 
 Finds persons whose names contain any of the given keywords.
@@ -225,6 +233,7 @@ _Details coming soon ..._
 | **Edit**    | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [cy/CURRENT_YEAR] [cg/CURRENT_GRADE] [eg/EXPECTED_GRADE] [t/TAG]… [t+/TAGS_TO_APPEND]… [t-/TAGS_TO_REMOVE]…`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com t+/CS2040C#1E2C4D`         |
 | **Payment** | `payment INDEX [f/FEE] d/[PAYMENT_DATE]`<br> e.g., `payment 4 f/1000 d/14-11-2000`                                                                                                                                                                      |
 | **Find**    | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                                              |
+| **Sort**    | `sort`                                                                                                                                                                                                                                                  |
 | **List**    | `list`                                                                                                                                                                                                                                                  |
 | **Help**    | `help`                                                                                                                                                                                                                                                  |
 
