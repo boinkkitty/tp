@@ -2,47 +2,55 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.SortCommandParser;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.TypicalPersons;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for SortCommand.
  */
 public class SortCommandTest {
 
-    private final Model model = new ModelManager(createUnsortedAddressBook(), new UserPrefs());
-    private final Model expectedModel = new ModelManager(createUnsortedAddressBook(), new UserPrefs());
+    // Use the typical address book for testing
+    private final Model model = new ModelManager(TypicalPersons.getTypicalAddressBook(), new UserPrefs());
+    private final Model expectedModel = new ModelManager(TypicalPersons.getTypicalAddressBook(), new UserPrefs());
+    private final SortCommandParser parser = new SortCommandParser();
 
     @Test
     public void execute_sortUnfilteredList_success() {
-        // The command should reorder the unsorted Model in alphabetical order
+        // The command should reorder the typical Model in alphabetical order
         SortCommand sortCommand = new SortCommand();
 
-        // We manually create what the sorted list should look like
+        // We manually sort the expectedModel’s list by name (ignore case)
         List<Person> sortedList = new ArrayList<>(expectedModel.getAddressBook().getPersonList());
-        // e.g. sort them by name:
-        sortedList.sort((p1, p2) -> p1.getName().fullName.compareToIgnoreCase(p2.getName().fullName));
+        sortedList.sort((p1, p2) ->
+                p1.getName().fullName.compareToIgnoreCase(p2.getName().fullName));
 
-        // Now we set the sorted list into expectedModel
-        expectedModel.setAddressBook(createAddressBookFromList(sortedList));
+        // Overwrite expectedModel with the sorted list
+        AddressBook sortedAb = new AddressBook();
+        sortedList.forEach(sortedAb::addPerson);
+        expectedModel.setAddressBook(sortedAb);
 
         String expectedMessage = SortCommand.MESSAGE_SORT_SUCCESS;
 
+        // Now check that the command sorts model to match expectedModel
         assertCommandSuccess(sortCommand, model, expectedMessage, expectedModel);
     }
 
@@ -63,7 +71,10 @@ public class SortCommandTest {
     public void execute_sortSinglePerson_success() throws CommandException {
         // Sorting a single-person list does nothing but should still succeed
         Person singlePerson = new PersonBuilder().withName("Zoe").build();
-        AddressBook singleAb = createAddressBookFromList(Arrays.asList(singlePerson));
+
+        AddressBook singleAb = new AddressBook();
+        singleAb.addPerson(singlePerson);
+
         Model singleModel = new ModelManager(singleAb, new UserPrefs());
         Model expectedSingleModel = new ModelManager(singleAb, new UserPrefs());
 
@@ -72,7 +83,7 @@ public class SortCommandTest {
         // Execute command
         CommandResult commandResult = sortCommand.execute(singleModel);
 
-        // Check the final result
+        // Verify
         assertEquals(SortCommand.MESSAGE_SORT_SUCCESS, commandResult.getFeedbackToUser());
         // Single-person list won't change
         assertEquals(expectedSingleModel, singleModel);
@@ -81,12 +92,17 @@ public class SortCommandTest {
     @Test
     public void execute_alreadySortedList_noChangeButSuccess() {
         // If the list is already sorted, the command doesn't change anything
-        // We'll reuse 'expectedModel' but pre-sort it
-        List<Person> sortedList = new ArrayList<>(expectedModel.getAddressBook().getPersonList());
-        sortedList.sort((p1, p2) -> p1.getName().fullName.compareToIgnoreCase(p2.getName().fullName));
-        expectedModel.setAddressBook(createAddressBookFromList(sortedList));
 
-        Model sortedModel = new ModelManager(createAddressBookFromList(sortedList), new UserPrefs());
+        // 1) Sort expectedModel first
+        List<Person> sortedList = new ArrayList<>(expectedModel.getAddressBook().getPersonList());
+        sortedList.sort((p1, p2) ->
+                p1.getName().fullName.compareToIgnoreCase(p2.getName().fullName));
+        AddressBook sortedAb = new AddressBook();
+        sortedList.forEach(sortedAb::addPerson);
+        expectedModel.setAddressBook(sortedAb);
+
+        // 2) Use the same sorted AB for the real model
+        Model sortedModel = new ModelManager(sortedAb, new UserPrefs());
 
         SortCommand sortCommand = new SortCommand();
         String expectedMessage = SortCommand.MESSAGE_SORT_SUCCESS;
@@ -98,15 +114,23 @@ public class SortCommandTest {
     @Test
     public void execute_noPersonsToSort_noPersonsInModelAfterAdd() {
         // Example test that shows newly added person won't reorder automatically
-
         Model emptyModel = new ModelManager(new AddressBook(), new UserPrefs());
         SortCommand sortCommand = new SortCommand();
+
+        // Sorting an empty model
         assertCommandSuccess(sortCommand, emptyModel, Messages.MESSAGE_NO_PERSON_TO_SORT,
                 new ModelManager(new AddressBook(), new UserPrefs()));
+
 
         Person newPerson = new PersonBuilder().withName("Aaron").build();
         emptyModel.addPerson(newPerson);
 
+    }
+
+    @Test
+    public void parse_nonEmptyArgs_throwsParseException() {
+        // "sort" should have no arguments; providing any (e.g., "name") should fail
+        assertThrows(ParseException.class, () -> parser.parse(" name"));
     }
 
     @Test
@@ -126,27 +150,5 @@ public class SortCommandTest {
 
         // different type -> returns false
         assertFalse(sortCommand1.equals(5)); // e.g. an integer
-    }
-
-    // ------------------ Helper Methods --------------------------------
-
-    /**
-     * Creates a small unsorted AddressBook for testing. Adjust the size/names as you wish.
-     */
-    private static AddressBook createUnsortedAddressBook() {
-        AddressBook ab = new AddressBook();
-        ab.addPerson(new PersonBuilder().withName("Charlie").build());
-        ab.addPerson(new PersonBuilder().withName("alice").build()); // test ignoring case
-        ab.addPerson(new PersonBuilder().withName("Bob Choo").build());
-        return ab;
-    }
-
-    /**
-     * Creates an AddressBook from a given list of Persons.
-     */
-    private static AddressBook createAddressBookFromList(List<Person> persons) {
-        AddressBook ab = new AddressBook();
-        persons.forEach(ab::addPerson);
-        return ab;
     }
 }
