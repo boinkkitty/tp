@@ -46,6 +46,7 @@
                 <Label fx:id="expectedGrade" styleClass="cell_small_label" text="\$expectedGrade" />
                 <Label fx:id="paymentFee" styleClass="cell_small_label" text="\$paymentFee" />
                 <Label fx:id="paymentDate" styleClass="cell_small_label" text="\$paymentDate" />
+                <Label fx:id="paymentStatus" styleClass="cell_small_label" text="\$paymentStatus" />
             </children>
         </VBox>
 

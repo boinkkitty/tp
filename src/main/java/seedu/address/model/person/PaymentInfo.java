@@ -1,6 +1,5 @@
 package seedu.address.model.person;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import seedu.address.commons.util.StringUtil;
@@ -14,49 +13,71 @@ public class PaymentInfo {
             "Fees should only contain numerical characters, and it should not be blank";
     public static final String MESSAGE_CONSTRAINTS_DATE =
             "Dates should be in dd-MM-yyyy format, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS_STATUS =
+            "Payment Status should only be either 'paid' or 'waiting', and it should not be blank";
 
     private final int paymentFee;
     private final String paymentDate;
+    private final String paymentStatus;
 
     /**
-     * Constructs a {@code PaymentInfo} with {@code paymentFee} and {@code paymentDate}.
+     * Private constructor used by {@link Builder}.
+     * Prevents direct instantiation to enforce controlled object creation.
      *
-     * @param paymentFee A valid fee.
-     * @param paymentDate A valid date.
+     * @param builder the builder instance containing configured field values
      */
-    public PaymentInfo(int paymentFee, String paymentDate) {
-        requireNonNull(paymentDate);
-        checkArgument(PaymentInfo.isValidFee(paymentFee), MESSAGE_CONSTRAINTS_FEE);
-        checkArgument(isValidDate(paymentDate), MESSAGE_CONSTRAINTS_DATE);
-        this.paymentFee = paymentFee;
-        this.paymentDate = paymentDate;
+    private PaymentInfo(Builder builder) {
+        checkArgument(isValidFee(builder.paymentFee), MESSAGE_CONSTRAINTS_FEE);
+        checkArgument(isValidDate(builder.paymentDate), MESSAGE_CONSTRAINTS_DATE);
+        checkArgument(isValidStatus(builder.paymentStatus), MESSAGE_CONSTRAINTS_STATUS);
+        this.paymentFee = builder.paymentFee;
+        this.paymentDate = builder.paymentDate;
+        if (builder.paymentStatus.isEmpty()) {
+            this.paymentStatus = "";
+        } else {
+            this.paymentStatus = builder.paymentStatus.substring(0, 1).toUpperCase()
+                    + builder.paymentStatus.substring(1).toLowerCase();
+        }
     }
 
     /**
-     * Constructs a {@code PaymentInfo} with {@code paymentFee} only.
+     * Builder class for {@link PaymentInfo}, providing a flexible way to create instances
+     * with any combination of optional fields.
      */
-    public PaymentInfo(int paymentFee) {
-        checkArgument(PaymentInfo.isValidFee(paymentFee), MESSAGE_CONSTRAINTS_FEE);
-        this.paymentFee = paymentFee;
-        this.paymentDate = "";
-    }
+    public static class Builder {
+        private int paymentFee;
+        private String paymentDate;
+        private String paymentStatus;
 
-    /**
-     * Constructs a {@code PaymentInfo} with {@code paymentDate} only.
-     */
-    public PaymentInfo(String paymentDate) {
-        requireNonNull(paymentDate);
-        checkArgument(isValidDate(paymentDate), MESSAGE_CONSTRAINTS_DATE);
-        this.paymentFee = 0;
-        this.paymentDate = paymentDate;
-    }
+        /** Default constructor for {@link Builder}. */
+        public Builder() {
+            this.paymentFee = 0;
+            this.paymentDate = "";
+            this.paymentStatus = "";
+        }
 
-    /**
-     * Constructs a {@code PaymentInfo} without {@code paymentFee} and {@code paymentDate}.
-     */
-    public PaymentInfo() {
-        this.paymentFee = 0;
-        this.paymentDate = "";
+        /** Sets the value of {@code paymentFee}. */
+        public Builder setPaymentFee(int paymentFee) {
+            this.paymentFee = paymentFee;
+            return this;
+        }
+
+        /** Sets the value of {@code paymentDate}. */
+        public Builder setPaymentDate(String paymentDate) {
+            this.paymentDate = paymentDate;
+            return this;
+        }
+
+        /** Sets the value indicating whether the payment {@code isPaid}. */
+        public Builder setPaymentStatus(String paymentStatus) {
+            this.paymentStatus = paymentStatus;
+            return this;
+        }
+
+        /** Builds and returns the instance of {@link PaymentInfo}. */
+        public PaymentInfo build() {
+            return new PaymentInfo(this);
+        }
     }
 
     /**
@@ -73,12 +94,23 @@ public class PaymentInfo {
         return StringUtil.isValidDate(s) || s.isEmpty();
     }
 
+    /**
+     * Returns true if a given string is a valid status ("paid" or "waiting").
+     */
+    public static boolean isValidStatus(String s) {
+        return StringUtil.isValidPaymentStatus(s) || s.isEmpty();
+    }
+
     public int getPaymentFee() {
         return paymentFee;
     }
 
     public String getPaymentDate() {
         return paymentDate;
+    }
+
+    public String getPaymentStatus() {
+        return paymentStatus;
     }
 
     public String getPaymentFeeString() {
@@ -89,9 +121,13 @@ public class PaymentInfo {
         return "Date: " + paymentDate;
     }
 
+    public String getPaymentStatusString() {
+        return "Payment Status: " + paymentStatus;
+    }
+
     @Override
     public String toString() {
-        return "{" + getPaymentFeeString() + ", " + getPaymentDateString() + "}";
+        return "{" + getPaymentFeeString() + ", " + getPaymentDateString() + ", " + getPaymentStatusString() + "}";
     }
 
     @Override
@@ -105,7 +141,9 @@ public class PaymentInfo {
             return false;
         }
 
-        PaymentInfo otherFee = (PaymentInfo) other;
-        return paymentFee == otherFee.paymentFee && paymentDate.equals(otherFee.paymentDate);
+        PaymentInfo otherPaymentInfo = (PaymentInfo) other;
+        return paymentFee == otherPaymentInfo.paymentFee
+                && paymentDate.equals(otherPaymentInfo.paymentDate)
+                && paymentStatus.equals(otherPaymentInfo.paymentStatus);
     }
 }

@@ -65,7 +65,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         ExpectedGrade expectedGrade = ParserUtil.parseExpectedGrade(argMultimap.getValue(PREFIX_EXP_GRADE).orElse(""));
 
         // Add command does not allow adding paymentInfo straight away
-        PaymentInfo paymentInfo = new PaymentInfo();
+        PaymentInfo paymentInfo = new PaymentInfo.Builder().build();
 
         Person person = new Person(name, phone, email, address, eduLevel, currentYear, currentGrade, expectedGrade,
                 tagList, paymentInfo);

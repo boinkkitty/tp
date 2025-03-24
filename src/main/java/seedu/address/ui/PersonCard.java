@@ -60,6 +60,8 @@ public class PersonCard extends UiPart<Region> {
     private Label paymentFee;
     @FXML
     private Label paymentDate;
+    @FXML
+    private Label paymentStatus;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -111,6 +113,12 @@ public class PersonCard extends UiPart<Region> {
             hideDetailsLabel(paymentDate);
         } else {
             paymentDate.setText("Payment Date: " + paymentInfo.getPaymentDate());
+        }
+
+        if (paymentInfo.getPaymentStatus().isEmpty()) {
+            hideDetailsLabel(paymentStatus);
+        } else {
+            paymentStatus.setText("Payment Status: " + paymentInfo.getPaymentStatus());
         }
 
         person.getTags().stream()
