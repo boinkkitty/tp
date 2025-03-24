@@ -127,15 +127,17 @@ Examples:
 
 Updates the payment information of an existing person in the address book.
 
-Format: `payment INDEX [f/FEE] [d/PAYMENT_DATE]`
+Format: `payment INDEX [f/FEE] [d/PAYMENT_DATE] [s/PAYMENT_STATUS]`
 
 * Updates the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* Existing values will be updated to the input values.
+* Provided fields will be updated with the input values. Any missing fields will be removed by default.
 * If none of the optional fields are provided, the specified person's payment information will be removed.
-* `PAYMENT_DATE` should be in the format [DD-MM-YYYY]
+* `FEE` should be an unsigned integer, and will be removed if entered as `0`.
+* `PAYMENT_DATE` should be in the format `DD-MM-YYYY`.
+* `PAYMENT_STATUS` should be either `Paid` or `Waiting`.
 
 Examples:
-* `payment 1 f/1000 d/14-11-2000` Updates the tutoring fee and payment date to be `1000` and `14-11-2000` respectively.
+* `payment 1 f/1000 d/14-11-2000 s/paid` Updates the tutoring fee, payment date and status to be `1000`, `14-11-2000` and `paid` respectively.
 * `payment 2` Removes the payment information of the 2nd person.
 
 ### Sorting the list of people : `sort`
@@ -231,7 +233,7 @@ _Details coming soon ..._
 | **Clear**   | `clear`                                                                                                                                                                                                                                                 |
 | **Delete**  | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                                                     |
 | **Edit**    | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [cy/CURRENT_YEAR] [cg/CURRENT_GRADE] [eg/EXPECTED_GRADE] [t/TAG]… [t+/TAGS_TO_APPEND]… [t-/TAGS_TO_REMOVE]…`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com t+/CS2040C#1E2C4D`         |
-| **Payment** | `payment INDEX [f/FEE] d/[PAYMENT_DATE]`<br> e.g., `payment 4 f/1000 d/14-11-2000`                                                                                                                                                                      |
+| **Payment** | `payment INDEX [f/FEE] [d/PAYMENT_DATE] [s/PAYMENT_STATUS]`<br> e.g., `payment 1 f/1000 d/14-11-2000 s/paid`                                                                                                                                            |
 | **Find**    | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                                              |
 | **Sort**    | `sort`                                                                                                                                                                                                                                                  |
 | **List**    | `list`                                                                                                                                                                                                                                                  |
