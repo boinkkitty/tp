@@ -4,6 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -110,6 +113,17 @@ public class ModelManager implements Model {
 
         addressBook.setPerson(target, editedPerson);
     }
+
+    @Override
+    public void sortPersonsByName() {
+        List<Person> sortedList = new ArrayList<>(addressBook.getPersonList());
+        sortedList.sort(Comparator.comparing(person -> person.getName().fullName.toLowerCase()));
+        addressBook.setPersons(new ArrayList<>());
+        for (Person p : sortedList) {
+            addressBook.addPerson(p);
+        }
+    }
+
 
     //=========== Filtered Person List Accessors =============================================================
 
