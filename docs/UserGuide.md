@@ -122,6 +122,20 @@ Examples:
 *  `edit 1 t/Maths t/Science t-/Science ` Edits the tags of the 2nd person by clearing all existing tags and adding **only** `Maths`.
 *  `edit 1 t+/friend t+/owesMoney` appends friend and owesMoney to existing tags (without overwriting or removing).
 
+### Bulk removal of tags: `untag`
+
+Removes **all occurrences** of the specified tags from **all student records**.
+
+Format: `untag t/TAG [t/TAG]...`
+
+- Removes all matching tags from all student records.
+- If a tag does not exist in any student record, it will be ignored.
+
+**Examples**:
+- `untag t/Math`  
+  Removes the tag `Math` from all student records.
+- `untag t/Math t/Science`  
+  Removes the tags `Math` and `Science` from all student records.
 
 ### Updating a person's payment information : `payment`
 
@@ -148,6 +162,7 @@ Subsequent additions are inserted at the bottom.
 This command takes no arguments.
 
 Format: `sort`
+
 ### Locating persons by name : `find`
 
 Finds persons whose names contain any of the given keywords.
