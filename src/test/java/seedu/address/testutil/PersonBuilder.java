@@ -38,7 +38,7 @@ public class PersonBuilder {
     private ExpectedGrade expectedGrade;
 
     private Set<Tag> tags;
-    private PaymentInfo paymentInfo;
+    private PaymentInfo.Builder paymentInfoBuilder;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -53,7 +53,7 @@ public class PersonBuilder {
         currentGrade = new CurrentGrade();
         eduLevel = new EduLevel(DEFAULT_EDULEVEL);
         tags = new HashSet<>();
-        paymentInfo = new PaymentInfo();
+        paymentInfoBuilder = new PaymentInfo.Builder();
     }
 
     /**
@@ -69,7 +69,10 @@ public class PersonBuilder {
         expectedGrade = personToCopy.getExpectedGrade();
         eduLevel = personToCopy.getEduLevel();
         tags = new HashSet<>(personToCopy.getTags());
-        paymentInfo = personToCopy.getPaymentInfo();
+        paymentInfoBuilder = new PaymentInfo.Builder()
+                .setPaymentFee(personToCopy.getPaymentInfo().getPaymentFee())
+                .setPaymentDate(personToCopy.getPaymentInfo().getPaymentDate())
+                .setPaymentStatus(personToCopy.getPaymentInfo().getPaymentStatus());
     }
 
     /**
@@ -113,10 +116,10 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code ExpectedGrade} of the {@code Person} that we are building.
+     * Sets the {@code EduLevel} of the {@code Person} that we are building.
      */
-    public PersonBuilder withExpectedGrade(String expectedGrade) {
-        this.expectedGrade = new ExpectedGrade(expectedGrade);
+    public PersonBuilder withEduLevel(String eduLevel) {
+        this.eduLevel = new EduLevel(eduLevel);
         return this;
     }
 
@@ -137,42 +140,34 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code PaymentInfo} of the {@code Person} that we are building, with no initial value.
+     * Sets the {@code ExpectedGrade} of the {@code Person} that we are building.
      */
-    public PersonBuilder withPaymentInfo() {
-        this.paymentInfo = new PaymentInfo();
+    public PersonBuilder withExpectedGrade(String expectedGrade) {
+        this.expectedGrade = new ExpectedGrade(expectedGrade);
         return this;
     }
 
     /**
-     * Sets the {@code PaymentInfo} of the {@code Person} that we are building, containing only the Payment Fee.
+     * Sets the {@code paymentFee} of the {@code Person} that we are building.
      */
-    public PersonBuilder withPaymentInfo(int paymentFee) {
-        this.paymentInfo = new PaymentInfo(paymentFee);
+    public PersonBuilder withPaymentFee(int paymentFee) {
+        this.paymentInfoBuilder.setPaymentFee(paymentFee);
         return this;
     }
 
     /**
-     * Sets the {@code PaymentInfo} of the {@code Person} that we are building, containing only the Payment Date.
+     * Sets the {@code paymentDate} of the {@code Person} that we are building.
      */
-    public PersonBuilder withPaymentInfo(String paymentDate) {
-        this.paymentInfo = new PaymentInfo(paymentDate);
+    public PersonBuilder withPaymentDate(String paymentDate) {
+        this.paymentInfoBuilder.setPaymentDate(paymentDate);
         return this;
     }
 
     /**
-     * Sets the {@code PaymentInfo} of the {@code Person} that we are building, containing Payment Fee & Date.
+     * Sets the {@code paymentStatus} of the {@code Person} that we are building.
      */
-    public PersonBuilder withPaymentInfo(int paymentFee, String paymentDate) {
-        this.paymentInfo = new PaymentInfo(paymentFee, paymentDate);
-        return this;
-    }
-
-    /**
-     * Sets the {@code EduLevel} of the {@code Person} that we are building.
-     */
-    public PersonBuilder withEduLevel(String eduLevel) {
-        this.eduLevel = new EduLevel(eduLevel);
+    public PersonBuilder withPaymentStatus(String paymentStatus) {
+        this.paymentInfoBuilder.setPaymentStatus(paymentStatus);
         return this;
     }
 
@@ -182,7 +177,8 @@ public class PersonBuilder {
 
     public Person build() {
         return new Person(
-                name, phone, email, address, eduLevel, currentYear, currentGrade, expectedGrade, tags, paymentInfo);
+                name, phone, email, address, eduLevel, currentYear, currentGrade, expectedGrade, tags,
+                paymentInfoBuilder.build());
     }
 
 }

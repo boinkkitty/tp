@@ -16,6 +16,7 @@ import seedu.address.model.person.EduLevel;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.ExpectedGrade;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.PaymentInfo;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -25,8 +26,6 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-    public static final String MESSAGE_INVALID_PAYMENT_FEE = "Payment Fee is not an unsigned integer.";
-    public static final String MESSAGE_INVALID_PAYMENT_DATE = "Payment Date is not a valid Date.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -194,12 +193,12 @@ public class ParserUtil {
     /**
      * Parses {@code feeString} into an {@code int} and returns it. Leading and trailing whitespaces will be
      * trimmed.
-     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     * @throws ParseException if the specified fee is invalid (not unsigned integer).
      */
     public static int parseFee(String feeString) throws ParseException {
         String trimmedFee = feeString.trim();
         if (!StringUtil.isUnsignedInteger(trimmedFee)) {
-            throw new ParseException(MESSAGE_INVALID_PAYMENT_FEE);
+            throw new ParseException(PaymentInfo.MESSAGE_CONSTRAINTS_FEE);
         }
         return Integer.parseInt(trimmedFee);
     }
@@ -207,13 +206,26 @@ public class ParserUtil {
     /**
      * Parses {@code dateString} into a valid date and returns it. Leading and trailing whitespaces will be
      * trimmed.
-     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     * @throws ParseException if the specified {@code dateString} is invalid (not "dd-MM-yyyy").
      */
     public static String parseDate(String dateString) throws ParseException {
         String trimmedDate = dateString.trim();
         if (!StringUtil.isValidDate(trimmedDate)) {
-            throw new ParseException(MESSAGE_INVALID_PAYMENT_DATE);
+            throw new ParseException(PaymentInfo.MESSAGE_CONSTRAINTS_DATE);
         }
         return trimmedDate;
+    }
+
+    /**
+     * Parses {@code paymentStatusString} into a valid date and returns it. Leading and trailing whitespaces
+     * will be trimmed.
+     * @throws ParseException if the specified {@code paymentStatusString} is invalid (not "paid" or "waiting").
+     */
+    public static String parsePaymentStatus(String paymentStatusString) throws ParseException {
+        String trimmedStatus = paymentStatusString.trim();
+        if (!StringUtil.isValidPaymentStatus(trimmedStatus)) {
+            throw new ParseException(PaymentInfo.MESSAGE_CONSTRAINTS_STATUS);
+        }
+        return trimmedStatus.substring(0, 1).toUpperCase() + trimmedStatus.substring(1).toLowerCase();
     }
 }
