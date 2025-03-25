@@ -105,4 +105,15 @@ public class StringUtil {
             return false;
         }
     }
+
+    /**
+     * Returns true if {@code s} represents a valid Payment Status
+     * e.g. paid or waiting. <br>
+     * Will return false for any other invalid Payment Status.
+     * @throws NullPointerException if {@code s} is null.
+     */
+    public static boolean isValidPaymentStatus(String s) {
+        requireNonNull(s);
+        return "paid".equalsIgnoreCase(s) || "waiting".equalsIgnoreCase(s);
+    }
 }
