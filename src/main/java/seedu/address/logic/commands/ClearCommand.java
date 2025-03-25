@@ -25,8 +25,8 @@ public class ClearCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes all persons EITHER"
             + " from a start to end index OR"
             + " matching the specified tags. \n"
-            + "Parameters:  [" + PREFIX_INDEX_SEQUENCE + "START...END] OR"
-            + " [" + PREFIX_TAG + "TAG]...\n"
+            + "Parameters:  " + PREFIX_INDEX_SEQUENCE + "START...END OR "
+            + PREFIX_TAG + "TAG" + " [" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_INDEX_SEQUENCE + "1...5"
             + " OR " + COMMAND_WORD + " " + PREFIX_TAG + "friends " + PREFIX_TAG + "colleagues";
 
