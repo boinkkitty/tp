@@ -83,7 +83,8 @@ public class ClearCommandTest {
         nonMatchingTags.add(new Tag("nonexistent"));
 
         ClearCommand clearCommand = new ClearCommand(nonMatchingTags);
-        String expectedMessage = String.format(MESSAGE_SUCCESS, ClearCommand.MESSAGE_NO_PERSONS_FOUND);
+        String expectedMessage = String.format(MESSAGE_SUCCESS,
+                String.format(ClearCommand.MESSAGE_NO_PERSONS_FOUND, nonMatchingTags.toString()));
 
         assertCommandSuccess(clearCommand, model, expectedMessage, model);
     }
