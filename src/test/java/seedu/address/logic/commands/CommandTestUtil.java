@@ -12,6 +12,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX_SEQUENCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_FEE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG_APPEND;
@@ -59,6 +60,7 @@ public class CommandTestUtil {
     public static final String VALID_TAG_FRIEND = "friend";
     public static final int VALID_PAYMENT_FEE = 1000;
     public static final String VALID_PAYMENT_DATE = "13-03-2025";
+    public static final String VALID_PAYMENT_STATUS = "Waiting";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -82,6 +84,7 @@ public class CommandTestUtil {
     public static final String PAYMENT_DATE_DESC = " " + PREFIX_PAYMENT_DATE + VALID_PAYMENT_DATE;
     public static final String INDEX_SEQUENCE_DESC = " " + PREFIX_INDEX_SEQUENCE + INDEX_FIRST_PERSON.getOneBased()
             + "..." + INDEX_THIRD_PERSON.getOneBased();
+    public static final String PAYMENT_STATUS_DESC = " " + PREFIX_PAYMENT_STATUS + VALID_PAYMENT_STATUS;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -96,6 +99,8 @@ public class CommandTestUtil {
     public static final String INVALID_PAYMENT_FEE_DESC = " " + PREFIX_PAYMENT_FEE + -1000;
     // only 'dd-MM-yyyy' is allowed
     public static final String INVALID_PAYMENT_DATE_DESC = " " + PREFIX_PAYMENT_DATE + "2000-11-14";
+    // only 'paid' or 'waiting' is allowed
+    public static final String INVALID_PAYMENT_STATUS_DESC = " " + PREFIX_PAYMENT_STATUS + "OWING";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
