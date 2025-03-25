@@ -33,11 +33,12 @@ public class ClearCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Number of persons removed successfully: %1$s";
     public static final String MESSAGE_SUCCESS_INDEX = "%d. Deleted persons from index %d to %d";
     public static final String MESSAGE_SUCCESS_TAG = "%d. Persons deleted had tags: %s";
-    public static final String MESSAGE_NO_PERSONS_FOUND = "0. No persons found with the provided tags.";
+    public static final String MESSAGE_NO_PERSONS_FOUND = "0. No persons found with the tags: %s.";
     public static final String MESSAGE_INVALID_INDEX_RANGE = "Invalid index range provided. End index must be "
             + "strictly greater than start index";
     public static final String MESSAGE_INVALID_START_INDEX = "Invalid start index provided";
     public static final String MESSAGE_INVALID_END_INDEX = "Invalid end index provided";
+    public static final String MESSAGE_MISSING_TAGS = "Please provide at least one tag to clear";
 
 
     private final Index start;
@@ -107,6 +108,10 @@ public class ClearCommand extends Command {
             throw new IllegalStateException();
         }
 
+        if (tags.isEmpty()) {
+            throw new CommandException(MESSAGE_MISSING_TAGS);
+        }
+
         TagsContainTagPredicate predicate = new TagsContainTagPredicate(tags);
 
         // Filter and delete persons
@@ -118,7 +123,7 @@ public class ClearCommand extends Command {
 
         int numberOfPersonsDeleted = personsToDelete.size();
         if (numberOfPersonsDeleted == 0) {
-            return MESSAGE_NO_PERSONS_FOUND;
+            return String.format(MESSAGE_NO_PERSONS_FOUND, tags.toString());
         }
 
         return String.format(MESSAGE_SUCCESS_TAG,
