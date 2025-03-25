@@ -4,11 +4,16 @@ import java.util.Comparator;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.util.Duration;
+import seedu.address.commons.util.ColorUtil;
 import seedu.address.model.person.PaymentInfo;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -42,17 +47,17 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
-    private Label placeholder1;
+    private VBox details;
     @FXML
-    private Label placeholder2;
+    private Label eduLevel;
     @FXML
-    private Label placeholder3;
+    private Label currentYear;
     @FXML
-    private Label placeholder4;
+    private Label currentGrade;
     @FXML
-    private Label paymentFee;
+    private Label expectedGrade;
     @FXML
-    private Label paymentDate;
+    private Label paymentInfo;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -66,26 +71,108 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
 
-        placeholder1.setText("placeholder text 1");
-        placeholder2.setText("placeholder text 2");
-        placeholder3.setText("placeholder text 3");
-        placeholder4.setText("placeholder text 4");
-        PaymentInfo paymentInfo = person.getPaymentInfo();
-        if (paymentInfo.getPaymentFee() == 0) {
-            paymentFee.setManaged(false);
-            paymentFee.setVisible(false);
+        if (person.getEduLevel().value.equals("")) {
+            hideDetailsLabel(eduLevel);
         } else {
-            paymentFee.setText("Tutoring Fee: $" + paymentInfo.getPaymentFee());
-        }
-        if (paymentInfo.getPaymentDate().isEmpty()) {
-            paymentDate.setManaged(false);
-            paymentDate.setVisible(false);
-        } else {
-            paymentDate.setText("Payment Date: " + paymentInfo.getPaymentDate());
+            eduLevel.setText("Education Level: " + person.getEduLevel().value);
         }
 
+        if (person.getCurrentYear().value.equals("")) {
+            hideDetailsLabel(currentYear);
+        } else {
+            currentYear.setText("Current Year: " + person.getCurrentYear().value);
+        }
+
+        if (person.getCurrentGrade().value.equals("")) {
+            hideDetailsLabel(currentGrade);
+        } else {
+            currentGrade.setText("Current Grade: " + person.getCurrentGrade().value);
+            currentGrade.setStyle("-fx-text-fill: " + person.getCurrentGrade().color);
+        }
+
+        if (person.getExpectedGrade().value.equals("")) {
+            hideDetailsLabel(expectedGrade);
+        } else {
+            expectedGrade.setText("Expected Grade: " + person.getExpectedGrade().value);
+            expectedGrade.setStyle("-fx-text-fill: " + person.getExpectedGrade().color);
+        }
+
+        PaymentInfo paymentInfo = person.getPaymentInfo();
+        updatePaymentInfo(paymentInfo);
+
         person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .sorted(Comparator.comparing(tag -> tag.fullTag))
+                .forEach(tag -> tags.getChildren().add(createTagLabel(tag)));
+    }
+
+    private void hideDetailsLabel(Label label) {
+        label.setManaged(false);
+        label.setVisible(false);
+    }
+
+    /**
+     * A helper function to create a {@code Label} given a {@code Tag}.
+     * @param tag A valid Tag object.
+     * @return The corresponding JavaFX Label object.
+     */
+    private Label createTagLabel(Tag tag) {
+        String[] parts = tag.fullTag.split("#");
+        Label label = new Label(parts[0]);
+        label.maxWidthProperty().bind(tags.widthProperty());
+        label.setOnMouseClicked(event -> label.setWrapText(!label.isWrapText()));
+        if (parts.length == 2 && !parts[1].isEmpty()) {
+            // Determine text and background color if custom color code is found...
+            String hexColor = parts[1];
+            String textColor = ColorUtil.isLightColor(hexColor) ? "black" : "white";
+            label.setStyle("-fx-background-color: #" + hexColor + "; -fx-text-fill: " + textColor + ";");
+            // Create a tooltip showing the hex color
+            Tooltip tooltip = new Tooltip("Color: #" + hexColor);
+            tooltip.setShowDelay(Duration.millis(0)); // No delay before showing
+            Tooltip.install(label, tooltip); // Attach tooltip to the label
+        } else {
+            // Create a tooltip showing the hex color
+            Tooltip tooltip = new Tooltip("Color: #3e7b91");
+            tooltip.setShowDelay(Duration.millis(0)); // No delay before showing
+            Tooltip.install(label, tooltip); // Attach tooltip to the label
+        }
+
+        return label;
+    }
+
+    /**
+     * A helper function to update the text of the Payment Info field given {@code paymentInfo}.
+     * @param paymentInfo A valid paymentInfo object.
+     */
+    private void updatePaymentInfo(PaymentInfo paymentInfo) {
+        boolean hasFee = paymentInfo.getPaymentFee() > 0;
+        boolean hasDate = !paymentInfo.getPaymentDate().isEmpty();
+        boolean hasStatus = !paymentInfo.getPaymentStatus().isEmpty();
+
+        // Build the string dynamically based on what fields are available
+        StringBuilder sb = new StringBuilder("Payment Info: ");
+
+        if (!hasFee && !hasDate && !hasStatus) {
+            hideDetailsLabel(this.paymentInfo);
+        }
+
+        if (hasFee) {
+            sb.append("$").append(paymentInfo.getPaymentFee()).append(" ");
+        }
+        if (hasStatus) {
+            sb.append(paymentInfo.getPaymentStatus()).append(" ");
+        }
+        if (hasDate) {
+            if (hasFee || hasStatus) {
+                sb.append("(Due ").append(paymentInfo.getPaymentDate()).append(")");
+            } else {
+                sb.append("Due ").append(paymentInfo.getPaymentDate());
+            }
+        }
+
+        this.paymentInfo.setText(sb.toString());
+
+        if (!paymentInfo.getPaymentDate().isEmpty() || !paymentInfo.getPaymentStatus().isEmpty()) {
+            this.paymentInfo.setStyle("-fx-text-fill: " + ColorUtil.getPaymentInfoColor(paymentInfo));
+        }
     }
 }

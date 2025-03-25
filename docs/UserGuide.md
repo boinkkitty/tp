@@ -15,7 +15,7 @@ TutorSynch is a **desktop app for managing student contacts and academic details
 1. Ensure you have Java `17` or above installed in your Computer.<br>
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-2. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S2-CS2103-F15-2/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
@@ -52,8 +52,10 @@ TutorSynch is a **desktop app for managing student contacts and academic details
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+* Items with `…` after them can be used multiple times including zero times.<br>
+  e.g. `[t/TAG]…` can be used as ` ` (i.e. 0 times), `t/cs4238`, `t/cs2103 t/GEA1000` etc.
+
+* Any tags can be written as an alphanumeric tag, accompanied by `#` followed by 6 hexadecimal color code. (E.g. `CS2040C#ED9E49`)
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -77,7 +79,7 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [l/EDU_LEVEL] [cy/CURRENT_YEAR] [cg/CURRENT_GRADE] [eg/EXP_GRADE] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
@@ -85,7 +87,7 @@ A person can have any number of tags (including 0)
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 cg/C+ t/cs2040s`
 
 ### Listing all persons : `list`
 
@@ -97,33 +99,55 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [l/EDU_LEVEL] [cy/CURRENT_YEAR] [cg/CURRENT_GRADE] [eg/EXP_GRADE] [t/TAG]… [t+/TAGS_TO_APPEND]… [t-/TAGS_TO_REMOVE]…`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+
+
+#### Tag Editing : `t/`, `t+/`, `t-/`
+* When editing tags, any number of `t/`, `t+/` or `t-/` may be provided, order of execution is as follows:
+1. Tags prefixed with `t/` form the new list of tags (overwriting the old tags), if none are provided, old list of tags is used for the next steps.
+2. Tags prefixed with `t+/` are added to the current list. If the tag already exists, the updated list remains unchanged as tags are unique.
+3. Tags prefixed with `t-/` are removed from the list provided by the last step. If the tag to be removed does not exist, the app silently continues with the rest.
+4. The final tag list is updated to the person.
+
+Examples:
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 2 t-/Maths` Edits the tags of the 2nd person by removing `Maths` from existing list of tags.
+*  `edit 1 t/Maths t/Science t-/Science ` Edits the tags of the 2nd person by clearing all existing tags and adding **only** `Maths`.
+*  `edit 1 t+/friend t+/owesMoney` appends friend and owesMoney to existing tags (without overwriting or removing).
+
 
 ### Updating a person's payment information : `payment`
 
 Updates the payment information of an existing person in the address book.
 
-Format: `payment INDEX [f/FEE] [d/PAYMENT_DATE]`
+Format: `payment INDEX [f/FEE] [d/PAYMENT_DATE] [s/PAYMENT_STATUS]`
 
 * Updates the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* Existing values will be updated to the input values.
+* Provided fields will be updated with the input values. Any missing fields will be removed by default.
 * If none of the optional fields are provided, the specified person's payment information will be removed.
+* `FEE` should be an unsigned integer, and will be removed if entered as `0`.
+* `PAYMENT_DATE` should be in the format `DD-MM-YYYY`.
+* `PAYMENT_STATUS` should be either `Paid` or `Waiting`.
 
 Examples:
-* `payment 1 f/1000 d/14-11-2000` Updates the tutoring fee and payment date to be `1000` and `14-11-2000` respectively.
+* `payment 1 f/1000 d/14-11-2000 s/paid` Updates the tutoring fee, payment date and status to be `1000`, `14-11-2000` and `paid` respectively.
 * `payment 2` Removes the payment information of the 2nd person.
 
+### Sorting the list of people : `sort`
+Sorts the list of people alphabetically based on their name.
+
+Subsequent additions are inserted at the bottom.
+
+This command takes no arguments.
+
+Format: `sort`
 ### Locating persons by name : `find`
 
 Finds persons whose names contain any of the given keywords.
@@ -203,13 +227,15 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                                                      |
-|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Clear**  | `clear`                                                                                                                                                               |
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
-| **Payment**| `payment INDEX [f/FEE] d/[PAYMENT_DATE]`<br> e.g., `payment 4 f/1000 d/14-11-2000`                                                                                    |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
-| **List**   | `list`                                                                                                                                                                |
-| **Help**   | `help`                                                                                                                                                                |
+| Action      | Format, Examples                                                                                                                                                                                                                                        |
+|-------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**     | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [l/ EDUCATION_LEVEL] [cy/CURRENT_YEAR] [cg/CURRENT_GRADE] [eg/EXPECTED_GRADE] [t/TAG]…` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 cg/D t/friend t/colleague` |
+| **Clear**   | `clear`                                                                                                                                                                                                                                                 |
+| **Delete**  | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                                                     |
+| **Edit**    | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [cy/CURRENT_YEAR] [cg/CURRENT_GRADE] [eg/EXPECTED_GRADE] [t/TAG]… [t+/TAGS_TO_APPEND]… [t-/TAGS_TO_REMOVE]…`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com t+/CS2040C#1E2C4D`         |
+| **Payment** | `payment INDEX [f/FEE] [d/PAYMENT_DATE] [s/PAYMENT_STATUS]`<br> e.g., `payment 1 f/1000 d/14-11-2000 s/paid`                                                                                                                                            |
+| **Find**    | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                                              |
+| **Sort**    | `sort`                                                                                                                                                                                                                                                  |
+| **List**    | `list`                                                                                                                                                                                                                                                  |
+| **Help**    | `help`                                                                                                                                                                                                                                                  |
+

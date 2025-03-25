@@ -1,33 +1,32 @@
 ---
 layout: page
-title: John Doe's Project Portfolio Page
+title: Daryl's Project Portfolio Page
 ---
 
-## Project: TutorSynch
+### Project: TutorSynch
 
-Below are my project contributions:
+Given below are my contributions to the project.
 
 ***
 ### Codebase:
 * Feature 1: Added `Current Grade` field to student's information
-  * Allows tutor to store the current grade of the student and keep track of student's progress
-  * Tested functionality of feature with empty inputs and duplicate `cg/` fields
-***
-### Documentation:
-* User Guide:
-  * Refurbished details of adding current grade field in `add` command
-* Developer Guide:
-  * Created additional Non-Functional Requirements for project
-* README:
-  * Refurbished design of README to incorporate relevant features of TutorSynch
+    * Allows tutor to store the expected grade of the student and keep track of student's progress
+    * Tested functionality of feature with empty inputs and duplicate `eg/` fields
+
+* **Documentation**:
+    * User Guide:
+      * Added fields to command format and examples for 'add' and 'edit' command
+    * Developer Guide:
+      * Added additional Non-Functional Requirements for the project
+
+* **Community**:
+    * PRs reviewed (with non-trivial review comments): [\#61](https://github.com/AY2425S2-CS2103-F15-2/tp/pull/61)
+    
+* **Testing**
+  * Performed Smoke Testing for V1.3 [/#68](https://github.com/AY2425S2-CS2103-F15-2/tp/issues/68)
+    * Rectified bugs spotted during Smoke Testing [/#80](https://github.com/AY2425S2-CS2103-F15-2/tp/issues/80)
 
 <!--
-### Project: AddressBook Level 3
-
-AddressBook - Level 3 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
-
-Given below are my contributions to the project.
-
 * **New Feature**: Added the ability to undo/redo previous commands.
   * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
   * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.

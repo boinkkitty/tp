@@ -12,7 +12,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.CurrentGrade;
+import seedu.address.model.person.CurrentYear;
+import seedu.address.model.person.EduLevel;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.ExpectedGrade;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.PaymentInfo;
 import seedu.address.model.person.Person;
@@ -30,9 +34,14 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
+    private final String expectedGrade;
+    private final String currentGrade;
+    private final String currentYear;
+    private final String eduLevel;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final int paymentFee;
     private final String paymentDate;
+    private final String paymentStatus;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -40,17 +49,24 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
+            @JsonProperty("eduLevel") String eduLevel, @JsonProperty("currentYear") String currentYear,
+            @JsonProperty("currentGrade") String currentGrade, @JsonProperty("expectedGrade") String expectedGrade,
             @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("paymentFee") int paymentFee,
-            @JsonProperty("paymentDate") String paymentDate) {
+            @JsonProperty("paymentDate") String paymentDate, @JsonProperty("paymentStatus") String paymentStatus) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.expectedGrade = expectedGrade;
+        this.currentYear = currentYear;
+        this.currentGrade = currentGrade;
+        this.eduLevel = eduLevel;
         if (tags != null) {
             this.tags.addAll(tags);
         }
         this.paymentFee = paymentFee;
         this.paymentDate = Objects.requireNonNullElse(paymentDate, "");
+        this.paymentStatus = Objects.requireNonNullElse(paymentStatus, "");
     }
 
     /**
@@ -61,11 +77,16 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        expectedGrade = source.getExpectedGrade().value;
+        currentYear = source.getCurrentYear().value;
+        currentGrade = source.getCurrentGrade().value;
+        eduLevel = source.getEduLevel().value; // getEduLevel() returns the value
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
         paymentFee = source.getPaymentInfo().getPaymentFee();
         paymentDate = source.getPaymentInfo().getPaymentDate();
+        paymentStatus = source.getPaymentInfo().getPaymentStatus();
     }
 
     /**
@@ -111,6 +132,43 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        if (eduLevel == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    EduLevel.class.getSimpleName()));
+        }
+        if (!EduLevel.isValidEduLevel(eduLevel)) {
+            throw new IllegalValueException(EduLevel.MESSAGE_CONSTRAINTS);
+        }
+        final EduLevel modelEduLevel = new EduLevel(eduLevel);
+
+        final CurrentYear modelCurrentYear;
+        if (currentYear == null) {
+            modelCurrentYear = new CurrentYear(); // If currentYear field is missing, currentYear will be set to "".
+        } else {
+            if (!CurrentYear.isValidCurrentYear(currentYear)) {
+                throw new IllegalValueException(CurrentYear.MESSAGE_CONSTRAINTS);
+            }
+            modelCurrentYear = new CurrentYear(currentYear);
+        }
+
+        if (currentGrade == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    CurrentGrade.class.getSimpleName()));
+        }
+        if (!CurrentGrade.isValidCurrentGrade(currentGrade)) {
+            throw new IllegalValueException(CurrentGrade.MESSAGE_CONSTRAINTS);
+        }
+        final CurrentGrade modelCurrentGrade = new CurrentGrade(currentGrade);
+
+        if (expectedGrade == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    ExpectedGrade.class.getSimpleName()));
+        }
+        if (!ExpectedGrade.isValidExpectedGrade(expectedGrade)) {
+            throw new IllegalValueException(ExpectedGrade.MESSAGE_CONSTRAINTS);
+        }
+        final ExpectedGrade modelExpectedGrade = new ExpectedGrade(expectedGrade);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
         // IF paymentFee field is missing, it will be set as 0 by default. Therefore, no checks needed.
@@ -123,9 +181,17 @@ class JsonAdaptedPerson {
         if (!PaymentInfo.isValidDate(paymentDate)) {
             throw new IllegalValueException(PaymentInfo.MESSAGE_CONSTRAINTS_DATE);
         }
-        final PaymentInfo paymentInfo = new PaymentInfo(paymentFee, paymentDate);
+        if (paymentStatus == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "[paymentStatus]"));
+        }
+        if (!PaymentInfo.isValidStatus(paymentStatus)) {
+            throw new IllegalValueException(PaymentInfo.MESSAGE_CONSTRAINTS_STATUS);
+        }
+        final PaymentInfo paymentInfo = new PaymentInfo.Builder().setPaymentFee(paymentFee)
+                .setPaymentDate(paymentDate).setPaymentStatus(paymentStatus).build();
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, paymentInfo);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelEduLevel, modelCurrentYear,
+                modelCurrentGrade, modelExpectedGrade, modelTags, paymentInfo);
     }
 
 }

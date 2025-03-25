@@ -18,6 +18,7 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_NO_PERSON_TO_SORT = "The list is empty!";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -43,8 +44,17 @@ public class Messages {
                 .append(person.getEmail())
                 .append("; Address: ")
                 .append(person.getAddress())
+                .append("; EduLevel: ")
+                .append(person.getEduLevel())
+                .append("; Current Year: ")
+                .append(person.getCurrentYear())
+                .append("; Current Grade: ")
+                .append(person.getCurrentGrade())
+                .append("; Expected Grade: ")
+                .append(person.getExpectedGrade())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
+
         return builder.toString();
     }
 

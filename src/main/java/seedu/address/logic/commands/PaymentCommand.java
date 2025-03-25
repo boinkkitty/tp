@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_FEE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_STATUS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
@@ -24,9 +25,11 @@ public class PaymentCommand extends Command {
             + "by the index number used in the person listing. "
             + "Existing payment  will be overwritten by the input.\n"
             + "Parameters: INDEX (must be a positive integer) ["
-            + PREFIX_PAYMENT_FEE + "FEE] [" + PREFIX_PAYMENT_DATE + "PAYMENT_DATE]\n"
+            + PREFIX_PAYMENT_FEE + "FEE] [" + PREFIX_PAYMENT_DATE
+            + "PAYMENT_DATE] [" + PREFIX_PAYMENT_STATUS + "PAYMENT_STATUS]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PAYMENT_FEE + "900 " + PREFIX_PAYMENT_DATE + "13-03-2025";
+            + PREFIX_PAYMENT_FEE + "900 " + PREFIX_PAYMENT_DATE + "13-03-2025 "
+            + PREFIX_PAYMENT_STATUS + "waiting";
     public static final String MESSAGE_ADD_PAYMENT_SUCCESS = "Added payment information to Person: %1$s";
     public static final String MESSAGE_UPDATE_PAYMENT_SUCCESS = "Updated payment information for Person: %1$s";
     public static final String MESSAGE_DELETE_PAYMENT_SUCCESS = "Removed payment information from Person: %1$s";
@@ -42,11 +45,15 @@ public class PaymentCommand extends Command {
      * @param paymentFee of the person to be updated to
      * @param paymentDate of the person to be updated to
      */
-    public PaymentCommand(Index index, int paymentFee, String paymentDate) {
-        requireAllNonNull(index, paymentFee, paymentDate);
+    public PaymentCommand(Index index, int paymentFee, String paymentDate, String paymentStatus) {
+        requireAllNonNull(index, paymentFee, paymentDate, paymentStatus);
 
         this.index = index;
-        this.paymentInfo = new PaymentInfo(paymentFee, paymentDate);
+        this.paymentInfo = new PaymentInfo.Builder()
+                .setPaymentFee(paymentFee)
+                .setPaymentDate(paymentDate)
+                .setPaymentStatus(paymentStatus)
+                .build();
     }
 
     @Override
@@ -59,7 +66,8 @@ public class PaymentCommand extends Command {
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), personToEdit.getTags(), paymentInfo);
+                personToEdit.getAddress(), personToEdit.getEduLevel(), personToEdit.getCurrentYear(),
+                personToEdit.getCurrentGrade(), personToEdit.getExpectedGrade(), personToEdit.getTags(), paymentInfo);
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -76,9 +84,11 @@ public class PaymentCommand extends Command {
         PaymentInfo newPaymentInfo = editedPerson.getPaymentInfo();
         if (originalPaymentInfo.equals(newPaymentInfo)) {
             return String.format(MESSAGE_SAME_PAYMENT_SUCCESS, editedPerson);
-        } else if (originalPaymentInfo.getPaymentFee() == 0 && originalPaymentInfo.getPaymentDate().isEmpty()) {
+        } else if (originalPaymentInfo.getPaymentFee() == 0 && originalPaymentInfo.getPaymentDate().isEmpty()
+                && originalPaymentInfo.getPaymentStatus().isEmpty()) {
             return String.format(MESSAGE_ADD_PAYMENT_SUCCESS, editedPerson);
-        } else if (newPaymentInfo.getPaymentFee() == 0 && newPaymentInfo.getPaymentDate().isEmpty()) {
+        } else if (newPaymentInfo.getPaymentFee() == 0 && newPaymentInfo.getPaymentDate().isEmpty()
+                && newPaymentInfo.getPaymentStatus().isEmpty()) {
             return String.format(MESSAGE_DELETE_PAYMENT_SUCCESS, editedPerson);
         } else {
             return String.format(MESSAGE_UPDATE_PAYMENT_SUCCESS, editedPerson);

@@ -6,7 +6,11 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.CurrentGrade;
+import seedu.address.model.person.CurrentYear;
+import seedu.address.model.person.EduLevel;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.ExpectedGrade;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -36,6 +40,9 @@ public class EditPersonDescriptorBuilder {
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
+        descriptor.setCurrentYear(person.getCurrentYear());
+        descriptor.setCurrentGrade(person.getCurrentGrade());
+        descriptor.setExpectedGrade(person.getExpectedGrade());
         descriptor.setTags(person.getTags());
     }
 
@@ -72,12 +79,64 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
+     * Sets the {@code ExpectedGrade} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withExpectedGrade(String expectedGrade) {
+        descriptor.setExpectedGrade(new ExpectedGrade(expectedGrade));
+        return this;
+    }
+
+    /**
+     * Sets the {@code EduLevel} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withEduLevel(String eduLevel) {
+        descriptor.setEduLevel(new EduLevel(eduLevel));
+        return this;
+    }
+
+    /**
+     * Sets the {@code CurrentYear} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withCurrentYear(String currentYear) {
+        descriptor.setCurrentYear(new CurrentYear(currentYear));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Current Grade} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withCurrentGrade(String currentGrade) {
+        descriptor.setCurrentGrade(new CurrentGrade(currentGrade));
+        return this;
+    }
+
+    /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
      * that we are building.
      */
     public EditPersonDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
+        return this;
+    }
+
+    /**
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
+     * that we are building.
+     */
+    public EditPersonDescriptorBuilder withTagsToRemove(String... tags) {
+        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
+        descriptor.setTagsToRemove(tagSet);
+        return this;
+    }
+
+    /**
+     * Parses the {@code tags} into a {@code Set<Tag>} and appends it in the {@code EditPersonDescriptor}
+     * that we are building.
+     */
+    public EditPersonDescriptorBuilder withTagsToAppend(String... tags) {
+        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
+        descriptor.setTagsToAppend(tagSet);
         return this;
     }
 

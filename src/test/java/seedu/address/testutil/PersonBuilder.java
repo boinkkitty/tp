@@ -4,7 +4,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
+import seedu.address.model.person.CurrentGrade;
+import seedu.address.model.person.CurrentYear;
+import seedu.address.model.person.EduLevel;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.ExpectedGrade;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.PaymentInfo;
 import seedu.address.model.person.Person;
@@ -21,13 +25,20 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_EXP_GRADE = "A";
+    public static final String DEFAULT_EDULEVEL = "Bachelor";
 
     private Name name;
     private Phone phone;
     private Email email;
+    private EduLevel eduLevel;
     private Address address;
+    private CurrentYear currentYear;
+    private CurrentGrade currentGrade;
+    private ExpectedGrade expectedGrade;
+
     private Set<Tag> tags;
-    private PaymentInfo paymentInfo;
+    private PaymentInfo.Builder paymentInfoBuilder;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -37,8 +48,12 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        expectedGrade = new ExpectedGrade(DEFAULT_EXP_GRADE);
+        currentYear = new CurrentYear();
+        currentGrade = new CurrentGrade();
+        eduLevel = new EduLevel(DEFAULT_EDULEVEL);
         tags = new HashSet<>();
-        paymentInfo = new PaymentInfo();
+        paymentInfoBuilder = new PaymentInfo.Builder();
     }
 
     /**
@@ -49,8 +64,15 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
+        currentYear = personToCopy.getCurrentYear();
+        currentGrade = personToCopy.getCurrentGrade();
+        expectedGrade = personToCopy.getExpectedGrade();
+        eduLevel = personToCopy.getEduLevel();
         tags = new HashSet<>(personToCopy.getTags());
-        paymentInfo = personToCopy.getPaymentInfo();
+        paymentInfoBuilder = new PaymentInfo.Builder()
+                .setPaymentFee(personToCopy.getPaymentInfo().getPaymentFee())
+                .setPaymentDate(personToCopy.getPaymentInfo().getPaymentDate())
+                .setPaymentStatus(personToCopy.getPaymentInfo().getPaymentStatus());
     }
 
     /**
@@ -94,39 +116,69 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code PaymentInfo} of the {@code Person} that we are building, with no initial value.
+     * Sets the {@code EduLevel} of the {@code Person} that we are building.
      */
-    public PersonBuilder withPaymentInfo() {
-        this.paymentInfo = new PaymentInfo();
+    public PersonBuilder withEduLevel(String eduLevel) {
+        this.eduLevel = new EduLevel(eduLevel);
         return this;
     }
 
     /**
-     * Sets the {@code PaymentInfo} of the {@code Person} that we are building, containing only the Payment Fee.
+     * Sets the {@code CurrentYear} of the {@code Person} that we are building.
      */
-    public PersonBuilder withPaymentInfo(int paymentFee) {
-        this.paymentInfo = new PaymentInfo(paymentFee);
+    public PersonBuilder withCurrentYear(String currentYear) {
+        this.currentYear = new CurrentYear(currentYear);
         return this;
     }
 
     /**
-     * Sets the {@code PaymentInfo} of the {@code Person} that we are building, containing only the Payment Date.
+     * Sets the {@code Email} of the {@code Person} that we are building.
      */
-    public PersonBuilder withPaymentInfo(String paymentDate) {
-        this.paymentInfo = new PaymentInfo(paymentDate);
+    public PersonBuilder withCurrentGrade(String currentGrade) {
+        this.currentGrade = new CurrentGrade(currentGrade);
         return this;
     }
 
     /**
-     * Sets the {@code PaymentInfo} of the {@code Person} that we are building, containing Payment Fee & Date.
+     * Sets the {@code ExpectedGrade} of the {@code Person} that we are building.
      */
-    public PersonBuilder withPaymentInfo(int paymentFee, String paymentDate) {
-        this.paymentInfo = new PaymentInfo(paymentFee, paymentDate);
+    public PersonBuilder withExpectedGrade(String expectedGrade) {
+        this.expectedGrade = new ExpectedGrade(expectedGrade);
         return this;
     }
+
+    /**
+     * Sets the {@code paymentFee} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withPaymentFee(int paymentFee) {
+        this.paymentInfoBuilder.setPaymentFee(paymentFee);
+        return this;
+    }
+
+    /**
+     * Sets the {@code paymentDate} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withPaymentDate(String paymentDate) {
+        this.paymentInfoBuilder.setPaymentDate(paymentDate);
+        return this;
+    }
+
+    /**
+     * Sets the {@code paymentStatus} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withPaymentStatus(String paymentStatus) {
+        this.paymentInfoBuilder.setPaymentStatus(paymentStatus);
+        return this;
+    }
+
+    /**
+     * Builds {@code Person} object using internal fields.
+     */
 
     public Person build() {
-        return new Person(name, phone, email, address, tags, paymentInfo);
+        return new Person(
+                name, phone, email, address, eduLevel, currentYear, currentGrade, expectedGrade, tags,
+                paymentInfoBuilder.build());
     }
 
 }
