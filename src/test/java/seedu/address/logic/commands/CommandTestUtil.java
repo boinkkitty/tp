@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CURRENT_YEAR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EDULEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXP_GRADE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX_SEQUENCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_FEE;
@@ -16,6 +17,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG_APPEND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG_REMOVE;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -77,6 +80,8 @@ public class CommandTestUtil {
     public static final String TAG_DESC_DONOR_TO_REMOVE = " " + PREFIX_TAG_REMOVE + VALID_TAG_DONOR;
     public static final String PAYMENT_FEE_DESC = " " + PREFIX_PAYMENT_FEE + VALID_PAYMENT_FEE;
     public static final String PAYMENT_DATE_DESC = " " + PREFIX_PAYMENT_DATE + VALID_PAYMENT_DATE;
+    public static final String INDEX_SEQUENCE_DESC = " " + PREFIX_INDEX_SEQUENCE + INDEX_FIRST_PERSON.getOneBased()
+            + "..." + INDEX_THIRD_PERSON.getOneBased();
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones

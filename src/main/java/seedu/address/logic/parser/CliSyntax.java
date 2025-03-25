@@ -20,4 +20,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_PAYMENT_FEE = new Prefix("f/");
     public static final Prefix PREFIX_PAYMENT_DATE = new Prefix("d/");
     public static final Prefix PREFIX_EDULEVEL = new Prefix("l/");
+    public static final Prefix PREFIX_INDEX_SEQUENCE = new Prefix("i/");
 }
