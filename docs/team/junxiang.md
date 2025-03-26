@@ -12,12 +12,20 @@ Below are my project contributions:
 * Feature 1: Added `Current Grade` field to student's information
   * Allows tutor to store the current grade of the student and keep track of student's progress
   * Tested functionality of feature with empty inputs and duplicate `cg/` fields
+* Feature 2: Added Colour Coded Visuals to `Current Grade` field in student's information
+  * Allows tutor to differentiate grade levels to see how student is progressing
+* Feature 3: Added Light Theme to Application's GUI
+  * Allows tutor to customize and change themes if certain texts are hard to read
+  * Tested visibility of different text colours in the different themes to ensure readability
 ***
 ### Documentation:
 * User Guide:
-  * Refurbished details of adding current grade field in `add` command
+  * Refurbished details of adding `Current Grade` field in `add` command
+  * Added details regarding `Current Grade` field
+  * Added details regarding switching of themes feature
 * Developer Guide:
   * Created additional Non-Functional Requirements for project
+  *
 * README:
   * Refurbished design of README to incorporate relevant features of TutorSynch
 
