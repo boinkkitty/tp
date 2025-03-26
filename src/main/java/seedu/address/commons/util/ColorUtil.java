@@ -38,17 +38,17 @@ public class ColorUtil {
     public static String getGradeHexColor(String grade) {
         switch (grade) {
         case "A":
-            return "#6DF162";
+            return "#4CAF50";
         case "B":
-            return "#D2F088";
+            return "#6CAA00";
         case "C":
-            return "#E1E888";
+            return "#BEB005";
         case "D":
-            return "#E8D588";
+            return "#F57C00";
         case "E":
-            return "#EE9C59";
+            return "#FF7043";
         case "F":
-            return "#EC736E";
+            return "#FF5252";
         default:
             return "#FFFFFF";
         }
