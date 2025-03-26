@@ -32,7 +32,7 @@ TutorSynch is a **desktop app for managing student contacts and academic details
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
-   * `clear` : Deletes all contacts.
+   * `purge` : Deletes all contacts.
 
    * `exit` : Exits the app.
 
@@ -50,7 +50,7 @@ TutorSynch is a **desktop app for managing student contacts and academic details
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…` after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…` can be used as ` ` (i.e. 0 times), `t/cs4238`, `t/cs2103 t/GEA1000` etc.
@@ -60,7 +60,7 @@ TutorSynch is a **desktop app for managing student contacts and academic details
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `purge`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -68,7 +68,7 @@ TutorSynch is a **desktop app for managing student contacts and academic details
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -154,7 +154,7 @@ Finds persons whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* The search is case-insensitive. e.g. `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
@@ -180,11 +180,31 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-### Clearing all entries : `clear`
+### Deleting multiple persons : `clear`
 
-Clears all entries from the address book.
+Deletes multiple persons:
+* in sequence from a starting to ending index **OR**
+* based on given tags (person is deleted if they have at least one of the provided tags).
 
-Format: `clear`
+Format: `clear i/START_INDEX...END_INDEX` OR `clear t/TAG [t/TAG]...`
+* Index refers to the index number shown in the displayed person list.
+* Indices must be **positive integers** 1, 2, 3, ...
+* Starting index must be **strictly smaller** than ending index.
+* Tags provided must be valid tags (color code not necessary) in the format prescribed above.
+* At least one tag must be provided.
+* Each person in the address book is checked for the tags provided.
+* If the person has at least one tag that matches, they will be deleted.
+* **IMPORTANT**: using both types of prefixes together will yield an error.
+
+Examples:
+* `list` followed by `clear i/2...5` will delete persons at indices 2, 3, 4 and 5 for a total of four deletions.
+* `clear t/friends t/enemies` will delete persons who have either the `friends` tag or `enemeies` tag.
+
+### Purging all entries : `purge`
+
+Purges all entries from the address book.
+
+Format: `purge`
 
 ### Exiting the program : `exit`
 
@@ -202,7 +222,7 @@ TutorSynch data are saved automatically as a JSON file `[JAR file location]/data
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, TutorSynch will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the TutorSynch to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+Furthermore, certain edits can cause the TutorSynch to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
@@ -230,8 +250,9 @@ _Details coming soon ..._
 | Action      | Format, Examples                                                                                                                                                                                                                                        |
 |-------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**     | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [l/ EDUCATION_LEVEL] [cy/CURRENT_YEAR] [cg/CURRENT_GRADE] [eg/EXPECTED_GRADE] [t/TAG]…` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 cg/D t/friend t/colleague` |
-| **Clear**   | `clear`                                                                                                                                                                                                                                                 |
+| **Purge**   | `purge`                                                                                                                                                                                                                                                 |
 | **Delete**  | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                                                     |
+| **Clear**   | `clear i/START_INDEX...END_INDEX` OR `clear t/TAG [t/TAG]`                                                                                                                                                                                              |
 | **Edit**    | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [cy/CURRENT_YEAR] [cg/CURRENT_GRADE] [eg/EXPECTED_GRADE] [t/TAG]… [t+/TAGS_TO_APPEND]… [t-/TAGS_TO_REMOVE]…`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com t+/CS2040C#1E2C4D`         |
 | **Payment** | `payment INDEX [f/FEE] [d/PAYMENT_DATE] [s/PAYMENT_STATUS]`<br> e.g., `payment 1 f/1000 d/14-11-2000 s/paid`                                                                                                                                            |
 | **Find**    | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                                              |
