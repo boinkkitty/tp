@@ -168,11 +168,11 @@ public class ParserUtil {
     public static ExpectedGrade parseExpectedGrade(String expectedGrade) throws ParseException {
         requireNonNull(expectedGrade);
         String trimmedExpectedGrade = expectedGrade.trim();
-        String upperCaseCurrentGrade = trimmedExpectedGrade.toUpperCase();
-        if (!ExpectedGrade.isValidExpectedGrade(upperCaseCurrentGrade)) {
+        String upperCaseExpectedGrade = trimmedExpectedGrade.toUpperCase();
+        if (!ExpectedGrade.isValidExpectedGrade(upperCaseExpectedGrade)) {
             throw new ParseException(ExpectedGrade.MESSAGE_CONSTRAINTS);
         }
-        return new ExpectedGrade(upperCaseCurrentGrade);
+        return new ExpectedGrade(upperCaseExpectedGrade);
     }
 
     /**
