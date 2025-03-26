@@ -37,4 +37,19 @@ public class UntagCommandParserTest {
         Set<Tag> tagsToRemove = Set.of(new Tag("CS2040"));
         assertParseSuccess(parser, " t/CS2040 t/CS2040", new UntagCommand(tagsToRemove));
     }
+
+    @Test
+    public void parse_nonEmptyPreamble_failure() {
+        // Non-empty preamble with valid tag
+        assertParseFailure(parser, "invalidPreamble t/CS2040",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, UntagCommand.MESSAGE_USAGE));
+
+        // Non-empty preamble with no tags
+        assertParseFailure(parser, "invalidPreamble",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, UntagCommand.MESSAGE_USAGE));
+
+        // Empty preamble but no tags provided
+        assertParseFailure(parser, "",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, UntagCommand.MESSAGE_USAGE));
+    }
 }

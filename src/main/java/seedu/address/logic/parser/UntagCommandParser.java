@@ -25,7 +25,8 @@ public class UntagCommandParser implements Parser<UntagCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TAG);
 
-        if (!argMultimap.getValue(PREFIX_TAG).isPresent()) {
+        // Check if the preamble is not empty or no tags are provided
+        if (!argMultimap.getPreamble().isEmpty() || !argMultimap.getValue(PREFIX_TAG).isPresent()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UntagCommand.MESSAGE_USAGE));
         }
 
