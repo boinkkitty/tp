@@ -173,7 +173,7 @@ public class PaymentCommandTest {
         assertFalse(standardCommand.equals(null));
 
         // different types -> return false
-        assertFalse(standardCommand.equals(new ClearCommand()));
+        assertFalse(standardCommand.equals(new PurgeCommand()));
 
         // different index -> return false
         assertFalse(standardCommand.equals(
