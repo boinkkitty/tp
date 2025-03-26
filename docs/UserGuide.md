@@ -122,6 +122,20 @@ Examples:
 *  `edit 1 t/Maths t/Science t-/Science ` Edits the tags of the 2nd person by clearing all existing tags and adding **only** `Maths`.
 *  `edit 1 t+/friend t+/owesMoney` appends friend and owesMoney to existing tags (without overwriting or removing).
 
+### Bulk removal of tags: `untag`
+
+Removes **all occurrences** of the specified tags from **all student records**.
+
+Format: `untag t/TAG [t/TAG]...`
+
+- Removes all matching tags from all student records.
+- If a tag does not exist in any student record, it will be ignored.
+
+**Examples**:
+- `untag t/Math`  
+  Removes the tag `Math` from all student records.
+- `untag t/Math t/Science`  
+  Removes the tags `Math` and `Science` from all student records.
 
 ### Updating a person's payment information : `payment`
 
@@ -148,6 +162,7 @@ Subsequent additions are inserted at the bottom.
 This command takes no arguments.
 
 Format: `sort`
+
 ### Locating persons by name : `find`
 
 Finds persons whose names contain any of the given keywords.
@@ -254,6 +269,7 @@ _Details coming soon ..._
 | **Delete**  | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                                                     |
 | **Clear**   | `clear i/START_INDEX...END_INDEX` OR `clear t/TAG [t/TAG]`                                                                                                                                                                                              |
 | **Edit**    | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [cy/CURRENT_YEAR] [cg/CURRENT_GRADE] [eg/EXPECTED_GRADE] [t/TAG]… [t+/TAGS_TO_APPEND]… [t-/TAGS_TO_REMOVE]…`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com t+/CS2040C#1E2C4D`         |
+| **Untag**   | `untag t/TAG [t/TAG]...`<br> e.g., `untag t/Math t/Science`                                                                                                                                                                                             |
 | **Payment** | `payment INDEX [f/FEE] [d/PAYMENT_DATE] [s/PAYMENT_STATUS]`<br> e.g., `payment 1 f/1000 d/14-11-2000 s/paid`                                                                                                                                            |
 | **Find**    | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                                              |
 | **Sort**    | `sort`                                                                                                                                                                                                                                                  |
