@@ -95,7 +95,11 @@ public class ClearCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_INDEX_RANGE);
         }
 
-        List<Person> subListToDelete = lastShownList.subList(start.getZeroBased(), end.getZeroBased() + 1).stream().toList();
+        List<Person> subListToDelete = lastShownList
+                .subList(start.getZeroBased(), end.getZeroBased() + 1)
+                .stream()
+                .toList();
+
         subListToDelete.forEach(model::deletePerson);
 
         int numberOfPersonsDeleted = end.getZeroBased() - start.getZeroBased() + 1;
