@@ -32,7 +32,7 @@ public class ClearCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Number of persons removed successfully: %1$s";
     public static final String MESSAGE_SUCCESS_INDEX = "%d. Deleted persons from index %d to %d";
-    public static final String MESSAGE_SUCCESS_TAG = "%d. Persons deleted had tags: %s";
+    public static final String MESSAGE_SUCCESS_TAG = "%d. Person(s) deleted had at least one of these tag(s): %s";
     public static final String MESSAGE_NO_PERSONS_FOUND = "0. No persons found with the tags: %s.";
     public static final String MESSAGE_INVALID_INDEX_RANGE = "Invalid index range provided. End index must be "
             + "strictly greater than start index";
@@ -95,7 +95,7 @@ public class ClearCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_INDEX_RANGE);
         }
 
-        List<Person> subListToDelete = lastShownList.subList(start.getZeroBased(), end.getZeroBased() + 1);
+        List<Person> subListToDelete = lastShownList.subList(start.getZeroBased(), end.getZeroBased() + 1).stream().toList();
         subListToDelete.forEach(model::deletePerson);
 
         int numberOfPersonsDeleted = end.getZeroBased() - start.getZeroBased() + 1;
