@@ -60,6 +60,8 @@ TutorSynch is a **desktop app for managing student contacts and academic details
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
+* Only use the prefixes explicitly defined for a given command. Using unsupported prefixes—such as those from other commands—may result in them being interpreted as plaintext (i.e. `f/1000` is not a valid prefix for the `add` command and will not be parsed correctly).
+
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `purge`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
@@ -146,7 +148,7 @@ Format: `payment INDEX [f/FEE] [d/PAYMENT_DATE] [s/PAYMENT_STATUS]`
 * Updates the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * Provided fields will be updated with the input values. Any missing fields will be removed by default.
 * If none of the optional fields are provided, the specified person's payment information will be removed.
-* `FEE` should be an unsigned integer, and will be removed if entered as `0`.
+* `FEE` should be an unsigned integer (positive, no decimals, and less than or equal to $2,147,483,647), and will be removed if entered as `0`.
 * `PAYMENT_DATE` should be in the format `DD-MM-YYYY`.
 * `PAYMENT_STATUS` should be either `Paid` or `Waiting`.
 
