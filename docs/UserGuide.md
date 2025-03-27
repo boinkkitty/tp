@@ -146,7 +146,7 @@ Format: `payment INDEX [f/FEE] [d/PAYMENT_DATE] [s/PAYMENT_STATUS]`
 * Updates the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * Provided fields will be updated with the input values. Any missing fields will be removed by default.
 * If none of the optional fields are provided, the specified person's payment information will be removed.
-* `FEE` should be an unsigned integer, and will be removed if entered as `0`.
+* `FEE` should be an unsigned integer (positive, no decimals, and less than or equal to $2,147,483,647), and will be removed if entered as `0`.
 * `PAYMENT_DATE` should be in the format `DD-MM-YYYY`.
 * `PAYMENT_STATUS` should be either `Paid` or `Waiting`.
 
