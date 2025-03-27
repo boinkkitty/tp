@@ -15,7 +15,7 @@ Below are my project contributions:
 * Feature 2: Added Colour Coded Visuals to `Current Grade` field in student's information
   * Allows tutor to differentiate grade levels to see how student is progressing
 * Feature 3: Added Light Theme to Application's GUI
-  * Allows tutor to customize and change themes if certain texts are hard to read
+  * Allows tutor to customize and change themes if certain texts are hard to read 
   * Tested visibility of different text colours in the different themes to ensure readability
 ***
 ### Documentation:
@@ -25,7 +25,7 @@ Below are my project contributions:
   * Added details regarding switching of themes feature
 * Developer Guide:
   * Created additional Non-Functional Requirements for project
-  *
+  * 
 * README:
   * Refurbished design of README to incorporate relevant features of TutorSynch
 

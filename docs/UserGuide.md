@@ -181,6 +181,19 @@ Examples:
 * `find lee yu` returns `Benny Lee`, `Bernice Yu`<br>
   ![result for 'find lee yu'](images/findLeeYuResult.png)
 
+### Filter list of persons : `filter`
+
+Filters list of persons who match all filter conditions.
+
+Format: `filter [l/EDU_LEVEL] [cg/CURRENT_GRADE] [eg/EXP_GRADE] [t/TAG]…`
+
+* Filters list to persons who fulfill all filter conditions.
+* At least one of the optional fields must be provided.
+* Empty fields are accepted
+  * If `[l/EDU_LEVEL] [cg/CURRENT_GRADE] [eg/EXP_GRADE]` are empty e.g. `l/ cg/ eg/`,
+    filter will show persons without values in respective fields stated.
+  * `[t/TAG]…` an empty tag field will not add to filter condition.
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
@@ -280,6 +293,7 @@ _Details coming soon ..._
 | **Payment**      | `payment INDEX [f/FEE] [d/PAYMENT_DATE] [s/PAYMENT_STATUS]`<br> e.g., `payment 1 f/1000 d/14-11-2000 s/paid`                                                                                                                                            |
 | **Find**         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                                              |
 | **Sort**         | `sort`                                                                                                                                                                                                                                                  |
+| **Filter**       | `filter [l/EDU_LEVEL] [cg/CURRENT_GRADE] [eg/EXP_GRADE] [t/TAG]…`                                                                                                                                                                                       |
 | **List**         | `list`                                                                                                                                                                                                                                                  |
 | **Help**         | `help`                                                                                                                                                                                                                                                  |
 | **Switch Theme** | `toggletheme`                                                                                                                                                                                                                                           |

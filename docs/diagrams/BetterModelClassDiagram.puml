@@ -21,4 +21,6 @@ Person *--> Address
 Person *--> EduLevel
 Person *--> CurrentYear
 Person *--> CurrentGrade
+Person *--> ExpectedGrade
+Person *--> PaymentInfo
 @enduml

@@ -32,6 +32,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.PaymentCommand;
 import seedu.address.logic.commands.PurgeCommand;
+import seedu.address.logic.commands.ToggleThemeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -111,6 +112,12 @@ public class AddressBookParserTest {
                 + INDEX_FIRST_PERSON.getOneBased() + PAYMENT_FEE_DESC + PAYMENT_DATE_DESC + PAYMENT_STATUS_DESC);
         assertEquals(new PaymentCommand(INDEX_FIRST_PERSON, VALID_PAYMENT_FEE,
                 VALID_PAYMENT_DATE, VALID_PAYMENT_STATUS), command);
+    }
+
+    @Test
+    public void parseCommand_toggleTheme() throws Exception {
+        assertTrue(parser.parseCommand(ToggleThemeCommand.COMMAND_WORD) instanceof ToggleThemeCommand);
+        assertTrue(parser.parseCommand(ToggleThemeCommand.COMMAND_WORD + " 3") instanceof ToggleThemeCommand);
     }
 
     @Test
