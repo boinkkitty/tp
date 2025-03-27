@@ -5,10 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -57,6 +59,30 @@ public class ParserUtilTest {
 
         // Leading and trailing whitespaces
         assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  "));
+    }
+
+    @Test
+    public void parseIndexSequence_invalidInput_throwsParseException() {
+        // Non-integer start and end
+        assertThrows(ParseException.class, () -> ParserUtil.parseIndexSequence("10...a"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseIndexSequence("a...10"));
+
+        // End less than start
+        assertThrows(ParseException.class, () -> ParserUtil.parseIndexSequence("10...9"));
+
+        // End equals to start
+        assertThrows(ParseException.class, () -> ParserUtil.parseIndexSequence("10...10"));
+    }
+
+    @Test
+    public void parseIndexSequence_validInput_success() throws Exception {
+        // no whitespaces
+        assertEquals(List.of(INDEX_FIRST_PERSON, INDEX_THIRD_PERSON),
+                ParserUtil.parseIndexSequence("1...3"));
+
+        //leading and trailing whitespaces
+        assertEquals(List.of(INDEX_FIRST_PERSON, INDEX_THIRD_PERSON),
+                ParserUtil.parseIndexSequence("   1...3  "));
     }
 
     @Test

@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.INDEX_SEQUENCE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.PAYMENT_DATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.PAYMENT_FEE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.PAYMENT_STATUS_DESC;
@@ -12,6 +13,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PAYMENT_FEE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PAYMENT_STATUS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 
 import java.util.Arrays;
 import java.util.List;
@@ -29,6 +31,8 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.PaymentCommand;
+import seedu.address.logic.commands.PurgeCommand;
+import seedu.address.logic.commands.ToggleThemeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -48,9 +52,9 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_clear() throws Exception {
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
+    public void parseCommand_purge() throws Exception {
+        assertTrue(parser.parseCommand(PurgeCommand.COMMAND_WORD) instanceof PurgeCommand);
+        assertTrue(parser.parseCommand(PurgeCommand.COMMAND_WORD + " 3") instanceof PurgeCommand);
     }
 
     @Test
@@ -58,6 +62,13 @@ public class AddressBookParserTest {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_clear() throws Exception {
+        ClearCommand command =
+                (ClearCommand) parser.parseCommand(ClearCommand.COMMAND_WORD + " " + INDEX_SEQUENCE_DESC);
+        assertEquals(new ClearCommand(INDEX_FIRST_PERSON, INDEX_THIRD_PERSON), command);
     }
 
     @Test
@@ -104,9 +115,15 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_toggleTheme() throws Exception {
+        assertTrue(parser.parseCommand(ToggleThemeCommand.COMMAND_WORD) instanceof ToggleThemeCommand);
+        assertTrue(parser.parseCommand(ToggleThemeCommand.COMMAND_WORD + " 3") instanceof ToggleThemeCommand);
+    }
+
+    @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-            -> parser.parseCommand(""));
+                -> parser.parseCommand(""));
     }
 
     @Test

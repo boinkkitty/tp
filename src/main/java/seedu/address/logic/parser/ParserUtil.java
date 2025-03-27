@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -26,6 +27,9 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_INDEX_SEQUENCE = "Start index must be strictly less than End index.";
+    public static final String MESSAGE_INVALID_PAYMENT_FEE = "Payment Fee is not an unsigned integer.";
+    public static final String MESSAGE_INVALID_PAYMENT_DATE = "Payment Date is not a valid Date.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -38,6 +42,30 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses a "Start...End" {@code indexSequence} into a {@code List<Index>} containing two indices: Start and End.
+     * Leading and trailing whitespaces will be trimmed, and Start and End must be valid positive integers.
+     *
+     * @throws ParseException if the input is invalid (not two positive integers, or Start >= End).
+     */
+    public static List<Index> parseIndexSequence(String indexSequence) throws ParseException {
+        requireNonNull(indexSequence);
+        String[] parts = indexSequence.trim().split("\\.\\.\\.");
+        if (parts.length != 2) { // Must have exactly two parts
+            throw new ParseException("Invalid format. Provide exactly two positive integers separated by '...'.");
+        }
+        if (!StringUtil.isNonZeroUnsignedInteger(parts[0])) {
+            throw new ParseException("Start Index: " + MESSAGE_INVALID_INDEX);
+        }
+        if (!StringUtil.isNonZeroUnsignedInteger(parts[1])) {
+            throw new ParseException("End Index: " + MESSAGE_INVALID_INDEX);
+        }
+        if (Integer.parseInt(parts[0]) >= Integer.parseInt(parts[1])) {
+            throw new ParseException(MESSAGE_INVALID_INDEX_SEQUENCE);
+        }
+        return List.of(Index.fromOneBased(Integer.parseInt(parts[0])), Index.fromOneBased(Integer.parseInt(parts[1])));
     }
 
     /**
@@ -171,7 +199,7 @@ public class ParserUtil {
         if (!ExpectedGrade.isValidExpectedGrade(upperCaseCurrentGrade)) {
             throw new ParseException(ExpectedGrade.MESSAGE_CONSTRAINTS);
         }
-        return new ExpectedGrade(upperCaseCurrentGrade);
+        return new ExpectedGrade(trimmedExpectedGrade);
     }
 
     /**
