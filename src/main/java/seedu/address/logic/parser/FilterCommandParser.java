@@ -32,6 +32,10 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_TAG, PREFIX_EDULEVEL, PREFIX_CURRENT_GRADE, PREFIX_EXP_GRADE);
 
+        if (!argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+        }
+
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_EDULEVEL, PREFIX_CURRENT_GRADE, PREFIX_EXP_GRADE);
 
         FilterDescriptor filterDescriptor = new FilterDescriptor();

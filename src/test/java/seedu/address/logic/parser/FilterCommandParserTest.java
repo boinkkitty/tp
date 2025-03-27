@@ -40,7 +40,6 @@ public class FilterCommandParserTest {
 
     private FilterCommandParser parser = new FilterCommandParser();
 
-
     @Test
     public void parse_emptyArg_throwsParseException() {
         assertParseFailure(parser, " ", MESSAGE_INVALID_FORMAT);
@@ -133,5 +132,20 @@ public class FilterCommandParserTest {
 
         assertParseFailure(parser, userInput,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_CURRENT_GRADE, PREFIX_EXP_GRADE));
+    }
+
+    @Test
+    public void parse_nonEmptyPreamble_failure() {
+        // Non-empty preamble with valid field
+        assertParseFailure(parser, "invalidPreamble" + GRADE_DESC_AMY ,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+
+        // Non-empty preamble with no field
+        assertParseFailure(parser, "invalidPreamble",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+
+        // Empty preamble
+        assertParseFailure(parser, "",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
     }
 }
