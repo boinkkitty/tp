@@ -60,6 +60,8 @@ TutorSynch is a **desktop app for managing student contacts and academic details
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
+* Only use the prefixes explicitly defined for a given command. Using unsupported prefixes—such as those from other commands—may result in them being interpreted as plaintext (i.e. `f/1000` is not a valid prefix for the `add` command and will not be parsed correctly).
+
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `purge`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
