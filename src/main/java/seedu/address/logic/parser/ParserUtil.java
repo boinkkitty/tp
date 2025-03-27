@@ -199,7 +199,7 @@ public class ParserUtil {
         if (!ExpectedGrade.isValidExpectedGrade(upperCaseCurrentGrade)) {
             throw new ParseException(ExpectedGrade.MESSAGE_CONSTRAINTS);
         }
-        return new ExpectedGrade(upperCaseCurrentGrade);
+        return new ExpectedGrade(trimmedExpectedGrade);
     }
 
     /**

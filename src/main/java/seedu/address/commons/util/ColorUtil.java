@@ -11,9 +11,9 @@ import seedu.address.model.person.PaymentInfo;
  * Helper functions for handling color.
  */
 public class ColorUtil {
-    public static final String RED_COLOR_HEX = "#EC736E";
-    public static final String YELLOW_COLOR_HEX = "#E8D588";
-    public static final String GREEN_COLOR_HEX = "#6DF162";
+    public static final String RED_COLOR_HEX = "#FF5252";
+    public static final String YELLOW_COLOR_HEX = "#F57C00";
+    public static final String GREEN_COLOR_HEX = "#4CAF50";
 
     /**
      * Determines if a hex color is light or dark.
@@ -49,13 +49,13 @@ public class ColorUtil {
         case "A":
             return GREEN_COLOR_HEX;
         case "B":
-            return "#D2F088";
+            return "#6CAA00";
         case "C":
-            return "#E1E888";
+            return "#BEB005";
         case "D":
             return YELLOW_COLOR_HEX;
         case "E":
-            return "#EE9C59";
+            return "#FF7043";
         case "F":
             return RED_COLOR_HEX;
         default:
