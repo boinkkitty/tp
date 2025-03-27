@@ -38,7 +38,7 @@ public class FilterCommand extends Command {
             + "[" + PREFIX_EDULEVEL + "EDUCATION] "
             + "[" + PREFIX_CURRENT_GRADE + "CURRENT_GRADE] "
             + "[" + PREFIX_EXP_GRADE + "EXP_GRADE]\n"
-            + "Example: " + COMMAND_WORD
+            + "Example: " + COMMAND_WORD + " "
             + PREFIX_TAG + "Husband "
             + PREFIX_TAG + "Friend "
             + PREFIX_EDULEVEL + "Primary "
@@ -73,7 +73,7 @@ public class FilterCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditCommand)) {
+        if (!(other instanceof FilterCommand)) {
             return false;
         }
 
