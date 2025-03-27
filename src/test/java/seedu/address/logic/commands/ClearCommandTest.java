@@ -3,8 +3,10 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.ClearCommand.MESSAGE_INVALID_INDEX_RANGE;
+import static seedu.address.logic.commands.ClearCommand.MESSAGE_NO_PERSONS_FOUND;
 import static seedu.address.logic.commands.ClearCommand.MESSAGE_SUCCESS;
 import static seedu.address.logic.commands.ClearCommand.MESSAGE_SUCCESS_INDEX;
+import static seedu.address.logic.commands.ClearCommand.MESSAGE_SUCCESS_TAG;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -44,7 +46,9 @@ public class ClearCommandTest {
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         List<Person> personsToRemove = expectedModel.getFilteredPersonList()
-                .subList(INDEX_FIRST_PERSON.getZeroBased(), INDEX_SECOND_PERSON.getZeroBased() + 1);
+                .subList(INDEX_FIRST_PERSON.getZeroBased(), INDEX_SECOND_PERSON.getZeroBased() + 1)
+                .stream().toList();
+
         personsToRemove.forEach(expectedModel::deletePerson);
         assertCommandSuccess(clearCommand, model, expectedMessage, expectedModel);
     }
@@ -65,7 +69,8 @@ public class ClearCommandTest {
 
         ClearCommand clearCommand = new ClearCommand(targetTags);
         String expectedMessage = String
-                .format(MESSAGE_SUCCESS, "3. Persons deleted had tags: [[friends]]");
+                .format(MESSAGE_SUCCESS,
+                        String.format(MESSAGE_SUCCESS_TAG, 3, targetTags.toString()));
 
         // Simulate tag-based deletion results for the expected model
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
@@ -84,7 +89,7 @@ public class ClearCommandTest {
 
         ClearCommand clearCommand = new ClearCommand(nonMatchingTags);
         String expectedMessage = String.format(MESSAGE_SUCCESS,
-                String.format(ClearCommand.MESSAGE_NO_PERSONS_FOUND, nonMatchingTags.toString()));
+                String.format(MESSAGE_NO_PERSONS_FOUND, nonMatchingTags.toString()));
 
         assertCommandSuccess(clearCommand, model, expectedMessage, model);
     }
