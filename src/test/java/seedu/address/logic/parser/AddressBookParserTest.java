@@ -54,7 +54,6 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_purge() throws Exception {
         assertTrue(parser.parseCommand(PurgeCommand.COMMAND_WORD) instanceof PurgeCommand);
-        assertTrue(parser.parseCommand(PurgeCommand.COMMAND_WORD + " 3") instanceof PurgeCommand);
     }
 
     @Test
@@ -83,7 +82,6 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_exit() throws Exception {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
-        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
     }
 
     @Test
@@ -97,13 +95,11 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
-        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
     }
 
     @Test
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
     }
 
     @Test
@@ -117,7 +113,6 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_toggleTheme() throws Exception {
         assertTrue(parser.parseCommand(ToggleThemeCommand.COMMAND_WORD) instanceof ToggleThemeCommand);
-        assertTrue(parser.parseCommand(ToggleThemeCommand.COMMAND_WORD + " 3") instanceof ToggleThemeCommand);
     }
 
     @Test
