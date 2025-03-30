@@ -9,8 +9,11 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class CurrentYear {
 
+    public static final int MAX_LENGTH = 25;
+
     public static final String MESSAGE_CONSTRAINTS =
-            "Current Year should only contain alphanumeric characters and spaces. "
+            String.format("Current Year should only contain alphanumeric characters and "
+                    + "spaces and must not exceed %d characters. ", MAX_LENGTH)
                     + "As Current Year is an optional field, it could also be blank.";
 
     public static final String VALIDATION_REGEX = "[\\p{Alnum} ]*";
@@ -35,7 +38,16 @@ public class CurrentYear {
      * Returns true if a given string is a valid current year.
      */
     public static boolean isValidCurrentYear(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX) && isValidLength(test);
+    }
+
+    /**
+     * Check length of current year against limit
+     * @param test
+     * @return Returns true if given current year exceeds max length
+     */
+    public static boolean isValidLength(String test) {
+        return test.length() <= MAX_LENGTH;
     }
 
     @Override
