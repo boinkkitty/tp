@@ -20,6 +20,36 @@ public class NameTest {
     }
 
     @Test
+    public void isValidLength() {
+        // Invalid name but valid length - cannot be empty
+        assertTrue(Name.isValidLength(""));
+
+        // Valid name
+        assertTrue(Name.isValidLength("Stephanie Tan Tik Tok"));
+
+        // 85 characters - Valid as within limit
+        assertTrue(Name.isValidLength("abcdefghijklmnopqrstabcdefghijklmnopqrstabcdefghijklmnopqrst"
+                + "abcdefghijklmnopqrstabcde"));
+
+        // 86 characters - Invalid as exceeds limit
+        assertFalse(Name.isValidLength("abcdefghijklmnopqrstabcdefghijklmnopqrstabcdefghijklmnopqrst"
+                + "abcdefghijklmnopqrstabcdeF"));
+
+        // Super long string - Invalid as exceeds limit
+        assertFalse(Name.isValidLength(
+                "Absurdly long string that is meant to fail and it should fail and only fail and not pass. "
+                        + "Absurdly long string that is meant to fail and it should fail and only fail and not pass. "
+                        + "Absurdly long string that is meant to fail and it should fail and only fail and not pass. "
+                        + "Absurdly long string that is meant to fail and it should fail and only fail and not pass. "
+                        + "Absurdly long string that is meant to fail and it should fail and only fail and not pass. "
+                        + "Absurdly long string that is meant to fail and it should fail and only fail and not pass. "
+                        + "Absurdly long string that is meant to fail and it should fail and only fail and not pass. "
+                        + "Absurdly long string that is meant to fail and it should fail and only fail and not pass. "
+                        + "Absurdly long string that is meant to fail and it should fail and only fail and not pass. "
+                        + "Absurdly long string that is meant to fail and it should fail and only fail and not pass."));
+    }
+
+    @Test
     public void isValidName() {
         // null name
         assertThrows(NullPointerException.class, () -> Name.isValidName(null));
@@ -29,6 +59,8 @@ public class NameTest {
         assertFalse(Name.isValidName(" ")); // spaces only
         assertFalse(Name.isValidName("^")); // only non-alphanumeric characters
         assertFalse(Name.isValidName("peter*")); // contains non-alphanumeric characters
+        assertFalse(Name.isValidName("abcdefghijklmnopqrstabcdefghijklmnopqrstabcdefghijklmnopqrst"
+                + "abcdefghijklmnopqrstabcdeF")); // exceeds limit
 
         // valid name
         assertTrue(Name.isValidName("peter jack")); // alphabets only
@@ -36,6 +68,8 @@ public class NameTest {
         assertTrue(Name.isValidName("peter the 2nd")); // alphanumeric characters
         assertTrue(Name.isValidName("Capital Tan")); // with capital letters
         assertTrue(Name.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
+        assertTrue(Name.isValidName("abcdefghijklmnopqrstabcdefghijklmnopqrstabcdefghijklmnopqrst"
+                + "abcdefghijklmnopqrstabcde")); // at max limit
     }
 
     @Test
