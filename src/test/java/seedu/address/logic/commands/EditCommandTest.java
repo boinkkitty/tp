@@ -27,6 +27,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 
@@ -150,10 +151,11 @@ public class EditCommandTest {
     }
 
     /**
-     * Edit
+     * Tests successful execution of an EditCommand that combines full tag overwrite, tag append, and tag removal,
+     * inclusive of Tag containing valid Hexadecimal Color Code.
      */
     @Test
-    public void execute_test_success() {
+    public void execute_editWithTagOverwriteAppendRemove_success() {
         Person editedPerson = new PersonBuilder().withTags().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson)
                 .withTags("Math#FF5733", "Physics", "PE").withTagsToAppend("Chemistry", "Math", "History")
@@ -169,6 +171,33 @@ public class EditCommandTest {
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
+
+    @Test
+    public void execute_editWithTooManyFinalTags_failure() {
+        // Base tags: 6 tags that will remain after overwrite
+        String[] baseTags = {"Tag1", "Tag2", "Tag3", "Tag4", "Tag5", "Tag6"};
+
+        // Tags to append: 3 more unique tags (total would become 10)
+        String[] tagsToAppend = {"Tag7", "Tag8", "Tag9", "Tag10#ABCDEF"};
+
+        // Tags to remove: only 1 tag removed, so final set = (6 + 4 - 1) = 9
+        String[] tagsToRemove = {"Tag9", "Tag11"};
+
+        // Build person and descriptor
+        Person editedPerson = new PersonBuilder().withTags(baseTags).build();
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson)
+                .withTags(baseTags) // Overwrite with 6 base tags
+                .withTagsToAppend(tagsToAppend) // Append 4 more
+                .withTagsToRemove(tagsToRemove) // Remove 1 tag
+                .build();
+
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+
+        // Expect failure due to exceeding tag limit
+        assertCommandFailure(editCommand, model, Tag.MESSAGE_CONSTRAINTS_EDIT_SET);
+    }
+
 
     @Test
     public void equals() {

@@ -204,31 +204,37 @@ public class AddCommandParserTest {
     public void parse_invalidValue_failure() {
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + EDULEVEL_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + VALID_GRADE_BOB
-                        + VALID_EXP_GRADE_BOB, Name.MESSAGE_CONSTRAINTS);
+                + EDULEVEL_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND
+                        + " cg/" + VALID_GRADE_BOB + " eg/" + VALID_EXP_GRADE_BOB,
+                Name.MESSAGE_CONSTRAINTS);
 
         // invalid phone
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + EDULEVEL_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + VALID_GRADE_BOB
-                + VALID_EXP_GRADE_BOB, Phone.MESSAGE_CONSTRAINTS);
+                + EDULEVEL_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND
+                        + " cg/" + VALID_GRADE_BOB + " eg/" + VALID_EXP_GRADE_BOB,
+                Phone.MESSAGE_CONSTRAINTS);
 
         // invalid email
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC + ADDRESS_DESC_BOB
-                + EDULEVEL_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + VALID_GRADE_BOB
-                + VALID_EXP_GRADE_BOB, Email.MESSAGE_CONSTRAINTS);
+                + EDULEVEL_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND
+                        + " cg/" + VALID_GRADE_BOB + " eg/" + VALID_EXP_GRADE_BOB,
+                Email.MESSAGE_CONSTRAINTS);
 
         // invalid address
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
-                + EDULEVEL_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + VALID_GRADE_BOB + VALID_EXP_GRADE_BOB,
+                + EDULEVEL_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND
+                        + " cg/" + VALID_GRADE_BOB + " eg/" + VALID_EXP_GRADE_BOB,
                 Address.MESSAGE_CONSTRAINTS);
 
         // invalid tag
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + INVALID_TAG_DESC + VALID_TAG_FRIEND + VALID_GRADE_BOB + VALID_EXP_GRADE_BOB, Tag.MESSAGE_CONSTRAINTS);
+                + INVALID_TAG_DESC + VALID_TAG_FRIEND + " cg/" + VALID_GRADE_BOB + " eg/" + VALID_EXP_GRADE_BOB,
+                Tag.MESSAGE_CONSTRAINTS);
 
         // invalid grade
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + EDULEVEL_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + INVALID_GRADE_DESC + VALID_EXP_GRADE_BOB,
+                + EDULEVEL_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + INVALID_GRADE_DESC
+                        + " eg/" + VALID_EXP_GRADE_BOB,
                 CurrentGrade.MESSAGE_CONSTRAINTS);
 
         // invalid expected grade
@@ -243,5 +249,13 @@ public class AddCommandParserTest {
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_overMaxTagInSet_failure() {
+        // number of tags is over the maximum limit
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + EDULEVEL_DESC_BOB + " cg/" + VALID_GRADE_BOB + " eg/" + VALID_EXP_GRADE_BOB
+                + " t/1001 t/1002 t/1003 t/1004 t/1005 t/1006 t/1007 t/1008 t/1009", Tag.MESSAGE_CONSTRAINTS_ADD_SET);
     }
 }
