@@ -65,7 +65,7 @@ public class ClearCommandTest {
     public void execute_validTag_success() {
         // Simulate clearing by tag
         Set<Tag> targetTags = new HashSet<>();
-        targetTags.add(new Tag("friends"));
+        targetTags.add(new Tag("CS2030C"));
 
         ClearCommand clearCommand = new ClearCommand(targetTags);
         String expectedMessage = String
@@ -75,7 +75,7 @@ public class ClearCommandTest {
         // Simulate tag-based deletion results for the expected model
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         model.getFilteredPersonList().stream()
-                .filter(person -> person.getTags().contains(new Tag("friends")))
+                .filter(person -> person.getTags().contains(new Tag("CS2030C")))
                 .forEach(expectedModel::deletePerson);
 
         assertCommandSuccess(clearCommand, model, expectedMessage, expectedModel);
@@ -85,7 +85,7 @@ public class ClearCommandTest {
     public void execute_noMatchingTags_success() {
         // Simulate clearing when no persons match the provided tag
         Set<Tag> nonMatchingTags = new HashSet<>();
-        nonMatchingTags.add(new Tag("nonexistent"));
+        nonMatchingTags.add(new Tag("nonexist"));
 
         ClearCommand clearCommand = new ClearCommand(nonMatchingTags);
         String expectedMessage = String.format(MESSAGE_SUCCESS,
@@ -109,11 +109,11 @@ public class ClearCommandTest {
 
         // Commands with tag-based clearing
         Set<Tag> targetTags1 = new HashSet<>();
-        targetTags1.add(new Tag("friends"));
+        targetTags1.add(new Tag("CS2030C"));
         ClearCommand clearByTagCommand1 = new ClearCommand(targetTags1);
 
         Set<Tag> targetTags2 = new HashSet<>();
-        targetTags2.add(new Tag("colleagues"));
+        targetTags2.add(new Tag("GEA1000"));
         ClearCommand clearByTagCommand2 = new ClearCommand(targetTags2);
 
         // Same object => true
@@ -125,7 +125,7 @@ public class ClearCommandTest {
 
         // Same values for tag-based command => true
         Set<Tag> targetTags1Copy = new HashSet<>();
-        targetTags1Copy.add(new Tag("friends"));
+        targetTags1Copy.add(new Tag("CS2030C"));
         ClearCommand clearByTagCommand1Copy = new ClearCommand(targetTags1Copy);
         assertEquals(clearByTagCommand1, clearByTagCommand1Copy);
 

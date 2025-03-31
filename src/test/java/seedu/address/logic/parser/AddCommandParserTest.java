@@ -228,7 +228,7 @@ public class AddCommandParserTest {
 
         // invalid grade
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + EDULEVEL_DESC_BOB + TAG_DESC_HUSBAND + VALID_TAG_FRIEND + INVALID_GRADE_DESC + VALID_EXP_GRADE_BOB,
+                + EDULEVEL_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + INVALID_GRADE_DESC + VALID_EXP_GRADE_BOB,
                 CurrentGrade.MESSAGE_CONSTRAINTS);
 
         // invalid expected grade

@@ -9,7 +9,7 @@
     "currentYear" : "Year 3",
     "currentGrade": "D",
     "expectedGrade": "A",
-    "tags" : [ "friends" ],
+    "tags" : [ "CS2030C" ],
     "paymentFee" : 0,
     "paymentDate" : "",
     "paymentStatus" : ""
@@ -22,7 +22,7 @@
     "currentYear" : "Year 4",
     "currentGrade": "B-",
     "expectedGrade": "B",
-    "tags" : [ "owesMoney", "friends" ],
+    "tags" : [ "GEA1000", "CS2030C" ],
     "paymentFee" : 500,
     "paymentDate" : "",
     "paymentStatus" : "Paid"
@@ -46,7 +46,7 @@
     "eduLevel": "Master",
     "currentGrade": "",
     "expectedGrade": "D",
-    "tags" : [ "friends" ],
+    "tags" : [ "CS2030C" ],
     "paymentFee" : 1000,
     "paymentDate" : "22-04-2025",
     "paymentStatus" : "Paid"

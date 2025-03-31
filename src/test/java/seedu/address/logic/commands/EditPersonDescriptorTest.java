@@ -79,7 +79,9 @@ public class EditPersonDescriptorTest {
                 + ", currentYear=" + editPersonDescriptor.getCurrentYear().orElse(null)
                 + ", currentGrade=" + editPersonDescriptor.getCurrentGrade().orElse(null)
                 + ", expectedGrade=" + editPersonDescriptor.getExpectedGrade().orElse(null)
-                + ", tags=" + editPersonDescriptor.getTags().orElse(null) + "}";
+                + ", tags=" + editPersonDescriptor.getTags().orElse(null)
+                + ", tagsToAppend=" + editPersonDescriptor.getTagsToAppend().orElse(null)
+                + ", tagsToRemove=" + editPersonDescriptor.getTagsToRemove().orElse(null) + "}";
         assertEquals(expected, editPersonDescriptor.toString());
     }
 }

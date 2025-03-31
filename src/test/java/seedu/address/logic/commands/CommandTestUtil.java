@@ -15,8 +15,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_FEE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG_APPEND;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG_REMOVE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
@@ -78,8 +76,6 @@ public class CommandTestUtil {
     public static final String EDULEVEL_DESC_BOB = " " + PREFIX_EDULEVEL + VALID_EDULEVEL_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
-    public static final String TAG_DESC_CLASSMATE_TO_APPEND = " " + PREFIX_TAG_APPEND + VALID_TAG_CLASSMATE;
-    public static final String TAG_DESC_DONOR_TO_REMOVE = " " + PREFIX_TAG_REMOVE + VALID_TAG_DONOR;
     public static final String PAYMENT_FEE_DESC = " " + PREFIX_PAYMENT_FEE + VALID_PAYMENT_FEE;
     public static final String PAYMENT_DATE_DESC = " " + PREFIX_PAYMENT_DATE + VALID_PAYMENT_DATE;
     public static final String PAYMENT_STATUS_DESC = " " + PREFIX_PAYMENT_STATUS + VALID_PAYMENT_STATUS;
