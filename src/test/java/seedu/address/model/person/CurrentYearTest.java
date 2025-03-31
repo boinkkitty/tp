@@ -24,6 +24,12 @@ public class CurrentYearTest {
         // Valid current year
         assertTrue(CurrentYear.isValidLength("Sophomore"));
 
+        // 30 characters - valid as within limit
+        assertTrue(CurrentYear.isValidLength("abcdefghijklmnopqrstabcdefghij"));
+
+        // 31 characters - invalid as exceeds limit
+        assertFalse(CurrentYear.isValidLength("abcdefghijklmnopqrstabcdefghijK"));
+
         // Super long string - meant to fail
         assertFalse(CurrentYear.isValidLength(
                 "Absurdly long string that is meant to fail and it should fail and only fail and not pass. "

@@ -8,7 +8,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
 public class Name {
-    public static final int MAX_LENGTH = 255;
+    public static final int MAX_LENGTH = 85;
 
     public static final String MESSAGE_CONSTRAINTS =
             String.format("Names should only contain alphanumeric characters and spaces, should not be blank, "

@@ -24,6 +24,14 @@ public class EmailTest {
         // Valid email
         assertTrue(Email.isValidLength("test@gmail.com"));
 
+        // Email length of 110 - valid as within limit
+        assertTrue(Email.isValidLength("abcdefghijklmnopqrstabcdefghijklmnopqrstabcdefghijklmnopqrst"
+                + "abcdefghijklmnopqrstabcdefghijklmnopqrst@gmail.com"));
+
+        // Email length of 111 - invalid as exceeds limit
+        assertFalse(Email.isValidLength("abcdefghijklmnopqrstabcdefghijklmnopqrstabcdefghijklmnopqrst"
+                + "abcdefghijklmnopqrstabcdefghijklmnopqrstA@gmail.com"));
+
         // Super long email - meant to fail
         assertFalse(Email.isValidLength(
                 "Absurdlylongemailthatismeanttofailanditshouldfailandonlyfailandnotpass"

@@ -24,6 +24,14 @@ public class AddressTest {
         // Valid address
         assertTrue(Address.isValidLength("Blk 123 @ The Best Place"));
 
+        // Email length of 110 - valid as within limit
+        assertTrue(Address.isValidLength("abcdefghijklmnopqrstabcdefghijklmnopqrstabcdefghijklmnopqrst"
+                + "abcdefghijklmnopqrstabcdefghijklmnopqrstabcdefghij"));
+
+        // Email length of 111 - invalid as exceeds limit
+        assertFalse(Address.isValidLength("abcdefghijklmnopqrstabcdefghijklmnopqrstabcdefghijklmnopqrst"
+                + "abcdefghijklmnopqrstabcdefghijklmnopqrstabcdefghijK"));
+
         // Super long string - meant to fail
         assertFalse(Address.isValidLength(
                 "Absurdly long string that is meant to fail and it should fail and only fail and cannot pass. "

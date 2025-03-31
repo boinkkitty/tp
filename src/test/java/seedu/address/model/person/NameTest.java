@@ -24,7 +24,15 @@ public class NameTest {
         // Valid name
         assertTrue(Name.isValidLength("Stephanie Tan Tik Tok"));
 
-        // Super long string - meant to fail
+        // 85 characters - Valid as within limit
+        assertTrue(Name.isValidLength("abcdefghijklmnopqrstabcdefghijklmnopqrstabcdefghijklmnopqrst"
+                + "abcdefghijklmnopqrstabcde"));
+
+        // 86 characters - Invalid as exceeds limit
+        assertFalse(Name.isValidLength("abcdefghijklmnopqrstabcdefghijklmnopqrstabcdefghijklmnopqrst"
+                + "abcdefghijklmnopqrstabcdeF"));
+
+        // Super long string - Invalid as exceeds limit
         assertFalse(Name.isValidLength(
                 "Absurdly long string that is meant to fail and it should fail and only fail and not pass. "
                         + "Absurdly long string that is meant to fail and it should fail and only fail and not pass. "
