@@ -21,6 +21,9 @@ public class CurrentYearTest {
 
     @Test
     public void isValidLength() {
+        // Empty current year
+        assertTrue(CurrentYear.isValidLength(""));
+
         // Valid current year
         assertTrue(CurrentYear.isValidLength("Sophomore"));
 
@@ -52,6 +55,7 @@ public class CurrentYearTest {
         // invalid current year
         assertFalse(CurrentYear.isValidCurrentYear("^")); // only non-alphanumeric characters
         assertFalse(CurrentYear.isValidCurrentYear("2021*")); // contains non-alphanumeric characters
+        assertFalse(CurrentYear.isValidCurrentYear("abcdefghijklmnopqrstabcdefghijK")); // exceeds limit
 
         // valid current year
         assertTrue(CurrentYear.isValidCurrentYear("")); // empty string
@@ -59,6 +63,7 @@ public class CurrentYearTest {
         assertTrue(CurrentYear.isValidCurrentYear("2025")); // numbers only
         assertTrue(CurrentYear.isValidCurrentYear("Year 2025")); // alphanumeric characters
         assertTrue(CurrentYear.isValidCurrentYear("Year Twenty Twenty Five")); // with spaces
+        assertTrue(CurrentYear.isValidLength("abcdefghijklmnopqrstabcdefghij")); // max limit
     }
 
     @Test
