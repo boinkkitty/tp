@@ -149,12 +149,12 @@ public class ClearCommandTest {
     @Test
     public void toStringMethod() {
         Set<Tag> targetTags = new HashSet<>();
-        targetTags.add(new Tag("friends"));
+        targetTags.add(new Tag("CS2030C"));
 
         ClearCommand clearByTagCommand = new ClearCommand(targetTags);
         ClearCommand clearByIndexCommand = new ClearCommand(INDEX_FIRST_PERSON, INDEX_SECOND_PERSON);
 
-        assertEquals(ClearCommand.class.getCanonicalName() + "{tags=[[friends]]}",
+        assertEquals(ClearCommand.class.getCanonicalName() + "{tags=[[CS2030C]]}",
                 clearByTagCommand.toString());
         assertEquals(ClearCommand.class.getCanonicalName() + "{start=1, end=2}",
                 clearByIndexCommand.toString());
