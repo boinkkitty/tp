@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class CurrentYear {
 
-    public static final int MAX_LENGTH = 25;
+    public static final int MAX_LENGTH = 255;
 
     public static final String MESSAGE_CONSTRAINTS =
             String.format("Current Year should only contain alphanumeric characters and "

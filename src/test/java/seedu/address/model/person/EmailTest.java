@@ -20,6 +20,25 @@ public class EmailTest {
     }
 
     @Test
+    public void isValidLength() {
+        // Valid email
+        assertTrue(Email.isValidLength("test@gmail.com"));
+
+        // Super long email - meant to fail
+        assertFalse(Email.isValidLength(
+                "Absurdlylongemailthatismeanttofailanditshouldfailandonlyfailandnotpass"
+                        + "Absurdlylongemailthatismeanttofailanditshouldfailandonlyfailandnotpass"
+                        + "Absurdlylongemailthatismeanttofailanditshouldfailandonlyfailandnotpass"
+                        + "Absurdlylongemailthatismeanttofailanditshouldfailandonlyfailandnotpass"
+                        + "Absurdlylongemailthatismeanttofailanditshouldfailandonlyfailandnotpass"
+                        + "Absurdlylongemailthatismeanttofailanditshouldfailandonlyfailandnotpass"
+                        + "Absurdlylongemailthatismeanttofailanditshouldfailandonlyfailandnotpass"
+                        + "Absurdlylongemailthatismeanttofailanditshouldfailandonlyfailandnotpass"
+                        + "Absurdlylongemailthatismeanttofailanditshouldfailandonlyfailandnotpass"
+                        + "@gmail.com"));
+    }
+
+    @Test
     public void isValidEmail() {
         // null email
         assertThrows(NullPointerException.class, () -> Email.isValidEmail(null));

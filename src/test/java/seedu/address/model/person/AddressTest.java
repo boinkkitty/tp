@@ -20,6 +20,25 @@ public class AddressTest {
     }
 
     @Test
+    public void isValidLength() {
+        // Valid address
+        assertTrue(Address.isValidLength("Blk 123 @ The Best Place"));
+
+        // Super long string - meant to fail
+        assertFalse(Address.isValidLength(
+                "Absurdly long string that is meant to fail and it should fail and only fail and cannot pass. "
+                + "Absurdly long string that is meant to fail and it should fail and only fail and cannot pass. "
+                + "Absurdly long string that is meant to fail and it should fail and only fail and cannot pass. "
+                + "Absurdly long string that is meant to fail and it should fail and only fail and cannot pass. "
+                + "Absurdly long string that is meant to fail and it should fail and only fail and cannot pass. "
+                + "Absurdly long string that is meant to fail and it should fail and only fail and cannot pass. "
+                + "Absurdly long string that is meant to fail and it should fail and only fail and cannot pass. "
+                + "Absurdly long string that is meant to fail and it should fail and only fail and cannot pass. "
+                + "Absurdly long string that is meant to fail and it should fail and only fail and cannot pass. "
+                + "Absurdly long string that is meant to fail and it should fail and only fail and cannot pass."));
+    }
+
+    @Test
     public void isValidAddress() {
         // null address
         assertThrows(NullPointerException.class, () -> Address.isValidAddress(null));

@@ -20,6 +20,25 @@ public class NameTest {
     }
 
     @Test
+    public void isValidLength() {
+        // Valid name
+        assertTrue(Name.isValidLength("Stephanie Tan Tik Tok"));
+
+        // Super long string - meant to fail
+        assertFalse(Name.isValidLength(
+                "Absurdly long string that is meant to fail and it should fail and only fail and not pass. "
+                        + "Absurdly long string that is meant to fail and it should fail and only fail and not pass. "
+                        + "Absurdly long string that is meant to fail and it should fail and only fail and not pass. "
+                        + "Absurdly long string that is meant to fail and it should fail and only fail and not pass. "
+                        + "Absurdly long string that is meant to fail and it should fail and only fail and not pass. "
+                        + "Absurdly long string that is meant to fail and it should fail and only fail and not pass. "
+                        + "Absurdly long string that is meant to fail and it should fail and only fail and not pass. "
+                        + "Absurdly long string that is meant to fail and it should fail and only fail and not pass. "
+                        + "Absurdly long string that is meant to fail and it should fail and only fail and not pass. "
+                        + "Absurdly long string that is meant to fail and it should fail and only fail and not pass."));
+    }
+
+    @Test
     public void isValidName() {
         // null name
         assertThrows(NullPointerException.class, () -> Name.isValidName(null));

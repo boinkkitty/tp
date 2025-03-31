@@ -20,6 +20,25 @@ public class CurrentYearTest {
     }
 
     @Test
+    public void isValidLength() {
+        // Valid current year
+        assertTrue(CurrentYear.isValidLength("Sophomore"));
+
+        // Super long string - meant to fail
+        assertFalse(CurrentYear.isValidLength(
+                "Absurdly long string that is meant to fail and it should fail and only fail and not pass. "
+                        + "Absurdly long string that is meant to fail and it should fail and only fail and not pass. "
+                        + "Absurdly long string that is meant to fail and it should fail and only fail and not pass. "
+                        + "Absurdly long string that is meant to fail and it should fail and only fail and not pass. "
+                        + "Absurdly long string that is meant to fail and it should fail and only fail and not pass. "
+                        + "Absurdly long string that is meant to fail and it should fail and only fail and not pass. "
+                        + "Absurdly long string that is meant to fail and it should fail and only fail and not pass. "
+                        + "Absurdly long string that is meant to fail and it should fail and only fail and not pass. "
+                        + "Absurdly long string that is meant to fail and it should fail and only fail and not pass. "
+                        + "Absurdly long string that is meant to fail and it should fail and only fail and not pass."));
+    }
+
+    @Test
     public void isValidCurrentYear() {
         // null current year
         assertThrows(NullPointerException.class, () -> CurrentYear.isValidCurrentYear(null));
