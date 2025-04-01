@@ -170,6 +170,9 @@ class JsonAdaptedPerson {
         final ExpectedGrade modelExpectedGrade = new ExpectedGrade(expectedGrade);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
+        if (modelTags.size() > Tag.MAX_TAGS_IN_SET) {
+            throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS_ADD_SET);
+        }
 
         // IF paymentFee field is missing, it will be set as 0 by default. Therefore, no checks needed.
         if (!PaymentInfo.isValidFee(paymentFee)) {

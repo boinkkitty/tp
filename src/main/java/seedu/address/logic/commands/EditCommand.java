@@ -99,6 +99,10 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
+        if (editedPerson.getTags().size() > Tag.MAX_TAGS_IN_SET) {
+            throw new CommandException(Tag.MESSAGE_CONSTRAINTS_EDIT_SET);
+        }
+
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
@@ -177,8 +181,8 @@ public class EditCommand extends Command {
         private CurrentYear currentYear;
         private CurrentGrade currentGrade;
         private Set<Tag> tags;
-        private Set<Tag> tagsToRemove;
         private Set<Tag> tagsToAppend;
+        private Set<Tag> tagsToRemove;
         private EduLevel eduLevel;
 
 
@@ -200,8 +204,8 @@ public class EditCommand extends Command {
             setCurrentYear(toCopy.currentYear);
             setCurrentGrade(toCopy.currentGrade);
             setTags(toCopy.tags);
-            setTagsToRemove(toCopy.tagsToRemove);
             setTagsToAppend(toCopy.tagsToAppend);
+            setTagsToRemove(toCopy.tagsToRemove);
 
         }
 
@@ -344,8 +348,8 @@ public class EditCommand extends Command {
                     && Objects.equals(currentGrade, otherEditPersonDescriptor.currentGrade)
                     && Objects.equals(expectedGrade, otherEditPersonDescriptor.expectedGrade)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags)
-                    && Objects.equals(tagsToRemove, otherEditPersonDescriptor.tagsToRemove)
-                    && Objects.equals(tagsToAppend, otherEditPersonDescriptor.tagsToAppend);
+                    && Objects.equals(tagsToAppend, otherEditPersonDescriptor.tagsToAppend)
+                    && Objects.equals(tagsToRemove, otherEditPersonDescriptor.tagsToRemove);
         }
 
         @Override
@@ -360,6 +364,8 @@ public class EditCommand extends Command {
                     .add("currentGrade", currentGrade)
                     .add("expectedGrade", expectedGrade)
                     .add("tags", tags)
+                    .add("tagsToAppend", tagsToAppend)
+                    .add("tagsToRemove", tagsToRemove)
                     .toString();
         }
     }

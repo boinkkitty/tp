@@ -9,10 +9,10 @@ public class GuiSettingsTest {
     public void testGuiSettings() {
         GuiSettings guiSettings = new GuiSettings();
 
-        assertEquals(guiSettings.getWindowWidth(), 740);
-        assertEquals(guiSettings.getWindowHeight(), 600);
-        assertEquals(guiSettings.getWindowCoordinates(), null);
-        assertEquals(guiSettings.getIsDarkTheme(), true);
+        assertEquals(1080, guiSettings.getWindowWidth());
+        assertEquals(600, guiSettings.getWindowHeight());
+        assertEquals(null, guiSettings.getWindowCoordinates());
+        assertEquals(true, guiSettings.getIsDarkTheme());
     }
 
     @Test

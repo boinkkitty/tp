@@ -52,7 +52,7 @@ TutorSynch is a **desktop app for managing student contacts and academic details
 * Items in square brackets are optional.<br>
   e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items with `…` after them can be used multiple times including zero times.<br>
+* Items with `…` after them can be used less than or equals to 8 times, including zero times.<br>
   e.g. `[t/TAG]…` can be used as ` ` (i.e. 0 times), `t/cs4238`, `t/cs2103 t/GEA1000` etc.
 
 * Any tags can be written as an alphanumeric tag, accompanied by `#` followed by 6 hexadecimal color code. (E.g. `CS2040C#ED9E49`)
@@ -66,6 +66,26 @@ TutorSynch is a **desktop app for managing student contacts and academic details
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+</div>
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Constraints:**<br>
+
+* NAME must be between 1 and 85 characters. (Do note that extremely long NAME may be truncated unless you increase the window size)
+
+* EMAIL must be between 1 and 110 characters. (Do note that extremely long EMAIL may be truncated unless you increase the window size)
+
+* ADDRESS must be between 1 and 110 characters. (Do note that extremely long ADDRESS may be truncated unless you increase the window size)
+
+* CURRENT_YEAR must be between 1 and 30 characters.
+
+* Each TAG (before the optional #HEX code) must be alphanumeric and at most 10 characters.
+
+* Tags can include an optional hexadecimal color code in the format #RRGGBB (e.g., t/cs2040#FFAABB).
+
+* A maximum of 8 unique TAGs is allowed per person.
+
+* Parameters must conform to their respective formats and constraints; otherwise, the command may be rejected.
+
 </div>
 
 ### Viewing help : `help`
@@ -84,12 +104,17 @@ Adds a person to the address book.
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [l/EDU_LEVEL] [cy/CURRENT_YEAR] [cg/CURRENT_GRADE] [eg/EXP_GRADE] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+A person can have less than or equals to 8 unique tags each (including 0).
+</div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can add a hexadecimal color code to any tag by appending `#RRGGBB` after the tag name.
+For example: `t/CS2040#ED9E49`. This allows tags to be visually color-coded in the UI.
 </div>
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 cg/C+ t/cs2040s`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 cg/C+ t/CS2030C`
 
 ### Listing all persons : `list`
 
@@ -107,6 +132,15 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [l/EDU_LEVEL] [cy/C
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+A person can have less than or equals to 8 unique tags each (including 0).
+</div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can add a hexadecimal color code to any tag by appending `#RRGGBB` after the tag name.
+For example: `t/CS2040#ED9E49`. This allows tags to be visually color-coded in the UI.
+</div>
+
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 
@@ -116,13 +150,13 @@ Examples:
 1. Tags prefixed with `t/` form the new list of tags (overwriting the old tags), if none are provided, old list of tags is used for the next steps.
 2. Tags prefixed with `t+/` are added to the current list. If the tag already exists, the updated list remains unchanged as tags are unique.
 3. Tags prefixed with `t-/` are removed from the list provided by the last step. If the tag to be removed does not exist, the app silently continues with the rest.
-4. The final tag list is updated to the person.
+4. The final tag list is updated to the person, and should have less than or equals to 8 unique tags.
 
 Examples:
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 *  `edit 2 t-/Maths` Edits the tags of the 2nd person by removing `Maths` from existing list of tags.
 *  `edit 1 t/Maths t/Science t-/Science ` Edits the tags of the 2nd person by clearing all existing tags and adding **only** `Maths`.
-*  `edit 1 t+/friend t+/owesMoney` appends friend and owesMoney to existing tags (without overwriting or removing).
+*  `edit 1 t+/friend t+/CS2030C#1E3BC3` appends `friend` and `CS2030C#1E3BC3` to existing tags (without overwriting or removing).
 
 ### Bulk removal of tags: `untag`
 
@@ -262,16 +296,17 @@ If your changes to the data file makes its format invalid, TutorSynch will disca
 Furthermore, certain edits can cause the TutorSynch to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TutorSynch home folder.
+**A**: Install the app on the other computer. After it runs once, it will create a default data file at `[JAR file location]/data/addressbook.json`. To transfer your data, overwrite this file with the `addressbook.json` file from your original computer.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Before doing this, ensure that the data file is valid and has not been corrupted or manually edited in a way that breaks the expected format. Invalid or out-of-range values may cause TutorSynch to start with an empty data file or behave unpredictably.<br>
+It's strongly recommended to make a backup of your data file before any manual edits or transfers.
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -279,24 +314,25 @@ _Details coming soon ..._
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. **If you need to see your truncated NAME, EMAIL or ADDRESS**, increase your window size for the application until it is no longer truncated.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
-| Action           | Format, Examples                                                                                                                                                                                                                                        |
-|------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**          | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [l/ EDUCATION_LEVEL] [cy/CURRENT_YEAR] [cg/CURRENT_GRADE] [eg/EXPECTED_GRADE] [t/TAG]…` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 cg/D t/friend t/colleague` |
-| **Purge**        | `purge`                                                                                                                                                                                                                                                 |
-| **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                                                     |
-| **Clear**        | `clear i/START_INDEX...END_INDEX` OR `clear t/TAG [t/TAG]`                                                                                                                                                                                              |
-| **Edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [cy/CURRENT_YEAR] [cg/CURRENT_GRADE] [eg/EXPECTED_GRADE] [t/TAG]… [t+/TAGS_TO_APPEND]… [t-/TAGS_TO_REMOVE]…`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com t+/CS2040C#1E2C4D`         |
-| **Untag**        | `untag t/TAG [t/TAG]...`<br> e.g., `untag t/Math t/Science`                                                                                                                                                                                             |
-| **Payment**      | `payment INDEX [f/FEE] [d/PAYMENT_DATE] [s/PAYMENT_STATUS]`<br> e.g., `payment 1 f/1000 d/14-11-2000 s/paid`                                                                                                                                            |
-| **Find**         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                                              |
-| **Sort**         | `sort`                                                                                                                                                                                                                                                  |
-| **Filter**       | `filter [l/EDU_LEVEL] [cg/CURRENT_GRADE] [eg/EXP_GRADE] [t/TAG]…`                                                                                                                                                                                       |
-| **List**         | `list`                                                                                                                                                                                                                                                  |
-| **Help**         | `help`                                                                                                                                                                                                                                                  |
-| **Switch Theme** | `toggletheme`                                                                                                                                                                                                                                           |
-| **Exit**         | `exit`                                                                                                                                                                                                                                                  |
+| Action           | Format, Examples                                                                                                                                                                                                                                       |
+|------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**          | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [l/ EDUCATION_LEVEL] [cy/CURRENT_YEAR] [cg/CURRENT_GRADE] [eg/EXPECTED_GRADE] [t/TAG]…` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 cg/D t/CS2030C t/friends` |
+| **Purge**        | `purge`                                                                                                                                                                                                                                                |
+| **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                                                    |
+| **Clear**        | `clear i/START_INDEX...END_INDEX` OR `clear t/TAG [t/TAG]`                                                                                                                                                                                             |
+| **Edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [cy/CURRENT_YEAR] [cg/CURRENT_GRADE] [eg/EXPECTED_GRADE] [t/TAG]… [t+/TAGS_TO_APPEND]… [t-/TAGS_TO_REMOVE]…`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com t+/CS2040C#1E2C4D`        |
+| **Untag**        | `untag t/TAG [t/TAG]...`<br> e.g., `untag t/Math t/Science`                                                                                                                                                                                            |
+| **Payment**      | `payment INDEX [f/FEE] [d/PAYMENT_DATE] [s/PAYMENT_STATUS]`<br> e.g., `payment 1 f/1000 d/14-11-2000 s/paid`                                                                                                                                           |
+| **Find**         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                                             |
+| **Sort**         | `sort`                                                                                                                                                                                                                                                 |
+| **Filter**       | `filter [l/EDU_LEVEL] [cg/CURRENT_GRADE] [eg/EXP_GRADE] [t/TAG]…`                                                                                                                                                                                      |
+| **List**         | `list`                                                                                                                                                                                                                                                 |
+| **Help**         | `help`                                                                                                                                                                                                                                                 |
+| **Switch Theme** | `toggletheme`                                                                                                                                                                                                                                          |
+| **Exit**         | `exit`                                                                                                                                                                                                                                                 |

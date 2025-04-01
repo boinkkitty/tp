@@ -44,8 +44,8 @@ public class AddCommand extends Command {
             + PREFIX_CURRENT_YEAR + "Year 1 "
             + PREFIX_CURRENT_GRADE + "C "
             + PREFIX_EXP_GRADE + "A "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney ";
+            + PREFIX_TAG + "CS2030C "
+            + PREFIX_TAG + "GEA1000 ";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
