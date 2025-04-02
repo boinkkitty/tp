@@ -2,9 +2,6 @@
 !include style.puml
 skinparam ArrowFontStyle plain
 
-title "Sort Command Sequence Diagram"
-
-actor User
 
 ' -- Box for Logic layer
 box Logic LOGIC_COLOR_T1
@@ -15,12 +12,12 @@ participant ":SortCommand" as SortCommand LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
-' -- Box for Model layer
+
 box Model MODEL_COLOR_T1
 participant "m:Model" as Model MODEL_COLOR
 end box
 
-User -> LogicManager: "sort"
+[-> LogicManager : execute("sort")
 activate LogicManager
 
 LogicManager -> AddressBookParser: parseCommand("sort")
@@ -45,7 +42,7 @@ destroy SortCommandParser
 AddressBookParser -> SortCommandParser: parse("sort")
 
 activate SortCommandParser
-SortCommandParser -> SortCommandParser: parse("sort")
+
 ' Create and return new SortCommand
 create SortCommand
 SortCommandParser -> SortCommand
