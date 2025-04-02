@@ -1,0 +1,85 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":UntagCommandParser" as UntagCommandParser LOGIC_COLOR
+participant "ut:UntagCommand" as UntagCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+participant "p:Person" as Person MODEL_COLOR
+end box
+
+[-> LogicManager : execute("untag t/CS2040 t/Math")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("untag t/CS2040 t/Math")
+activate AddressBookParser
+
+create UntagCommandParser
+AddressBookParser -> UntagCommandParser
+activate UntagCommandParser
+
+UntagCommandParser --> AddressBookParser
+deactivate UntagCommandParser
+
+AddressBookParser -> UntagCommandParser : parse("t/CS2040 t/Math")
+activate UntagCommandParser
+
+create UntagCommand
+UntagCommandParser -> UntagCommand
+activate UntagCommand
+
+UntagCommand --> UntagCommandParser :
+deactivate UntagCommand
+
+UntagCommandParser --> AddressBookParser : ut
+deactivate UntagCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+UntagCommandParser -[hidden]-> AddressBookParser
+destroy UntagCommandParser
+
+AddressBookParser --> LogicManager : ut
+deactivate AddressBookParser
+
+LogicManager -> UntagCommand : execute(m)
+activate UntagCommand
+
+UntagCommand -> Model : getFilteredPersonList()
+activate Model
+Model --> UntagCommand : filteredList
+deactivate Model
+
+
+loop for each p in filteredList
+    UntagCommand -> Person : getTags()
+    activate Person
+    Person --> UntagCommand
+    deactivate Person
+
+    UntagCommand -> Model : setPerson(personToUntag, updatedPerson)
+    activate Model
+    Model --> UntagCommand
+    deactivate Model
+end
+
+
+create CommandResult
+UntagCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> UntagCommand
+deactivate CommandResult
+
+UntagCommand --> LogicManager : r
+deactivate UntagCommand
+
+[<--LogicManager
+deactivate LogicManager
+
+@enduml
