@@ -176,6 +176,7 @@ The following diagram shows the interaction flow for the command — `sort`. Thi
 ![SortCommandSequenceDiagram](images/SortCommandSequence.png))
 
 
+
 ## **Documentation, logging, testing, configuration, dev-ops**
 
 - [Documentation guide](Documentation.md)
