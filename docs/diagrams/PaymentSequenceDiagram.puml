@@ -52,16 +52,16 @@ activate PaymentCommand
 PaymentCommand -> Model : getFilteredPersonList()
 activate Model
 
-Model --> PaymentCommand : fP
+Model --> PaymentCommand
 deactivate Model
 
-PaymentCommand -> Model : setPerson(pTE, eP)
+PaymentCommand -> Model : setPerson(personToEdit, editedPerson)
 activate Model
 
 Model --> PaymentCommand
 deactivate Model
 
-PaymentCommand -> Model : updateFilteredPersonList(PSAP)
+PaymentCommand -> Model : updateFilteredPersonList(PREDICATE)
 activate Model
 
 Model --> PaymentCommand
