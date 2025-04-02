@@ -437,7 +437,7 @@ Guarantees:
 **Use case: UC08 - Remove tags from all students**
 
 **Preconditions:**
-- At least one student must exist
+- At least one student must exist.
 - Tags to remove are specified.
 
 **Guarantees:**
@@ -446,8 +446,8 @@ Guarantees:
 **MSS**
 
 1. User enters the `untag` command with one or more tags.
-2. TutorSynch removes all occurrences of the specified tags from every student
-3. TutorSynch shows the updated student list reflecting tag removal
+2. TutorSynch removes all occurrences of the specified tags from every student.
+3. TutorSynch shows the updated student list reflecting tag removal.
 
 **Extensions**
 
@@ -488,8 +488,8 @@ Guarantees:
 **MSS**
 
 1. User enters clear with either:
-   2. a valid index range, or 
-   3. one or more tags. 
+   1. a valid index range, or 
+   2. one or more tags. 
 2. TutorSynch validates input.
 3. TutorSynch deletes matching students.
 4. TutorSynch shows the updated student list.
