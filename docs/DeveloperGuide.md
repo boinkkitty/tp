@@ -169,6 +169,16 @@ The following diagram shows the interaction flow for the command — `payment 1 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `PaymentCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </div>
 
+### `Sort` Command Feature
+
+The following diagram shows the interaction flow for the command — `sort`. This sorts the names in the list alphabetically.
+<puml src="diagrams/SortCommandSequence.puml" width="550" />
+![SortCommandSequenceDiagram](images/SortCommandSequence.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `SortCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</div>
+
+
 ## **Documentation, logging, testing, configuration, dev-ops**
 
 - [Documentation guide](Documentation.md)
@@ -385,12 +395,8 @@ Guarantees:
 **MSS**
 
 1. User requests to perform a bulk deletion.
-2. TutorSynch requests for confirmation.
-3. User confirms.
-4. TutorSynch requests for a second confirmation.
-5. User confirms.
-6. TutorSynch deletes **ALL** student records.
-7. TutorSynch informs the user of the bulk deletion.
+2. TutorSynch deletes **ALL** student records.
+3. TutorSynch informs the user of the bulk deletion.
 
    Use case ends.
 
@@ -436,6 +442,74 @@ Guarantees:
   - 1a2. TutorSynch terminates the comparison process.
 
     Use case ends.
+
+  
+**Use case: UC08 - Remove tags from all students**
+
+**Preconditions:**
+- At least one student must exist.
+- Tags to remove are specified.
+
+**Guarantees:**
+- All occurrences of specified tags are removed from all student records.
+
+**MSS**
+
+1. User enters the `untag` command with one or more tags.
+2. TutorSynch removes all occurrences of the specified tags from every student.
+3. TutorSynch shows the updated student list reflecting tag removal.
+
+**Extensions**
+
+* 1a. No students have any of the specified tags.
+    * 1a1. TutorSynch completes silently with no changes.
+* 1b. Invalid tag formatting is detected.
+  * 1b1. TutorSynch shows an error message.
+
+**Use case: UC09 – Sort student list alphabetically**
+
+**Guarantees:**
+
+- Student list is displayed in alphabetical order by name.
+
+**MSS**
+
+1. User enters the sort command.
+2. TutorSynch sorts the existing student list alphabetically.
+3. TutorSynch displays the sorted list.
+
+**Extensions**
+
+* 1a. Student list is empty.
+  * 1a1. TutorSynch shows a message indicating the list is empty.
+
+
+**Use case: UC10 – Bulk delete using `clear` command by index range or tags**
+
+**Preconditions:**
+
+- At least one student exists.
+- User provides either a valid index range or valid tags.
+
+**Guarantees:**
+
+- Student records in the given index range or with matching tags are permanently deleted.
+
+**MSS**
+
+1. User enters clear with either:
+   1. a valid index range, or 
+   2. one or more tags. 
+2. TutorSynch validates input.
+3. TutorSynch deletes matching students.
+4. TutorSynch shows the updated student list.
+
+**Extensions**
+
+* 1a. Index range is invalid.
+  * 1a1. TutorSynch shows an error message.
+* 1b. No students match the given tags.
+    * 1b1. TutorSynch displays a message indicating no students found.
 
 ### Non-Functional Requirements
 
