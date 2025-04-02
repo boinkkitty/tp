@@ -4,32 +4,37 @@ title "Sort Command Sequence Diagram"
 
 actor User
 
-User -> Logic : "sort"
+User -> Logic: "sort"
 activate Logic
 
-Logic -> AddressBookParser : parseCommand("sort")
+Logic -> AddressBookParser: parseCommand("sort")
 activate AddressBookParser
 
-AddressBookParser -> SortCommandParser : parse("sort")
+' AddressBookParser creates a new SortCommandParser
+AddressBookParser -> AddressBookParser: new SortCommandParser()
+create SortCommandParser
 activate SortCommandParser
-SortCommandParser --> AddressBookParser : new SortCommand()
+
+AddressBookParser -> SortCommandParser: parse("sort")
+SortCommandParser--> SortCommandParser: parse("sort")
+SortCommandParser --> AddressBookParser: new SortCommand()
 deactivate SortCommandParser
 
-AddressBookParser --> Logic : SortCommand
+AddressBookParser --> Logic: SortCommand
 deactivate AddressBookParser
 
-Logic -> SortCommand : execute()
+Logic -> SortCommand: execute()
 activate SortCommand
 
-SortCommand -> Model : sortPersonsByName()
+SortCommand -> Model: sortPersonsByName()
 activate Model
-Model --> Model : reorder internal person list
+Model -> Model: reorder internal person list
 deactivate Model
 
-SortCommand --> Logic : CommandResult("Sorted all persons by name.")
+SortCommand --> Logic: CommandResult("Sorted all persons by name.")
 deactivate SortCommand
 
-Logic -> User : display CommandResult
+Logic -> User: display CommandResult
 deactivate Logic
 
 @enduml
