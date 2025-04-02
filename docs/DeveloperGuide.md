@@ -169,6 +169,13 @@ The following diagram shows the interaction flow for the command — `payment 1 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `PaymentCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </div>
 
+### `Sort` Command Feature
+
+The following diagram shows the interaction flow for the command — `sort`. This sorts the names in the list alphabetically.
+<puml src="diagrams/SortCommandSequence.puml" width="550" />
+![SortCommandSequenceDiagram](images/SortCommandSequence.png))
+
+
 ## **Documentation, logging, testing, configuration, dev-ops**
 
 - [Documentation guide](Documentation.md)
