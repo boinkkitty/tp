@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -50,6 +51,11 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane statusbarPlaceholder;
 
+    @FXML
+    private MenuItem themeSwitch;
+
+    private boolean isDarkTheme = true;
+
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
@@ -62,6 +68,7 @@ public class MainWindow extends UiPart<Stage> {
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
+        setTheme(logic.getGuiSettings());
 
         setAccelerators();
 
@@ -157,7 +164,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void handleExit() {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY());
+                (int) primaryStage.getX(), (int) primaryStage.getY(), isDarkTheme);
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
@@ -186,11 +193,57 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            if (commandResult.isToggleTheme()) {
+                switchTheme();
+            }
+
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    /**
+     * Sets GUI theme based on {@code guiSettings}.
+     */
+    private void setTheme(GuiSettings guiSettings) {
+        Scene scene = primaryStage.getScene(); // Get the scene from the primary stage
+
+        if (guiSettings.getIsDarkTheme()) {
+            scene.getStylesheets().clear();
+            scene.getStylesheets().add(getClass().getResource("/view/DarkTheme.css").toExternalForm());
+        } else {
+            scene.getStylesheets().clear();
+            scene.getStylesheets().add(getClass().getResource("/view/LightTheme.css").toExternalForm());
+        }
+
+        this.isDarkTheme = guiSettings.getIsDarkTheme();
+    }
+
+    /**
+     * Switches between light and dark themes for the application.
+     *
+     * The method uses the {@code isDarkTheme} flag to determine which theme is currently
+     * applied, and after switching the theme, it toggles the flag to reflect the change.
+     *
+     * @see #isDarkTheme
+     */
+    @FXML
+    public void switchTheme() {
+        Scene scene = primaryStage.getScene(); // Get the scene from the primary stage
+
+        // Toggle between themes
+        if (isDarkTheme) {
+            scene.getStylesheets().clear();
+            scene.getStylesheets().add(getClass().getResource("/view/LightTheme.css").toExternalForm());
+        } else {
+            scene.getStylesheets().clear();
+            scene.getStylesheets().add(getClass().getResource("/view/DarkTheme.css").toExternalForm());
+        }
+
+        // Toggle the theme flag
+        isDarkTheme = !isDarkTheme;
     }
 }

@@ -58,6 +58,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         EduLevel eduLevel = ParserUtil.parseEduLevel(argMultimap.getValue(PREFIX_EDULEVEL).orElse(""));
 
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        if (tagList.size() > Tag.MAX_TAGS_IN_SET) {
+            throw new ParseException(Tag.MESSAGE_CONSTRAINTS_ADD_SET);
+        }
         CurrentYear currentYear = ParserUtil.parseCurrentYear(argMultimap.getValue(PREFIX_CURRENT_YEAR)
             .orElse(""));
         CurrentGrade currentGrade = ParserUtil.parseCurrentGrade(argMultimap
@@ -65,7 +68,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         ExpectedGrade expectedGrade = ParserUtil.parseExpectedGrade(argMultimap.getValue(PREFIX_EXP_GRADE).orElse(""));
 
         // Add command does not allow adding paymentInfo straight away
-        PaymentInfo paymentInfo = new PaymentInfo();
+        PaymentInfo paymentInfo = new PaymentInfo.Builder().build();
 
         Person person = new Person(name, phone, email, address, eduLevel, currentYear, currentGrade, expectedGrade,
                 tagList, paymentInfo);

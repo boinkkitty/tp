@@ -57,9 +57,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label expectedGrade;
     @FXML
-    private Label paymentFee;
-    @FXML
-    private Label paymentDate;
+    private Label paymentInfo;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -100,18 +98,7 @@ public class PersonCard extends UiPart<Region> {
         }
 
         PaymentInfo paymentInfo = person.getPaymentInfo();
-
-        if (paymentInfo.getPaymentFee() == 0) {
-            hideDetailsLabel(paymentFee);
-        } else {
-            paymentFee.setText("Tutoring Fee: $" + paymentInfo.getPaymentFee());
-        }
-
-        if (paymentInfo.getPaymentDate().isEmpty()) {
-            hideDetailsLabel(paymentDate);
-        } else {
-            paymentDate.setText("Payment Date: " + paymentInfo.getPaymentDate());
-        }
+        updatePaymentInfo(paymentInfo);
 
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.fullTag))
@@ -150,5 +137,42 @@ public class PersonCard extends UiPart<Region> {
         }
 
         return label;
+    }
+
+    /**
+     * A helper function to update the text of the Payment Info field given {@code paymentInfo}.
+     * @param paymentInfo A valid paymentInfo object.
+     */
+    private void updatePaymentInfo(PaymentInfo paymentInfo) {
+        boolean hasFee = paymentInfo.getPaymentFee() > 0;
+        boolean hasDate = !paymentInfo.getPaymentDate().isEmpty();
+        boolean hasStatus = !paymentInfo.getPaymentStatus().isEmpty();
+
+        // Build the string dynamically based on what fields are available
+        StringBuilder sb = new StringBuilder("Payment Info: ");
+
+        if (!hasFee && !hasDate && !hasStatus) {
+            hideDetailsLabel(this.paymentInfo);
+        }
+
+        if (hasFee) {
+            sb.append("$").append(paymentInfo.getPaymentFee()).append(" ");
+        }
+        if (hasStatus) {
+            sb.append(paymentInfo.getPaymentStatus()).append(" ");
+        }
+        if (hasDate) {
+            if (hasFee || hasStatus) {
+                sb.append("(Due ").append(paymentInfo.getPaymentDate()).append(")");
+            } else {
+                sb.append("Due ").append(paymentInfo.getPaymentDate());
+            }
+        }
+
+        this.paymentInfo.setText(sb.toString());
+
+        if (!paymentInfo.getPaymentDate().isEmpty() || !paymentInfo.getPaymentStatus().isEmpty()) {
+            this.paymentInfo.setStyle("-fx-text-fill: " + ColorUtil.getPaymentInfoColor(paymentInfo));
+        }
     }
 }

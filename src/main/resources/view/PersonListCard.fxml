@@ -14,8 +14,8 @@
 
     <GridPane HBox.hgrow="ALWAYS">
         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" percentWidth="60" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" percentWidth="40" />
         </columnConstraints>
         <VBox fx:id="personCardLeft" alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0" GridPane.vgrow="ALWAYS">
             <padding>
@@ -44,8 +44,7 @@
                 <Label fx:id="currentYear" styleClass="cell_small_label" text="\$currentYear" />
                 <Label fx:id="currentGrade" styleClass="cell_small_label" text="\$currentGrade" />
                 <Label fx:id="expectedGrade" styleClass="cell_small_label" text="\$expectedGrade" />
-                <Label fx:id="paymentFee" styleClass="cell_small_label" text="\$paymentFee" />
-                <Label fx:id="paymentDate" styleClass="cell_small_label" text="\$paymentDate" />
+                <Label fx:id="paymentInfo" styleClass="cell_small_label" text="\$paymentInfo" />
             </children>
         </VBox>
 

@@ -12,7 +12,8 @@ Given below are my contributions to the project.
 * Feature 1: Added `Current Grade` field to student's information
     * Allows tutor to store the expected grade of the student and keep track of student's progress
     * Tested functionality of feature with empty inputs and duplicate `eg/` fields
-
+* Feature 2: Added `filter` feature to filter persons list using conditions
+  * Allows tutors to view all students who meet the same filter conditions
 * **Documentation**:
     * User Guide:
       * Added fields to command format and examples for 'add' and 'edit' command

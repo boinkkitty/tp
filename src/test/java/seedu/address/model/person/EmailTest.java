@@ -20,6 +20,36 @@ public class EmailTest {
     }
 
     @Test
+    public void isValidLength() {
+        // Invalid email but valid length
+        assertTrue(Email.isValidLength(""));
+
+        // Valid email
+        assertTrue(Email.isValidLength("test@gmail.com"));
+
+        // Email length of 110 - valid as within limit
+        assertTrue(Email.isValidLength("abcdefghijklmnopqrstabcdefghijklmnopqrstabcdefghijklmnopqrst"
+                + "abcdefghijklmnopqrstabcdefghijklmnopqrst@gmail.com"));
+
+        // Email length of 111 - invalid as exceeds limit
+        assertFalse(Email.isValidLength("abcdefghijklmnopqrstabcdefghijklmnopqrstabcdefghijklmnopqrst"
+                + "abcdefghijklmnopqrstabcdefghijklmnopqrstA@gmail.com"));
+
+        // Super long email - meant to fail
+        assertFalse(Email.isValidLength(
+                "Absurdlylongemailthatismeanttofailanditshouldfailandonlyfailandnotpass"
+                        + "Absurdlylongemailthatismeanttofailanditshouldfailandonlyfailandnotpass"
+                        + "Absurdlylongemailthatismeanttofailanditshouldfailandonlyfailandnotpass"
+                        + "Absurdlylongemailthatismeanttofailanditshouldfailandonlyfailandnotpass"
+                        + "Absurdlylongemailthatismeanttofailanditshouldfailandonlyfailandnotpass"
+                        + "Absurdlylongemailthatismeanttofailanditshouldfailandonlyfailandnotpass"
+                        + "Absurdlylongemailthatismeanttofailanditshouldfailandonlyfailandnotpass"
+                        + "Absurdlylongemailthatismeanttofailanditshouldfailandonlyfailandnotpass"
+                        + "Absurdlylongemailthatismeanttofailanditshouldfailandonlyfailandnotpass"
+                        + "@gmail.com"));
+    }
+
+    @Test
     public void isValidEmail() {
         // null email
         assertThrows(NullPointerException.class, () -> Email.isValidEmail(null));
@@ -51,6 +81,9 @@ public class EmailTest {
         assertFalse(Email.isValidEmail("peterjack@-example.com")); // domain name starts with a hyphen
         assertFalse(Email.isValidEmail("peterjack@example.com-")); // domain name ends with a hyphen
         assertFalse(Email.isValidEmail("peterjack@example.c")); // top level domain has less than two chars
+        assertFalse(Email.isValidEmail("abcdefghijklmnopqrstabcdefghijklmnopqrstabcdefghijklmnopqrst"
+                + "abcdefghijklmnopqrstabcdefghijklmnopqrstA@gmail.com")); // exceeds limit
+
 
         // valid email
         assertTrue(Email.isValidEmail("PeterJack_1190@example.com")); // underscore in local part
@@ -64,6 +97,8 @@ public class EmailTest {
         assertTrue(Email.isValidEmail("peter_jack@very-very-very-long-example.com")); // long domain name
         assertTrue(Email.isValidEmail("if.you.dream.it_you.can.do.it@example.com")); // long local part
         assertTrue(Email.isValidEmail("e1234567@u.nus.edu")); // more than one period in domain
+        assertTrue(Email.isValidEmail("abcdefghijklmnopqrstabcdefghijklmnopqrstabcdefghijklmnopqrst"
+                + "abcdefghijklmnopqrstabcdefghijklmnopqrst@gmail.com")); // max limit
     }
 
     @Test

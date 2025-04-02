@@ -41,6 +41,7 @@ class JsonAdaptedPerson {
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final int paymentFee;
     private final String paymentDate;
+    private final String paymentStatus;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -51,7 +52,7 @@ class JsonAdaptedPerson {
             @JsonProperty("eduLevel") String eduLevel, @JsonProperty("currentYear") String currentYear,
             @JsonProperty("currentGrade") String currentGrade, @JsonProperty("expectedGrade") String expectedGrade,
             @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("paymentFee") int paymentFee,
-        @JsonProperty("paymentDate") String paymentDate) {
+            @JsonProperty("paymentDate") String paymentDate, @JsonProperty("paymentStatus") String paymentStatus) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -65,6 +66,7 @@ class JsonAdaptedPerson {
         }
         this.paymentFee = paymentFee;
         this.paymentDate = Objects.requireNonNullElse(paymentDate, "");
+        this.paymentStatus = Objects.requireNonNullElse(paymentStatus, "");
     }
 
     /**
@@ -84,6 +86,7 @@ class JsonAdaptedPerson {
                 .collect(Collectors.toList()));
         paymentFee = source.getPaymentInfo().getPaymentFee();
         paymentDate = source.getPaymentInfo().getPaymentDate();
+        paymentStatus = source.getPaymentInfo().getPaymentStatus();
     }
 
     /**
@@ -167,6 +170,9 @@ class JsonAdaptedPerson {
         final ExpectedGrade modelExpectedGrade = new ExpectedGrade(expectedGrade);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
+        if (modelTags.size() > Tag.MAX_TAGS_IN_SET) {
+            throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS_ADD_SET);
+        }
 
         // IF paymentFee field is missing, it will be set as 0 by default. Therefore, no checks needed.
         if (!PaymentInfo.isValidFee(paymentFee)) {
@@ -178,7 +184,14 @@ class JsonAdaptedPerson {
         if (!PaymentInfo.isValidDate(paymentDate)) {
             throw new IllegalValueException(PaymentInfo.MESSAGE_CONSTRAINTS_DATE);
         }
-        final PaymentInfo paymentInfo = new PaymentInfo(paymentFee, paymentDate);
+        if (paymentStatus == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "[paymentStatus]"));
+        }
+        if (!PaymentInfo.isValidStatus(paymentStatus)) {
+            throw new IllegalValueException(PaymentInfo.MESSAGE_CONSTRAINTS_STATUS);
+        }
+        final PaymentInfo paymentInfo = new PaymentInfo.Builder().setPaymentFee(paymentFee)
+                .setPaymentDate(paymentDate).setPaymentStatus(paymentStatus).build();
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelEduLevel, modelCurrentYear,
                 modelCurrentGrade, modelExpectedGrade, modelTags, paymentInfo);

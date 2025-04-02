@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_FEE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_STATUS;
 
 import java.util.stream.Stream;
 
@@ -24,7 +25,7 @@ public class PaymentCommandParser implements Parser<PaymentCommand> {
     public PaymentCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_PAYMENT_FEE, PREFIX_PAYMENT_DATE);
+                ArgumentTokenizer.tokenize(args, PREFIX_PAYMENT_FEE, PREFIX_PAYMENT_DATE, PREFIX_PAYMENT_STATUS);
 
         if (argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, PaymentCommand.MESSAGE_USAGE));
@@ -37,7 +38,7 @@ public class PaymentCommandParser implements Parser<PaymentCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, PaymentCommand.MESSAGE_USAGE), pe);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PAYMENT_FEE, PREFIX_PAYMENT_DATE);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PAYMENT_FEE, PREFIX_PAYMENT_DATE, PREFIX_PAYMENT_STATUS);
 
         int paymentFee;
         if (argMultimap.getValue(PREFIX_PAYMENT_FEE).isPresent()) {
@@ -53,7 +54,14 @@ public class PaymentCommandParser implements Parser<PaymentCommand> {
             paymentDate = "";
         }
 
-        return new PaymentCommand(index, paymentFee, paymentDate);
+        String paymentStatus;
+        if (argMultimap.getValue(PREFIX_PAYMENT_STATUS).isPresent()) {
+            paymentStatus = ParserUtil.parsePaymentStatus(argMultimap.getValue(PREFIX_PAYMENT_STATUS).get());
+        } else {
+            paymentStatus = "";
+        }
+
+        return new PaymentCommand(index, paymentFee, paymentDate, paymentStatus);
     }
 
     /**

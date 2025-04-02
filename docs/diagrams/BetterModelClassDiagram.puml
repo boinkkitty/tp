@@ -18,4 +18,9 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
+Person *--> EduLevel
+Person *--> CurrentYear
+Person *--> CurrentGrade
+Person *--> ExpectedGrade
+Person *--> PaymentInfo
 @enduml
