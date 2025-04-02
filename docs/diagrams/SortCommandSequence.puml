@@ -1,40 +1,86 @@
 @startuml
+!include style.puml
+skinparam ArrowFontStyle plain
 
 title "Sort Command Sequence Diagram"
 
 actor User
 
-User -> Logic: "sort"
-activate Logic
+' -- Box for Logic layer
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":SortCommandParser" as SortCommandParser LOGIC_COLOR
+participant ":SortCommand" as SortCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
 
-Logic -> AddressBookParser: parseCommand("sort")
+' -- Box for Model layer
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+User -> LogicManager: "sort"
+activate LogicManager
+
+LogicManager -> AddressBookParser: parseCommand("sort")
 activate AddressBookParser
 
-' AddressBookParser creates a new SortCommandParser
+' Create the SortCommandParser
 AddressBookParser -> AddressBookParser: new SortCommandParser()
 create SortCommandParser
+AddressBookParser -> SortCommandParser
 activate SortCommandParser
 
-AddressBookParser -> SortCommandParser: parse("sort")
-SortCommandParser--> SortCommandParser: parse("sort")
-SortCommandParser --> AddressBookParser: new SortCommand()
+' Return to show the parser was constructed
+SortCommandParser --> AddressBookParser
 deactivate SortCommandParser
+' Hidden arrow to position the destroy marker
 
-AddressBookParser --> Logic: SortCommand
-deactivate AddressBookParser
+SortCommandParser -[hidden]-> AddressBookParser
 
-Logic -> SortCommand: execute()
+destroy SortCommandParser
+
+' Now call parse(...) on the newly created parser
+AddressBookParser -> SortCommandParser: parse("sort")
+
+activate SortCommandParser
+SortCommandParser -> SortCommandParser: parse("sort")
+' Create and return new SortCommand
+create SortCommand
+SortCommandParser -> SortCommand
 activate SortCommand
 
-SortCommand -> Model: sortPersonsByName()
-activate Model
-Model -> Model: reorder internal person list
-deactivate Model
-
-SortCommand --> Logic: CommandResult("Sorted all persons by name.")
+SortCommand --> SortCommandParser
 deactivate SortCommand
 
-Logic -> User: display CommandResult
-deactivate Logic
+SortCommandParser --> AddressBookParser : s
+deactivate SortCommandParser
+SortCommandParser -[hidden]-> AddressBookParser
+destroy SortCommandParser
 
+AddressBookParser --> LogicManager : s
+deactivate AddressBookParser
+
+LogicManager -> SortCommand : execute(m)
+activate SortCommand
+
+SortCommand -> Model : sortPersonsByName()
+activate Model
+
+Model -> Model : reorder internal person list
+deactivate Model
+
+create CommandResult
+SortCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> SortCommand
+deactivate CommandResult
+
+SortCommand --> LogicManager : r
+deactivate SortCommand
+
+[<--LogicManager
+deactivate LogicManager
 @enduml
