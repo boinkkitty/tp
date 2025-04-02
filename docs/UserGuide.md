@@ -51,7 +51,7 @@ TutorSynch is a **desktop app for managing student contacts and academic details
 
 * Items in square brackets are optional.<br>
   e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-
+h
 * Items with `…` after them can be used less than or equals to 8 times, including zero times.<br>
   e.g. `[t/TAG]…` can be used as ` ` (i.e. 0 times), `t/cs4238`, `t/cs2103 t/GEA1000` etc.
 
@@ -90,7 +90,7 @@ TutorSynch is a **desktop app for managing student contacts and academic details
 
 ### Viewing help : `help`
 
-Shows a message explaining how to access the help page.
+Shows a message explaining how to access the help page. The help window will block any and all activity with the main window until it is closed.
 
 ![help message](images/helpMessage.png)
 
@@ -313,8 +313,7 @@ It's strongly recommended to make a backup of your data file before any manual e
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-3. **If you need to see your truncated NAME, EMAIL or ADDRESS**, increase your window size for the application until it is no longer truncated.
+2. **If you need to see your truncated NAME, EMAIL or ADDRESS**, increase your window size for the application until it is no longer truncated.
 
 --------------------------------------------------------------------------------------------------------------------
 
