@@ -215,6 +215,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | Tutor (Beginner User)     | List all student information                          | Look through an organized overview of all my students for easy reference and management.  |
 | `* *`    | Tutor (Beginner User)     | Search for student information by name                | Quickly retrieve student records that match the name.                                     |
 | `* *`    | Tutor (Beginner User)     | Sort my student information when listing              | Organize and view student records sorted based on a specific field.                       |
+| `*`      | Tutor (Beginner User)     | Be able to change to Dark/Light mode                  | See certain assigned colors easier.                                                       |
 | `* *`    | Tutor (Intermediate User) | Edit student information                              | Update incorrect records.                                                                 |
 | `* *`    | Tutor (Intermediate User) | Tag students into groups                              | Easily manage students by group type.                                                     |
 | `* * *`  | Tutor (Intermediate User) | Assign colors to groups                               | Visually differentiate student groups.                                                    |
@@ -222,17 +223,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | Tutor (Intermediate User) | Be able to bulk remove ALL student information        | Efficiently wipe out student records onto a clean slate.                                  |
 | `* *`    | Tutor (Intermediate User) | Be able to bulk remove certain tag from all students  | Efficiently clear outdated tags.                                                          |
 | `* *`    | Tutor (Expert User)       | Categorise student information                        | Better retrieve and organize relevant student data.                                       |
-| `* *`    | Tutor (Expert User)       | Compare student progress                              | Tailor lessons to individual needs.                                                       |
 | `* *`    | Tutor (Expert User)       | Perform bulk deletion of student information          | Efficiently clear outdated records and prepare for a new semester.                        |
 | `* *`    | Tutor (Expert User)       | Record student payments                               | Keep track of payments received.                                                          |
 | `* *`    | Tutor (Expert User)       | Update payment statuses                               | Know which students have outstanding fees.                                                |
-| `*`      | Tutor (Expert User)       | Export filtered views                                 | Save and share specific student data for analysis, reporting, or administrative purposes. |
 | `*`      | Tutor (Expert User)       | Filter students by criteria                           | Quickly find relevant students.                                                           |
-| `*`      | Tutor (Expert User)       | Generate payment summaries                            | Have a quick overview of all payments.                                                    |
-| `*`      | Tutor (Expert User)       | Generate student progress reports                     | Share insights with students or parents.                                                  |
-| `*`      | Tutor (Expert User)       | Perform conditional deletion of student information   | Efficiently clear out specific groups of student records.                                 |
-| `*`      | Tutor (Expert User)       | View student performance trends                       | Assess their progress over time.                                                          |
-| `*`      | Tutor (Beginner User)     | Be able to change to Dark/Light mode                  | See certain assigned colors easier.                                                       |
 
 ### Use cases
 
@@ -241,7 +235,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: UC01 - Add a new student**
 
-Guarantees:
+**Guarantees:**
 
 - The new student record is saved if successfully added.
 
@@ -271,12 +265,12 @@ Guarantees:
 
 **Use case: UC02 - Edit a student's information**
 
-Preconditions:
+**Preconditions:**
 
 - At least one student record exists in TutorSynch.
 - User has identified the specific student to be edited.
 
-Guarantees:
+**Guarantees:**
 
 - The existing student record is updated if successfully edited.
 
@@ -306,12 +300,12 @@ Guarantees:
 
 **Use case: UC03 - Delete a student**
 
-Preconditions:
+**Preconditions:**
 
 - At least one student record exists in TutorSynch.
 - User has identified the specific student to be deleted.
 
-Guarantees:
+**Guarantees:**
 
 - The targeting student record is removed if successfully deleted.
 
@@ -326,8 +320,10 @@ Guarantees:
 **Extensions**
 
 - 1a. TutorSynch detects that user enters an invalid student reference.
+
   - 1a1. TutorSynch shows an error message.
   - 1a2. TutorSynch terminates the delete process.
+  
     Use case ends.
 
 **Use case: UC04 - List all students**
@@ -345,16 +341,16 @@ Guarantees:
 
   - 1a1. TutorSynch informs the user of the empty list.
 
-  Use case ends.
+    Use case ends.
 
 **Use case: UC05 - Record payment information for existing student**
 
-Preconditions:
+**Preconditions:**
 
 - At least one student record exists in TutorSynch.
 - User has identified the specific student to update their payment information.
 
-Guarantees:
+**Guarantees:**
 
 - The existing student record is updated with payment information if successfully recorded.
 
@@ -382,19 +378,19 @@ Guarantees:
 
     Use case ends.
 
-**Use case: UC06 - Bulk delete student records**
+**Use case: UC06 - Bulk delete student records using `purge` command**
 
-Preconditions:
+**Preconditions:**
 
 - At least one student record exists in TutorSynch.
 
-Guarantees:
+**Guarantees:**
 
 - **ALL** existing student records will be removed.
 
 **MSS**
 
-1. User requests to perform a bulk deletion.
+1. User enters the `purge` command.
 2. TutorSynch deletes **ALL** student records.
 3. TutorSynch informs the user of the bulk deletion.
 
@@ -442,7 +438,6 @@ Guarantees:
   - 1a2. TutorSynch terminates the comparison process.
 
     Use case ends.
-
   
 **Use case: UC08 - Remove tags from all students**
 
@@ -459,12 +454,21 @@ Guarantees:
 2. TutorSynch removes all occurrences of the specified tags from every student.
 3. TutorSynch shows the updated student list reflecting tag removal.
 
+   Use case ends.
+
 **Extensions**
 
-* 1a. No students have any of the specified tags.
-    * 1a1. TutorSynch completes silently with no changes.
-* 1b. Invalid tag formatting is detected.
-  * 1b1. TutorSynch shows an error message.
+- 1a. No students have any of the specified tags.
+
+  - 1a1. TutorSynch completes silently with no changes.
+
+    Use case ends.
+  
+- 1b. Invalid tag formatting is detected.
+
+  - 1b1. TutorSynch shows an error message.
+
+    Use case ends.
 
 **Use case: UC09 – Sort student list alphabetically**
 
@@ -478,10 +482,15 @@ Guarantees:
 2. TutorSynch sorts the existing student list alphabetically.
 3. TutorSynch displays the sorted list.
 
+   Use case ends.
+
 **Extensions**
 
-* 1a. Student list is empty.
-  * 1a1. TutorSynch shows a message indicating the list is empty.
+- 1a. Student list is empty.
+
+  - 1a1. TutorSynch shows a message indicating the list is empty.
+
+    Use case ends.
 
 
 **Use case: UC10 – Bulk delete using `clear` command by index range or tags**
@@ -504,12 +513,128 @@ Guarantees:
 3. TutorSynch deletes matching students.
 4. TutorSynch shows the updated student list.
 
+   Use case ends.
+
 **Extensions**
 
-* 1a. Index range is invalid.
-  * 1a1. TutorSynch shows an error message.
-* 1b. No students match the given tags.
-    * 1b1. TutorSynch displays a message indicating no students found.
+- 1a. Index range is invalid.
+
+  - 1a1. TutorSynch shows an error message.
+
+    Use case ends.
+  
+- 1b. No students match the given tags.
+
+  - 1b1. TutorSynch displays a message indicating no students found.
+
+    Use case ends.
+
+**Use case: UC11 - Find a person by name**
+
+**Preconditions:**
+
+- At least one student exists.
+
+**Guarantees:**
+
+- Persons whose partial names contain at least one of the specified keywords will be displayed in a list.
+
+**MSS**
+
+1. User enters the `find` command followed by one or more keywords.
+2. TutorSynch searches all persons for names containing any of the given keywords.
+3. TutorSynch displays a list of matching persons.
+
+   Use case ends.
+
+**Extensions**
+
+- 3a. No matching person found.
+
+  - 3a1. TutorSynch shows an empty list with display message.
+
+    Use case ends.
+
+**Use case: UC12 - Filter persons based on conditions**
+
+**Preconditions:**
+
+- At least one student exists.
+
+**Guarantees:**
+
+- Only persons who match all the specified filter conditions are shown in the filtered list.
+
+**MSS**
+
+1. User enters the filter command followed by one or more filter conditions.
+2. TutorSynch filters the list to include only those who satisfy all the specified conditions.
+3. TutorSynch displays the filtered list.
+
+   Use case ends.
+
+**Extensions**
+
+- 1a. User provides none of the optional fields.
+
+  - 1a1. TutorSynch shows an error message.
+  
+    Use case ends.
+
+- 2a. No person matches all the filter conditions.
+
+  - 2a1. TutorSynch shows an empty list.
+  
+    Use case ends.
+
+**Use case: UC13 - View help window**
+
+**Guarantees:**
+
+- Help window is displayed with weblink for guidance on how to use TutorSynch.
+
+**MSS**
+
+1. User enters the help command.
+2. TutorSynch displays help window consisting of User Guide weblink.
+3. User reviews and closes the help window.
+
+   Use case ends.
+
+**Extensions**
+
+- 2a. User copies URL and opens weblink.
+
+  - 2a1. User is directed to User Guide for further guidance.
+  
+    Use case ends.
+
+**Use case: UC14 - Switch application theme**
+
+**Guarantees:**
+
+- The application theme is toggled and the selected theme is saved as a user preference.
+
+**MSS**
+
+1. User enters the toggletheme command.
+2. TutorSynch switches between Light Mode and Dark Mode.
+3. The selected theme is saved and will be used on next startup.
+
+   Use case ends.
+
+**Use case: UC15 - Exit the application**
+
+**Guarantees:**
+
+- TutorSynch closes the application gracefully.
+
+**MSS**
+
+1. User enters the exit command.
+2. TutorSynch shuts down and exits the program.
+
+   Use case ends.
 
 ### Non-Functional Requirements
 
