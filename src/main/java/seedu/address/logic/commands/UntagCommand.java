@@ -25,7 +25,7 @@ public class UntagCommand extends Command {
             + PREFIX_TAG + "CS2030";
 
     public static final String MESSAGE_SUCCESS = "The following tags have been cleared: %1$s.\n"
-            + "%2$d person had their tags updated.";
+            + "%2$d person(s) had their tags updated.";
     public static final String MESSAGE_NO_PERSON_UPDATED = "No persons were updated as no matching tags were found.";
 
     private final Set<Tag> tagsToRemove;

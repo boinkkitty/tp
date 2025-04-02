@@ -182,6 +182,32 @@ public class JsonAdaptedPersonTest {
                         VALID_CURRENT_YEAR, VALID_CURRENT_GRADE, VALID_EXP_GRADE,
                         invalidTags, VALID_PAYMENT_FEE, VALID_PAYMENT_DATE, VALID_PAYMENT_STATUS);
         assertThrows(IllegalValueException.class, person::toModelType);
+
+        // Invalid tags as it breaks the maximum char constraints
+        invalidTags = new ArrayList<>(VALID_TAGS);
+        invalidTags.add(new JsonAdaptedTag("1234567890TOOLONG#123123"));
+        person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_EDULEVEL,
+                        VALID_CURRENT_YEAR, VALID_CURRENT_GRADE, VALID_EXP_GRADE,
+                        invalidTags, VALID_PAYMENT_FEE, VALID_PAYMENT_DATE, VALID_PAYMENT_STATUS);
+        assertThrows(IllegalValueException.class, person::toModelType);
+
+        // Invalid tags as it breaks the maximum tags in set constraints
+        invalidTags = new ArrayList<>(VALID_TAGS);
+        invalidTags.add(new JsonAdaptedTag("1"));
+        invalidTags.add(new JsonAdaptedTag("2"));
+        invalidTags.add(new JsonAdaptedTag("3"));
+        invalidTags.add(new JsonAdaptedTag("4"));
+        invalidTags.add(new JsonAdaptedTag("5"));
+        invalidTags.add(new JsonAdaptedTag("6"));
+        invalidTags.add(new JsonAdaptedTag("7"));
+        invalidTags.add(new JsonAdaptedTag("8"));
+        invalidTags.add(new JsonAdaptedTag("9"));
+        person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_EDULEVEL,
+                        VALID_CURRENT_YEAR, VALID_CURRENT_GRADE, VALID_EXP_GRADE,
+                        invalidTags, VALID_PAYMENT_FEE, VALID_PAYMENT_DATE, VALID_PAYMENT_STATUS);
+        assertThrows(IllegalValueException.class, person::toModelType);
     }
 
     @Test

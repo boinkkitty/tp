@@ -3,8 +3,10 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.ClearCommand.MESSAGE_INVALID_INDEX_RANGE;
+import static seedu.address.logic.commands.ClearCommand.MESSAGE_NO_PERSONS_FOUND;
 import static seedu.address.logic.commands.ClearCommand.MESSAGE_SUCCESS;
 import static seedu.address.logic.commands.ClearCommand.MESSAGE_SUCCESS_INDEX;
+import static seedu.address.logic.commands.ClearCommand.MESSAGE_SUCCESS_TAG;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -44,7 +46,9 @@ public class ClearCommandTest {
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         List<Person> personsToRemove = expectedModel.getFilteredPersonList()
-                .subList(INDEX_FIRST_PERSON.getZeroBased(), INDEX_SECOND_PERSON.getZeroBased() + 1);
+                .subList(INDEX_FIRST_PERSON.getZeroBased(), INDEX_SECOND_PERSON.getZeroBased() + 1)
+                .stream().toList();
+
         personsToRemove.forEach(expectedModel::deletePerson);
         assertCommandSuccess(clearCommand, model, expectedMessage, expectedModel);
     }
@@ -61,16 +65,17 @@ public class ClearCommandTest {
     public void execute_validTag_success() {
         // Simulate clearing by tag
         Set<Tag> targetTags = new HashSet<>();
-        targetTags.add(new Tag("friends"));
+        targetTags.add(new Tag("CS2030C"));
 
         ClearCommand clearCommand = new ClearCommand(targetTags);
         String expectedMessage = String
-                .format(MESSAGE_SUCCESS, "3. Persons deleted had tags: [[friends]]");
+                .format(MESSAGE_SUCCESS,
+                        String.format(MESSAGE_SUCCESS_TAG, 3, targetTags.toString()));
 
         // Simulate tag-based deletion results for the expected model
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         model.getFilteredPersonList().stream()
-                .filter(person -> person.getTags().contains(new Tag("friends")))
+                .filter(person -> person.getTags().contains(new Tag("CS2030C")))
                 .forEach(expectedModel::deletePerson);
 
         assertCommandSuccess(clearCommand, model, expectedMessage, expectedModel);
@@ -80,11 +85,11 @@ public class ClearCommandTest {
     public void execute_noMatchingTags_success() {
         // Simulate clearing when no persons match the provided tag
         Set<Tag> nonMatchingTags = new HashSet<>();
-        nonMatchingTags.add(new Tag("nonexistent"));
+        nonMatchingTags.add(new Tag("nonexist"));
 
         ClearCommand clearCommand = new ClearCommand(nonMatchingTags);
         String expectedMessage = String.format(MESSAGE_SUCCESS,
-                String.format(ClearCommand.MESSAGE_NO_PERSONS_FOUND, nonMatchingTags.toString()));
+                String.format(MESSAGE_NO_PERSONS_FOUND, nonMatchingTags.toString()));
 
         assertCommandSuccess(clearCommand, model, expectedMessage, model);
     }
@@ -104,11 +109,11 @@ public class ClearCommandTest {
 
         // Commands with tag-based clearing
         Set<Tag> targetTags1 = new HashSet<>();
-        targetTags1.add(new Tag("friends"));
+        targetTags1.add(new Tag("CS2030C"));
         ClearCommand clearByTagCommand1 = new ClearCommand(targetTags1);
 
         Set<Tag> targetTags2 = new HashSet<>();
-        targetTags2.add(new Tag("colleagues"));
+        targetTags2.add(new Tag("GEA1000"));
         ClearCommand clearByTagCommand2 = new ClearCommand(targetTags2);
 
         // Same object => true
@@ -120,7 +125,7 @@ public class ClearCommandTest {
 
         // Same values for tag-based command => true
         Set<Tag> targetTags1Copy = new HashSet<>();
-        targetTags1Copy.add(new Tag("friends"));
+        targetTags1Copy.add(new Tag("CS2030C"));
         ClearCommand clearByTagCommand1Copy = new ClearCommand(targetTags1Copy);
         assertEquals(clearByTagCommand1, clearByTagCommand1Copy);
 
@@ -144,12 +149,12 @@ public class ClearCommandTest {
     @Test
     public void toStringMethod() {
         Set<Tag> targetTags = new HashSet<>();
-        targetTags.add(new Tag("friends"));
+        targetTags.add(new Tag("CS2030C"));
 
         ClearCommand clearByTagCommand = new ClearCommand(targetTags);
         ClearCommand clearByIndexCommand = new ClearCommand(INDEX_FIRST_PERSON, INDEX_SECOND_PERSON);
 
-        assertEquals(ClearCommand.class.getCanonicalName() + "{tags=[[friends]]}",
+        assertEquals(ClearCommand.class.getCanonicalName() + "{tags=[[CS2030C]]}",
                 clearByTagCommand.toString());
         assertEquals(ClearCommand.class.getCanonicalName() + "{start=1, end=2}",
                 clearByIndexCommand.toString());

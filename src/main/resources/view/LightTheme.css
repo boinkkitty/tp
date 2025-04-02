@@ -81,6 +81,10 @@
     -fx-background-color: derive(#f7f7f7, 20%);
 }
 
+.list-cell:empty {
+    -fx-background-color: #f7f7f7;
+}
+
 .list-cell:filled:even {
     -fx-background-color: #e8e8e8; /* Lightened even cells */
 }
@@ -115,7 +119,7 @@
 
 .pane-with-border {
     -fx-background-color: derive(#f7f7f7, 20%);
-    -fx-border-color: derive(#f7f7f7, 10%);
+    -fx-border-color: derive(#A8A8A8, 10%);
     -fx-border-top-width: 1px;
 }
 

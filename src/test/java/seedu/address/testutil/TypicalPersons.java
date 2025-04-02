@@ -34,18 +34,18 @@ public class TypicalPersons {
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253").withEduLevel("Bachelor").withCurrentYear("Year 3")
-            .withCurrentGrade("D").withExpectedGrade("A").withTags("friends").build();
+            .withCurrentGrade("D").withExpectedGrade("A").withTags("CS2030C").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25").withPaymentFee(500).withPaymentStatus("Paid")
             .withEmail("johnd@example.com").withPhone("98765432").withEduLevel("Bachelor").withCurrentYear("Year 4")
-            .withCurrentGrade("B-").withExpectedGrade("B").withTags("owesMoney", "friends").build();
+            .withCurrentGrade("B-").withExpectedGrade("B").withTags("GEA1000", "CS2030C").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street").withEduLevel("PhD")
             .withPaymentFee(1250).withPaymentDate("25-02-2025").withPaymentStatus("Waiting")
             .withExpectedGrade("C").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withEduLevel("Master").withAddress("10th street")
-            .withExpectedGrade("D").withTags("friends").withPaymentFee(1000)
+            .withExpectedGrade("D").withTags("CS2030C").withPaymentFee(1000)
             .withPaymentDate("22-04-2025").withPaymentStatus("Paid").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
             .withEmail("werner@example.com").withEduLevel("Bachelor").withAddress("michegan ave")

@@ -20,6 +20,34 @@ public class CurrentYearTest {
     }
 
     @Test
+    public void isValidLength() {
+        // Empty current year
+        assertTrue(CurrentYear.isValidLength(""));
+
+        // Valid current year
+        assertTrue(CurrentYear.isValidLength("Sophomore"));
+
+        // 30 characters - valid as within limit
+        assertTrue(CurrentYear.isValidLength("abcdefghijklmnopqrstabcdefghij"));
+
+        // 31 characters - invalid as exceeds limit
+        assertFalse(CurrentYear.isValidLength("abcdefghijklmnopqrstabcdefghijK"));
+
+        // Super long string - meant to fail
+        assertFalse(CurrentYear.isValidLength(
+                "Absurdly long string that is meant to fail and it should fail and only fail and not pass. "
+                        + "Absurdly long string that is meant to fail and it should fail and only fail and not pass. "
+                        + "Absurdly long string that is meant to fail and it should fail and only fail and not pass. "
+                        + "Absurdly long string that is meant to fail and it should fail and only fail and not pass. "
+                        + "Absurdly long string that is meant to fail and it should fail and only fail and not pass. "
+                        + "Absurdly long string that is meant to fail and it should fail and only fail and not pass. "
+                        + "Absurdly long string that is meant to fail and it should fail and only fail and not pass. "
+                        + "Absurdly long string that is meant to fail and it should fail and only fail and not pass. "
+                        + "Absurdly long string that is meant to fail and it should fail and only fail and not pass. "
+                        + "Absurdly long string that is meant to fail and it should fail and only fail and not pass."));
+    }
+
+    @Test
     public void isValidCurrentYear() {
         // null current year
         assertThrows(NullPointerException.class, () -> CurrentYear.isValidCurrentYear(null));
@@ -27,6 +55,7 @@ public class CurrentYearTest {
         // invalid current year
         assertFalse(CurrentYear.isValidCurrentYear("^")); // only non-alphanumeric characters
         assertFalse(CurrentYear.isValidCurrentYear("2021*")); // contains non-alphanumeric characters
+        assertFalse(CurrentYear.isValidCurrentYear("abcdefghijklmnopqrstabcdefghijK")); // exceeds limit
 
         // valid current year
         assertTrue(CurrentYear.isValidCurrentYear("")); // empty string
@@ -34,6 +63,7 @@ public class CurrentYearTest {
         assertTrue(CurrentYear.isValidCurrentYear("2025")); // numbers only
         assertTrue(CurrentYear.isValidCurrentYear("Year 2025")); // alphanumeric characters
         assertTrue(CurrentYear.isValidCurrentYear("Year Twenty Twenty Five")); // with spaces
+        assertTrue(CurrentYear.isValidLength("abcdefghijklmnopqrstabcdefghij")); // max limit
     }
 
     @Test
