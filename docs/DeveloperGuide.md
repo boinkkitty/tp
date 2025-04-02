@@ -157,7 +157,13 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### `Sort` Command Feature
+
+The Sort commands follows the sequence diagram depicted here:
+<puml src="diagrams/SortCommandSequence.puml" width="550" />
+
+
+
 
 #### Proposed Implementation
 
