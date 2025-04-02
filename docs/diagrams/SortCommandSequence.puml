@@ -24,7 +24,7 @@ LogicManager -> AddressBookParser: parseCommand("sort")
 activate AddressBookParser
 
 ' Create the SortCommandParser
-AddressBookParser -> AddressBookParser: new SortCommandParser()
+'AddressBookParser -> AddressBookParser: new SortCommandParser()
 create SortCommandParser
 AddressBookParser -> SortCommandParser
 activate SortCommandParser
@@ -34,9 +34,9 @@ SortCommandParser --> AddressBookParser
 deactivate SortCommandParser
 ' Hidden arrow to position the destroy marker
 
-SortCommandParser -[hidden]-> AddressBookParser
-
-destroy SortCommandParser
+'SortCommandParser -[hidden]-> AddressBookParser
+'
+'destroy SortCommandParser
 
 ' Now call parse(...) on the newly created parser
 AddressBookParser -> SortCommandParser: parse("sort")
@@ -64,9 +64,12 @@ activate SortCommand
 
 SortCommand -> Model : sortPersonsByName()
 activate Model
-
-Model -> Model : reorder internal person list
+Model --> SortCommand
 deactivate Model
+'activate Model
+'
+'Model -> Model : reorder internal person list
+'deactivate Model
 
 create CommandResult
 SortCommand -> CommandResult
