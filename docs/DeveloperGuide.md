@@ -164,7 +164,7 @@ This section describes some noteworthy details on how certain features are imple
 ### `Payment` command feature
 The following diagram shows the interaction flow for the command — `payment 1 f/1000`. This updates the payment information for a person at the given index with the specified fee.
 
-<puml src="diagrams/PaymentSequenceDiagram.puml" width="1000" />
+![Interactions Inside the Logic Component for the `payment 1 f/1000` Command](images/PaymentSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `PaymentCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </div>
