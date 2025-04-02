@@ -395,12 +395,19 @@ Guarantees:
 2. TutorSynch removes all occurrences of the specified tags from every student.
 3. TutorSynch shows the updated student list reflecting tag removal.
 
+   Use case ends.
+
 **Extensions**
 
 * 1a. No students have any of the specified tags.
     * 1a1. TutorSynch completes silently with no changes.
+      
+    Use case ends.
+
 * 1b. Invalid tag formatting is detected.
     * 1b1. TutorSynch shows an error message.
+      
+    Use case ends.
 
 **Use case: UC08 – Sort student list alphabetically**
 
@@ -414,11 +421,15 @@ Guarantees:
 2. TutorSynch sorts the existing student list alphabetically.
 3. TutorSynch displays the sorted list.
 
+   Use case ends.
+
 **Extensions**
 
 * 1a. Student list is empty.
     * 1a1. TutorSynch shows a message indicating the list is empty.
-
+    * 1a2. TutorSynch terminates the sort process.
+      
+    Use case ends.
 
 **Use case: UC09 – Bulk delete using `clear` command by index range or tags**
 
@@ -440,13 +451,21 @@ Guarantees:
 3. TutorSynch deletes matching students.
 4. TutorSynch shows the updated student list.
 
+   Use case ends.
+
 **Extensions**
 
 * 1a. Index range is invalid.
     * 1a1. TutorSynch shows an error message.
+    * 1a2. TutorSynch terminates the clear process.
+
+      Use case ends.
+  
 * 1b. No students match the given tags.
     * 1b1. TutorSynch displays a message indicating no students found.
+    * 1b2. TutorSynch terminates the clear process
 
+      Use case ends.
 
 ### Non-Functional Requirements
 
