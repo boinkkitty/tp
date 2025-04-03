@@ -27,7 +27,7 @@ activate FilterCommandParser
 FilterCommandParser --> AddressBookParser
 deactivate FilterCommandParser
 
-AddressBookParser -> FilterCommandParser : parse("filter cg/A")
+AddressBookParser -> FilterCommandParser : parse("cg/A")
 activate FilterCommandParser
 
 create FilterCommand

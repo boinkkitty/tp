@@ -39,7 +39,7 @@ deactivate SortCommandParser
 'destroy SortCommandParser
 
 ' Now call parse(...) on the newly created parser
-AddressBookParser -> SortCommandParser: parse("sort")
+AddressBookParser -> SortCommandParser: parse("")
 
 activate SortCommandParser
 
