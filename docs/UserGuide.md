@@ -70,23 +70,28 @@ TutorSynch is a **desktop app for managing student contacts and academic details
 </div>
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Constraints:**<br>
-
-* NAME must be between 1 and 85 characters. (Do note that extremely long NAME may be truncated unless you increase the window size)
-
-* EMAIL must be between 1 and 110 characters. (Do note that extremely long EMAIL may be truncated unless you increase the window size)
-
-* ADDRESS must be between 1 and 110 characters. (Do note that extremely long ADDRESS may be truncated unless you increase the window size)
-
-* CURRENT_YEAR is limited to a maximum of 30 characters.
-
-* Each TAG (before the optional #HEX code) must be alphanumeric and at most 10 characters.
-
-* Tags can include an optional hexadecimal color code in the format #RRGGBB (e.g., t/cs2040#FFAABB).
-
-* A maximum of 8 unique TAGs are allowed per person.
-
-* Parameters must conform to their respective formats and constraints; otherwise, the command may be rejected.
-
+NAME must be between 1 and 65 characters. (Do note that extremely long NAME may be truncated unless you increase the window size)
+</div>
+<div markdown="span" class="alert alert-warning">:exclamation: **Constraints:**<br>
+EMAIL must be between 1 and 85 characters. (Do note that extremely long EMAIL may be truncated unless you increase the window size)
+</div>
+<div markdown="span" class="alert alert-warning">:exclamation: **Constraints:**<br>
+ADDRESS must be between 1 and 85 characters. (Do note that extremely long ADDRESS may be truncated unless you increase the window size)
+</div>
+<div markdown="span" class="alert alert-warning">:exclamation: **Constraints:**<br>
+CURRENT_YEAR is limited to a maximum of 30 characters.
+</div>
+<div markdown="span" class="alert alert-warning">:exclamation: **Constraints:**<br>
+Each TAG (before the optional #HEX code) must be alphanumeric and at most 10 characters.
+</div>
+<div markdown="span" class="alert alert-warning">:exclamation: **Constraints:**<br>
+Tags can include an optional hexadecimal color code in the format #RRGGBB (e.g., t/cs2040#FFAABB).
+</div>
+<div markdown="span" class="alert alert-warning">:exclamation: **Constraints:**<br>
+A maximum of 8 unique TAGs are allowed per person.
+</div>
+<div markdown="span" class="alert alert-warning">:exclamation: **Constraints:**<br>
+Parameters must conform to their respective formats and constraints; otherwise, the command may be rejected.
 </div>
 
 ### Viewing help : `help`
