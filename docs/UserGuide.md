@@ -87,6 +87,7 @@ can get your contact management or other administrative tasks done faster than t
 <li>EMAIL must be between 1 and 85 characters. (Do note that extremely long EMAIL may be truncated unless you increase the window size)</li>
 <li>ADDRESS must be between 1 and 85 characters. (Do note that extremely long ADDRESS may be truncated unless you increase the window size)</li>
 <li>CURRENT_YEAR is limited to a maximum of 30 characters.</li>
+<li>EDU_LEVEL is limited to a maximum of 30 characters.</li>
 <li>Each TAG (before the optional #HEX code) must be alphanumeric and at most 10 characters.</li>
 <li>Tags can include an optional hexadecimal color code in the format #RRGGBB (e.g., t/cs2040#FFAABB).</li>
 <li>A maximum of 8 unique TAGs are allowed per person.</li>

@@ -9,12 +9,14 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class EduLevel {
 
+    public static final int MAX_LENGTH = 30;
 
-    private static final String[] VALID_EDU_LEVELS = {"Primary", "Secondary", "Diploma", "Bachelor", "Master", "PhD"};
     public static final String MESSAGE_CONSTRAINTS =
-            "Education level should not be blank and should be one of the predefined levels: "
-                    + String.join(", ", VALID_EDU_LEVELS) + ".";
+            String.format("Education Level should only contain alphanumeric characters and "
+                    + "spaces and must not exceed %d characters. ", MAX_LENGTH)
+                    + "As Education Level is an optional field, it could also be blank.";
 
+    public static final String VALIDATION_REGEX = "[\\p{Alnum} ]*";
     public final String value;
 
     /**
@@ -36,18 +38,19 @@ public class EduLevel {
     }
 
     /**
+     * Check length of education level against limit
+     * @param test
+     * @return Returns true if given education level exceeds max length
+     */
+    public static boolean isValidLength(String test) {
+        return test.length() <= MAX_LENGTH;
+    }
+
+    /**
      * Returns true if the string is a valid education level.
      */
     public static boolean isValidEduLevel(String eduLevel) {
-        if (eduLevel.isEmpty()) {
-            return true;
-        }
-        for (String validLevel : VALID_EDU_LEVELS) {
-            if (validLevel.equalsIgnoreCase(eduLevel)) {
-                return true;
-            }
-        }
-        return false;
+        return eduLevel.matches(VALIDATION_REGEX) && isValidLength(eduLevel);
     }
 
 
@@ -67,7 +70,7 @@ public class EduLevel {
         }
 
         EduLevel otherEduLevel = (EduLevel) other;
-        return value.equalsIgnoreCase(otherEduLevel.value);
+        return value.equals(otherEduLevel.value);
     }
 
     @Override

@@ -14,12 +14,6 @@ public class CurrentYearTest {
     }
 
     @Test
-    public void constructor_invalidCurrentYear_throwsIllegalArgumentException() {
-        String invalidCurrentYear = "";
-        assertThrows(IllegalArgumentException.class, () -> new Name(invalidCurrentYear));
-    }
-
-    @Test
     public void isValidLength() {
         // Empty current year
         assertTrue(CurrentYear.isValidLength(""));
@@ -63,7 +57,7 @@ public class CurrentYearTest {
         assertTrue(CurrentYear.isValidCurrentYear("2025")); // numbers only
         assertTrue(CurrentYear.isValidCurrentYear("Year 2025")); // alphanumeric characters
         assertTrue(CurrentYear.isValidCurrentYear("Year Twenty Twenty Five")); // with spaces
-        assertTrue(CurrentYear.isValidLength("abcdefghijklmnopqrstabcdefghij")); // max limit
+        assertTrue(CurrentYear.isValidCurrentYear("abcdefghijklmnopqrstabcdefghij")); // max limit
     }
 
     @Test
