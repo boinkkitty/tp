@@ -1,0 +1,101 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+
+' -- Box for Logic layer
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":PurgeCommandParser" as PurgeCommandParser LOGIC_COLOR
+participant ":PurgeCommand" as PurgeCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+box AddressBook UI_COLOR_T1
+participant "a:AddressBook" as AddressBook UI_COLOR
+end box
+
+[-> LogicManager : execute("purge")
+activate LogicManager
+
+LogicManager -> AddressBookParser: parseCommand("purge")
+activate AddressBookParser
+
+' Create the PurgeCommandParser
+'AddressBookParser -> AddressBookParser: new PurgeCommandParser()
+create PurgeCommandParser
+AddressBookParser -> PurgeCommandParser : purgeCommandParser()
+activate PurgeCommandParser
+
+' Return to show the parser was constructed
+PurgeCommandParser --> AddressBookParser
+deactivate PurgeCommandParser
+' Hidden arrow to position the destroy marker
+
+'PurgeCommandParser -[hidden]-> AddressBookParser
+'
+'destroy PurgeCommandParser
+
+' Now call parse(...) on the newly created parser
+AddressBookParser -> PurgeCommandParser: parse("purge")
+
+activate PurgeCommandParser
+
+' Create and return new PurgeCommand
+create PurgeCommand
+PurgeCommandParser -> PurgeCommand:purgeCommand()
+activate PurgeCommand
+
+PurgeCommand --> PurgeCommandParser : p
+deactivate PurgeCommand
+
+
+PurgeCommandParser --> AddressBookParser : p
+deactivate PurgeCommandParser
+PurgeCommandParser -[hidden]-> AddressBookParser
+destroy PurgeCommandParser
+
+AddressBookParser --> LogicManager : p
+deactivate AddressBookParser
+
+LogicManager -> PurgeCommand : execute(m)
+activate PurgeCommand
+
+create AddressBook
+PurgeCommand -> AddressBook : AddressBook()
+activate AddressBook
+AddressBook --> PurgeCommand : a
+deactivate AddressBook
+
+PurgeCommand -> Model
+activate Model
+Model -> AddressBook : setAddressBook(a)
+deactivate Model
+activate AddressBook
+AddressBook -[hidden]-> PurgeCommand
+deactivate AddressBook
+
+'activate Model
+'
+'Model -> Model : reorder internal person list
+'deactivate Model
+
+create CommandResult
+PurgeCommand -> CommandResult : commandResult()
+activate CommandResult
+
+CommandResult --> PurgeCommand : r
+deactivate CommandResult
+
+PurgeCommand --> LogicManager : r
+deactivate PurgeCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

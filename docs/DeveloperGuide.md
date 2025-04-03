@@ -183,6 +183,16 @@ The following diagram shows the interaction flow for the command — `untag t/CS
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UntagCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </div>
 
+### `Purge` Command Feature
+
+The following diagram shows the interaction flow for the command — `purge`. This purges the contact list of all student contacts.
+
+![PurgeSequenceDiagram](images/PurgeSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `purgeCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</div>
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
