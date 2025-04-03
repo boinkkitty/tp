@@ -50,7 +50,22 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                 PREFIX_EDULEVEL, PREFIX_CURRENT_YEAR, PREFIX_CURRENT_GRADE, PREFIX_EXP_GRADE);
-
+        if (argMultimap.isEmptyField(PREFIX_EDULEVEL)) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, PREFIX_EDULEVEL + " cannot be empty."));
+        }
+        if (argMultimap.isEmptyField(PREFIX_CURRENT_YEAR)) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, PREFIX_CURRENT_YEAR + " cannot be empty."));
+        }
+        if (argMultimap.isEmptyField(PREFIX_CURRENT_GRADE)) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, PREFIX_CURRENT_GRADE + " cannot be empty."));
+        }
+        if (argMultimap.isEmptyField(PREFIX_EXP_GRADE)) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, PREFIX_EXP_GRADE + " cannot be empty."));
+        }
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
