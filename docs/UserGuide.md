@@ -359,6 +359,13 @@ It's strongly recommended to make a backup of your data file before any manual e
    that parameter. <br> The team has deemed that this bug does not impact the functionality of edit command and that
    fixing it would require drastic changes to the logic of parsing tags. See
    issue: [here](https://github.com/AY2425S2-CS2103-F15-2/tp/issues/179).
+4. **When adding/editing many tags**, in certain scenarios where the tags begin to wrap (especially on lower screen
+   resolution), the tags may inadvertently overlap onto the remaining Person's information field, as shown in the 
+   screenshot below.
+   ![Example of Tags Overflowing Bug](images/TagsOverflow_1.png)
+   The remedy is to click on the specific Person's Card, which will trigger a CSS style update, so that the wrapping
+   works as intended.
+   ![Example of Tags Overflowing Bug Remedy](images/TagsOverflow_2.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
