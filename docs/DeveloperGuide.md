@@ -183,6 +183,15 @@ The following diagram shows the interaction flow for the command — `untag t/CS
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UntagCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </div>
 
+### `Filter` Command Feature
+
+The following diagram shows the interaction flow for the command — `filter cg/A`. This removes the tag `CS2040` and `Math` from all student records.
+
+![FilterSequenceDiagram](images/FilterSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FilterCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</div>
+
 ### `Purge` Command Feature
 
 The following diagram shows the interaction flow for the command — `purge`. This purges the contact list of all student contacts.
@@ -191,7 +200,6 @@ The following diagram shows the interaction flow for the command — `purge`. Th
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `purgeCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </div>
-
 
 --------------------------------------------------------------------------------------------------------------------
 
