@@ -127,7 +127,7 @@ Format: `help`
 Adds a person to the address book.
 
 Format:
-`add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [l/EDU_LEVEL] [cy/CURRENT_YEAR] [cg/CURRENT_GRADE] [eg/EXP_GRADE] [t/TAG]…​`
+`add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [l/EDUCATION] [cy/CURRENT_YEAR] [cg/CURRENT_GRADE] [eg/EXP_GRADE] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:** Duplicate detection for repeated contacts are
 based on **EXACT** matching of name. For example: `Jane Doe` (single-spaced) and `Jane  Doe` (double-spaced) will be
@@ -160,7 +160,7 @@ Format: `list`
 Edits an existing person in the address book.
 
 Format:
-`edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [l/EDU_LEVEL] [cy/CURRENT_YEAR] [cg/CURRENT_GRADE] [eg/EXP_GRADE] [t/TAG]… [t+/TAGS_TO_APPEND]… [t-/TAGS_TO_REMOVE]…`
+`edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [l/EDUCATION] [cy/CURRENT_YEAR] [cg/CURRENT_GRADE] [eg/EXP_GRADE] [t/TAG]… [t+/TAGS_TO_APPEND]… [t-/TAGS_TO_REMOVE]…`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
   The index **must be a positive integer** 1, 2, 3, …​
@@ -280,12 +280,12 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 Filters list of persons who match all filter conditions.
 
-Format: `filter [l/EDU_LEVEL] [cg/CURRENT_GRADE] [eg/EXP_GRADE] [t/TAG]…`
+Format: `filter [l/EDUCATION] [cg/CURRENT_GRADE] [eg/EXP_GRADE] [t/TAG]…`
 
 * Filters list to persons who fulfill all filter conditions.
 * At least one of the optional fields must be provided.
 * Empty fields are accepted
-    * If `[l/EDU_LEVEL] [cg/CURRENT_GRADE] [eg/EXP_GRADE]` are empty e.g. `l/ cg/ eg/`,
+    * If `[l/EDUCATION] [cg/CURRENT_GRADE] [eg/EXP_GRADE]` are empty e.g. `l/ cg/ eg/`,
       filter will show persons without values in respective fields stated.
     * `[t/TAG]…` an empty tag field will trigger an error.
 
@@ -397,19 +397,19 @@ It's strongly recommended to make a backup of your data file before any manual e
 
 ## Command summary
 
-| Action           | Format, Examples                                                                                                                                                                                                                                       |
-|------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**          | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [l/ EDUCATION_LEVEL] [cy/CURRENT_YEAR] [cg/CURRENT_GRADE] [eg/EXPECTED_GRADE] [t/TAG]…` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 cg/D t/CS2030C t/friends` |
-| **Purge**        | `purge`                                                                                                                                                                                                                                                |
-| **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                                                    |
-| **Clear**        | `clear i/START_INDEX...END_INDEX` OR `clear t/TAG [t/TAG]`                                                                                                                                                                                             |
-| **Edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [cy/CURRENT_YEAR] [cg/CURRENT_GRADE] [eg/EXPECTED_GRADE] [t/TAG]… [t+/TAGS_TO_APPEND]… [t-/TAGS_TO_REMOVE]…`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com t+/CS2040C#1E2C4D`        |
-| **Untag**        | `untag t/TAG [t/TAG]...`<br> e.g., `untag t/Math t/Science`                                                                                                                                                                                            |
-| **Payment**      | `payment INDEX [f/FEE] [d/PAYMENT_DATE] [s/PAYMENT_STATUS]`<br> e.g., `payment 1 f/1000 d/14-11-2000 s/paid`                                                                                                                                           |
-| **Find**         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                                             |
-| **Sort**         | `sort`                                                                                                                                                                                                                                                 |
-| **Filter**       | `filter [l/EDU_LEVEL] [cg/CURRENT_GRADE] [eg/EXP_GRADE] [t/TAG]…`                                                                                                                                                                                      |
-| **List**         | `list`                                                                                                                                                                                                                                                 |
-| **Help**         | `help`                                                                                                                                                                                                                                                 |
-| **Switch Theme** | `toggletheme`                                                                                                                                                                                                                                          |
-| **Exit**         | `exit`                                                                                                                                                                                                                                                 |
+| Action           | Format, Examples                                                                                                                                                                                                                                              |
+|------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**          | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [l/EDUCATION] [cy/CURRENT_YEAR] [cg/CURRENT_GRADE] [eg/EXPECTED_GRADE] [t/TAG]…` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 cg/D t/CS2030C t/friends`               |
+| **Purge**        | `purge`                                                                                                                                                                                                                                                       |
+| **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                                                           |
+| **Clear**        | `clear i/START_INDEX...END_INDEX` OR `clear t/TAG [t/TAG]`                                                                                                                                                                                                    |
+| **Edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [l/EDUCATION] [cy/CURRENT_YEAR] [cg/CURRENT_GRADE] [eg/EXPECTED_GRADE] [t/TAG]… [t+/TAGS_TO_APPEND]… [t-/TAGS_TO_REMOVE]…`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com t+/CS2040C#1E2C4D` |
+| **Untag**        | `untag t/TAG [t/TAG]...`<br> e.g., `untag t/Math t/Science`                                                                                                                                                                                                   |
+| **Payment**      | `payment INDEX [f/FEE] [d/PAYMENT_DATE] [s/PAYMENT_STATUS]`<br> e.g., `payment 1 f/1000 d/14-11-2000 s/paid`                                                                                                                                                  |
+| **Find**         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                                                    |
+| **Sort**         | `sort`                                                                                                                                                                                                                                                        |
+| **Filter**       | `filter [l/EDUCATION] [cg/CURRENT_GRADE] [eg/EXP_GRADE] [t/TAG]…`                                                                                                                                                                                             |
+| **List**         | `list`                                                                                                                                                                                                                                                        |
+| **Help**         | `help`                                                                                                                                                                                                                                                        |
+| **Switch Theme** | `toggletheme`                                                                                                                                                                                                                                                 |
+| **Exit**         | `exit`                                                                                                                                                                                                                                                        |
