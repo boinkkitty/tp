@@ -106,15 +106,12 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [l/EDU_LEVEL] [cy/CURRENT_Y
 
 <span markdown="span" class="alert alert-primary">:bulb: **Tip:**</span> Duplicate detection for repeated contacts are based on **EXACT** matching of name. For example: `Jane Doe` (single-spaced) and `Jane  Doe` (double-spaced) will be treated as 2 distinct contacts.
 
+<span markdown="span" class="alert alert-primary">:bulb: **Tip:** </span> A person can have less than or equals to 8 unique tags each (including 0).
 
-<span markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have less than or equals to 8 unique tags each (including 0).
-</span>
-
-<span markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<span markdown="span" class="alert alert-primary">:bulb: **Tip:** </span>
 You can add a hexadecimal color code to any tag by appending `#RRGGBB` after the tag name.
 For example: `t/CS2040#ED9E49`. This allows tags to be visually color-coded in the UI.
-</span>
+
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
