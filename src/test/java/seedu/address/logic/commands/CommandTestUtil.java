@@ -89,7 +89,7 @@ public class CommandTestUtil {
     public static final String INVALID_EXP_GRADE_DESC = " " + PREFIX_EXP_GRADE + "AB"; // No more than 1 letter allowed
     public static final String INVALID_CURRENT_YEAR = " " + PREFIX_CURRENT_YEAR + "@3"; // special char not allowed
     public static final String INVALID_GRADE_DESC = " " + PREFIX_CURRENT_GRADE + "Z"; // "Z" not allowed in grades
-    public static final String INVALID_EDULEVEL_DESC = " " + PREFIX_EDULEVEL + "InvalidLevel";
+    public static final String INVALID_EDULEVEL_DESC = " " + PREFIX_EDULEVEL + "@Bachelor";
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     // '-' integer not allowed in paymentFees
     public static final String INVALID_PAYMENT_FEE_DESC = " " + PREFIX_PAYMENT_FEE + -1000;
