@@ -53,6 +53,26 @@ public class EditCommandTest {
     }
 
     @Test
+    public void execute_duplicateEmailUnfilteredList_failure() {
+
+        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person secondPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+                .withEmail(secondPerson.getEmail().value) // copy second person's email
+                .build();
+
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+
+        assertCommandFailure(
+                editCommand,
+                model,
+                "This email is already used by another person!"
+        );
+    }
+
+
+    @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
         Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
         Person lastPerson = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());

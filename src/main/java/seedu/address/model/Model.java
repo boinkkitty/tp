@@ -5,6 +5,8 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.person.Email;
 import seedu.address.model.person.Person;
 
 /**
@@ -62,12 +64,13 @@ public interface Model {
      * The person must exist in the address book.
      */
     void deletePerson(Person target);
-
+    boolean hasEmail(Email email, Person excludedPerson);
     /**
      * Adds the given person.
      * {@code person} must not already exist in the address book.
      */
-    void addPerson(Person person);
+    public void addPerson(Person person) throws CommandException;
+
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.

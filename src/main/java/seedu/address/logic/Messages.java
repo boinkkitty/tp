@@ -19,6 +19,10 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_NO_PERSON_TO_SORT = "The list is empty!";
+    public static final String MESSAGE_DUPLICATE_EMAIL =
+            "This email is already used by another person in TutorSynch!";
+
+
 
     /**
      * Returns an error message indicating the duplicate prefixes.
