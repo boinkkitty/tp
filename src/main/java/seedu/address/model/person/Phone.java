@@ -9,10 +9,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Phone {
 
-
-    public static final String MESSAGE_CONSTRAINTS =
-            "Phone numbers should only contain digits, and be between 3 to 15 digits in length.";
-    public static final String VALIDATION_REGEX = "\\d{3,85}";
+    public static final int MAX_LENGTH = 85;
+    public static final String MESSAGE_CONSTRAINTS = "Phone numbers can include digits, letters, '+', '(', ')', "
+            + "and spaces, and must be between 3 to " + MAX_LENGTH + " characters long.";
+    public static final String VALIDATION_REGEX = "[\\dA-Za-z()+\\s]{3,85}";
     public final String value;
 
     /**
@@ -30,7 +30,16 @@ public class Phone {
      * Returns true if a given string is a valid phone number.
      */
     public static boolean isValidPhone(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX) && isValidLength(test);
+    }
+
+    /**
+     * Check length of email against limit
+     * @param test
+     * @return Returns true if given email exceeds max length
+     */
+    public static boolean isValidLength(String test) {
+        return test.length() <= MAX_LENGTH;
     }
 
     @Override
