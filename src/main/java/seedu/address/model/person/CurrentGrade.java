@@ -19,7 +19,7 @@ public class CurrentGrade {
      * The first character of the Current Grade must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "^(?:[A-F][+-]?|CS|CU|S|U|Pass|Fail|)$";
+    public static final String VALIDATION_REGEX = "^(?:[A-F][+-]?|CS|CU|S|U|PASS|FAIL|)$";
 
     public final String value;
     public final String color;
