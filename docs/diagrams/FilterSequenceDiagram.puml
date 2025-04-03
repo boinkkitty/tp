@@ -6,7 +6,7 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":FilterCommandParser" as FilterCommandParser LOGIC_COLOR
-participant "d:FilterCommand" as FilterCommand LOGIC_COLOR
+participant "f:FilterCommand" as FilterCommand LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -37,19 +37,19 @@ activate FilterCommand
 FilterCommand --> FilterCommandParser :
 deactivate FilterCommand
 
-FilterCommandParser --> AddressBookParser : p
+FilterCommandParser --> AddressBookParser : f
 deactivate FilterCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
 FilterCommandParser -[hidden]-> AddressBookParser
 destroy FilterCommandParser
 
-AddressBookParser --> LogicManager : p
+AddressBookParser --> LogicManager : f
 deactivate AddressBookParser
 
 LogicManager -> FilterCommand : execute(m)
 activate FilterCommand
 
-FilterCommand -> Model : updateFilteredPersonList(PREDICATE)
+FilterCommand -> Model : updateFilteredPersonList(fD)
 activate Model
 
 Model -> Model : filter list
