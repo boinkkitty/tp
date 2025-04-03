@@ -55,15 +55,16 @@ TutorSynch is a **desktop app for managing student contacts and academic details
 * Items with `…` after them can be used less than or equals to 8 times, including zero times.<br>
   e.g. `[t/TAG]…` can be used as ` ` (i.e. 0 times), `t/cs4238`, `t/cs2103 t/GEA1000` etc.
 
-* Any tags can be written as an alphanumeric tag, accompanied by `#` followed by 6 hexadecimal color code. (E.g. `CS2040C#ED9E49`)
+* Any tags can be written as an alphanumeric tag
+    * Optional: Tags can be appended with a `#` followed by 6 hexadecimal color code for a custom color. (E.g. `CS2040C#ED9E49`)
+    * Tags without a hexadecimal color code appended will resolve to a default color.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 * Only use the prefixes explicitly defined for a given command. Using unsupported prefixes—such as those from other commands—may result in them being interpreted as plaintext (i.e. `f/1000` is not a valid prefix for the `add` command and will not be parsed correctly).
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `purge`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+* Commands that do not take in parameters (such as `help`, `list`, `exit` and `purge`) will show error when arguments are provided. 
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
@@ -76,7 +77,7 @@ TutorSynch is a **desktop app for managing student contacts and academic details
 
 * ADDRESS must be between 1 and 110 characters. (Do note that extremely long ADDRESS may be truncated unless you increase the window size)
 
-* CURRENT_YEAR must be between 1 and 30 characters.
+* CURRENT_YEAR is limited to a maximum of 30 characters.
 
 * Each TAG (before the optional #HEX code) must be alphanumeric and at most 10 characters.
 

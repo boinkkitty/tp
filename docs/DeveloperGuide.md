@@ -183,6 +183,15 @@ The following diagram shows the interaction flow for the command — `untag t/CS
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UntagCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </div>
 
+### `Filter` Command Feature
+
+The following diagram shows the interaction flow for the command — `filter cg/A`. This removes the tag `CS2040` and `Math` from all student records.
+
+![FilterSequenceDiagram](images/FilterSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FilterCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</div>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -214,23 +223,24 @@ The following diagram shows the interaction flow for the command — `untag t/CS
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …                    | I want to …                                           | So that I can…                                                                            |
-|----------|---------------------------|-------------------------------------------------------|-------------------------------------------------------------------------------------------|
-| `* * *`  | Tutor (Beginner User)     | Add student information                               | Have all necessary student info in one place.                                             |
-| `* * *`  | Tutor (Beginner User)     | Delete student information                            | Remove outdated or incorrect records.                                                     |
-| `* * *`  | Tutor (Beginner User)     | List all student information                          | Look through an organized overview of all my students for easy reference and management.  |
-| `* *`    | Tutor (Beginner User)     | Search for student information by name                | Quickly retrieve student records that match the name.                                     |
-| `* *`    | Tutor (Beginner User)     | Sort my student information when listing              | Organize and view student records sorted based on a specific field.                       |
-| `* *`    | Tutor (Intermediate User) | Edit student information                              | Update incorrect records.                                                                 |
-| `* *`    | Tutor (Intermediate User) | Tag students into groups                              | Easily manage students by group type.                                                     |
-| `* * *`  | Tutor (Intermediate User) | Assign colors to groups                               | Visually differentiate student groups.                                                    |
-| `* * *`  | Tutor (Intermediate User) | Be able to efficiently add or remove tag from student | Efficiently manage a student's tag without having to overwrite it instead.                |
-| `* * *`  | Tutor (Intermediate User) | Be able to bulk remove ALL student information        | Efficiently wipe out student records onto a clean slate.                                  |
-| `* *`    | Tutor (Intermediate User) | Be able to bulk remove certain tag from all students  | Efficiently clear outdated tags.                                                          |
-| `* *`    | Tutor (Expert User)       | Perform bulk deletion of student information          | Efficiently clear outdated records and prepare for a new semester.                        |
-| `* *`    | Tutor (Expert User)       | Record student payments                               | Keep track of payments received.                                                          |
-| `* *`    | Tutor (Expert User)       | Update payment statuses                               | Know which students have outstanding fees.                                                |
-| `* *`    | Tutor (Beginner User)     | Be able to change to Dark/Light mode                  | See certain assigned colors easier.                                                       |
+| Priority | As a …                    | I want to …                                           | So that I can…                                                                           |
+|----------|---------------------------|-------------------------------------------------------|------------------------------------------------------------------------------------------|
+| `* * *`  | Tutor (Beginner User)     | Add student information                               | Have all necessary student info in one place.                                            |
+| `* * *`  | Tutor (Beginner User)     | Delete student information                            | Remove outdated or incorrect records.                                                    |
+| `* * *`  | Tutor (Beginner User)     | List all student information                          | Look through an organized overview of all my students for easy reference and management. |
+| `* *`    | Tutor (Beginner User)     | Search for student information by name                | Quickly retrieve student records that match the name.                                    |
+| `* *`    | Tutor (Beginner User)     | Sort my student information when listing              | Organize and view student records sorted based on a specific field.                      |
+| `* *`    | Tutor (Intermediate User) | Edit student information                              | Update incorrect records.                                                                |
+| `* *`    | Tutor (Intermediate User) | Tag students into groups                              | Easily manage students by group type.                                                    |
+| `* *`    | Tutor (Intermediate User) | Filter list of students by field                      | Quickly retrieve student records of the same fields.                                     |
+| `* * *`  | Tutor (Intermediate User) | Assign colors to groups                               | Visually differentiate student groups.                                                   |
+| `* * *`  | Tutor (Intermediate User) | Be able to efficiently add or remove tag from student | Efficiently manage a student's tag without having to overwrite it instead.               |
+| `* * *`  | Tutor (Intermediate User) | Be able to bulk remove ALL student information        | Efficiently wipe out student records onto a clean slate.                                 |
+| `* *`    | Tutor (Intermediate User) | Be able to bulk remove certain tag from all students  | Efficiently clear outdated tags.                                                         |
+| `* *`    | Tutor (Expert User)       | Perform bulk deletion of student information          | Efficiently clear outdated records and prepare for a new semester.                       |
+| `* *`    | Tutor (Expert User)       | Record student payments                               | Keep track of payments received.                                                         |
+| `* *`    | Tutor (Expert User)       | Update payment statuses                               | Know which students have outstanding fees.                                               |
+| `* *`    | Tutor (Beginner User)     | Be able to change to Dark/Light mode                  | See certain assigned colors easier.                                                      |
 
 ### Use cases
 
