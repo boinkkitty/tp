@@ -30,7 +30,7 @@ activate AddressBookParser
 ' Create the PurgeCommandParser
 'AddressBookParser -> AddressBookParser: new PurgeCommandParser()
 create PurgeCommandParser
-AddressBookParser -> PurgeCommandParser : purgeCommandParser()
+AddressBookParser -> PurgeCommandParser :
 activate PurgeCommandParser
 
 ' Return to show the parser was constructed
@@ -43,7 +43,7 @@ deactivate PurgeCommandParser
 'destroy PurgeCommandParser
 
 ' Now call parse(...) on the newly created parser
-AddressBookParser -> PurgeCommandParser: parse()
+AddressBookParser -> PurgeCommandParser: parse("")
 
 activate PurgeCommandParser
 

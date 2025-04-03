@@ -46,12 +46,12 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
-Person *--> "0..8" Tag
-Person *--> "0..1" EduLevel
-Person *-> "0..1" CurrentYear
-Person *-> "0..1" CurrentGrade
-Person *-> "0..1" ExpectedGrade
-Person *-> "0..1" PaymentInfo
+Person *--> Tag
+Person *--> EduLevel
+Person *-> CurrentYear
+Person *-> CurrentGrade
+Person *-> ExpectedGrade
+Person *-> PaymentInfo
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
