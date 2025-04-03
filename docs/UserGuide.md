@@ -79,6 +79,8 @@ TutorSynch is a **desktop app for managing student contacts and academic details
 
 * CURRENT_YEAR is limited to a maximum of 30 characters.
 
+* EDU_LEVEL is limited to a maximum of 30 characters.
+
 * Each TAG (before the optional #HEX code) must be alphanumeric and at most 10 characters.
 
 * Tags can include an optional hexadecimal color code in the format #RRGGBB (e.g., t/cs2040#FFAABB).
