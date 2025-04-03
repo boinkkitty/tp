@@ -54,7 +54,14 @@ public class EditCommandParser implements Parser<EditCommand> {
                 PREFIX_EDULEVEL, PREFIX_CURRENT_YEAR, PREFIX_CURRENT_GRADE, PREFIX_EXP_GRADE);
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
-
+        if (argMultimap.isEmptyField(PREFIX_TAG_APPEND)) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, PREFIX_TAG_APPEND + " cannot be empty."));
+        }
+        if (argMultimap.isEmptyField(PREFIX_TAG_REMOVE)) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, PREFIX_TAG_REMOVE + " cannot be empty."));
+        }
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }

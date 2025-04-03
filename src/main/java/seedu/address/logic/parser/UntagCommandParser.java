@@ -29,6 +29,10 @@ public class UntagCommandParser implements Parser<UntagCommand> {
         if (!argMultimap.getPreamble().isEmpty() || !argMultimap.getValue(PREFIX_TAG).isPresent()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UntagCommand.MESSAGE_USAGE));
         }
+        if (argMultimap.isEmptyField(PREFIX_TAG)) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, PREFIX_TAG + " cannot be empty."));
+        }
 
         Set<Tag> tagsToRemove = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 

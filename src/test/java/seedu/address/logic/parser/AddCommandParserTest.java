@@ -231,15 +231,26 @@ public class AddCommandParserTest {
                 + INVALID_TAG_DESC + VALID_TAG_FRIEND + " cg/" + VALID_GRADE_BOB + " eg/" + VALID_EXP_GRADE_BOB,
                 Tag.MESSAGE_CONSTRAINTS);
 
-        // invalid grade
+        // invalid current grade
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + EDULEVEL_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + INVALID_GRADE_DESC
                         + " eg/" + VALID_EXP_GRADE_BOB,
                 CurrentGrade.MESSAGE_CONSTRAINTS);
 
+        // blank current grade
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                        + EDULEVEL_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND
+                        + " " + PREFIX_CURRENT_GRADE,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, PREFIX_CURRENT_GRADE + " cannot be empty."));
+
         // invalid expected grade
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + INVALID_EXP_GRADE_DESC + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, ExpectedGrade.MESSAGE_CONSTRAINTS);
+
+        // invalid expected grade
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + " " + PREFIX_EXP_GRADE + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, PREFIX_EXP_GRADE + " cannot be empty."));
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC

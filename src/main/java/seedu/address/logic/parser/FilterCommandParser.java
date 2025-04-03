@@ -39,6 +39,10 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_EDULEVEL, PREFIX_CURRENT_GRADE, PREFIX_EXP_GRADE);
 
         FilterDescriptor filterDescriptor = new FilterDescriptor();
+        if (argMultimap.isEmptyField(PREFIX_TAG)) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, PREFIX_TAG + " cannot be empty."));
+        }
 
         if (argMultimap.getValue(PREFIX_EDULEVEL).isPresent()) {
             filterDescriptor.setEduLevel(ParserUtil.parseEduLevel(argMultimap.getValue(PREFIX_EDULEVEL).get()));
