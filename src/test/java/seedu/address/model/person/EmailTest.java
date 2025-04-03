@@ -27,13 +27,13 @@ public class EmailTest {
         // Valid email
         assertTrue(Email.isValidLength("test@gmail.com"));
 
-        // Email length of 110 - valid as within limit
-        assertTrue(Email.isValidLength("abcdefghijklmnopqrstabcdefghijklmnopqrstabcdefghijklmnopqrst"
-                + "abcdefghijklmnopqrstabcdefghijklmnopqrst@gmail.com"));
+        // Email length of 85 - valid as within limit
+        assertTrue(Email.isValidLength("abcdefghijklmnopqrstabcdefghijklmnopqrstabcdefghijklmnopqrstabc"
+                + "defghijklmno@gmail.com"));
 
-        // Email length of 111 - invalid as exceeds limit
-        assertFalse(Email.isValidLength("abcdefghijklmnopqrstabcdefghijklmnopqrstabcdefghijklmnopqrst"
-                + "abcdefghijklmnopqrstabcdefghijklmnopqrstA@gmail.com"));
+        // Email length of 86 - invalid as exceeds limit
+        assertFalse(Email.isValidLength("abcdefghijklmnopqrstabcdefghijklmnopqrstabcdefghijklmnopqrstabc"
+                + "defghijklmnop@gmail.com"));
 
         // Super long email - meant to fail
         assertFalse(Email.isValidLength(
@@ -97,8 +97,8 @@ public class EmailTest {
         assertTrue(Email.isValidEmail("peter_jack@very-very-very-long-example.com")); // long domain name
         assertTrue(Email.isValidEmail("if.you.dream.it_you.can.do.it@example.com")); // long local part
         assertTrue(Email.isValidEmail("e1234567@u.nus.edu")); // more than one period in domain
-        assertTrue(Email.isValidEmail("abcdefghijklmnopqrstabcdefghijklmnopqrstabcdefghijklmnopqrst"
-                + "abcdefghijklmnopqrstabcdefghijklmnopqrst@gmail.com")); // max limit
+        assertTrue(Email.isValidEmail("abcdefghijklmnopqrstabcdefghijklmnopqrstabcdefghijklmnopqrstabc"
+                + "defghijklmno@gmail.com")); // max limit
     }
 
     @Test

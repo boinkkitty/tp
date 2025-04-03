@@ -27,13 +27,11 @@ public class NameTest {
         // Valid name
         assertTrue(Name.isValidLength("Stephanie Tan Tik Tok"));
 
-        // 85 characters - Valid as within limit
-        assertTrue(Name.isValidLength("abcdefghijklmnopqrstabcdefghijklmnopqrstabcdefghijklmnopqrst"
-                + "abcdefghijklmnopqrstabcde"));
+        // 65 characters - Valid as within limit
+        assertTrue(Name.isValidLength("abcdefghijklmnopqrstabcdefghijklmnopqrstabcdefghijklmnopqrstabcde"));
 
-        // 86 characters - Invalid as exceeds limit
-        assertFalse(Name.isValidLength("abcdefghijklmnopqrstabcdefghijklmnopqrstabcdefghijklmnopqrst"
-                + "abcdefghijklmnopqrstabcdeF"));
+        // 66 characters - Invalid as exceeds limit
+        assertFalse(Name.isValidLength("abcdefghijklmnopqrstabcdefghijklmnopqrstabcdefghijklmnopqrstabcdef"));
 
         // Super long string - Invalid as exceeds limit
         assertFalse(Name.isValidLength(
@@ -68,8 +66,8 @@ public class NameTest {
         assertTrue(Name.isValidName("peter the 2nd")); // alphanumeric characters
         assertTrue(Name.isValidName("Capital Tan")); // with capital letters
         assertTrue(Name.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
-        assertTrue(Name.isValidName("abcdefghijklmnopqrstabcdefghijklmnopqrstabcdefghijklmnopqrst"
-                + "abcdefghijklmnopqrstabcde")); // at max limit
+        // at max limit
+        assertTrue(Name.isValidName("abcdefghijklmnopqrstabcdefghijklmnopqrstabcdefghijklmnopqrstabcde"));
     }
 
     @Test
