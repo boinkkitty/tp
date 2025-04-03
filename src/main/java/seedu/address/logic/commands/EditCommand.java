@@ -99,6 +99,13 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
+        Email oldEmail = personToEdit.getEmail();
+        Email newEmail = editedPerson.getEmail();
+        // Only check if user changed the email
+        if (!oldEmail.equals(newEmail) && model.hasEmail(newEmail, personToEdit)) {
+            throw new CommandException("This email is already used by another person!");
+        }
+
         if (editedPerson.getTags().size() > Tag.MAX_TAGS_IN_SET) {
             throw new CommandException(Tag.MESSAGE_CONSTRAINTS_EDIT_SET);
         }

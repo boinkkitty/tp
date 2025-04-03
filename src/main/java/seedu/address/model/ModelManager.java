@@ -120,6 +120,24 @@ public class ModelManager implements Model {
                 .anyMatch(p -> p.getEmail().value.equalsIgnoreCase(email.value));
     }
 
+    /**
+     * Returns true if an existing {@code Person} in the address book (excluding the specified
+     * {@code excludedPerson} if not null) already has the given {@code Email}.
+     *
+     * @param email The email to check for duplicates.
+     * @param excludedPerson A person to exclude from the search, or null if none should be excluded.
+     * @return True if another person in the address book has the same email, ignoring case.
+     *         False otherwise.
+     * @throws NullPointerException if the provided email is null.
+     */
+    public boolean hasEmail(Email email, Person excludedPerson) {
+        requireNonNull(email);
+        return addressBook.getPersonList().stream()
+                // If excludedPerson is provided, skip them in the check
+                .filter(p -> excludedPerson == null || !p.equals(excludedPerson))
+                .anyMatch(p -> p.getEmail().value.equalsIgnoreCase(email.value));
+    }
+
 
     @Override
     public void setPerson(Person target, Person editedPerson) {
