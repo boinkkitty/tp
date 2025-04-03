@@ -54,6 +54,23 @@ public class AddCommandTest {
     }
 
     @Test
+    public void execute_duplicateEmail_throwsCommandException() {
+        // Two Persons with the same email but potentially different names/phones
+        Person firstPerson = new PersonBuilder().withEmail("john@example.com").build();
+        Person secondPerson = new PersonBuilder().withEmail("john@example.com").withName("Another Person").build();
+
+        ModelStubAcceptingPersonAddedButCheckingEmail modelStub = new ModelStubAcceptingPersonAddedButCheckingEmail();
+
+        // Add the first person
+        modelStub.addPerson(firstPerson);
+
+        // Attempt to add the second with same email
+        AddCommand addCommand = new AddCommand(secondPerson);
+        assertThrows(CommandException.class, () -> addCommand.execute(modelStub));
+    }
+
+
+    @Test
     public void equals() {
         Person alice = new PersonBuilder().withName("Alice").build();
         Person bob = new PersonBuilder().withName("Bob").build();
@@ -192,6 +209,32 @@ public class AddCommandTest {
         public boolean hasPerson(Person person) {
             requireNonNull(person);
             return personsAdded.stream().anyMatch(person::isSamePerson);
+        }
+
+        @Override
+        public void addPerson(Person person) {
+            requireNonNull(person);
+            personsAdded.add(person);
+        }
+
+        @Override
+        public ReadOnlyAddressBook getAddressBook() {
+            return new AddressBook();
+        }
+    }
+
+    /**
+     * A Model stub that checks for duplicate emails.
+     */
+    private class ModelStubAcceptingPersonAddedButCheckingEmail extends ModelStub {
+        final ArrayList<Person> personsAdded = new ArrayList<>();
+
+        @Override
+        public boolean hasPerson(Person person) {
+            requireNonNull(person);
+            // Return true if any Person in the list has the same email
+            return personsAdded.stream()
+                    .anyMatch(p -> p.getEmail().value.equalsIgnoreCase(person.getEmail().value));
         }
 
         @Override

@@ -12,6 +12,7 @@ import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -29,7 +30,7 @@ public class UntagCommandTest {
     }
 
     @Test
-    public void execute_allTagsExist_tagsRemovedSuccessfully() {
+    public void execute_allTagsExist_tagsRemovedSuccessfully() throws CommandException {
         Person aliceWithTags = new PersonBuilder(ALICE).withTags("CS2040", "Math").build();
         Person bobWithTags = new PersonBuilder(BOB).withTags("CS2040").build();
         model.addPerson(aliceWithTags);
@@ -49,7 +50,7 @@ public class UntagCommandTest {
     }
 
     @Test
-    public void execute_someTagsNotFound_tagsRemovedSuccessfully() {
+    public void execute_someTagsNotFound_tagsRemovedSuccessfully() throws CommandException {
         Person aliceWithTags = new PersonBuilder(ALICE).withTags("CS2040", "Math").build();
         model.addPerson(aliceWithTags);
 
@@ -65,7 +66,7 @@ public class UntagCommandTest {
     }
 
     @Test
-    public void execute_noMatchingTags_noPersonsUpdated() {
+    public void execute_noMatchingTags_noPersonsUpdated() throws CommandException {
         Person aliceWithTags = new PersonBuilder(ALICE).withTags("Math").build();
         model.addPerson(aliceWithTags);
 
