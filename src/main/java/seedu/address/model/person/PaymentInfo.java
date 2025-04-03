@@ -10,7 +10,7 @@ import seedu.address.commons.util.StringUtil;
  */
 public class PaymentInfo {
     public static final String MESSAGE_CONSTRAINTS_FEE =
-            "Fees should only contain unsigned integers, and it should not be blank";
+            "Fees should only contain unsigned integers, less than $2,147,483,648, and it should not be blank";
     public static final String MESSAGE_CONSTRAINTS_DATE =
             "Dates should be in dd-MM-yyyy format, and it should not be blank";
     public static final String MESSAGE_CONSTRAINTS_STATUS =
