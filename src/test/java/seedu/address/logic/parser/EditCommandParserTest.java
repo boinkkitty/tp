@@ -116,9 +116,9 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + TAG_DESC_FRIEND + TAG_DESC_HUSBAND + TAG_EMPTY, Tag.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, "1" + TAG_DESC_FRIEND + TAG_EMPTY + TAG_DESC_HUSBAND, Tag.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND, Tag.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + "t+/",
+        assertParseFailure(parser, "1" + " t+/",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, PREFIX_TAG_APPEND + " cannot be empty."));
-        assertParseFailure(parser, "1" + "t-/",
+        assertParseFailure(parser, "1" + " t-/",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, PREFIX_TAG_REMOVE + " cannot be empty."));
 
         // multiple invalid values, but only the first invalid value is captured
