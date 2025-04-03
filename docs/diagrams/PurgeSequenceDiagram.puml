@@ -24,7 +24,7 @@ end box
 [-> LogicManager : execute("purge")
 activate LogicManager
 
-LogicManager -> AddressBookParser: parseCommand("purge")
+LogicManager -> AddressBookParser: parseCommand()
 activate AddressBookParser
 
 ' Create the PurgeCommandParser
@@ -43,7 +43,7 @@ deactivate PurgeCommandParser
 'destroy PurgeCommandParser
 
 ' Now call parse(...) on the newly created parser
-AddressBookParser -> PurgeCommandParser: parse("purge")
+AddressBookParser -> PurgeCommandParser: parse()
 
 activate PurgeCommandParser
 
