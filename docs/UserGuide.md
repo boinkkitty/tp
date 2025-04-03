@@ -112,7 +112,7 @@ Format:
 
 <span markdown="span" class="alert alert-primary">:bulb: **Tip:**</span> Duplicate detection for repeated contacts are
 based on **EXACT** matching of name. For example: `Jane Doe` (single-spaced) and `Jane  Doe` (double-spaced) will be
-treated as 2 distinct contacts.
+treated as 2 distinct contacts. Names are case-sensitive so `Jane Doe` and `jane doe` will be treated as distinct contacts.
 
 <span markdown="span" class="alert alert-primary">:bulb: **Tip:** </span> A person can have less than or equals to 8
 unique tags each (including 0).
