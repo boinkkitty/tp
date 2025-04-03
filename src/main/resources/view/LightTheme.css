@@ -31,6 +31,16 @@
     -fx-font-family: "Segoe UI Semibold";
 }
 
+.tab-pane {
+    -fx-padding: 0 0 0 1;
+}
+
+.tab-pane .tab-header-area {
+    -fx-padding: 0 0 0 0;
+    -fx-min-height: 0;
+    -fx-max-height: 0;
+}
+
 .table-view {
     -fx-base: #f8f8f8; /* Lighter base color */
     -fx-control-inner-background: #f8f8f8;
@@ -81,6 +91,12 @@
     -fx-background-color: derive(#f7f7f7, 20%);
 }
 
+.list-cell {
+    -fx-label-padding: 0 0 0 0;
+    -fx-graphic-text-gap : 0;
+    -fx-padding: 0 0 0 0;
+}
+
 .list-cell:empty {
     -fx-background-color: #f7f7f7;
 }
@@ -111,6 +127,7 @@
     -fx-font-family: "Segoe UI";
     -fx-font-size: 13px;
     -fx-text-fill: #4a4a4a; /* Darker small text */
+    -fx-font-weight: bold;
 }
 
 .stack-pane {

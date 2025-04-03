@@ -23,7 +23,7 @@ public class PaymentCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the payment information"
             + " of the person identified "
             + "by the index number used in the person listing. "
-            + "Existing payment  will be overwritten by the input.\n"
+            + "Existing payment will be overwritten by the input.\n"
             + "Parameters: INDEX (must be a positive integer) ["
             + PREFIX_PAYMENT_FEE + "FEE] [" + PREFIX_PAYMENT_DATE
             + "PAYMENT_DATE] [" + PREFIX_PAYMENT_STATUS + "PAYMENT_STATUS]\n"
