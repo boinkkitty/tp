@@ -60,11 +60,15 @@ public class Tag {
         return fullTag.split("#")[0].toLowerCase().hashCode();
     }
 
+    private String getTagName() {
+        return this.fullTag.split("#")[0];
+    }
+
     /**
      * Format state as text for viewing.
      */
     public String toString() {
-        return '[' + fullTag + ']';
+        return '[' + getTagName() + ']';
     }
 
 }

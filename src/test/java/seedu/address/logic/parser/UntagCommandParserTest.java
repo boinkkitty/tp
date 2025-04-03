@@ -1,9 +1,9 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.model.tag.Tag.MESSAGE_CONSTRAINTS;
 
 import java.util.Set;
 
@@ -29,7 +29,8 @@ public class UntagCommandParserTest {
 
     @Test
     public void parse_invalidTag_failure() {
-        assertParseFailure(parser, " t/ ", MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " t/",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, PREFIX_TAG + " cannot be empty."));
     }
 
     @Test

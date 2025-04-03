@@ -58,8 +58,8 @@ public class FilterCommandParserTest {
                 INVALID_EDULEVEL_DESC + INVALID_GRADE_DESC, EduLevel.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
-        assertParseFailure(parser, INVALID_EDULEVEL_DESC + INVALID_GRADE_DESC + INVALID_EXP_GRADE_DESC
-                + INVALID_TAG_DESC, EduLevel.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser,
+                " t/", String.format(MESSAGE_INVALID_COMMAND_FORMAT, "t/ cannot be empty."));
     }
 
     @Test

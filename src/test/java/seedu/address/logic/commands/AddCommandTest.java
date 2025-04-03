@@ -22,6 +22,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.person.Email;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -52,6 +53,23 @@ public class AddCommandTest {
 
         assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
     }
+
+    @Test
+    public void execute_duplicateEmail_throwsCommandException() {
+        // Two Persons with the same email but potentially different names/phones
+        Person firstPerson = new PersonBuilder().withEmail("john@example.com").build();
+        Person secondPerson = new PersonBuilder().withEmail("john@example.com").withName("Another Person").build();
+
+        ModelStubAcceptingPersonAddedButCheckingEmail modelStub = new ModelStubAcceptingPersonAddedButCheckingEmail();
+
+        // Add the first person
+        modelStub.addPerson(firstPerson);
+
+        // Attempt to add the second with same email
+        AddCommand addCommand = new AddCommand(secondPerson);
+        assertThrows(CommandException.class, () -> addCommand.execute(modelStub));
+    }
+
 
     @Test
     public void equals() {
@@ -90,6 +108,11 @@ public class AddCommandTest {
     private class ModelStub implements Model {
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
+            throw new AssertionError("This method should not be called.");
+
+        }
+        @Override
+        public boolean hasEmail(Email email, Person excludedPerson) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -192,6 +215,32 @@ public class AddCommandTest {
         public boolean hasPerson(Person person) {
             requireNonNull(person);
             return personsAdded.stream().anyMatch(person::isSamePerson);
+        }
+
+        @Override
+        public void addPerson(Person person) {
+            requireNonNull(person);
+            personsAdded.add(person);
+        }
+
+        @Override
+        public ReadOnlyAddressBook getAddressBook() {
+            return new AddressBook();
+        }
+    }
+
+    /**
+     * A Model stub that checks for duplicate emails.
+     */
+    private class ModelStubAcceptingPersonAddedButCheckingEmail extends ModelStub {
+        final ArrayList<Person> personsAdded = new ArrayList<>();
+
+        @Override
+        public boolean hasPerson(Person person) {
+            requireNonNull(person);
+            // Return true if any Person in the list has the same email
+            return personsAdded.stream()
+                    .anyMatch(p -> p.getEmail().value.equalsIgnoreCase(person.getEmail().value));
         }
 
         @Override

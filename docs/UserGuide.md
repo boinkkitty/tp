@@ -327,6 +327,7 @@ Format: `clear i/START_INDEX...END_INDEX` OR `clear t/TAG [t/TAG]...`
 * At least one tag must be provided.
 * Each person in the address book is checked for the tags provided.
 * If the person has at least one tag that matches, they will be deleted.
+* If hexadecimal for color coding is provided in tag, hexadecimal color will be ignored
 * **IMPORTANT**: using both types of prefixes together will yield an error.
 
 **Examples**:

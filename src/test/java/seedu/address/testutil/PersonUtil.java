@@ -40,10 +40,18 @@ public class PersonUtil {
         sb.append(PREFIX_PHONE + person.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
-        sb.append(PREFIX_EDULEVEL).append(person.getEduLevel().value + " ");
-        sb.append(PREFIX_CURRENT_YEAR + person.getCurrentYear().value + " ");
-        sb.append(PREFIX_CURRENT_GRADE + person.getCurrentGrade().value + " ");
-        sb.append(PREFIX_EXP_GRADE + person.getExpectedGrade().value + " ");
+        if (!person.getEduLevel().value.equals("")) {
+            sb.append(PREFIX_EDULEVEL + person.getEduLevel().value + " ");
+        }
+        if (!person.getExpectedGrade().value.equals("")) {
+            sb.append(PREFIX_EXP_GRADE + person.getExpectedGrade().value + " ");
+        }
+        if (!person.getCurrentGrade().value.equals("")) {
+            sb.append(PREFIX_CURRENT_GRADE + person.getCurrentGrade().value + " ");
+        }
+        if (!person.getCurrentYear().value.equals("")) {
+            sb.append(PREFIX_CURRENT_YEAR + person.getCurrentYear().value + " ");
+        }
         person.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.fullTag + " ")
         );

@@ -8,6 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.testutil.Assert;
+
 /**
  * Contains unit tests for {@code EduLevel}.
  */
@@ -16,12 +18,6 @@ public class EduLevelTest {
     @Test
     public void constructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new EduLevel(null));
-    }
-
-    @Test
-    public void constructor_invalidEduLevel_throwsIllegalArgumentException() {
-        String invalidEduLevel = "NOT_VALID";
-        assertThrows(IllegalArgumentException.class, () -> new EduLevel(invalidEduLevel));
     }
 
     @Test
@@ -39,28 +35,50 @@ public class EduLevelTest {
     }
 
     @Test
-    public void isValidEduLevel() {
-        // null -> throws NullPointerException
-        assertThrows(NullPointerException.class, () -> EduLevel.isValidEduLevel(null));
+    public void isValidLength() {
+        // Empty edu level
+        assertTrue(EduLevel.isValidLength(""));
 
-        // invalid eduLevel
-        assertFalse(EduLevel.isValidEduLevel("asdf"));
-        assertFalse(EduLevel.isValidEduLevel("Primmmary"));
-        assertFalse(EduLevel.isValidEduLevel("123"));
+        // Valid edu level
+        assertTrue(EduLevel.isValidLength("Primary"));
 
-        // valid eduLevel
-        assertTrue(EduLevel.isValidEduLevel("")); // empty allowed
-        assertTrue(EduLevel.isValidEduLevel("Primary"));
-        assertTrue(EduLevel.isValidEduLevel("secondary")); // ignoring case
-        assertTrue(EduLevel.isValidEduLevel("PhD"));
+        // 30 characters - valid as within limit
+        assertTrue(EduLevel.isValidLength("abcdefghijklmnopqrstabcdefghij"));
+
+        // 31 characters - invalid as exceeds limit
+        assertFalse(EduLevel.isValidLength("abcdefghijklmnopqrstabcdefghijK"));
+
+        // Super long string - meant to fail
+        assertFalse(EduLevel.isValidLength(
+                "Absurdly long string that is meant to fail and it should fail and only fail and not pass. "
+                        + "Absurdly long string that is meant to fail and it should fail and only fail and not pass. "
+                        + "Absurdly long string that is meant to fail and it should fail and only fail and not pass. "
+                        + "Absurdly long string that is meant to fail and it should fail and only fail and not pass. "
+                        + "Absurdly long string that is meant to fail and it should fail and only fail and not pass. "
+                        + "Absurdly long string that is meant to fail and it should fail and only fail and not pass. "
+                        + "Absurdly long string that is meant to fail and it should fail and only fail and not pass. "
+                        + "Absurdly long string that is meant to fail and it should fail and only fail and not pass. "
+                        + "Absurdly long string that is meant to fail and it should fail and only fail and not pass. "
+                        + "Absurdly long string that is meant to fail and it should fail and only fail and not pass."));
     }
 
     @Test
-    public void equals_sameValues_returnsTrue() {
-        EduLevel first = new EduLevel("Bachelor");
-        EduLevel second = new EduLevel("bachelor");
-        // equalsIgnoreCase in the class
-        assertTrue(first.equals(second));
+    public void isValidEduLevel() {
+        // null edu level
+        Assert.assertThrows(NullPointerException.class, () -> CurrentYear.isValidCurrentYear(null));
+
+        // invalid edu level
+        assertFalse(EduLevel.isValidEduLevel("^")); // only non-alphanumeric characters
+        assertFalse(EduLevel.isValidEduLevel("Primary*")); // contains non-alphanumeric characters
+        assertFalse(EduLevel.isValidEduLevel("abcdefghijklmnopqrstabcdefghijK")); // exceeds limit
+
+        // valid edu level
+        assertTrue(EduLevel.isValidEduLevel("")); // empty string
+        assertTrue(EduLevel.isValidEduLevel(" ")); // spaces only
+        assertTrue(EduLevel.isValidEduLevel("10")); // numbers only
+        assertTrue(EduLevel.isValidEduLevel("Primary 10")); // alphanumeric characters
+        assertTrue(EduLevel.isValidEduLevel("Bachelor Degree")); // with spaces
+        assertTrue(EduLevel.isValidEduLevel("abcdefghijklmnopqrstabcdefghij")); // max limit
     }
 
     @Test

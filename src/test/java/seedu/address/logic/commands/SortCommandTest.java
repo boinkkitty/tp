@@ -88,7 +88,7 @@ public class SortCommandTest {
     }
 
     @Test
-    public void execute_noPersonsToSort_noPersonsInModelAfterAdd() {
+    public void execute_noPersonsToSort_noPersonsInModelAfterAdd() throws CommandException {
         Model emptyModel = new ModelManager(new AddressBook(), new UserPrefs());
         SortCommand sortCommand = new SortCommand();
         assertCommandSuccess(sortCommand, emptyModel, Messages.MESSAGE_NO_PERSON_TO_SORT,

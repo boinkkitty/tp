@@ -36,6 +36,22 @@ public class ArgumentMultimap {
     }
 
     /**
+     * Check if {@code prefix} is present
+     */
+    public boolean isPrefixPresent(Prefix prefix) {
+        return argMultimap.containsKey(prefix);
+    }
+
+    /**
+     * Check if {@code prefix} is present but field is empty string.
+     */
+    public boolean isEmptyField(Prefix prefix) {
+        return isPrefixPresent(prefix) && getAllValues(prefix)
+                .stream()
+                .anyMatch(s -> s.isEmpty());
+    }
+
+    /**
      * Returns the last value of {@code prefix}.
      */
     public Optional<String> getValue(Prefix prefix) {

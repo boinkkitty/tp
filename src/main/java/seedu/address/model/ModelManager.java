@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.Messages.MESSAGE_DUPLICATE_EMAIL;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -14,6 +15,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.person.Email;
 import seedu.address.model.person.Person;
 
 /**
@@ -102,10 +105,39 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addPerson(Person person) {
+    public void addPerson(Person person) throws CommandException {
+        requireNonNull(person);
+
+        if (hasEmail(person.getEmail())) {
+            throw new CommandException(MESSAGE_DUPLICATE_EMAIL);
+        }
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
+
+    private boolean hasEmail(Email email) {
+        return addressBook.getPersonList().stream()
+                .anyMatch(p -> p.getEmail().value.equalsIgnoreCase(email.value));
+    }
+
+    /**
+     * Returns true if an existing {@code Person} in the address book (excluding the specified
+     * {@code excludedPerson} if not null) already has the given {@code Email}.
+     *
+     * @param email The email to check for duplicates.
+     * @param excludedPerson A person to exclude from the search, or null if none should be excluded.
+     * @return True if another person in the address book has the same email, ignoring case.
+     *         False otherwise.
+     * @throws NullPointerException if the provided email is null.
+     */
+    public boolean hasEmail(Email email, Person excludedPerson) {
+        requireNonNull(email);
+        return addressBook.getPersonList().stream()
+                // If excludedPerson is provided, skip them in the check
+                .filter(p -> excludedPerson == null || !p.equals(excludedPerson))
+                .anyMatch(p -> p.getEmail().value.equalsIgnoreCase(email.value));
+    }
+
 
     @Override
     public void setPerson(Person target, Person editedPerson) {
