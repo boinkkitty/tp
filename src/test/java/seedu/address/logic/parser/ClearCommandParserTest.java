@@ -61,4 +61,10 @@ public class ClearCommandParserTest {
         ClearCommand expectedClearCommand = new ClearCommand(INDEX_FIRST_PERSON, INDEX_THIRD_PERSON);
         assertParseSuccess(parser, INDEX_SEQUENCE_DESC, expectedClearCommand);
     }
+
+    @Test
+    public void parse_validIndexSequenceWithSpaces_success() {
+        ClearCommand expectedCommand = new ClearCommand(INDEX_FIRST_PERSON, INDEX_THIRD_PERSON);
+        assertParseSuccess(parser, " i/  1 ...  3  ", expectedCommand);
+    }
 }

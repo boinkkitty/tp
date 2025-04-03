@@ -56,16 +56,21 @@ public class ParserUtil {
         if (parts.length != 2) { // Must have exactly two parts
             throw new ParseException("Invalid format. Provide exactly two positive integers separated by '...'.");
         }
-        if (!StringUtil.isNonZeroUnsignedInteger(parts[0])) {
+
+        String startIndex = parts[0].trim();
+        String endIndex = parts[1].trim();
+
+        if (!StringUtil.isNonZeroUnsignedInteger(startIndex)) {
             throw new ParseException("Start Index: " + MESSAGE_INVALID_INDEX);
         }
-        if (!StringUtil.isNonZeroUnsignedInteger(parts[1])) {
+        if (!StringUtil.isNonZeroUnsignedInteger(endIndex)) {
             throw new ParseException("End Index: " + MESSAGE_INVALID_INDEX);
         }
-        if (Integer.parseInt(parts[0]) >= Integer.parseInt(parts[1])) {
+        if (Integer.parseInt(startIndex) >= Integer.parseInt(endIndex)) {
             throw new ParseException(MESSAGE_INVALID_INDEX_SEQUENCE);
         }
-        return List.of(Index.fromOneBased(Integer.parseInt(parts[0])), Index.fromOneBased(Integer.parseInt(parts[1])));
+        return List.of(Index.fromOneBased(Integer.parseInt(startIndex)),
+                Index.fromOneBased(Integer.parseInt(endIndex)));
     }
 
     /**
