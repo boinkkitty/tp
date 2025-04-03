@@ -8,7 +8,7 @@ Interface** (CLI) while still having the benefits of a Graphical User Interface 
 can get your contact management or other administrative tasks done faster than traditional GUI apps.
 
 * Table of Contents
-  {:toc}
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -82,16 +82,35 @@ can get your contact management or other administrative tasks done faster than t
 </div>
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Constraints:**<br>
-<ul>
-<li>NAME must be between 1 and 65 characters. (Do note that extremely long NAME may be truncated unless you increase the window size)</li>
-<li>EMAIL must be between 1 and 85 characters. (Do note that extremely long EMAIL may be truncated unless you increase the window size)</li>
-<li>ADDRESS must be between 1 and 85 characters. (Do note that extremely long ADDRESS may be truncated unless you increase the window size)</li>
-<li>CURRENT_YEAR is limited to a maximum of 30 characters.</li>
-<li>Each TAG (before the optional #HEX code) must be alphanumeric and at most 10 characters.</li>
-<li>Tags can include an optional hexadecimal color code in the format #RRGGBB (e.g., t/cs2040#FFAABB).</li>
-<li>A maximum of 8 unique TAGs are allowed per person.</li>
-<li>Parameters must conform to their respective formats and constraints; otherwise, the command may be rejected.</li>
-</ul>
+NAME must be between 1 and 65 characters. (Do note that extremely long NAME may be truncated unless you increase the window size)
+</div>
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Constraints:**<br>
+EMAIL must be between 1 and 85 characters. (Do note that extremely long EMAIL may be truncated unless you increase the window size)
+</div>
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Constraints:**<br>
+ADDRESS must be between 1 and 85 characters. (Do note that extremely long ADDRESS may be truncated unless you increase the window size)
+</div>
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Constraints:**<br>
+CURRENT_YEAR is limited to a maximum of 30 characters.
+</div>
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Constraints:**<br>
+Each TAG (before the optional #HEX code) must be alphanumeric and at most 10 characters.
+</div>
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Constraints:**<br>
+Tags can include an optional hexadecimal color code in the format #RRGGBB (e.g., t/cs2040#FFAABB).
+</div>
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Constraints:**<br>
+A maximum of 8 unique TAGs are allowed per person.
+</div>
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Constraints:**<br>
+Parameters must conform to their respective formats and constraints; otherwise, the command may be rejected.
 </div>
 
 ### Viewing help : `help`
@@ -110,18 +129,22 @@ Adds a person to the address book.
 Format:
 `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [l/EDU_LEVEL] [cy/CURRENT_YEAR] [cg/CURRENT_GRADE] [eg/EXP_GRADE] [t/TAG]…​`
 
-<span markdown="span" class="alert alert-primary">:bulb: **Tip:**</span> Duplicate detection for repeated contacts are
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:** Duplicate detection for repeated contacts are
 based on **EXACT** matching of name. For example: `Jane Doe` (single-spaced) and `Jane  Doe` (double-spaced) will be
-treated as 2 distinct contacts. Names are case-sensitive so `Jane Doe` and `jane doe` will be treated as distinct contacts.
+treated as 2 distinct contacts. Names are case-sensitive so `Jane Doe` and `jane doe` will be treated as distinct contacts.</div>
 
-<span markdown="span" class="alert alert-primary">:bulb: **Tip:** </span> A person can have less than or equals to 8
-unique tags each (including 0).
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:** Duplicate detection for repeated email address are
+based on **CASE-INSENSITIVE** matching of emails. For example: `janedoe@email.com` and `JaneDoe@email.com` will be
+treated as duplicated contacts.</div>
 
-<span markdown="span" class="alert alert-primary">:bulb: **Tip:** </span>
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:** A person can have less than or equals to 8
+unique tags each (including 0).</div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You can add a hexadecimal color code to any tag by appending `#RRGGBB` after the tag name.
-For example: `t/CS2040#ED9E49`. This allows tags to be visually color-coded in the UI.
+For example: `t/CS2040#ED9E49`. This allows tags to be visually color-coded in the UI.</div>
 
-Examples:
+**Examples**:
 
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 cg/C+ t/CS2030C`
@@ -144,6 +167,14 @@ Format:
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:** Duplicate detection for repeated contacts are
+based on **EXACT** matching of name. For example: `Jane Doe` (single-spaced) and `Jane  Doe` (double-spaced) will be
+treated as 2 distinct contacts. Names are case-sensitive so `Jane Doe` and `jane doe` will be treated as distinct contacts.</div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:** Duplicate detection for repeated email address are
+based on **CASE-INSENSITIVE** matching of emails. For example: `janedoe@email.com` and `JaneDoe@email.com` will be
+treated as duplicated contacts.</div>
+
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have less than or equals to 8 unique tags each (including 0).
 </div>
@@ -153,7 +184,7 @@ You can add a hexadecimal color code to any tag by appending `#RRGGBB` after the
 For example: `t/CS2040#ED9E49`. This allows tags to be visually color-coded in the UI.
 </div>
 
-Examples:
+**Examples**:
 
 * `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567`
   and `johndoe@example.com` respectively.
@@ -170,7 +201,7 @@ Examples:
    exist, the app silently continues with the rest.
 4. The final tag list is updated to the person, and should have less than or equals to 8 unique tags.
 
-Examples:
+**Examples**:
 
 * `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 * `edit 2 t-/Maths` Edits the tags of the 2nd person by removing `Maths` from existing list of tags.
@@ -210,7 +241,7 @@ Format: `payment INDEX [f/FEE] [d/PAYMENT_DATE] [s/PAYMENT_STATUS]`
 * `PAYMENT_DATE` should be in the format `DD-MM-YYYY`.
 * `PAYMENT_STATUS` should be either `Paid` or `Waiting`.
 
-Examples:
+**Examples**:
 
 * `payment 1 f/1000 d/14-11-2000 s/paid` Updates the tutoring fee, payment date and status to be `1000`, `14-11-2000`
   and `paid` respectively.
@@ -239,7 +270,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
-Examples:
+**Examples**:
 
 * `find John` returns `john` and `John Doe`
 * `find lee yu` returns `Benny Lee`, `Bernice Yu`<br>
@@ -256,7 +287,7 @@ Format: `filter [l/EDU_LEVEL] [cg/CURRENT_GRADE] [eg/EXP_GRADE] [t/TAG]…`
 * Empty fields are accepted
     * If `[l/EDU_LEVEL] [cg/CURRENT_GRADE] [eg/EXP_GRADE]` are empty e.g. `l/ cg/ eg/`,
       filter will show persons without values in respective fields stated.
-    * `[t/TAG]…` an empty tag field will not add to filter condition.
+    * `[t/TAG]…` an empty tag field will trigger an error.
 
 ### Deleting a person : `delete`
 
@@ -268,7 +299,7 @@ Format: `delete INDEX`
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
-Examples:
+**Examples**:
 
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
@@ -298,7 +329,7 @@ Format: `clear i/START_INDEX...END_INDEX` OR `clear t/TAG [t/TAG]...`
 * If the person has at least one tag that matches, they will be deleted.
 * **IMPORTANT**: using both types of prefixes together will yield an error.
 
-Examples:
+**Examples**:
 
 * `list` followed by `clear i/2...5` will delete persons at indices 2, 3, 4 and 5 for a total of four deletions.
 * `clear t/friends t/enemies` will delete persons who have either the `friends` tag or `enemeies` tag.
@@ -353,11 +384,6 @@ It's strongly recommended to make a backup of your data file before any manual e
    application before running the application again.
 2. **If you need to see your truncated NAME, EMAIL or ADDRESS**, increase your window size for the application until it
    is no longer truncated.
-3. **When editing tags**, in certain scenarios where edit is used with empty tags to append and tags to remove, e.g.,
-   `edit 1 t-/`, command will still successfully execute but due to the logic of the program, no change is effected by
-   that parameter. <br> The team has deemed that this bug does not impact the functionality of edit command and that
-   fixing it would require drastic changes to the logic of parsing tags. See
-   issue: [here](https://github.com/AY2425S2-CS2103-F15-2/tp/issues/179).
 
 --------------------------------------------------------------------------------------------------------------------
 
