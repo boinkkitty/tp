@@ -105,6 +105,10 @@ Adds a person to the address book.
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [l/EDU_LEVEL] [cy/CURRENT_YEAR] [cg/CURRENT_GRADE] [eg/EXP_GRADE] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Duplicate detection for repeated contacts are based on **EXACT** matching of name. For example: `Jane Doe` (single-spaced) and `Jane  Doe` (double-spaced) will be treated as 2 distinct contacts.
+</div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have less than or equals to 8 unique tags each (including 0).
 </div>
 
