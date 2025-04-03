@@ -30,20 +30,16 @@ public class FilterCommand extends Command {
 
     public static final String COMMAND_WORD = "filter";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filter the contact list according to the specified "
+            + "conditions provided. If multiple conditions are provided, all conditions must be met.\n"
+            + "Parameters: "
             + "[" + PREFIX_TAG + "TAG]... "
             + "[" + PREFIX_EDULEVEL + "EDUCATION] "
             + "[" + PREFIX_CURRENT_GRADE + "CURRENT_GRADE] "
             + "[" + PREFIX_EXP_GRADE + "EXP_GRADE]\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_TAG + "Husband "
-            + PREFIX_TAG + "Friend "
-            + PREFIX_EDULEVEL + "Primary "
-            + PREFIX_CURRENT_GRADE + "A "
-            + PREFIX_EXP_GRADE + "C";
+            + PREFIX_TAG + "Husband ";
+
 
     public static final String MESSAGE_FILTER_SUCCESS = "Filtered Persons: %1$s";
     public static final String MESSAGE_NOT_FILTERED = "At least one field to filter must be provided.";
