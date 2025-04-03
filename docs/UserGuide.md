@@ -82,7 +82,7 @@ TutorSynch is a **desktop app for managing student contacts and academic details
 
 * Tags can include an optional hexadecimal color code in the format #RRGGBB (e.g., t/cs2040#FFAABB).
 
-* A maximum of 8 unique TAGs is allowed per person.
+* A maximum of 8 unique TAGs are allowed per person.
 
 * Parameters must conform to their respective formats and constraints; otherwise, the command may be rejected.
 
@@ -314,6 +314,8 @@ It's strongly recommended to make a backup of your data file before any manual e
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you need to see your truncated NAME, EMAIL or ADDRESS**, increase your window size for the application until it is no longer truncated.
+3. **When editing tags**, in certain scenarios where edit is used with empty tags to append and tags to remove, e.g., `edit 1 t-/`, command will still successfully execute but due to the logic of the program, no change is effected by that parameter. <br> The team has deemed that this bug does not impact the functionality of edit command and that fixing it would require drastic changes to the logic of parsing tags. See issue: [here](https://github.com/AY2425S2-CS2103-F15-2/tp/issues/179).
+
 
 --------------------------------------------------------------------------------------------------------------------
 
