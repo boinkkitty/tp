@@ -385,6 +385,13 @@ It's strongly recommended to make a backup of your data file before any manual e
    application before running the application again.
 2. **If you need to see your truncated NAME, EMAIL or ADDRESS**, increase your window size for the application until it
    is no longer truncated.
+3. **When adding/editing many tags**, in certain scenarios where the tags begin to wrap (especially on lower screen
+   resolution), the tags may inadvertently overlap onto the remaining Person's information field, as shown in the
+   screenshot below.
+   ![Example of Tags Overflowing Bug](images/TagsOverflow_1.png)
+   The remedy is to click on the specific Person's Card, which will trigger a CSS style update, so that the wrapping
+   works as intended.
+   ![Example of Tags Overflowing Bug Remedy](images/TagsOverflow_2.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
