@@ -20,6 +20,10 @@ Class Name
 Class Phone
 Class Tag
 Class ExpectedGrade
+Class CurrentGrade
+Class EduLevel
+Class CurrentYear
+Class PaymentInfo
 
 Class I #FFFFFF
 }
@@ -42,8 +46,12 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
-Person *--> "*" Tag
-Person *--> ExpectedGrade
+Person *--> "0..8" Tag
+Person *--> "0..1" EduLevel
+Person *-> "0..1" CurrentYear
+Person *-> "0..1" CurrentGrade
+Person *-> "0..1" ExpectedGrade
+Person *-> "0..1" PaymentInfo
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
@@ -51,6 +59,12 @@ UniquePersonList -[hidden]right-> I
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
+
+EduLevel -[hidden]up->Name
+CurrentYear -[hidden]up->Phone
+CurrentGrade -[hidden]up->Address
+ExpectedGrade -[hidden]up->Email
+PaymentInfo -[hidden]up->Tag
 
 ModelManager --> "~* filtered" Person
 @enduml

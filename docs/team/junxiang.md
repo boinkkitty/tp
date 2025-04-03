@@ -25,7 +25,8 @@ Below are my project contributions:
   * Added details regarding switching of themes feature
 * Developer Guide:
   * Created additional Non-Functional Requirements for project
-  * 
+  * Created Use Case for `find`, `filter`, `help`, `toggletheme` and `exit` commands
+  * Formatted Use Cases for standardization
 * README:
   * Refurbished design of README to incorporate relevant features of TutorSynch
 

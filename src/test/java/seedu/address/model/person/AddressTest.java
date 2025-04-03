@@ -27,13 +27,13 @@ public class AddressTest {
         // Valid address
         assertTrue(Address.isValidLength("Blk 123 @ The Best Place"));
 
-        // Email length of 110 - valid as within limit
-        assertTrue(Address.isValidLength("abcdefghijklmnopqrstabcdefghijklmnopqrstabcdefghijklmnopqrst"
-                + "abcdefghijklmnopqrstabcdefghijklmnopqrstabcdefghij"));
+        // Email address of 85 - valid as within limit
+        assertTrue(Address.isValidLength("abcdefghijklmnopqrstabcdefghijklmnopqrstabcdefghijklmnopqrstabcde"
+                + "fghijklmnopqrstuvwxy"));
 
-        // Email length of 111 - invalid as exceeds limit
-        assertFalse(Address.isValidLength("abcdefghijklmnopqrstabcdefghijklmnopqrstabcdefghijklmnopqrst"
-                + "abcdefghijklmnopqrstabcdefghijklmnopqrstabcdefghijK"));
+        // Email address of 86 - invalid as exceeds limit
+        assertFalse(Address.isValidLength("abcdefghijklmnopqrstabcdefghijklmnopqrstabcdefghijklmnopqrstabcde"
+                + "fghijklmnopqrstuvwxyz"));
 
         // Super long string - meant to fail
         assertFalse(Address.isValidLength(
@@ -64,8 +64,8 @@ public class AddressTest {
         assertTrue(Address.isValidAddress("Blk 456, Den Road, #01-355"));
         assertTrue(Address.isValidAddress("-")); // one character
         assertTrue(Address.isValidAddress("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA")); // long address
-        assertTrue(Address.isValidAddress("abcdefghijklmnopqrstabcdefghijklmnopqrstabcdefghijklmnopqrst"
-                + "abcdefghijklmnopqrstabcdefghijklmnopqrstabcdefghij")); // max limit
+        assertTrue(Address.isValidAddress("abcdefghijklmnopqrstabcdefghijklmnopqrstabcdefghijklmnopqrstabcde"
+                + "fghijklmnopqrstuvwxy")); // max limit
     }
 
     @Test

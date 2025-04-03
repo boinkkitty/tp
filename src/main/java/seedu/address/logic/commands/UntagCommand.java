@@ -18,7 +18,7 @@ import seedu.address.model.tag.Tag;
 public class UntagCommand extends Command {
 
     public static final String COMMAND_WORD = "untag";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes specified tags from all persons. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes specified tags from all persons.\n"
             + "Parameters: " + PREFIX_TAG + "TAG" + " [" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TAG + "CS2040 "
